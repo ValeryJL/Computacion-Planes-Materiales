@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Conceptual de Correlativas · Ingeniería en Computación UNLP</title>
+  
+  <meta name="description" content="Mapa conceptual interactivo de materias y correlativas para Ingeniería en Computación (UNLP - Plan 2011).">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+  <!-- Blueprint Grid Pattern -->
+  <div class="blueprint-grid" aria-hidden="true"></div>
+
+  <div class="app-container">
+    <!-- =========================================================================
+         CANVAS HEADER: Blueprint Metadata & Telemetry Overlay
+         ========================================================================= -->
+    <header class="canvas-header">
+      <div class="brand-block">
+        <span class="brand-meta">UNLP · Informática & Ingeniería</span>
+        <div class="brand-title">
+          <span>Ingeniería en Computación</span>
+          <button type="button" class="plan-toggle-badge" id="btnTogglePlan" title="Hacer clic para alternar entre Plan 2011 y Plan 2024" aria-label="Cambiar plan de estudio">
+            <span id="planBadgeText">Plan 2011</span>
+            <span class="plan-toggle-icon" aria-hidden="true">⇄</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- HUD Telemetry directly written on the canvas -->
+      <div class="hud-telemetry">
+        <!-- Promedio -->
+        <div class="hud-item" title="Promedio general s/ 24 materias aprobadas (excluye cursos de ingreso)">
+          <span class="hud-label">Promedio General</span>
+          <div class="hud-value highlight-gpa">
+            <span id="hudGpa">7.58</span>
+            <span class="hud-sub">/ 10</span>
+          </div>
+        </div>
+
+        <!-- Avance -->
+        <div class="hud-item" title="24 materias aprobadas sobre 42 materias totales">
+          <span class="hud-label">Avance de Carrera</span>
+          <div class="hud-value">
+            <span id="hudAvance">57.1%</span>
+            <span class="hud-sub" id="hudMateriasRatio">(24/42)</span>
+          </div>
+        </div>
+
+        <!-- Interactive State Filter Legend with Integrated Live Counters -->
+        <div class="hud-legend" role="group" aria-label="Filtros por estado de materia">
+          <button type="button" class="legend-chip" data-filter="aprobada" title="Clic para filtrar materias aprobadas">
+            <span class="dot dot-aprobada"></span> Aprobadas <span class="chip-count" id="chipAprobadas">24</span>
+          </button>
+          <button type="button" class="legend-chip" data-filter="en_curso" title="Clic para filtrar materias en curso">
+            <span class="dot dot-en-curso"></span> En curso <span class="chip-count" id="chipEnCurso">4</span>
+          </button>
+          <button type="button" class="legend-chip" data-filter="cursada_aprobada" title="Clic para filtrar materias con cursada aprobada">
+            <span class="dot dot-cursada"></span> Cursadas <span class="chip-count" id="chipCursada">0</span>
+          </button>
+          <button type="button" class="legend-chip" data-filter="pendiente" title="Clic para filtrar materias pendientes">
+            <span class="dot dot-pendiente"></span> Pendientes <span class="chip-count" id="chipPendientes">14</span>
+          </button>
+          <button type="button" class="legend-chip" data-filter="recursa" title="Clic para filtrar materias recursadas">
+            <span class="square-fail"></span> Recursa <span class="chip-count" id="chipRecursa">0</span>
+          </button>
+        </div>
+
+        <!-- Data Sync Actions: Import / Export Notes -->
+        <div class="hud-actions" role="group" aria-label="Gestión de notas y respaldo">
+          <button type="button" class="hud-action-btn" id="btnExportNotes" title="Exportar notas y estados a un archivo JSON">
+            <span class="hud-action-icon">⬇</span> Exportar
+          </button>
+          <label class="hud-action-btn" id="btnImportNotesLabel" title="Importar notas y estados desde un archivo JSON">
+            <span class="hud-action-icon">⬆</span> Importar
+            <input type="file" id="inputImportNotes" accept=".json,application/json" style="display: none;">
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         MAP VIEWPORT: 10-Semester Matrix with Full Viewport Fit
+         ========================================================================= -->
+    <main class="map-viewport" id="mapViewport">
+      <!-- Left Edge Hover Trigger (Invisible 28px strip on the left edge) -->
+      <div class="left-edge-trigger" id="leftEdgeTrigger" aria-hidden="true"></div>
+
+      <!-- Graph Canvas: The entire graph moves as a single unified piece -->
+      <div class="graph-canvas" id="graphCanvas">
+        <!-- SVG Connecting Wires Canvas -->
+        <svg id="connectionsSvg" aria-hidden="true">
+          <defs>
+            <marker id="arrow-anc" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 2 L 7 5 L 0 8 z" fill="#4f46e5" />
+            </marker>
+            <marker id="arrow-desc" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 2 L 7 5 L 0 8 z" fill="#0d9488" />
+            </marker>
+          </defs>
+        </svg>
+
+        <!-- Semester Column Labels Header Bar: Ingreso + 10 Semesters -->
+        <div class="years-timeline-bar" id="timelineBar">
+          <div class="semester-col-header col-ingreso-header"><span class="col-year-tag">NIVELACIÓN</span><span class="col-sem-num">INGRESO</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">1º AÑO</span><span class="col-sem-num">SEM 01</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">1º AÑO</span><span class="col-sem-num">SEM 02</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">2º AÑO</span><span class="col-sem-num">SEM 03</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">2º AÑO</span><span class="col-sem-num">SEM 04</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">3º AÑO</span><span class="col-sem-num">SEM 05</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">3º AÑO</span><span class="col-sem-num">SEM 06</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">4º AÑO</span><span class="col-sem-num">SEM 07</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">4º AÑO</span><span class="col-sem-num">SEM 08</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">5º AÑO</span><span class="col-sem-num">SEM 09</span></div>
+          <div class="semester-col-header"><span class="col-year-tag">5º AÑO</span><span class="col-sem-num">SEM 10</span></div>
+        </div>
+
+        <!-- 11 Columns Matrix Container (Populated by app.js: Ingreso + 10 Semesters) -->
+        <div class="matrix-container" id="matrixContainer">
+          <!-- Column 0 (Ingreso) + Columns 1..10 generated dynamically -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       CLASSY FLOATING MATERIAL DRAWER (<dialog closedby="any">)
+       ========================================================================= -->
+  <dialog id="materialDrawer" class="classy-drawer" closedby="any" aria-labelledby="drawerTitle">
+    <div class="drawer-header">
+      <div class="drawer-header-left">
+        <div class="drawer-meta-line">
+          <span class="drawer-code" id="drawerCode">E0303</span>
+          <span id="drawerYearSem">3º Año · 2º Semestre</span>
+          <span class="drawer-dot-sep">·</span>
+          <span id="drawerHours">6 hs/sem · 96 hs</span>
+          <span class="drawer-status-pill" id="drawerStatusSubtitle">Cursando actualmente</span>
+        </div>
+        <h2 class="drawer-title" id="drawerTitle">Redes de Datos 1</h2>
+        <div class="drawer-correlativas-banner" id="drawerCorrelativasBanner" style="display: none;">
+          <span class="correlativas-banner-icon">🔗</span>
+          <span class="correlativas-banner-label">Correlativas:</span>
+          <span class="correlativas-banner-text" id="drawerCorrelativasText"></span>
+        </div>
+      </div>
+
+      <div class="drawer-header-right">
+        <button type="button" class="drawer-change-optativa-btn" id="btnDrawerChangeOptativa" style="display: none;" title="Cambiar la materia seleccionada para esta optativa">
+          🔄 Cambiar optativa
+        </button>
+        <div class="official-strip" id="drawerOfficialLinks">
+          <!-- Populated dynamically -->
+        </div>
+        <button type="button" class="drawer-close" id="drawerCloseBtn" aria-label="Cerrar">✕</button>
+      </div>
+    </div>
+
+    <!-- Academic Condition & Grade Configuration Bar -->
+    <div class="drawer-status-bar" id="drawerStatusBar">
+      <div class="status-bar-left">
+        <label for="drawerStatusSelect" class="status-bar-label">
+          <span class="status-bar-icon">⚡</span>
+          <span>Condición académica:</span>
+        </label>
+        <select id="drawerStatusSelect" class="drawer-status-select" aria-label="Cambiar condición académica de la materia">
+          <option value="aprobada">🟢 Aprobada / Promocionada</option>
+          <option value="cursada_aprobada">🔵 Cursada Aprobada (Regular)</option>
+          <option value="en_curso">🟠 Cursando Actualmente</option>
+          <option value="pendiente">⚪ Pendiente de Cursar</option>
+          <option value="recursa">🔴 Recursa / Desaprobada</option>
+        </select>
+
+        <!-- Grade Editor: visible when status is aprobada -->
+        <div class="drawer-grade-editor" id="drawerGradeEditor">
+          <label for="drawerGradeInput" class="grade-editor-label">Nota final:</label>
+          <input type="number" id="drawerGradeInput" class="drawer-grade-input" min="4" max="10" step="0.5" placeholder="Nota" aria-label="Nota numérica de aprobación">
+          <span class="grade-editor-unit">pts</span>
+        </div>
+      </div>
+
+      <div class="status-bar-right">
+        <span class="status-saved-pill" id="drawerSavedIndicator" title="Guardado automático en tu navegador">
+          <span class="saved-dot">●</span> Memoria local activa
+        </span>
+        <button type="button" class="drawer-export-mini-btn" id="drawerExportBtn" title="Exportar notas y avance a JSON">⬇ Respaldo</button>
+      </div>
+    </div>
+
+    <!-- Category Tabs & Live Search Toolbar -->
+    <div class="drawer-toolbar">
+      <div class="drawer-tabs-wrapper" id="drawerCategoryTabs" role="tablist" aria-label="Categorías de recursos">
+        <!-- Injected via app.js -->
+      </div>
+      <div class="drawer-search-box">
+        <span class="drawer-search-icon" aria-hidden="true">🔍</span>
+        <input type="text" id="drawerSearchInput" class="drawer-search-input" placeholder="Buscar material o tema..." aria-label="Buscar en materiales">
+      </div>
+    </div>
+
+    <!-- Resource Grid Body (Architectural sage canvas, zero accordion scrolling) -->
+    <div class="drawer-body">
+      <div class="drawer-resources-grid" id="drawerMaterialsList">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </dialog>
+ 
+  <!-- =========================================================================
+       OPTATIVAS SELECTOR MODAL (<dialog closedby="any">)
+       ========================================================================= -->
+  <dialog id="optativasModal" class="classy-drawer optativas-modal" closedby="any" aria-labelledby="optativasModalTitle">
+    <div class="optativas-modal-header">
+      <div class="optativas-modal-title-group">
+        <span class="optativas-modal-meta" id="optativasModalSlotMeta">PLAN 2011 · CUARTO AÑO</span>
+        <h2 class="optativas-modal-title" id="optativasModalTitle">Seleccionar Asignatura Optativa</h2>
+        <p class="optativas-modal-subtitle" id="optativasModalSubtitle">Elige la materia optativa para asignar a este espacio curricular.</p>
+      </div>
+      <button type="button" class="drawer-close" id="optativasModalCloseBtn" aria-label="Cerrar modal">✕</button>
+    </div>
+
+    <!-- Controls: Search & Category Chips -->
+    <div class="optativas-modal-controls">
+      <div class="drawer-search-box optativas-search-box">
+        <span class="drawer-search-icon" aria-hidden="true">🔍</span>
+        <input type="text" id="optativasSearchInput" class="drawer-search-input" placeholder="Buscar por nombre, código o profesor..." aria-label="Buscar optativa">
+      </div>
+
+      <div class="optativas-filter-chips" id="optativasFilterChips" role="tablist" aria-label="Filtrar tipo de optativas">
+        <button type="button" class="opt-chip is-active" data-filter="all">Todas</button>
+        <button type="button" class="opt-chip" data-filter="tipoA">Tipo A · Informática</button>
+        <button type="button" class="opt-chip" data-filter="tipoB">Tipo B · Ingeniería</button>
+        <button type="button" class="opt-chip" data-filter="sem1">1º Semestre</button>
+        <button type="button" class="opt-chip" data-filter="sem2">2º Semestre</button>
+      </div>
+    </div>
+
+    <!-- Optativas List Body -->
+    <div class="optativas-modal-body">
+      <div class="optativas-grid" id="optativasListContainer">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+
+    <!-- Footer with unassign action -->
+    <div class="optativas-modal-footer">
+      <button type="button" class="btn-clear-optativa" id="btnClearOptativa">✕ Quitar materia / Dejar slot libre</button>
+      <span class="optativas-footer-hint">Las notas y estados de materias optativas se conservan en memoria</span>
+    </div>
+  </dialog>
+
+  <!-- Toast Notice -->
+  <div id="toastNotice" class="toast-notice" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="optativas_data.js?v=3"></script>
+  <script src="data.js?v=3"></script>
+  <script src="data_2024.js?v=3"></script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
