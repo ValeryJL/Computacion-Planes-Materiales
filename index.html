@@ -7,6 +7,11 @@
   
   <meta name="description" content="Mapa conceptual interactivo de materias y correlativas para Ingeniería en Computación (UNLP - Plan 2011).">
 
+  <!-- Mobile Theme & Web App Meta -->
+  <meta name="theme-color" content="#781719">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <!-- Favicon & Faculty Icons (Facultades de Informática e Ingeniería - UNLP) -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
@@ -17,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=16">
 </head>
 <body>
   <!-- Blueprint Grid Pattern -->
@@ -83,7 +88,7 @@
           </button>
         </div>
 
-        <!-- Data Sync Actions: Import / Export Notes -->
+        <!-- Data Sync Actions: Import / Export / Reset Notes -->
         <div class="hud-actions" role="group" aria-label="Gestión de notas y respaldo">
           <button type="button" class="hud-action-btn" id="btnExportNotes" title="Exportar notas y estados a un archivo JSON">
             <span class="hud-action-icon">⬇</span> Exportar
@@ -92,8 +97,20 @@
             <span class="hud-action-icon">⬆</span> Importar
             <input type="file" id="inputImportNotes" accept=".json,application/json" style="display: none;">
           </label>
+          <button type="button" class="hud-action-btn hud-action-btn-danger" id="btnResetNotes" title="Borrar y restablecer notas y optativas a valores iniciales">
+            <span class="hud-action-icon">↺</span> Borrar
+          </button>
         </div>
       </div>
+
+      <!-- Mobile / Responsive Side Menu Trigger (Always available on canvas-header) -->
+      <button type="button" class="nav-menu-toggle" id="btnToggleSideMenu" aria-label="Abrir menú de controles y filtros" title="Menú de controles y filtros">
+        <span class="nav-menu-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
     </header>
 
     <!-- =========================================================================
@@ -265,6 +282,132 @@
     </div>
   </dialog>
 
+  <!-- =========================================================================
+       SIDE MENU DRAWER (<dialog closedby="any">): Responsive Controls & Filters
+       ========================================================================= -->
+  <dialog id="sideMenuDrawer" class="side-menu-drawer" closedby="any" aria-labelledby="sideMenuTitle">
+    <div class="side-menu-header">
+      <div class="side-menu-title-group">
+        <span class="side-menu-meta">PANEL DE CONTROL</span>
+        <h2 class="side-menu-title" id="sideMenuTitle">Opciones y Filtros</h2>
+      </div>
+      <button type="button" class="drawer-close" id="sideMenuCloseBtn" aria-label="Cerrar menú">✕</button>
+    </div>
+
+    <div class="side-menu-body">
+      <!-- Section: Plan Toggle -->
+      <div class="side-menu-section">
+        <h3 class="side-menu-section-title">Plan de Estudios</h3>
+        <div class="side-plan-switcher">
+          <button type="button" class="side-plan-btn" id="btnSidePlan2011" data-plan="2011">
+            <span class="side-plan-name">Plan 2011</span>
+            <span class="side-plan-badge" id="sideBadge2011">Activo</span>
+          </button>
+          <button type="button" class="side-plan-btn" id="btnSidePlan2024" data-plan="2024">
+            <span class="side-plan-name">Plan 2024</span>
+            <span class="side-plan-badge" id="sideBadge2024">Nuevo</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section: Academic Telemetry Metrics -->
+      <div class="side-menu-section">
+        <h3 class="side-menu-section-title">Rendimiento Académico</h3>
+        <div class="side-telemetry-grid">
+          <div class="side-telemetry-card">
+            <span class="side-telemetry-label">Promedio General</span>
+            <div class="side-telemetry-val highlight-gpa">
+              <span id="sideGpa">7.58</span>
+              <span class="side-telemetry-sub">/ 10</span>
+            </div>
+          </div>
+          <div class="side-telemetry-card">
+            <span class="side-telemetry-label">Avance de Carrera</span>
+            <div class="side-telemetry-val">
+              <span id="sideAvance">57.1%</span>
+              <span class="side-telemetry-sub" id="sideMateriasRatio">(24/42)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: State Filters -->
+      <div class="side-menu-section">
+        <div class="side-section-header-flex">
+          <h3 class="side-menu-section-title">Filtrar por Estado</h3>
+          <button type="button" class="side-clear-filter-btn" id="btnSideClearFilter">Limpiar</button>
+        </div>
+        <div class="side-filters-list">
+          <button type="button" class="legend-chip side-filter-chip" data-filter="aprobada" title="Filtrar materias aprobadas">
+            <span class="dot dot-aprobada"></span>
+            <span class="filter-chip-text">Aprobadas</span>
+            <span class="chip-count" id="chipSideAprobadas">24</span>
+          </button>
+          <button type="button" class="legend-chip side-filter-chip" data-filter="en_curso" title="Filtrar materias en curso">
+            <span class="dot dot-en-curso"></span>
+            <span class="filter-chip-text">En curso</span>
+            <span class="chip-count" id="chipSideEnCurso">4</span>
+          </button>
+          <button type="button" class="legend-chip side-filter-chip" data-filter="cursada_aprobada" title="Filtrar materias cursadas">
+            <span class="dot dot-cursada"></span>
+            <span class="filter-chip-text">Cursadas</span>
+            <span class="chip-count" id="chipSideCursada">0</span>
+          </button>
+          <button type="button" class="legend-chip side-filter-chip" data-filter="pendiente" title="Filtrar materias pendientes">
+            <span class="dot dot-pendiente"></span>
+            <span class="filter-chip-text">Pendientes</span>
+            <span class="chip-count" id="chipSidePendientes">14</span>
+          </button>
+          <button type="button" class="legend-chip side-filter-chip" data-filter="recursa" title="Filtrar materias recursadas">
+            <span class="square-fail"></span>
+            <span class="filter-chip-text">Recursa</span>
+            <span class="chip-count" id="chipSideRecursa">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section: Backup & Restore -->
+      <div class="side-menu-section">
+        <h3 class="side-menu-section-title">Respaldo y Datos</h3>
+        <div class="side-actions-group">
+          <button type="button" class="side-action-btn" id="btnSideExportNotes">
+            <span class="side-action-icon">⬇</span>
+            <span>Exportar notas (JSON)</span>
+          </button>
+          <label class="side-action-btn" id="btnSideImportNotesLabel">
+            <span class="side-action-icon">⬆</span>
+            <span>Importar notas (JSON)</span>
+            <input type="file" id="inputSideImportNotes" accept=".json,application/json" style="display: none;">
+          </label>
+          <button type="button" class="side-action-btn side-btn-danger" id="btnSideResetNotes">
+            <span class="side-action-icon">↺</span>
+            <span>Restablecer datos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section: Institutional Links -->
+      <div class="side-menu-section side-menu-footer-links">
+        <a href="https://ic.info.unlp.edu.ar/" target="_blank" rel="noopener noreferrer" class="side-link-item">
+          <span>Sitio Oficial Carrera UNLP</span> ↗
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Floating Action Bar for Mobile Touch Selection -->
+  <div id="mobileActionPill" class="mobile-action-pill" aria-live="polite">
+    <div class="mobile-pill-info">
+      <span class="mobile-pill-code" id="mobilePillCode">E0303</span>
+      <span class="mobile-pill-name" id="mobilePillName">Redes de Datos 1</span>
+    </div>
+    <button type="button" class="mobile-pill-btn" id="mobilePillBtn">
+      <span>Ver material</span>
+      <span class="mobile-pill-arrow">↗</span>
+    </button>
+    <button type="button" class="mobile-pill-close" id="mobilePillClose" aria-label="Cerrar selección">✕</button>
+  </div>
+
   <!-- Toast Notice -->
   <div id="toastNotice" class="toast-notice" aria-live="polite"></div>
 
@@ -272,6 +415,6 @@
   <script src="optativas_data.js?v=3"></script>
   <script src="data.js?v=3"></script>
   <script src="data_2024.js?v=3"></script>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=16"></script>
 </body>
 </html>

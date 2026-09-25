@@ -145,6 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const drawerMaterialsList = document.getElementById('drawerMaterialsList');
   const toastNotice = document.getElementById('toastNotice');
 
+  // Mobile Action Pill Elements (Floating bottom bar on touch selection)
+  const mobileActionPill = document.getElementById('mobileActionPill');
+  const mobilePillCode = document.getElementById('mobilePillCode');
+  const mobilePillName = document.getElementById('mobilePillName');
+  const mobilePillBtn = document.getElementById('mobilePillBtn');
+  const mobilePillClose = document.getElementById('mobilePillClose');
+  let mobileActiveCode = null;
+  let mobileEffectiveDrawerCode = null;
+
   // Optativas Modal Elements
   const btnDrawerChangeOptativa = document.getElementById('btnDrawerChangeOptativa');
   const optativasModal = document.getElementById('optativasModal');
@@ -318,10 +327,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updatePlanBadge() {
-    if (!planBadgeText || !btnTogglePlan) return;
-    planBadgeText.textContent = `Plan ${currentPlan}`;
-    btnTogglePlan.classList.toggle('is-2024', currentPlan === '2024');
-    btnTogglePlan.setAttribute('title', `Plan activo: ${currentPlan}. Clic para cambiar a Plan ${currentPlan === '2011' ? '2024' : '2011'}`);
+    if (planBadgeText) planBadgeText.textContent = `Plan ${currentPlan}`;
+    if (btnTogglePlan) {
+      btnTogglePlan.classList.toggle('is-2024', currentPlan === '2024');
+      btnTogglePlan.setAttribute('title', `Plan activo: ${currentPlan}. Clic para cambiar a Plan ${currentPlan === '2011' ? '2024' : '2011'}`);
+    }
+    const btnSidePlan2011 = document.getElementById('btnSidePlan2011');
+    const btnSidePlan2024 = document.getElementById('btnSidePlan2024');
+    const sideBadge2011 = document.getElementById('sideBadge2011');
+    const sideBadge2024 = document.getElementById('sideBadge2024');
+    if (btnSidePlan2011 && btnSidePlan2024) {
+      btnSidePlan2011.classList.toggle('is-active', currentPlan === '2011');
+      btnSidePlan2024.classList.toggle('is-active', currentPlan === '2024');
+      if (sideBadge2011) sideBadge2011.textContent = (currentPlan === '2011') ? 'Activo' : 'Vigente';
+      if (sideBadge2024) sideBadge2024.textContent = (currentPlan === '2024') ? 'Activo' : 'Nuevo';
+    }
   }
 
   function switchPlan(newPlan) {
@@ -511,14 +531,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
 
   function initHud() {
-    hudGpa.textContent = Number(data.promedio).toFixed(2);
+    const formattedGpa = Number(data.promedio).toFixed(2);
+    if (hudGpa) hudGpa.textContent = formattedGpa;
+    const sideGpa = document.getElementById('sideGpa');
+    if (sideGpa) sideGpa.textContent = formattedGpa;
     
     const approved = data.stats.aprobadas;
     const total = data.stats.total;
     const percent = ((approved / total) * 100).toFixed(1);
     
-    hudAvance.textContent = `${percent}%`;
-    hudMateriasRatio.textContent = `(${approved}/${total})`;
+    if (hudAvance) hudAvance.textContent = `${percent}%`;
+    if (hudMateriasRatio) hudMateriasRatio.textContent = `(${approved}/${total})`;
+    const sideAvance = document.getElementById('sideAvance');
+    if (sideAvance) sideAvance.textContent = `${percent}%`;
+    const sideMateriasRatio = document.getElementById('sideMateriasRatio');
+    if (sideMateriasRatio) sideMateriasRatio.textContent = `(${approved}/${total})`;
 
     const chipAprobadas = document.getElementById('chipAprobadas');
     const chipEnCurso = document.getElementById('chipEnCurso');
@@ -531,6 +558,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chipCursada) chipCursada.textContent = data.stats.cursada_aprobada || 0;
     if (chipPendientes) chipPendientes.textContent = data.stats.pendientes;
     if (chipRecursa) chipRecursa.textContent = data.stats.reprobadas_previas || 0;
+
+    const chipSideAprobadas = document.getElementById('chipSideAprobadas');
+    const chipSideEnCurso = document.getElementById('chipSideEnCurso');
+    const chipSideCursada = document.getElementById('chipSideCursada');
+    const chipSidePendientes = document.getElementById('chipSidePendientes');
+    const chipSideRecursa = document.getElementById('chipSideRecursa');
+
+    if (chipSideAprobadas) chipSideAprobadas.textContent = data.stats.aprobadas;
+    if (chipSideEnCurso) chipSideEnCurso.textContent = data.stats.en_curso;
+    if (chipSideCursada) chipSideCursada.textContent = data.stats.cursada_aprobada || 0;
+    if (chipSidePendientes) chipSidePendientes.textContent = data.stats.pendientes;
+    if (chipSideRecursa) chipSideRecursa.textContent = data.stats.reprobadas_previas || 0;
+
+    updatePlanBadge();
   }
 
   // =========================================================================
@@ -749,14 +790,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const nodes = document.querySelectorAll('.subject-node');
 
     nodes.forEach(node => {
-      // Hover event: Full transitive ancestors & descendants
+      // Hover event: Full transitive ancestors & descendants (desktop mouse only)
       node.addEventListener('mouseenter', () => {
+        const isTouch = window.matchMedia('(max-width: 768px)').matches;
+        if (isTouch) return;
         const code = node.dataset.code;
         if (!code) return;
         highlightFullChain(code, node);
       });
 
       node.addEventListener('mouseleave', () => {
+        const isTouch = window.matchMedia('(max-width: 768px)').matches;
+        if (isTouch) return;
         clearFullChain();
       });
 
@@ -768,24 +813,41 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       node.addEventListener('blur', () => {
+        const isTouch = window.matchMedia('(max-width: 768px)').matches;
+        if (isTouch) return;
         clearFullChain();
       });
 
-      // Click event: Open selection modal if unassigned optativa; else open classy drawer
+      // Click / Tap event: On mobile first tap selects & shows pill, second tap opens drawer. On desktop opens drawer directly.
       node.addEventListener('click', () => {
+        const isTouch = window.matchMedia('(max-width: 768px)').matches || ('ontouchstart' in window && window.innerWidth <= 1024);
+
         if (node.dataset.isOptativaSlot === 'true') {
           const slotCode = node.dataset.slotCode;
           const selections = getSelectedOptativas();
           const assigned = selections[currentPlan]?.[slotCode];
           if (!assigned) {
+            hideMobilePill();
             openOptativasModal(slotCode);
             return;
           }
-          openDrawer(slotCode);
-          return;
         }
+
         const code = node.dataset.code;
-        if (code) openDrawer(code);
+        const effectiveDrawerCode = (node.dataset.isOptativaSlot === 'true') ? node.dataset.slotCode : code;
+
+        if (isTouch) {
+          if (mobileActiveCode === code) {
+            hideMobilePill();
+            openDrawer(effectiveDrawerCode);
+          } else {
+            mobileActiveCode = code;
+            highlightFullChain(code, node);
+            showMobilePill(code, effectiveDrawerCode);
+          }
+        } else {
+          openDrawer(effectiveDrawerCode);
+        }
       });
 
       // Keyboard accessible
@@ -797,14 +859,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const selections = getSelectedOptativas();
             const assigned = selections[currentPlan]?.[slotCode];
             if (!assigned) {
+              hideMobilePill();
               openOptativasModal(slotCode);
               return;
             }
+            hideMobilePill();
             openDrawer(slotCode);
             return;
           }
           const code = node.dataset.code;
-          if (code) openDrawer(code);
+          if (code) {
+            hideMobilePill();
+            openDrawer(code);
+          }
         }
       });
     });
@@ -948,6 +1015,81 @@ document.addEventListener('DOMContentLoaded', () => {
       renderWires(currentActiveEdges, nodeElemMap);
     }
   });
+
+  // Map Viewport scroll handler to keep SVG wires pixel-perfect during horizontal/vertical scroll
+  if (mapViewport) {
+    mapViewport.addEventListener('scroll', () => {
+      if (matrixContainer.classList.contains('has-active-path') && currentActiveEdges.length > 0) {
+        const nodeElemMap = new Map();
+        document.querySelectorAll('.subject-node').forEach(n => {
+          if (n.dataset.code) nodeElemMap.set(n.dataset.code, n);
+        });
+        renderWires(currentActiveEdges, nodeElemMap);
+      }
+    }, { passive: true });
+
+    // Tapping outside nodes on map clears active path on touch devices
+    mapViewport.addEventListener('click', (e) => {
+      if (!e.target.closest('.subject-node') && !e.target.closest('#mobileActionPill')) {
+        if (mobileActiveCode) {
+          hideMobilePill();
+          clearFullChain();
+        }
+      }
+    });
+  }
+
+  // Mobile Action Pill Handlers
+  function showMobilePill(code, effectiveDrawerCode) {
+    if (!mobileActionPill) return;
+    mobileEffectiveDrawerCode = effectiveDrawerCode;
+    const m = subjectMap.get(code);
+    let displayName = m ? m.name : code;
+    let displayCode = code;
+
+    if (m && m.is_optativa_slot) {
+      const selections = getSelectedOptativas();
+      const assigned = selections[currentPlan]?.[m.code];
+      const opt = assigned ? findOptativaInCatalog(assigned, currentPlan) : null;
+      if (opt) {
+        displayName = `Optativa: ${opt.name}`;
+        displayCode = getOptativaActiveCode(opt, currentPlan);
+      }
+    }
+
+    if (mobilePillCode) mobilePillCode.textContent = displayCode;
+    if (mobilePillName) {
+      mobilePillName.textContent = displayName;
+      mobilePillName.title = displayName;
+    }
+    mobileActionPill.classList.add('is-visible');
+  }
+
+  function hideMobilePill() {
+    if (!mobileActionPill) return;
+    mobileActionPill.classList.remove('is-visible');
+    mobileActiveCode = null;
+    mobileEffectiveDrawerCode = null;
+  }
+
+  if (mobilePillBtn) {
+    mobilePillBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (mobileEffectiveDrawerCode) {
+        const codeToOpen = mobileEffectiveDrawerCode;
+        hideMobilePill();
+        openDrawer(codeToOpen);
+      }
+    });
+  }
+
+  if (mobilePillClose) {
+    mobilePillClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hideMobilePill();
+      clearFullChain();
+    });
+  }
 
   // =========================================================================
   // 4. TRANSITIVE REDUCTION & SVG SEQUENTIAL PATH DRAWING (A -> B -> C)
@@ -1134,6 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openDrawer(code) {
     clearFullChain();
+    hideMobilePill();
     const m = subjectMap.get(code);
     if (!m) return;
     currentDrawerCode = code;
@@ -1850,21 +1993,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Wire up UI Import / Export buttons
+  // Wire up UI Import / Export buttons (Desktop, Drawer, Side Menu)
   const btnExportNotes = document.getElementById('btnExportNotes');
+  const btnSideExportNotes = document.getElementById('btnSideExportNotes');
   const inputImportNotes = document.getElementById('inputImportNotes');
+  const inputSideImportNotes = document.getElementById('inputSideImportNotes');
   const drawerExportBtn = document.getElementById('drawerExportBtn');
+  const btnSideResetNotes = document.getElementById('btnSideResetNotes');
+  const btnResetNotes = document.getElementById('btnResetNotes');
 
   if (btnExportNotes) {
     btnExportNotes.addEventListener('click', () => window.exportAcademicStatus());
+  }
+
+  if (btnSideExportNotes) {
+    btnSideExportNotes.addEventListener('click', () => window.exportAcademicStatus());
   }
 
   if (drawerExportBtn) {
     drawerExportBtn.addEventListener('click', () => window.exportAcademicStatus());
   }
 
-  if (inputImportNotes) {
-    inputImportNotes.addEventListener('change', (e) => {
+  if (btnSideResetNotes) {
+    btnSideResetNotes.addEventListener('click', () => window.resetAcademicStatus());
+  }
+
+  if (btnResetNotes) {
+    btnResetNotes.addEventListener('click', () => window.resetAcademicStatus());
+  }
+
+  function wireJsonImport(inputElement) {
+    if (!inputElement) return;
+    inputElement.addEventListener('change', (e) => {
       const file = e.target.files && e.target.files[0];
       if (!file) return;
 
@@ -1877,17 +2037,156 @@ document.addEventListener('DOMContentLoaded', () => {
           console.error(err);
           alert('Error al leer el archivo JSON. Verifica que sea un JSON válido.');
         } finally {
-          inputImportNotes.value = '';
+          inputElement.value = '';
         }
       };
       reader.readAsText(file);
     });
   }
 
+  wireJsonImport(inputImportNotes);
+  wireJsonImport(inputSideImportNotes);
+
+  // Side Menu Drawer Elements & Event Wiring
+  const sideMenuDrawer = document.getElementById('sideMenuDrawer');
+  const btnToggleSideMenu = document.getElementById('btnToggleSideMenu');
+  const sideMenuCloseBtn = document.getElementById('sideMenuCloseBtn');
+  const btnSidePlan2011 = document.getElementById('btnSidePlan2011');
+  const btnSidePlan2024 = document.getElementById('btnSidePlan2024');
+
+  if (btnToggleSideMenu && sideMenuDrawer) {
+    btnToggleSideMenu.addEventListener('click', () => {
+      sideMenuDrawer.showModal();
+    });
+  }
+
+  if (sideMenuCloseBtn && sideMenuDrawer) {
+    sideMenuCloseBtn.addEventListener('click', () => {
+      sideMenuDrawer.close();
+    });
+  }
+
+  if (sideMenuDrawer) {
+    sideMenuDrawer.addEventListener('click', (event) => {
+      if (event.target !== sideMenuDrawer) return;
+      const rect = sideMenuDrawer.getBoundingClientRect();
+      const isInside = (
+        rect.top <= event.clientY &&
+        event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.left + rect.width
+      );
+      if (!isInside) {
+        sideMenuDrawer.close();
+      }
+    });
+  }
+
+  if (btnSidePlan2011) {
+    btnSidePlan2011.addEventListener('click', () => switchPlan('2011'));
+  }
+
+  if (btnSidePlan2024) {
+    btnSidePlan2024.addEventListener('click', () => switchPlan('2024'));
+  }
+
   // Close Drawer
   drawerCloseBtn.addEventListener('click', () => {
     materialDrawer.close();
   });
+
+  // Mobile Touch Gestures: Pull down to close dialogs & menus ("si lo tiro para abajo, quiero poder cerrarlo")
+  function setupPullDownToClose(dialog) {
+    if (!dialog) return;
+    let startY = 0;
+    let startX = 0;
+    let currentY = 0;
+    let currentX = 0;
+    let isPulling = false;
+    let canPull = false;
+
+    dialog.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      startY = e.touches[0].clientY;
+      startX = e.touches[0].clientX;
+      currentY = startY;
+      currentX = startX;
+      // Only allow pull-down if dialog is at the top of its scroll container
+      canPull = (dialog.scrollTop <= 4);
+      isPulling = false;
+    }, { passive: true });
+
+    dialog.addEventListener('touchmove', (e) => {
+      if (e.touches.length !== 1 || !canPull) return;
+      currentY = e.touches[0].clientY;
+      currentX = e.touches[0].clientX;
+      const diffY = currentY - startY;
+      const diffX = currentX - startX;
+
+      // Check if dragging downwards
+      if (dialog.scrollTop <= 4 && diffY > 10 && diffY > Math.abs(diffX)) {
+        isPulling = true;
+        dialog.style.transition = 'none';
+        dialog.style.transform = `translateY(${Math.max(0, diffY)}px)`;
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+      } else if (dialog === sideMenuDrawer && diffX > 10 && diffX > Math.abs(diffY)) {
+        // Also support swiping side menu to the right
+        isPulling = true;
+        dialog.style.transition = 'none';
+        dialog.style.transform = `translateX(${Math.max(0, diffX)}px)`;
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+      }
+    }, { passive: false });
+
+    const finishPull = () => {
+      if (!isPulling) return;
+      isPulling = false;
+      const diffY = currentY - startY;
+      const diffX = currentX - startX;
+      dialog.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
+
+      if (diffY > 65) {
+        // Pulled down past threshold: close smoothly
+        dialog.style.transform = 'translateY(100%)';
+        setTimeout(() => {
+          try {
+            dialog.close();
+          } catch (err) {}
+          dialog.style.transform = '';
+          dialog.style.transition = '';
+        }, 200);
+      } else if (dialog === sideMenuDrawer && diffX > 65) {
+        // Swiped right past threshold: close smoothly
+        dialog.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          try {
+            dialog.close();
+          } catch (err) {}
+          dialog.style.transform = '';
+          dialog.style.transition = '';
+        }, 200);
+      } else {
+        // Snap back to open position
+        dialog.style.transform = '';
+        setTimeout(() => {
+          dialog.style.transform = '';
+          dialog.style.transition = '';
+        }, 220);
+      }
+    };
+
+    dialog.addEventListener('touchend', finishPull, { passive: true });
+    dialog.addEventListener('touchcancel', finishPull, { passive: true });
+  }
+
+  // Attach pull-to-close gestures to menus and bottom sheets
+  setupPullDownToClose(sideMenuDrawer);
+  setupPullDownToClose(materialDrawer);
+  setupPullDownToClose(optativasModal);
 
   // Modern Web Guidance: Light Dismiss Fallback for dialog
   if (!('closedBy' in HTMLDialogElement.prototype)) {
@@ -1919,6 +2218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentModalSearch = '';
 
   function openOptativasModal(slotCode) {
+    hideMobilePill();
     currentModalSlotCode = slotCode;
     const slotSubject = data.materias.find(x => x.code === slotCode) || { name: slotCode, year: 'Plan ' + currentPlan, semester: '' };
     
@@ -2217,6 +2517,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+
+    // Side menu clear filter button
+    const btnSideClearFilter = document.getElementById('btnSideClearFilter');
+    if (btnSideClearFilter) {
+      btnSideClearFilter.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clearStateFilter();
+      });
+    }
 
     // Clicking on empty map area clears the filter
     mapViewport.addEventListener('click', (e) => {
