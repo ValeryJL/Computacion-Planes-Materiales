@@ -7,12 +7,17 @@
   
   <meta name="description" content="Mapa conceptual interactivo de materias y correlativas para Ingeniería en Computación (UNLP - Plan 2011).">
 
+  <!-- Favicon & Faculty Icons (Facultades de Informática e Ingeniería - UNLP) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
   <!-- Blueprint Grid Pattern -->
@@ -23,14 +28,19 @@
          CANVAS HEADER: Blueprint Metadata & Telemetry Overlay
          ========================================================================= -->
     <header class="canvas-header">
-      <div class="brand-block">
-        <span class="brand-meta">UNLP · Informática & Ingeniería</span>
-        <div class="brand-title">
-          <span>Ingeniería en Computación</span>
-          <button type="button" class="plan-toggle-badge" id="btnTogglePlan" title="Hacer clic para alternar entre Plan 2011 y Plan 2024" aria-label="Cambiar plan de estudio">
-            <span id="planBadgeText">Plan 2011</span>
-            <span class="plan-toggle-icon" aria-hidden="true">⇄</span>
-          </button>
+      <div class="brand-group">
+        <a href="https://ic.info.unlp.edu.ar/" target="_blank" rel="noopener noreferrer" class="brand-faculty-link" title="Sitio Oficial Ingeniería en Computación (Facultad de Informática y Facultad de Ingeniería · UNLP)">
+          <img src="assets/faculty_logo_wide.png" alt="Facultad de Informática y Facultad de Ingeniería - UNLP" class="brand-faculty-logo" width="76" height="38">
+        </a>
+        <div class="brand-block">
+          <span class="brand-meta">UNLP · Informática & Ingeniería</span>
+          <div class="brand-title">
+            <span>Ingeniería en Computación</span>
+            <button type="button" class="plan-toggle-badge" id="btnTogglePlan" title="Hacer clic para alternar entre Plan 2011 y Plan 2024" aria-label="Cambiar plan de estudio">
+              <span id="planBadgeText">Plan 2011</span>
+              <span class="plan-toggle-icon" aria-hidden="true">⇄</span>
+            </button>
+          </div>
         </div>
       </div>
 
