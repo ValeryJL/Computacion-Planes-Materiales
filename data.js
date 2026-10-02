@@ -1017,7 +1017,116 @@ window.ACADEMIC_DATA = {
       ],
       "folder_name": "I110_Ingenieria_de_Software",
       "folder_rel": "materias/I110_Ingenieria_de_Software",
-      "materials": []
+      "materials": [
+        {
+          "title": "Resumen Ingeniería de Software - Módulo 1 (Teorías 1 y 2)",
+          "filename": "Resumen_IS_Modulo1.html",
+          "path": "materias/I110_Ingenieria_de_Software/Resumen_IS_Modulo1.html",
+          "type": "html",
+          "category": "resumenes",
+          "badge": "HTML Interactivo",
+          "desc": "Fundamentos del software, crisis del software, modelos de procesos tradicionales (Cascada, V, Espiral, RUP), filosofías ágiles (Scrum, XP, Kanban, MDD), comunicación, técnicas de elicitación y análisis de competencia."
+        },
+        {
+          "title": "Resumen Ingeniería de Software - Módulo 2 (Teorías 3 y 4)",
+          "filename": "Resumen_IS_Modulo2.html",
+          "path": "materias/I110_Ingenieria_de_Software/Resumen_IS_Modulo2.html",
+          "type": "html",
+          "category": "resumenes",
+          "badge": "HTML Interactivo",
+          "desc": "Ingeniería de requerimientos, Curva de Boehm, RF vs RNF (FURPS+, ISO 25010), iniciativas y épicas, estándar IEEE 830, DTE, Redes de Petri concurrentes (ejercicio 3 surtidores), Casos de Uso e Historias de Usuario (INVEST y Gherkin)."
+        },
+        {
+          "title": "Clase 1 - Introducción y Modelos de Procesos",
+          "filename": "Clase_1_Introduccion_Modelos_Procesos.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Clase_1_Introduccion_Modelos_Procesos.pdf",
+          "type": "pdf",
+          "category": "clases",
+          "badge": "PDF Cátedra",
+          "desc": "Diapositivas oficiales: conceptos generales, ciclo de vida, modelos de procesos tradicionales, ágiles y MDD."
+        },
+        {
+          "title": "Clase 2 - Técnicas de Comunicación y Elicitación",
+          "filename": "Clase_2_Tecnicas_de_Comunicacion.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Clase_2_Tecnicas_de_Comunicacion.pdf",
+          "type": "pdf",
+          "category": "clases",
+          "badge": "PDF Cátedra",
+          "desc": "Diapositivas oficiales: problemas de comunicación, puntos de vista, entrevistas, cuestionarios, observación y JAD."
+        },
+        {
+          "title": "Clase 3 - Requerimientos e Ingeniería de Requerimientos",
+          "filename": "Clase_3_Ingenieria_de_Requerimientos.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Clase_3_Ingenieria_de_Requerimientos.pdf",
+          "type": "pdf",
+          "category": "clases",
+          "badge": "PDF Cátedra",
+          "desc": "Diapositivas oficiales: definición de requerimientos, propiedades, etapas de IR y técnicas estáticas de especificación."
+        },
+        {
+          "title": "Clase 4 - Técnicas Dinámicas de Especificación",
+          "filename": "Clase_4_Especificacion_de_Requerimientos.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Clase_4_Especificacion_de_Requerimientos.pdf",
+          "type": "pdf",
+          "category": "clases",
+          "badge": "PDF Cátedra",
+          "desc": "Diapositivas oficiales: DTE, Redes de Petri, Casos de Uso con escenarios detallados e Historias de Usuario."
+        },
+        {
+          "title": "Guía Práctica 1 - Técnicas de Elicitación",
+          "filename": "Guia_1_Tecnicas_de_Elicitacion.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Guia_1_Tecnicas_de_Elicitacion.pdf",
+          "type": "pdf",
+          "category": "practicas",
+          "badge": "Guía Práctica",
+          "desc": "Resumen práctico de entrevistas, encuestas y lluvia de ideas."
+        },
+        {
+          "title": "Guía Práctica 2 - Requerimientos No Funcionales (RNF)",
+          "filename": "Guia_2_Requerimientos_No_Funcionales.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Guia_2_Requerimientos_No_Funcionales.pdf",
+          "type": "pdf",
+          "category": "practicas",
+          "badge": "Guía Práctica",
+          "desc": "Identificación de requerimientos no funcionales y pautas para la primera entrega."
+        },
+        {
+          "title": "Guía Práctica 3 - Iniciativas y Épicas",
+          "filename": "Guia_3_Iniciativas_y_Epicas.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Guia_3_Iniciativas_y_Epicas.pdf",
+          "type": "pdf",
+          "category": "practicas",
+          "badge": "Guía Práctica",
+          "desc": "Conceptos y descomposición de objetivos de alto nivel en épicas."
+        },
+        {
+          "title": "Guía Práctica 4 - Historias de Usuario (HU)",
+          "filename": "Guia_4_Historias_de_Usuario.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Guia_4_Historias_de_Usuario.pdf",
+          "type": "pdf",
+          "category": "practicas",
+          "badge": "Guía Práctica",
+          "desc": "Estructura, criterios de aceptación y ejemplos cotidianos y aplicados."
+        },
+        {
+          "title": "Guía Práctica 5 - Análisis de Competencia",
+          "filename": "Guia_5_Analisis_de_Competencia.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Guia_5_Analisis_de_Competencia.pdf",
+          "type": "pdf",
+          "category": "practicas",
+          "badge": "Guía Práctica",
+          "desc": "Competidores directos e indirectos y mapa perceptual de posicionamiento."
+        },
+        {
+          "title": "Presentación de la Materia - Parte Práctica",
+          "filename": "Presentacion_Practica_Materia.pdf",
+          "path": "materias/I110_Ingenieria_de_Software/Presentacion_Practica_Materia.pdf",
+          "type": "pdf",
+          "category": "otros",
+          "badge": "General",
+          "desc": "Pautas de cursada, cronograma de entregas, proyecto grupal y régimen de aprobación."
+        }
+      ]
     },
     {
       "code": "E0303",

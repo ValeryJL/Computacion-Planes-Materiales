@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="paper">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingeniería de Software — Módulo 1: Fundamentos, Procesos, Metodologías Ágiles y Elicitación | Guía Editorial A4</title>
+  
+  <!-- KaTeX para renderizado matemático vectorial nítido -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+          onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false});"></script>
+
+  <!-- Google Fonts: Newsreader, Source Sans 3, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, Monaco, monospace;
+      --ease-paper: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="paper"] {
+      --bg-body: #f9f6ef;
+      --bg-sidebar: #f2ece0;
+      --bg-card: #ffffff;
+      --bg-card-subtle: #f5efe3;
+      --border-color: #e4dccf;
+      --border-focus: #1c4573;
+      --text-main: #2c2825;
+      --text-muted: #6b645c;
+      --text-heading: #1a1715;
+      --text-bright: #1c4573;
+      --accent-ink: #1c4573;
+      --accent-ink-bg: rgba(28, 69, 115, 0.05);
+      --accent-terra: #9e3b2b;
+      --accent-terra-bg: rgba(158, 59, 43, 0.05);
+      --accent-sage: #2d5b3c;
+      --accent-sage-bg: rgba(45, 91, 60, 0.05);
+      --accent-ochre: #8c631e;
+      --accent-ochre-bg: rgba(140, 99, 30, 0.05);
+      --shadow-paper: 0 1px 3px rgba(44, 40, 37, 0.05), 0 4px 12px rgba(44, 40, 37, 0.03);
+      --shadow-paper-hover: 0 4px 14px rgba(44, 40, 37, 0.08), 0 8px 24px rgba(44, 40, 37, 0.05);
+      --scrollbar-thumb: #d8cebe;
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #191817;
+      --bg-sidebar: #1f1e1c;
+      --bg-card: #23211f;
+      --bg-card-subtle: #292724;
+      --border-color: #383530;
+      --border-focus: #cca362;
+      --text-main: #ded9d0;
+      --text-muted: #948d82;
+      --text-heading: #f4efe7;
+      --text-bright: #cca362;
+      --accent-ink: #7ba2c9;
+      --accent-ink-bg: rgba(123, 162, 201, 0.08);
+      --accent-terra: #d17567;
+      --accent-terra-bg: rgba(209, 117, 103, 0.08);
+      --accent-sage: #7ca887;
+      --accent-sage-bg: rgba(124, 168, 135, 0.08);
+      --accent-ochre: #cca362;
+      --accent-ochre-bg: rgba(204, 163, 98, 0.08);
+      --shadow-paper: 0 1px 4px rgba(0, 0, 0, 0.35);
+      --shadow-paper-hover: 0 6px 18px rgba(0, 0, 0, 0.5);
+      --scrollbar-thumb: #3a3733;
+    }
+
+    [data-theme="light"] {
+      --bg-body: #ffffff;
+      --bg-sidebar: #faf8f5;
+      --bg-card: #ffffff;
+      --bg-card-subtle: #f7f5f1;
+      --border-color: #e5e0d8;
+      --border-focus: #181715;
+      --text-main: #242220;
+      --text-muted: #666059;
+      --text-heading: #141312;
+      --text-bright: #1c4573;
+      --accent-ink: #1c4573;
+      --accent-ink-bg: rgba(28, 69, 115, 0.04);
+      --accent-terra: #a33b2a;
+      --accent-terra-bg: rgba(163, 59, 42, 0.04);
+      --accent-sage: #2c593b;
+      --accent-sage-bg: rgba(44, 89, 59, 0.04);
+      --accent-ochre: #8f641c;
+      --accent-ochre-bg: rgba(143, 100, 28, 0.04);
+      --shadow-paper: 0 1px 3px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.02);
+      --shadow-paper-hover: 0 4px 14px rgba(0,0,0,0.07);
+      --scrollbar-thumb: #dcd6cc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.72;
+      font-size: 15.5px;
+      transition: background-color 0.3s var(--ease-paper), color 0.3s var(--ease-paper);
+      overflow-x: hidden;
+    }
+
+    .app-layout { display: flex; min-height: 100vh; position: relative; }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 320px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 100;
+      transition: margin-left 0.3s var(--ease-paper), opacity 0.25s ease;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+    }
+
+    body.sidebar-collapsed .sidebar,
+    .app-layout.sidebar-collapsed .sidebar {
+      margin-left: -320px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sidebar-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-brand { display: flex; flex-direction: column; }
+    .sidebar-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+    }
+    .sidebar-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-toggle-sidebar {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-toggle-sidebar:hover {
+      background: var(--bg-card);
+      color: var(--text-heading);
+      border-color: var(--border-focus);
+    }
+
+    .btn-floating-toc {
+      position: fixed;
+      top: 14px;
+      left: 18px;
+      z-index: 99999;
+      background: var(--bg-card);
+      color: var(--text-heading);
+      border: 1.5px solid var(--border-color);
+      border-radius: 6px;
+      padding: 7px 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    body.sidebar-collapsed .btn-floating-toc,
+    .app-layout.sidebar-collapsed .btn-floating-toc {
+      display: flex;
+    }
+
+    .controls-panel {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-print {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-print:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card-subtle);
+    }
+
+    .theme-buttons { display: flex; gap: 4px; }
+    .btn-theme {
+      flex: 1;
+      padding: 5px 8px;
+      font-size: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-theme:hover { color: var(--text-heading); border-color: var(--border-focus); }
+    .btn-theme.active {
+      background: var(--accent-ink);
+      color: #fff;
+      border-color: var(--accent-ink);
+    }
+
+    .search-box { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
+    .search-input {
+      width: 100%;
+      padding: 7px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      color: var(--text-heading);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--border-focus); }
+
+    .sidebar-nav { padding: 16px 12px 30px; display: flex; flex-direction: column; gap: 3px; }
+    .nav-group-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 12px 10px 4px;
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.86rem;
+      border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-link:hover { background: var(--bg-card); color: var(--accent-ink); }
+    .nav-link span {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      min-width: 16px;
+    }
+
+    /* Main Content Area */
+    .main-wrapper {
+      flex: 1;
+      padding: 48px 64px 100px;
+      max-width: 1040px;
+      margin: 0 auto;
+      min-width: 0;
+    }
+
+    .reading-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3.5px;
+      background: var(--accent-ink);
+      z-index: 100000;
+      width: 0%;
+      transition: width 0.1s;
+    }
+
+    /* Hero Section */
+    .module-hero {
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 32px;
+      margin-bottom: 48px;
+    }
+    .module-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--accent-ink);
+      margin-bottom: 10px;
+    }
+    .module-hero h1 {
+      font-family: var(--font-serif);
+      font-size: 2.35rem;
+      line-height: 1.25;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .module-hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin-bottom: 20px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+    }
+    .hero-meta-item {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: var(--bg-card-subtle);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    .hero-meta-item strong { color: var(--text-heading); }
+
+    /* Chapters */
+    .chapter-section {
+      margin-bottom: 64px;
+      scroll-margin-top: 24px;
+    }
+    .chapter-header {
+      border-bottom: 1.5px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+    }
+    .chapter-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-ink);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .chapter-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.015em;
+      margin-top: 4px;
+    }
+
+    h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin: 32px 0 12px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    h4 {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin: 20px 0 8px;
+    }
+    p { margin-bottom: 14px; color: var(--text-main); }
+    ul, ol { margin-bottom: 16px; padding-left: 22px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text-heading); font-weight: 600; }
+
+    /* Callout Boxes */
+    .box-callout {
+      border-radius: 5px;
+      padding: 18px 22px;
+      margin: 24px 0;
+      border-left: 4px solid;
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-paper);
+    }
+    .box-callout-header {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .box-concept { border-left-color: var(--accent-ink); background: var(--accent-ink-bg); }
+    .box-concept .box-callout-header { color: var(--accent-ink); }
+    .box-exam { border-left-color: var(--accent-ochre); background: var(--accent-ochre-bg); }
+    .box-exam .box-callout-header { color: var(--accent-ochre); }
+    .box-formula { border-left-color: var(--accent-sage); background: var(--accent-sage-bg); }
+    .box-formula .box-callout-header { color: var(--accent-sage); }
+    .box-trap { border-left-color: var(--accent-terra); background: var(--accent-terra-bg); }
+    .box-trap .box-callout-header { color: var(--accent-terra); }
+
+    .box-exercise {
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-sage);
+      background: var(--bg-card);
+      border-radius: 6px;
+      padding: 22px 24px;
+      margin: 28px 0;
+      box-shadow: var(--shadow-paper);
+    }
+    .box-exercise-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-sage);
+      margin-bottom: 12px;
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 22px 0 28px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-paper);
+    }
+    .table-styled {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    .table-styled th {
+      background: var(--bg-card-subtle);
+      color: var(--text-heading);
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-color);
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+    }
+    .table-styled td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: top;
+    }
+    .table-styled tr:last-child td { border-bottom: none; }
+    .table-styled tr:hover td { background: var(--accent-ink-bg); }
+
+    /* Interactive Widgets */
+    .interactive-widget {
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-card);
+      padding: 24px;
+      margin: 32px 0;
+      box-shadow: var(--shadow-paper);
+    }
+    .widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+    .widget-badge {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--accent-ink);
+      background: var(--accent-ink-bg);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    .widget-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .widget-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      background: var(--bg-card-subtle);
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+    .control-group { display: flex; flex-direction: column; gap: 6px; }
+    .control-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    .widget-select, .widget-input {
+      padding: 7px 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-heading);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      border-radius: 4px;
+      outline: none;
+    }
+    .widget-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .result-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 12px 14px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .result-box.highlight {
+      border-color: var(--accent-ink);
+      background: var(--accent-ink-bg);
+    }
+    .result-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .result-value {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-ink);
+    }
+
+    /* Diagram Containers */
+    .diagram-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+      text-align: center;
+      box-shadow: var(--shadow-paper);
+    }
+    .diagram-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* Print Styles */
+    @media print {
+      .no-print, .sidebar, .reading-progress-bar, .btn-floating-toc { display: none !important; }
+      .app-layout { display: block !important; }
+      .main-wrapper { max-width: 100% !important; padding: 0 !important; }
+      body { background: #fff !important; color: #000 !important; font-size: 12pt; }
+      .chapter-section { page-break-after: always; }
+      .box-callout, .box-exercise, .table-responsive { break-inside: avoid; }
+    }
+
+    @media (max-width: 900px) {
+      .main-wrapper { padding: 30px 20px 80px; }
+      .sidebar { position: fixed; left: 0; top: 0; transform: translateX(-100%); }
+      body.sidebar-open .sidebar { transform: translateX(0); }
+      .btn-floating-toc { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-progress-bar" id="progressBar"></div>
+  <button id="btnExpandSidebar" class="btn-floating-toc no-print" title="Abrir índice (Atajo: tecla M)">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <span>Abrir Índice</span>
+  </button>
+
+  <div class="app-layout" id="appLayout">
+    <!-- Barra Lateral -->
+    <aside class="sidebar no-print" id="sidebarNav">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="sidebar-title">Ingeniería de Software</div>
+          <div class="sidebar-subtitle">Módulo 1 — Teorías 1 y 2</div>
+        </div>
+        <button id="btnCollapseSidebar" class="btn-toggle-sidebar" title="Ocultar índice (Atajo: tecla M)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+      </div>
+
+      <div class="controls-panel">
+        <button class="btn-print" onclick="window.print()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Imprimir / PDF A4</span>
+        </button>
+        <div class="theme-buttons">
+          <button class="btn-theme active" data-set-theme="paper">Papel</button>
+          <button class="btn-theme" data-set-theme="dark">Oscuro</button>
+          <button class="btn-theme" data-set-theme="light">Claro</button>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="sidebarSearch" class="search-input" placeholder="Buscar concepto o técnica...">
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group-title">Fundamentos y Procesos</div>
+        <a href="#cap1" class="nav-link"><span>1.</span> Fundamentos del Software y la IS</a>
+        <a href="#cap2" class="nav-link"><span>2.</span> Modelos de Procesos Tradicionales</a>
+        <a href="#cap3" class="nav-link"><span>3.</span> Metodologías Ágiles (Scrum, XP, Kanban, MDD)</a>
+
+        <div class="nav-group-title">Comunicación y Elicitación</div>
+        <a href="#cap4" class="nav-link"><span>4.</span> La Comunicación en la IS</a>
+        <a href="#cap5" class="nav-link"><span>5.</span> Técnicas de Elicitación de Requisitos</a>
+        <a href="#cap6" class="nav-link"><span>6.</span> Análisis de Competencia y Posicionamiento</a>
+
+        <div class="nav-group-title">Interactividad y Exámenes</div>
+        <a href="#cap7" class="nav-link"><span>7.</span> Widgets Interactivos de Decisión</a>
+        <a href="#cap8" class="nav-link"><span>8.</span> Taller de Examen y Preguntas Resueltas</a>
+      </nav>
+    </aside>
+
+    <main class="main-wrapper">
+      <header class="module-hero">
+        <span class="module-eyebrow">Ingeniería de Software • Módulo 1 (Clases 1 y 2 + Práctica)</span>
+        <h1>Fundamentos, Ciclo de Vida, Modelos de Proceso, Metodologías Ágiles, Comunicación y Elicitación</h1>
+        <p>
+          Tratado analítico exhaustivo y reestructurado de las Clases Teóricas 1 y 2, Guías de Elicitación, Análisis de Competencia y Filosofía Ágil. Diseñado para dominar tanto los principios teóricos rigurosos como la aplicación práctica en proyectos de desarrollo.
+        </p>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><strong>Alcance:</strong> Clases 1 y 2 teóricas + Guías prácticas TE y Competencia</div>
+          <div class="hero-meta-item"><strong>Eje temático:</strong> De la crisis del software a Scrum, XP y técnicas avanzadas de elicitación</div>
+          <div class="hero-meta-item"><strong>Orientación:</strong> Conceptos académicos + Análisis comparativo + Banco de preguntas de parcial</div>
+        </div>
+      </header>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 1: FUNDAMENTOS DEL SOFTWARE Y LA INGENIERÍA           -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap1">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 1</div>
+          <h2 class="chapter-title">Fundamentos del Software y la Ingeniería de Software</h2>
+        </div>
+
+        <p>
+          Para comprender la naturaleza y los desafíos de la disciplina, es indispensable comenzar analizando el objeto fundamental de estudio: el <strong>software</strong>. A diferencia de las manufacturas de la ingeniería tradicional (puentes, motores o circuitos integrados), el software es una entidad puramente lógica e intangible, lo que le confiere propiedades singulares de maleabilidad, pero también una propensión innata a la complejidad no lineal y al fallo silencioso.
+        </p>
+
+        <h3>1.1. Naturaleza y Componentes del Software</h3>
+        <p>
+          En la cátedra de Ingeniería de Software de la UNLP y la bibliografía clásica (Pressman, Sommerville, Pfleeger), el software no se reduce únicamente a las líneas de código que compila o interpreta un ordenador. El software es una configuración completa compuesta por tres elementos indisociables:
+        </p>
+        <ol>
+          <li><strong>Instrucciones y Programas de Computadora:</strong> Algoritmos y código ejecutable que, al ser procesados por el hardware, proporcionan las funciones, comportamiento y rendimiento deseados.</li>
+          <li><strong>Estructuras de Datos:</strong> Mecanismos lógicos (bases de datos, esquemas de memoria, árboles, grafos) que permiten a los programas manipular, almacenar y transformar la información adecuadamente.</li>
+          <li><strong>Documentación y Manuales:</strong> Información técnica descriptiva en formato digital o impreso que explica la operación, configuración, arquitectura, diseño y mantenimiento del sistema tanto a operadores técnicos como a usuarios finales.</li>
+        </ol>
+
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Principio Fundamental: Características Distintivas del Software</span>
+          </div>
+          <p>
+            1. <strong>El software se desarrolla o ingenia; no se manufactura en el sentido clásico:</strong> Aunque existen similitudes de gestión, la fase de fabricación física de software tiene coste marginal casi nulo (copia de bits). La mayor inversión de recursos radica enteramente en la concepción intelectual, el diseño y las pruebas.<br>
+            2. <strong>El software no se desgasta físicamente:</strong> A diferencia de las piezas mecánicas que sufren fricción, fatiga o corrosión, el software no sufre desgaste material. Sin embargo, <em>se deteriora conceptualmente</em>: los continuos parches, cambios de entorno operativo y modificaciones apresuradas introducen entropía interna y fallos colaterales.<br>
+            3. <strong>Gran componente a medida:</strong> A pesar de los esfuerzos por construir sistemas mediante componentes prefabricados, la inmensa mayoría de las soluciones corporativas continúan diseñándose para satisfacer requerimientos altamente personalizados.
+          </p>
+        </div>
+
+        <div class="diagram-container">
+          <svg viewBox="0 0 750 240" width="100%" height="220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="transparent"/>
+            <path d="M 50 50 Q 90 190, 160 190 L 260 190 Q 320 190, 340 50" fill="none" stroke="#9e3b2b" stroke-width="2.5"/>
+            <text x="190" y="35" font-family="'Newsreader', serif" font-size="14" font-weight="bold" fill="#9e3b2b" text-anchor="middle">Curva de la Bañera (Hardware)</text>
+            <text x="60" y="90" font-family="sans-serif" font-size="10" fill="#9e3b2b">Mortalidad infantil</text>
+            <text x="210" y="210" font-family="sans-serif" font-size="10" fill="#9e3b2b">Tasa de fallo constante</text>
+            <text x="320" y="90" font-family="sans-serif" font-size="10" fill="#9e3b2b">Desgaste físico</text>
+
+            <path d="M 420 50 Q 450 170, 500 170 L 530 170 L 530 140 L 560 175 L 590 145 L 630 185 L 660 130 L 700 200" fill="none" stroke="#1c4573" stroke-width="2.5"/>
+            <text x="560" y="35" font-family="'Newsreader', serif" font-size="14" font-weight="bold" fill="#1c4573" text-anchor="middle">Curva Real de Deterioro (Software)</text>
+            <text x="430" y="100" font-family="sans-serif" font-size="10" fill="#1c4573">Defectos iniciales</text>
+            <text x="575" y="125" font-family="sans-serif" font-size="10" fill="#1c4573">Picos tras cada modificación</text>
+            <text x="660" y="225" font-family="sans-serif" font-size="10" fill="#1c4573">Erosión por cambios sucesivos</text>
+
+            <line x1="380" y1="20" x2="380" y2="230" stroke="#e4dccf" stroke-width="1.5" stroke-dasharray="4"/>
+          </svg>
+          <div class="diagram-caption">Figura 1.1: Comparación entre la curva de fallos de hardware (desgaste físico predecible) y la curva real de deterioro del software por efecto secundario de modificaciones.</div>
+        </div>
+
+        <h3>1.2. La Crisis del Software y la Conferencia de Garmisch (1968)</h3>
+        <p>
+          Hacia mediados de la década de 1960, el abaratamiento exponencial del hardware y la llegada de la tercera generación de computadores (circuitos integrados, familias como IBM System/360) permitieron concebir aplicaciones de una escala sin precedentes. Sin embargo, la capacidad intelectual y metodológica para concebir y gestionar dichos programas no avanzó al mismo ritmo.
+        </p>
+        <p>
+          Surgió entonces la denominada <strong>Crisis del Software</strong>, acuñada en la legendaria conferencia de la OTAN en Garmisch (Alemania) en 1968. Dicha crisis se caracterizó por:
+        </p>
+        <ul>
+          <li><strong>Desbordamientos masivos de presupuesto:</strong> Los proyectos superaban habitualmente en un 200% a 500% sus costes previstos.</li>
+          <li><strong>Incumplimiento crónico de plazos:</strong> Retrasos de meses o años eran la norma y no la excepción.</li>
+          <li><strong>Calidad deficiente y fiabilidad nula:</strong> Sistemas repletos de fallos inadvertidos que colapsaban en entornos operativos de misión crítica.</li>
+          <li><strong>Inmantenibilidad:</strong> Código enrevesado (código espagueti) sin modularidad, incapaz de adaptarse a nuevas demandas del negocio sin provocar caídas sistémicas.</li>
+          <li><strong>Inadecuación al usuario:</strong> Sistemas que, tras años de desarrollo, resolvían de forma brillante problemas que el cliente ya no tenía o que nunca había solicitado.</li>
+        </ul>
+
+        <h3>1.3. Definición Formal de la Ingeniería de Software</h3>
+        <p>
+          Como respuesta científica e industrial a la crisis, nació la <strong>Ingeniería de Software (IS)</strong>. Existen diversas definiciones consagradas que el estudiante debe dominar con precisión:
+        </p>
+        
+        <div class="box-callout box-exam">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>Definición Oficial IEEE Standard 610.12 (1990)</span>
+          </div>
+          <p>
+            <em>"La Ingeniería de Software es la aplicación de un enfoque sistemático, disciplinado y cuantificable al desarrollo, operación y mantenimiento del software; es decir, la aplicación de la ingeniería al software, y el estudio de los enfoques mencionados."</em>
+          </p>
+        </div>
+
+        <p>
+          Otras perspectivas complementarias de autores canónicos:
+        </p>
+        <ul>
+          <li><strong>Ian Sommerville:</strong> <em>"Una disciplina de ingeniería que se ocupa de todos los aspectos de la producción de software, desde las etapas iniciales de la especificación del sistema hasta el mantenimiento del sistema después de que se ha puesto en uso."</em></li>
+          <li><strong>Roger Pressman:</strong> <em>"Una tecnología multicapa compuesta por: herramientas automatizadas, métodos y técnicas analíticas, un proceso estructurado unificador, y un compromiso fundamental con la calidad total."</em></li>
+        </ul>
+
+        <h3>1.4. Leyes de Lehman sobre la Evolución del Software</h3>
+        <p>
+          Meir Lehman formuló leyes empíricas fundamentales sobre los sistemas de tipo $E$ (sistemas embebidos en el mundo real que deben evolucionar):
+        </p>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Ley de Lehman</th>
+                <th>Enunciado Académico</th>
+                <th>Implicación en Ingeniería de Software</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>I. Cambio Continuo</strong></td>
+                <td>Un sistema debe adaptarse continuamente o de lo contrario se volverá progresivamente insatisfactorio en su contexto operativo.</td>
+                <td>El mantenimiento y la evolución no son fallos de diseño; son una ley natural del software. Un sistema que no cambia está muerto.</td>
+              </tr>
+              <tr>
+                <td><strong>II. Complejidad Creciente</strong></td>
+                <td>A medida que un sistema evoluciona, su complejidad intrínseca se incrementa a menos que se invierta trabajo explícito en reducirla.</td>
+                <td>Justifica la necesidad de la <em>refactorización</em> constante y el rediseño arquitectónico proactivo.</td>
+              </tr>
+              <tr>
+                <td><strong>III. Autorregulación</strong></td>
+                <td>El proceso de evolución del software es un proceso retroalimentado y autorregulado con propiedades estadísticas medibles.</td>
+                <td>Los ritmos de producción y tasas de defectos tienden a mantenerse constantes a nivel organizacional a largo plazo.</td>
+              </tr>
+              <tr>
+                <td><strong>VI. Crecimiento Continuo</strong></td>
+                <td>La funcionalidad ofrecida por un sistema debe incrementarse continuamente para mantener la satisfacción del usuario a lo largo de su vida útil.</td>
+                <td>La acumulación de nuevas funciones exige arquitecturas modulares altamente desacopladas para evitar el colapso.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>1.5. Responsabilidad Profesional y Ética en la Ingeniería de Software</h3>
+        <p>
+          La ingeniería de software conlleva una responsabilidad social y ética profunda. La ACM y la IEEE-CS establecieron el <strong>Código de Ética y Práctica Profesional de la Ingeniería de Software</strong>, organizado en 8 principios cardinales:
+        </p>
+        <ol>
+          <li><strong>Público:</strong> Los ingenieros de software deberán actuar congruentemente con el interés social de la comunidad humana.</li>
+          <li><strong>Cliente y Empleador:</strong> Prestar servicios de máxima lealtad preservando siempre la confidencialidad técnica y comercial, sin violar el interés público.</li>
+          <li><strong>Producto:</strong> Garantizar que las entregas cumplan con los más altos estándares profesionales posibles de calidad, seguridad y pruebas rigurosas.</li>
+          <li><strong>Juicio:</strong> Mantener integridad e independencia profesional en la toma de decisiones técnicas, declarando cualquier conflicto de interés.</li>
+          <li><strong>Gestión:</strong> Los líderes promoverán una administración justa, estimaciones realistas y evitarán imponer plazos imposibles que obliguen a recortar calidad o pruebas críticas.</li>
+          <li><strong>Profesión:</strong> Fomentar la reputación, el avance científico y la credibilidad de la ingeniería de software.</li>
+          <li><strong>Colegas:</strong> Tratar a los colegas con equidad, apoyar su desarrollo profesional y revisar su trabajo con objetividad constructiva.</li>
+          <li><strong>Uno Mismo:</strong> Mantener un aprendizaje continuo a lo largo de la vida profesional en métodos, lenguajes, estándares y seguridad.</li>
+        </ol>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 2: PROCESOS DE SOFTWARE Y MODELOS TRADICIONALES       -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap2">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 2</div>
+          <h2 class="chapter-title">Modelos de Procesos de Software Tradicionales y Prescriptivos</h2>
+        </div>
+
+        <p>
+          Un <strong>modelo de proceso de software</strong> es una abstracción descriptiva o prescriptiva del orden, las dependencias y las responsabilidades que gobiernan la construcción de un producto de software. Su propósito fundamental es imponer orden donde reina el caos, permitiendo predecir plazos, controlar costes y garantizar niveles de calidad auditables.
+        </p>
+
+        <h3>2.1. Actividades Universales del Proceso</h3>
+        <p>
+          Sin importar el modelo adoptado, todo ciclo de vida de desarrollo de software comprende cinco actividades metodológicas marco:
+        </p>
+        <ul>
+          <li><strong>Comunicación y Elicitación:</strong> Interacción intensiva con clientes y partes interesadas para identificar objetivos del negocio, necesidades operativas y restricciones iniciales.</li>
+          <li><strong>Planificación:</strong> Estimación del esfuerzo, coste, asignación de recursos humanos, cronograma de entregas y evaluación de riesgos técnicos y organizacionales.</li>
+          <li><strong>Modelado y Diseño:</strong> Creación de representaciones abstractas de los requerimientos y de la arquitectura de software (diseño estructural, diseño de interfaces, diseño de datos).</li>
+          <li><strong>Construcción:</strong> Codificación en lenguajes de programación y ejecución exhaustiva de pruebas unitarias e integrales para detección de defectos.</li>
+          <li><strong>Despliegue y Evolución:</strong> Puesta en producción del software, capacitación de usuarios, monitoreo del comportamiento y mantenimiento evolutivo/correctivo.</li>
+        </ul>
+
+        <h3>2.2. Modelo en Cascada (Waterfall / Cascada Clásica)</h3>
+        <p>
+          Propuesto formalmente por <strong>Winston Royce en 1970</strong> (originalmente como un modelo sobre el cual planteó mejoras iterativas), el modelo en cascada estipula una secuencia estrictamente lineal y unidireccional de etapas. Cada fase debe finalizarse por completo, aprobarse formalmente mediante documentos firmados y "congelarse" antes de iniciar la siguiente.
+        </p>
+
+        <div class="diagram-container">
+          <svg viewBox="0 0 700 240" width="100%" height="220" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="20" width="130" height="36" rx="4" fill="#1c4573"/>
+            <text x="95" y="43" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Requerimientos</text>
+
+            <rect x="150" y="65" width="130" height="36" rx="4" fill="#1c4573"/>
+            <text x="215" y="88" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Diseño de Sistema</text>
+
+            <rect x="270" y="110" width="130" height="36" rx="4" fill="#1c4573"/>
+            <text x="335" y="133" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Implementación</text>
+
+            <rect x="390" y="155" width="130" height="36" rx="4" fill="#1c4573"/>
+            <text x="455" y="178" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Verificación/Test</text>
+
+            <rect x="510" y="200" width="140" height="36" rx="4" fill="#1c4573"/>
+            <text x="580" y="223" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Mantenimiento</text>
+
+            <path d="M 160 38 L 180 38 L 180 65 L 150 65" fill="none" stroke="#6b645c" stroke-width="1.8"/>
+            <path d="M 280 83 L 300 83 L 300 110 L 270 110" fill="none" stroke="#6b645c" stroke-width="1.8"/>
+            <path d="M 400 128 L 420 128 L 420 155 L 390 155" fill="none" stroke="#6b645c" stroke-width="1.8"/>
+            <path d="M 520 173 L 540 173 L 540 200 L 510 200" fill="none" stroke="#6b645c" stroke-width="1.8"/>
+          </svg>
+          <div class="diagram-caption">Figura 2.1: Estructura secuencial lineal estricta del Modelo en Cascada clásico.</div>
+        </div>
+
+        <div class="box-callout box-trap">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>Trampas y Problemas Críticos del Modelo en Cascada</span>
+          </div>
+          <p>
+            1. <strong>La falacia de los requerimientos congelados:</strong> Asume de manera ficticia que los clientes conocen exactamente el 100% de lo que necesitan desde el día 1 y que el entorno de negocio permanecerá estático durante todo el proyecto.<br>
+            2. <strong>Retraso masivo de software funcional:</strong> El cliente no visualiza ni una sola pantalla funcional hasta el final del cronograma. Si hubo un error de interpretación en la fase 1, se descubre cuando ya se ha gastado el 90% del presupuesto.<br>
+            3. <strong>Efecto bloqueo:</strong> Los miembros del equipo de etapas tardías (desarrolladores, testers) permanecen subutilizados al inicio esperando la aprobación documental de los analistas.<br>
+            <strong>¿Cuándo SÍ es viable?:</strong> Proyectos con requerimientos perfectamente conocidos, estables y matemáticamente cerrados (sistemas de aviónica, drivers de hardware estándar, regulaciones gubernamentales inflexibles).
+          </p>
+        </div>
+
+        <h3>2.3. Modelo en V (V-Model: Verificación y Validación)</h3>
+        <p>
+          El Modelo en V reorganiza la cascada para enfatizar que por cada fase de diseño constructivo existe una fase simétrica correspondiente de <strong>pruebas y aseguramiento de calidad</strong> planificada con antelación:
+        </p>
+        <ul>
+          <li><strong>Especificación de Requerimientos de Usuario $\longleftrightarrow$ Pruebas de Aceptación:</strong> Se valida contra el cliente si el sistema satisface sus objetivos de negocio.</li>
+          <li><strong>Especificación de Requerimientos del Sistema $\longleftrightarrow$ Pruebas de Sistema:</strong> Se verifica el comportamiento global del sistema bajo carga, estrés y seguridad.</li>
+          <li><strong>Diseño Arquitectónico $\longleftrightarrow$ Pruebas de Integración:</strong> Se verifica la comunicación e interfaces entre módulos y subsistemas.</li>
+          <li><strong>Diseño Detallado $\longleftrightarrow$ Pruebas Unitarias:</strong> Se verifican funciones, algoritmos y clases individuales en aislamiento.</li>
+        </ul>
+
+        <h3>2.4. Modelo de Desarrollo Basado en Prototipos</h3>
+        <p>
+          Cuando el cliente define un conjunto de objetivos generales para el software pero no identifica los requerimientos detallados de entrada, procesamiento o salida, el prototipado es el modelo indicado.
+        </p>
+        <p>
+          Existen dos grandes ramas de prototipado:
+        </p>
+        <ol>
+          <li><strong>Prototipo Rápido o Desechable (Throwaway Prototyping):</strong> Construido con la única meta de aclarar y elicitar requerimientos oscuros. Una vez validados los requisitos con el usuario, el prototipo <em>se descarta por completo</em> y el sistema de producción se codifica desde cero con arquitectura robusta.</li>
+          <li><strong>Prototipo Evolutivo (Evolutionary Prototyping):</strong> El prototipo inicial constituye la base técnica sobre la cual se incorporan progresivamente nuevas capacidades hasta convertirse en el sistema final desplegado.</li>
+        </ol>
+
+        <h3>2.5. Modelo Incremental e Iterativo</h3>
+        <p>
+          Combina elementos lineales con la filosofía iterativa. El producto no se entrega como un "Big Bang" al final; en su lugar, se divide en <strong>incrementos funcionales</strong> (versiones utilizables). El primer incremento suele ser el núcleo fundamental del sistema (Core Product). Con cada nuevo release, el cliente recibe valor tangible y proporciona retroalimentación realista para guiar los incrementos sucesivos.
+        </p>
+
+        <h3>2.6. Modelo en Espiral de Barry Boehm (1988)</h3>
+        <p>
+          El modelo en espiral es un generador de procesos guiado fundamentalmente por el <strong>análisis y mitigación de riesgos</strong>. Cada vuelta de la espiral recorre cuatro cuadrantes cardinales:
+        </p>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Cuadrante</th>
+                <th>Objetivo Principal</th>
+                <th>Actividades Clave Realizadas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Determinación de Objetivos</strong></td>
+                <td>Definir metas y límites del ciclo</td>
+                <td>Identificación de objetivos de la fase actual, alternativas de implementación y restricciones de coste y calidad.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Análisis y Evaluación de Riesgos</strong></td>
+                <td>Detectar y neutralizar puntos críticos</td>
+                <td>Evaluación analítica de riesgos técnicos, financieros y operativos; construcción de prototipos y simulaciones para reducir incertidumbre.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Desarrollo y Verificación</strong></td>
+                <td>Construir el nivel del sistema</td>
+                <td>Elección del modelo adecuado (ej. cascada para partes ya conocidas, prototipos para partes complejas), codificación y pruebas.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Planificación del Siguiente Ciclo</strong></td>
+                <td>Revisar y acordar continuidad</td>
+                <td>Revisión con el cliente del producto del ciclo actual, decisión de continuidad (Go / No-Go) y plan para la siguiente vuelta.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.7. Proceso Unificado Racional (RUP - Rational Unified Process)</h3>
+        <p>
+          Creado por Ivar Jacobson, Grady Booch y James Rumbaugh, RUP es un marco de proceso prescriptivo moderno caracterizado por tres principios fundacionales: está <strong>dirigido por casos de uso</strong>, <strong>centrado en la arquitectura</strong>, y es <strong>iterativo e incremental</strong>.
+        </p>
+        <p>
+          RUP posee dos dimensiones ortogonales:
+        </p>
+        <ul>
+          <li><strong>Dimensión Temporal (Fases dinámicas del ciclo de vida):</strong>
+            <ul>
+              <li><strong>Inicio (Inception):</strong> Delimitar la visión del proyecto, el alcance del negocio, los casos de uso principales (aproximadamente el 20% más representativo) y la viabilidad económica.</li>
+              <li><strong>Elaboración (Elaboration):</strong> Diseñar la <em>línea base de la arquitectura ejecutable</em> (Executable Architectural Baseline), mitigar los riesgos técnicos de mayor severidad y detallar el 80% restante de los requerimientos.</li>
+              <li><strong>Construcción (Construction):</strong> Desarrollo masivo de componentes, integración progresiva y pruebas de los casos de uso restantes.</li>
+              <li><strong>Transición (Transition):</strong> Pruebas beta en el entorno del cliente, corrección de defectos menores, migración de datos, capacitación de usuarios y despliegue final.</li>
+            </ul>
+          </li>
+          <li><strong>Dimensión Estructural (Disciplinas del proceso):</strong> Disciplinas técnicas (Modelado de Negocio, Requerimientos, Análisis y Diseño, Implementación, Pruebas, Despliegue) y Disciplinas de gestión (Gestión de Configuración y Cambios, Gestión del Proyecto, Gestión del Entorno/Herramientas).</li>
+        </ul>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 3: METODOLOGÍAS ÁGILES, SCRUM, XP, KANBAN Y MDD       -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap3">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 3</div>
+          <h2 class="chapter-title">Metodologías Ágiles: Manifiesto, Scrum, XP, Kanban y Enfoque MDD</h2>
+        </div>
+
+        <p>
+          A finales de los 90, la rigidez burocrática y el excesivo peso documental de los modelos tradicionales llevaron a un grupo de 17 líderes de la industria (entre ellos Kent Beck, Jeff Sutherland, Ken Schwaber, Martin Fowler y Alistair Cockburn) a reunirse en febrero de 2001 en Snowbird, Utah. El fruto de ese encuentro fue el <strong>Manifiesto Ágil</strong>, el cual transformó radicalmente el paradigma de construcción de software mundial.
+        </p>
+
+        <h3>3.1. Los 4 Valores del Manifiesto Ágil</h3>
+        <p>
+          El manifiesto declara que, aunque se reconoce el valor de los elementos de la derecha, <strong>se valoran más los elementos de la izquierda</strong>:
+        </p>
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>Los 4 Postulados del Manifiesto Ágil (2001)</span>
+          </div>
+          <ol>
+            <li><strong>Individuos e interacciones</strong> por encima de <em>procesos y herramientas</em>.</li>
+            <li><strong>Software funcionando</strong> por encima de <em>documentación exhaustiva</em>.</li>
+            <li><strong>Colaboración con el cliente</strong> por encima de <em>negociación contractual</em>.</li>
+            <li><strong>Respuesta ante el cambio</strong> por encima de <em>seguimiento de un plan</em>.</li>
+          </ol>
+        </div>
+
+        <h3>3.2. Framework Scrum en Profundidad</h3>
+        <p>
+          Scrum es un marco liviano y empírico para resolver problemas adaptativos complejos entregando productos del mayor valor posible de manera creativa y productiva.
+        </p>
+        
+        <h4>A. Pilares y Valores de Scrum</h4>
+        <ul>
+          <li><strong>Transparencia:</strong> Todos los aspectos del proceso y el incremento deben ser visibles y comprensibles para quienes realizan el trabajo y quienes lo reciben.</li>
+          <li><strong>Inspección:</strong> Los artefactos y el progreso hacia los objetivos se inspeccionan con frecuencia y minuciosidad para detectar variaciones indeseadas.</li>
+          <li><strong>Adaptación:</strong> Si un aspecto se desvía fuera de los límites aceptables, el proceso o los materiales se ajustan a la mayor brevedad posible.</li>
+        </ul>
+
+        <h4>B. Roles del Scrum Team (Sin Jerarquías Internas)</h4>
+        <ul>
+          <li><strong>Product Owner (PO):</strong> La persona responsable de maximizar el valor del producto resultante del trabajo del equipo. Es el único dueño y responsable de la gestión efectiva del <em>Product Backlog</em> (redacción clara, ordenación por valor/prioridad y visibilidad).</li>
+          <li><strong>Scrum Master (SM):</strong> Es un líder servicial responsable de garantizar que Scrum se comprenda y aplique adecuadamente. Actúa como coach del equipo, facilita las ceremonias cuando se requiere y remueve activamente cualquier <em>impedimento</em> o bloqueo exterior que frene al equipo.</li>
+          <li><strong>Developers (Equipo de Desarrollo):</strong> Conjunto de profesionales multidisciplinarios (diseño, backend, frontend, test, infraestructura) que tienen todas las habilidades necesarias para transformar ítems del Product Backlog en un incremento potencialmente desplegable ("Done") en cada Sprint.</li>
+        </ul>
+
+        <h4>C. Artefactos de Scrum y sus Compromisos</h4>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Artefacto Scrum</th>
+                <th>Definición y Contenido</th>
+                <th>Compromiso Formal Asociado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Product Backlog</strong></td>
+                <td>Lista ordenada y viva de todo lo que se sabe que es necesario para mejorar el producto. Evoluciona continuamente.</td>
+                <td><strong>Product Goal (Objetivo del Producto):</strong> Describe un estado futuro del producto que sirve como blanco a largo plazo.</td>
+              </tr>
+              <tr>
+                <td><strong>Sprint Backlog</strong></td>
+                <td>Conjunto de elementos del Product Backlog seleccionados para el Sprint actual, junto con el plan ejecutable de tareas para entregarlos.</td>
+                <td><strong>Sprint Goal (Objetivo del Sprint):</strong> Meta única y concisa acordada por el equipo durante la planificación que da coherencia al trabajo.</td>
+              </tr>
+              <tr>
+                <td><strong>Incremento</strong></td>
+                <td>El resultado concreto acumulativo de todos los ítems completados en el Sprint sumados a los incrementos de Sprints anteriores.</td>
+                <td><strong>Definition of Done (DoD - Definición de Hecho):</strong> Descripción formal del estándar de calidad exigido para que el trabajo sea considerado terminado (pruebas, linting, code review, etc.).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>D. Eventos / Ceremonias del Sprint</h4>
+        <p>
+          Todos los eventos de Scrum son de <strong>duración fija (timeboxed)</strong>:
+        </p>
+        <ol>
+          <li><strong>El Sprint:</strong> Es el evento contenedor. Periodo de tiempo fijo de 1 a 4 semanas donde se crea el incremento útil. Al terminar un Sprint, el siguiente inicia inmediatamente.</li>
+          <li><strong>Sprint Planning:</strong> Se responde a: ¿Por qué es valioso este Sprint? ¿Qué se puede entregar? ¿Cómo se implementará el trabajo seleccionado? (Máx. 8 horas para Sprint de 1 mes).</li>
+          <li><strong>Daily Scrum:</strong> Reunión diaria de 15 minutos de los Developers para inspeccionar el avance hacia el Sprint Goal y adaptar el plan del día siguiente.</li>
+          <li><strong>Sprint Review:</strong> Reunión al final del Sprint donde el Scrum Team presenta el Incremento a los stakeholders para inspeccionar resultados y adaptar el Product Backlog.</li>
+          <li><strong>Sprint Retrospective:</strong> Reunión interna del equipo para inspeccionar cómo fue el Sprint en cuanto a personas, relaciones, procesos y herramientas, identificando mejoras accionables para el siguiente Sprint.</li>
+        </ol>
+
+        <h3>3.3. Extreme Programming (XP - Kent Beck)</h3>
+        <p>
+          Mientras Scrum se enfoca primordialmente en la gestión y el flujo de trabajo, <strong>XP es la metodología ágil por excelencia orientada a las prácticas técnicas rigurosas de ingeniería de software</strong>.
+        </p>
+        <ul>
+          <li><strong>Desarrollo Guiado por Pruebas (TDD - Test-Driven Development):</strong> Se escribe primero la prueba automatizada que falla (Red), luego se codifica el mínimo código indispensable para que pase (Green), y finalmente se limpia y optimiza la solución (Refactor).</li>
+          <li><strong>Programación en Parejas (Pair Programming):</strong> Dos desarrolladores trabajan juntos en una única estación de trabajo. Uno adopta el rol de <em>Conductor (Driver)</em> escribiendo el código, mientras el otro adopta el rol de <em>Navegador (Navigator)</em> revisando sintaxis, pensando en el diseño global y anticipando casos de borde.</li>
+          <li><strong>Integración Continua (CI):</strong> El código se integra y prueba en la rama principal varias veces al día para detectar incompatibilidades de inmediato.</li>
+          <li><strong>Refactorización Continua:</strong> Reestructuración permanente del código fuente para mejorar su legibilidad y simplicidad sin alterar su comportamiento externo observable.</li>
+          <li><strong>Propiedad Colectiva del Código:</strong> Cualquier miembro del equipo tiene la potestad y la responsabilidad de corregir o mejorar cualquier archivo de la base de código.</li>
+          <li><strong>Cliente en el Sitio (On-site Customer):</strong> Un representante del cliente con poder de decisión trabaja físicamente con el equipo para responder dudas en minutos.</li>
+        </ul>
+
+        <h3>3.4. Kanban en Ingeniería de Software</h3>
+        <p>
+          Inspirado en el sistema de producción Toyota, Kanban es un método para gestionar la entrega de servicios enfocado en el flujo continuo. Se rige por tres métricas cardinales:
+        </p>
+        <ul>
+          <li><strong>Visualización del Tablero:</strong> El flujo de trabajo se divide en columnas explícitas (Por hacer, En análisis, En desarrollo, En pruebas, Desplegado).</li>
+          <li><strong>Límites WIP (Work In Progress):</strong> Restricción estricta de la cantidad de tareas que pueden encontrarse simultáneamente en una columna (evita cuellos de botella y multitarea ineficiente).</li>
+          <li><strong>Lead Time vs Cycle Time:</strong>
+            $$\text{Lead Time} = t_{\text{entrega}} - t_{\text{solicitud del usuario}}$$
+            $$\text{Cycle Time} = t_{\text{entrega}} - t_{\text{inicio real de desarrollo}}$$
+          </li>
+        </ul>
+
+        <h3>3.5. Desarrollo de Software Dirigido por Modelos (MDD / MDA - Model Driven Architecture)</h3>
+        <p>
+          Impulsado por el <strong>OMG (Object Management Group)</strong>, el enfoque MDA propone que el núcleo del desarrollo de software no sea la escritura manual de código fuente, sino la creación de <strong>modelos formales</strong> que luego son transformados automáticamente en software ejecutable.
+        </p>
+        <p>
+          Niveles de Abstracción en MDA:
+        </p>
+        <ol>
+          <li><strong>CIM (Computation Independent Model):</strong> Modelo de Negocio. Representa los requerimientos y el dominio del problema sin hacer alusión a ningún sistema computacional o de software.</li>
+          <li><strong>PIM (Platform Independent Model):</strong> Modelo Independiente de la Plataforma. Modela la lógica del software, estructura de clases y flujo de datos sin depender de tecnologías específicas.</li>
+          <li><strong>PSM (Platform Specific Model):</strong> Modelo Específico de la Plataforma. Adapta el PIM a tecnologías concretas (ej. mapeo a Entity Beans, ASP.NET, tablas relacionales Oracle).</li>
+          <li><strong>Transformaciones de Modelos:</strong>
+            <ul>
+              <li><strong>M2M (Model-to-Model):</strong> Transformación automática de un PIM a uno o más PSM mediante reglas declarativas (ej. QVT).</li>
+              <li><strong>M2T (Model-to-Text):</strong> Generación automática del código fuente final y archivos de configuración a partir del PSM.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 4: LA COMUNICACIÓN EN LA INGENIERÍA DE SOFTWARE       -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap4">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 4</div>
+          <h2 class="chapter-title">La Comunicación en la Ingeniería de Software</h2>
+        </div>
+
+        <p>
+          Los estudios empíricos de la industria (Standish Group Chaos Report) demuestran que más del 60% de los defectos en proyectos de software no se deben a fallas algorítmicas ni a problemas de sintaxis, sino a <strong>deficiencias graves de comunicación humana</strong> durante las etapas preliminares del proyecto.
+        </p>
+
+        <h3>4.1. La Brecha Comunicacional Clásica</h3>
+        <p>
+          El software se encuentra en la intersección entre un dominio de negocio (gestión contable, salud, logística) y un dominio puramente tecnológico (servidores, redes, algoritmos). El cliente conoce íntimamente su negocio pero desconoce el vocabulario formal de la informática; el ingeniero domina la tecnología pero desconoce la jerga operativa diaria del cliente.
+        </p>
+        
+        <div class="box-callout box-exam">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Ejemplo de Cátedra: La Ambigüedad del Lenguaje Natural</span>
+          </div>
+          <p>
+            Consideremos la frase analizada formalmente en clase: <em>"Fred vio el avión volando sobre Zurich"</em>.
+          </p>
+          <p>
+            En lenguaje natural no estructurado, dicha frase presenta al menos tres interpretaciones semánticas radicalmente distintas:
+          </p>
+          <ul>
+            <li><strong>Interpretación A:</strong> Fred estaba en tierra en la ciudad de Zurich y observó un avión que volaba en el cielo.</li>
+            <li><strong>Interpretación B:</strong> Fred iba a bordo de una aeronave y desde la ventanilla observó a otro avión volar sobre el espacio aéreo de Zurich.</li>
+            <li><strong>Interpretación C:</strong> Fred iba volando como piloto o pasajero sobre Zurich y observó la ciudad desde el aire.</li>
+          </ul>
+          <p>
+            Si una frase cotidiana de siete palabras admite semejante dispersión de significado, un documento de requerimientos de 200 páginas redactado en lenguaje natural sin rigor provocará con certeza discrepancias catastróficas durante la implementación.
+          </p>
+        </div>
+
+        <h3>4.2. Barreras en la Comunicación</h3>
+        <p>
+          Durante el proceso de descubrimiento, los analistas deben sortear múltiples obstáculos:
+        </p>
+        <ol>
+          <li><strong>Conocimiento Tácito:</strong> Los usuarios experimentados ejecutan tareas complejas de forma intuitiva y automatizada ("sé cómo hacerlo, pero no puedo explicar paso a paso qué variables evalúo").</li>
+          <li><strong>Efecto Jerga y Vocabulario Heterogéneo:</strong> Términos que tienen un significado preciso en una sucursal o sector de la empresa pueden significar algo completamente distinto en otra área.</li>
+          <li><strong>Resistencia Psicológica al Cambio:</strong> Empleados que perciben que el nuevo sistema de software pondrá en riesgo su estabilidad laboral o aumentará el control disciplinario sobre sus jornadas, ocultando intencionalmente información operativa crítica.</li>
+          <li><strong>Filtros y Sesgos Cognitivos:</strong> La tendencia del cliente a describir "soluciones preconcebidas" en lugar de explicar la "necesidad raíz" que desea resolver.</li>
+        </ol>
+
+        <h3>4.3. Enfoque de Puntos de Vista (Viewpoints)</h3>
+        <p>
+          Un sistema de software nunca tiene un único cliente representativo. El enfoque de <strong>Puntos de Vista (Viewpoints)</strong> reconoce que existen múltiples actores con expectativas divergentes o incluso contradictorias sobre el mismo sistema:
+        </p>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Tipo de Punto de Vista</th>
+                <th>Definición y Enfoque</th>
+                <th>Ejemplo en Sistema Hospitalario</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Puntos de Vista Directos (Operacionales)</strong></td>
+                <td>Usuarios que interactúan de forma física o directa con la interfaz del software a diario.</td>
+                <td>Médicos que cargan diagnósticos; Enfermeros que consultan medicación; Recepcionistas que asignan turnos.</td>
+              </tr>
+              <tr>
+                <td><strong>Puntos de Vista Indirectos (Estratégicos / Gestión)</strong></td>
+                <td>Actores que no tocan el sistema a diario pero consumen sus reportes o financian el proyecto.</td>
+                <td>Director del Hospital (auditoría financiera); Gerente de Compras (control de stock de fármacos).</td>
+              </tr>
+              <tr>
+                <td><strong>Puntos de Vista del Dominio (Regulatorios / Legales)</strong></td>
+                <td>Normativas, leyes y estándares del entorno que imponen restricciones ineludibles al diseño.</td>
+                <td>Ministerio de Salud (ley de secreto médico, firma digital de recetas, estándares HL7 de interoperabilidad).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 5: TÉCNICAS DE ELICITACIÓN DE REQUISITOS              -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap5">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 5</div>
+          <h2 class="chapter-title">Técnicas de Elicitación de Requisitos de Software</h2>
+        </div>
+
+        <p>
+          El término <strong>elicitación</strong> proviene del latín <em>elicitare</em> (provocar, hacer surgir, descubrir). En Ingeniería de Software se prefiere enfáticamente sobre "recolección de requisitos", pues los requisitos no están esperando como frutas maduras en un árbol para ser recogidos; se hallan ocultos en la mente de los usuarios, en procesos no formalizados y en dinámicas complejas que exigen una exploración analítica activa.
+        </p>
+
+        <h3>5.1. Entrevistas a Fondo</h3>
+        <p>
+          La entrevista es la técnica de elicitación cara a cara más utilizada y poderosa, pero también la más propensa a sesgos si no se estructura profesionalmente.
+        </p>
+        
+        <h4>A. Clasificación de Entrevistas</h4>
+        <ul>
+          <li><strong>Estructuradas (Cerradas):</strong> El analista sigue un guión rígido de preguntas estandarizadas con opciones acotadas. Permite comparar respuestas numéricamente entre muchos encuestados pero anula el descubrimiento de necesidades imprevistas.</li>
+          <li><strong>No Estructuradas (Abiertas):</strong> Conversación libre y exploratoria sin preguntas predeterminadas. Útil en las primeras reuniones para tantear el terreno, pero suele dispersarse sin conclusiones concretas.</li>
+          <li><strong>Semiestructuradas (Recomendada en IS):</strong> El analista cuenta con un guión de temas y preguntas eje fundamentales, pero mantiene la flexibilidad de profundizar mediante preguntas de sondeo espontáneas ante respuestas interesantes del usuario.</li>
+        </ul>
+
+        <h4>B. Fases para una Entrevista Exitosa</h4>
+        <ol>
+          <li><strong>Preparación Previa:</strong>
+            <ul>
+              <li>Investigar el dominio del negocio antes de sentarse con el usuario (no hacer preguntas cuya respuesta está en la página web pública de la empresa).</li>
+              <li>Definir el objetivo concreto de la entrevista (¿qué quiero saber al terminar?).</li>
+              <li>Diseñar el guión temático y coordinar agenda formalmente respetando el tiempo del entrevistado.</li>
+            </ul>
+          </li>
+          <li><strong>Conducción de la Entrevista:</strong>
+            <ul>
+              <li><strong>Rapport inicial:</strong> Presentación formal, explicar el propósito del proyecto y generar confianza y distensión.</li>
+              <li><strong>Escucha Activa:</strong> Dejar hablar al usuario (regla del 80/20: el usuario habla el 80% del tiempo, el analista el 20%).</li>
+              <li><strong>Técnica de los 5 Por qués (5 Whys):</strong> Ante un requerimiento superficial ("necesito un botón rojo grande aquí"), preguntar sucesivamente por qué hasta desentrañar la causa raíz del problema operativo.</li>
+            </ul>
+          </li>
+          <li><strong>Registro y Cierre:</strong>
+            <ul>
+              <li>Toma de notas precisa; solicitar permiso explícito si se va a grabar el audio.</li>
+              <li>Resumir oralmente los puntos clave acordados antes de despedirse.</li>
+            </ul>
+          </li>
+          <li><strong>Seguimiento Post-Entrevista:</strong> Redactar y enviar una <strong>minuta formal</strong> por correo dentro de las 24-48 horas para que el entrevistado valide y firme por escrito los puntos comprendidos.</li>
+        </ol>
+
+        <h3>5.2. Cuestionarios y Encuestas</h3>
+        <p>
+          Técnica cuantitativa diseñada para recolectar información de una población amplia de usuarios a un coste marginal despreciable.
+        </p>
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+            <span>¿Cuándo usar Cuestionarios y cómo Diseñarlos?</span>
+          </div>
+          <p>
+            <strong>Escenarios de Aplicación Óptimos:</strong><br>
+            • Los usuarios se encuentran distribuidos geográficamente en múltiples sedes o países.<br>
+            • Se requiere un tamaño de muestra estadísticamente representativo (cientos o miles de usuarios).<br>
+            • Se desea verificar si una afirmación obtenida en una entrevista individual es compartida por la mayoría del personal.<br>
+            • Se requieren respuestas honestas y anónimas sobre temas delicados o conflictos organizacionales.
+          </p>
+          <p>
+            <strong>Reglas de Diseño:</strong> Emplear preguntas cerradas con <strong>Escalas de Likert</strong> (1: Totalmente en desacuerdo a 5: Totalmente de acuerdo); evitar preguntas ambiguas, compuestas ("¿Usted utiliza el sistema diariamente y le parece rápido?") o que induzcan la respuesta; incluir un número mínimo de preguntas abiertas de opinión al final.
+          </p>
+        </div>
+
+        <h3>5.3. Observación del Ambiente de Trabajo (Etnografía & Job Shadowing)</h3>
+        <p>
+          Consiste en observar directamente a los usuarios en su entorno operativo real mientras desempeñan sus labores cotidianas.
+        </p>
+        <ul>
+          <li><strong>Observación Pasiva (Fly-on-the-wall):</strong> El analista se sienta a un lado del operador y toma notas minuciosas de cada acción, clic, consulta telefónica y error sin interrumpir el flujo de trabajo.</li>
+          <li><strong>Observación Activa:</strong> El analista interrumpe puntualmente al usuario en momentos clave para consultarle por qué tomó una decisión o qué excepciones está gestionando.</li>
+        </ul>
+        
+        <div class="box-callout box-trap">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>El Efecto Hawthorne y su Mitigación</span>
+          </div>
+          <p>
+            El <strong>Efecto Hawthorne</strong> describe el fenómeno sociológico por el cual los sujetos modifican o mejoran artificialmente su conducta laboral habitual por el simple hecho de ser conscientes de que están siendo observados por un analista externo.
+          </p>
+          <p>
+            <em>Cómo mitigarlo:</em> Realizar observaciones prolongadas durante varios días consecutivos (el estrés de fingir desaparece al cabo de unas horas y reaparecen las costumbres reales) y contrastar la observación con el análisis silencioso de registros de auditoría y formularios históricos.
+          </p>
+        </div>
+
+        <h3>5.4. Planeación Conjunta de Requerimientos (JRP) / JAD (Joint Application Development)</h3>
+        <p>
+          Desarrollada por IBM, JRP/JAD es una técnica intensiva que reúne en una misma sala durante 2 a 4 días a todas las partes interesadas (patrocinadores, gerentes, usuarios operativos y analistas técnicos) para acordar los requerimientos en tiempo real.
+        </p>
+        <p>
+          Roles Indispensables en una sesión JAD/JRP:
+        </p>
+        <ul>
+          <li><strong>Facilitador Neutral:</strong> Líder de la sesión que guía la agenda, modera los debates, asegura que todos tengan voz y previene que los perfiles dominantes monopolicen la conversación. No toma decisiones de contenido.</li>
+          <li><strong>Patrocinador Ejecutivo (Sponsor):</strong> Directivo con poder de decisión legal y presupuestaria que destraba disputas políticas o contradicciones entre sectores.</li>
+          <li><strong>Escriba (Scribe):</strong> Registra y proyecta en vivo las conclusiones, acuerdos y requerimientos especificados.</li>
+          <li><strong>Usuarios y Expertos del Negocio:</strong> Aportan el conocimiento funcional diario.</li>
+          <li><strong>Especialistas Técnicos / Analistas:</strong> Evalúan la viabilidad técnica y los costes de las alternativas discutidas.</li>
+        </ul>
+
+        <h3>5.5. Lluvia de Ideas (Brainstorming)</h3>
+        <p>
+          Técnica creativa para generar un volumen masivo de ideas e iniciativas en un lapso breve. Se fundamenta en dos fases tajantemente separadas:
+        </p>
+        <ol>
+          <li><strong>Fase de Divergencia (Generación Pura):</strong>
+            <ul>
+              <li><strong>Prohibición absoluta de censurar o juzgar:</strong> Ninguna idea puede ser calificada de tonta, imposible o costosa durante esta fase.</li>
+              <li>Se busca la mayor cantidad posible de propuestas; las ideas disparatadas suelen ser el germen de soluciones altamente innovadoras.</li>
+              <li>Construir y asociar mejoras sobre ideas expuestas por otros miembros del grupo.</li>
+            </ul>
+          </li>
+          <li><strong>Fase de Convergencia (Filtrado y Priorización):</strong> Agrupación de ideas afines por temas, análisis de viabilidad técnica/económica y selección mediante votación ponderada (Dot Voting).</li>
+        </ol>
+        <p>
+          Modalidades: <em>Flujo Libre</em> (abierto y espontáneo), <em>En Círculo</em> (un turno estricto por participante) e <em>Ideas Escritas / Silencioso (Brainwriting)</em> con notas adhesivas para evitar que las personas introvertidas sean silenciadas.
+        </p>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 6: ANÁLISIS DE COMPETENCIA Y POSICIONAMIENTO          -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap6">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 6</div>
+          <h2 class="chapter-title">Análisis de Competencia y Posicionamiento Estratégico</h2>
+        </div>
+
+        <p>
+          En la práctica moderna de la Ingeniería de Software, ningún producto se concibe en un vacío aislado. Antes de escribir una sola línea de requerimientos o código, es un deber inexcusable de la organización realizar un <strong>análisis de competencia</strong> riguroso para verificar si el producto proyectado tiene o no una <em>ventaja competitiva</em> sostenible frente a las alternativas ya existentes en el mercado.
+        </p>
+
+        <h3>6.1. Tipología de Competidores</h3>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Categoría de Competidor</th>
+                <th>Definición y Alcance</th>
+                <th>Ejemplo para una Plataforma de Streaming de Música</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Competidores Directos</strong></td>
+                <td>Organizaciones que ofrecen un producto de software con funciones iguales o casi idénticas, dirigido al mismo segmento de usuarios y en el mismo mercado geográfico.</td>
+                <td>Spotify vs Apple Music vs Deezer vs Amazon Music.</td>
+              </tr>
+              <tr>
+                <td><strong>Competidores Indirectos</strong></td>
+                <td>Ofrecen un producto o servicio distinto, pero <em>satisfacen exactamente la misma necesidad fundamental</em> del consumidor en el mismo mercado.</td>
+                <td>YouTube (plataforma de video utilizada masivamente para reproducir música de fondo) o la Radio FM tradicional.</td>
+              </tr>
+              <tr>
+                <td><strong>Competidores Sustitutos / No Digitales</strong></td>
+                <td>Métodos tradicionales, analógicos o soluciones caseras que el usuario adopta para resolver el problema ante la falta de un software satisfactorio.</td>
+                <td>Colecciones de archivos MP3 en pendrives, CDs físicos o simplemente la memoria personal.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>6.2. Metodología del Mapa Perceptual de Posicionamiento</h3>
+        <p>
+          El <strong>Mapa Perceptual de Posicionamiento</strong> es una técnica analítica visual diseñada para graficar en dos dimensiones la ubicación relativa de nuestra solución de software frente a la competencia, tal como es percibida por los clientes en el mercado.
+        </p>
+
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            <span>Algoritmo de Construcción del Mapa Perceptual en 3 Pasos</span>
+          </div>
+          <p>
+            <strong>PASO 1: Identificación Exhaustiva:</strong> Listar todos los competidores directos e indirectos relevantes presentes en el nicho de negocio.<br>
+            <strong>PASO 2: Selección de Dos Atributos Clave Ortogonales:</strong> Elegir dos factores determinantes de compra para el cliente que sean independientes entre sí (ej. <em>Precio / Accesibilidad</em> vs <em>Nivel de Personalización / Complejidad Técnica</em>). Se asigna uno al <strong>Eje X</strong> y otro al <strong>Eje Y</strong>.<br>
+            <strong>PASO 3: Posicionamiento en el Plano Cartesiano:</strong> Ubicar gráficamente a cada competidor en uno de los cuatro cuadrantes según la evidencia empírica obtenida.<br>
+            <strong>PASO 4: Detección de "Océanos Azules":</strong> Identificar cuadrantes vacíos o desatendidos por el mercado para definir la <em>Propuesta Única de Valor (UVP)</em> de nuestro proyecto.
+          </p>
+        </div>
+
+        <div class="diagram-container">
+          <svg viewBox="0 0 650 320" width="100%" height="280" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="transparent"/>
+            <line x1="60" y1="160" x2="590" y2="160" stroke="#6b645c" stroke-width="2"/>
+            <line x1="325" y1="20" x2="325" y2="300" stroke="#6b645c" stroke-width="2"/>
+            
+            <polygon points="590,156 600,160 590,164" fill="#6b645c"/>
+            <polygon points="321,20 325,10 329,20" fill="#6b645c"/>
+
+            <text x="585" y="180" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1c4573" text-anchor="end">Alta Complejidad / Potencia Funcional (+)</text>
+            <text x="65" y="180" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6b645c">Simplicidad / Facilidad de Uso (-)</text>
+            <text x="340" y="25" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1c4573">Costo Elevado / Corporativo (+)</text>
+            <text x="340" y="295" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6b645c">Económico / Open Source (-)</text>
+
+            <circle cx="480" cy="70" r="16" fill="#9e3b2b" opacity="0.85"/>
+            <text x="480" y="74" fill="#fff" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">SAP</text>
+            <text x="480" y="98" fill="#9e3b2b" font-family="sans-serif" font-size="10" text-anchor="middle">Líder Corporativo Tradicional</text>
+
+            <circle cx="160" cy="240" r="14" fill="#8c631e" opacity="0.85"/>
+            <text x="160" y="244" fill="#fff" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">Trello</text>
+            <text x="160" y="266" fill="#8c631e" font-family="sans-serif" font-size="10" text-anchor="middle">Sencillo y Gratuito</text>
+
+            <circle cx="190" cy="85" r="12" fill="#6b645c" opacity="0.7"/>
+            <text x="190" y="89" fill="#fff" font-family="sans-serif" font-size="8" font-weight="bold" text-anchor="middle">Comp B</text>
+
+            <circle cx="490" cy="240" r="20" fill="#2d5b3c" stroke="#1c4573" stroke-width="2.5"/>
+            <text x="490" y="244" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">NUESTRO</text>
+            <rect x="420" y="270" width="140" height="22" rx="4" fill="#2d5b3c"/>
+            <text x="490" y="285" fill="#fff" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">★ Océano Azul Detectado</text>
+          </svg>
+          <div class="diagram-caption">Figura 6.1: Mapa Perceptual de Posicionamiento con detección gráfica de nicho competitivo de mercado desatendido.</div>
+        </div>
+
+        <h3>6.3. Matriz de Evaluación de Características (Feature Matrix)</h3>
+        <p>
+          Complementariamente al mapa perceptual, se elabora una tabla comparativa exhaustiva que evalúa la presencia, ausencia o calidad de implementación de cada función clave entre nuestro software y los productos competidores:
+        </p>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Característica Crítica de Negocio</th>
+                <th>Nuestro Proyecto</th>
+                <th>Competidor A (Líder Comercial)</th>
+                <th>Competidor B (Alternativa Libre)</th>
+                <th>Ventaja Competitiva Obtenida</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Modo Offline con Sincronización Automática</strong></td>
+                <td>Sí (Nativo con IndexedDB)</td>
+                <td>No (Solo web online)</td>
+                <td>Parcial (Exportación manual JSON)</td>
+                <td>Permite operar en zonas de conectividad deficiente sin pérdida de datos.</td>
+              </tr>
+              <tr>
+                <td><strong>Autenticación Multifactor (MFA / Biometría)</strong></td>
+                <td>Sí (FIDO2 / WebAuthn)</td>
+                <td>Sí (vía SMS con costo extra)</td>
+                <td>No</td>
+                <td>Máximo estándar de ciberseguridad sin sobrecostos por mensaje telefónico.</td>
+              </tr>
+              <tr>
+                <td><strong>API REST / Webhooks para Integraciones</strong></td>
+                <td>Sí (OpenAPI 3.0 documentada)</td>
+                <td>Sí (Exclusiva para plan Enterprise)</td>
+                <td>Parcial (Sin soporte oficial)</td>
+                <td>Democratiza la interoperabilidad con sistemas legados corporativos.</td>
+              </tr>
+              <tr>
+                <td><strong>Tiempo de Curva de Aprendizaje</strong></td>
+                <td>Menor a 30 minutos</td>
+                <td>Capacitación requerida de 40 hs</td>
+                <td>Medio (Requiere leer manual)</td>
+                <td>Adopción inmediata por usuarios no técnicos.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 7: WIDGETS INTERACTIVOS DE DECISIÓN                   -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap7">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 7</div>
+          <h2 class="chapter-title">Widgets Interactivos: Asesor Metodológico y Simulador de Sprint</h2>
+        </div>
+
+        <p>
+          Pon a prueba tu criterio ingenieril utilizando estas herramientas interactivas diseñadas para simular decisiones reales de arquitectura de procesos y estimación ágil de capacidad.
+        </p>
+
+        <!-- WIDGET 1: Asesor Metodológico -->
+        <div class="interactive-widget">
+          <div class="widget-header">
+            <h3 class="widget-title">Asesor Interactivo de Metodología de Software</h3>
+            <span class="widget-badge">Algoritmo de Decisión</span>
+          </div>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            Selecciona las restricciones clave de tu proyecto y el sistema recomendará el modelo de ciclo de vida óptimo con su fundamento analítico.
+          </p>
+          <div class="widget-controls">
+            <div class="control-group">
+              <label class="control-label">Claridad y Estabilidad de Requisitos:</label>
+              <select id="selReqs" class="widget-select" onchange="runMethodologyAdvisor()">
+                <option value="stable">100% Claros, estables y congelados</option>
+                <option value="unclear">Incompletos, exploratorios o desconocidos</option>
+                <option value="dynamic" selected>Dinámicos y sujetos a evolución rápida</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Tamaño del Equipo y Cultura:</label>
+              <select id="selTeam" class="widget-select" onchange="runMethodologyAdvisor()">
+                <option value="small" selected>Pequeño (3 a 9 devs, multifuncional)</option>
+                <option value="large">Grande (+30 personas, distribuido)</option>
+                <option value="pairs">Enfocado en máxima calidad técnica y pares</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Nivel de Criticidad y Riesgo de Vida:</label>
+              <select id="selRisk" class="widget-select" onchange="runMethodologyAdvisor()">
+                <option value="high">Crítico (Médico, aviónica, financiero)</option>
+                <option value="medium" selected>Comercial / Empresarial estándar</option>
+                <option value="low">Prototipo / App experimental</option>
+              </select>
+            </div>
+          </div>
+          <div class="widget-results">
+            <div class="result-box highlight">
+              <span class="result-label">Metodología Sugerida</span>
+              <span class="result-value" id="resMethodologyName">Scrum Framework</span>
+            </div>
+            <div class="result-box">
+              <span class="result-label">Perfil de Riesgo</span>
+              <span class="result-value" id="resMethodologyRisk" style="font-size:0.95rem;">Riesgo Moderado Mitigado por Sprints</span>
+            </div>
+          </div>
+          <div style="margin-top:14px; padding:12px; background:var(--bg-card-subtle); border-radius:5px; border:1px solid var(--border-color); font-size:0.86rem;" id="resMethodologyDesc">
+            Recomendado para equipos ágiles pequeños con requisitos que evolucionan con el mercado. Permite adaptar el rumbo cada 2 a 4 semanas.
+          </div>
+        </div>
+
+        <!-- WIDGET 2: Simulador de Capacidad y Sprint Scrum -->
+        <div class="interactive-widget">
+          <div class="widget-header">
+            <h3 class="widget-title">Simulador de Capacidad de Equipo y Planificación de Sprint</h3>
+            <span class="widget-badge">Métrica de Capacidad</span>
+          </div>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            Calcula la capacidad real en horas ideales y puntos de historia admisibles para evitar la sobrecarga (Overcommitment) del equipo en la Sprint Planning.
+          </p>
+          <div class="widget-controls">
+            <div class="control-group">
+              <label class="control-label">Cantidad de Developers: <span id="valDevs" class="control-value">4</span></label>
+              <input type="range" id="rngDevs" min="1" max="12" value="4" class="widget-input" oninput="runSprintCalculator()">
+            </div>
+            <div class="control-group">
+              <label class="control-label">Duración del Sprint (días laborables): <span id="valDays" class="control-value">10</span></label>
+              <input type="range" id="rngDays" min="5" max="20" value="10" class="widget-input" oninput="runSprintCalculator()">
+            </div>
+            <div class="control-group">
+              <label class="control-label">Factor de Enfoque Productivo (%): <span id="valFocus" class="control-value">70%</span></label>
+              <input type="range" id="rngFocus" min="40" max="90" step="5" value="70" class="widget-input" oninput="runSprintCalculator()">
+            </div>
+            <div class="control-group">
+              <label class="control-label">Horas promedio por Story Point: <span id="valHoursPerSp" class="control-value">6 hs</span></label>
+              <input type="range" id="rngHoursPerSp" min="2" max="12" value="6" class="widget-input" oninput="runSprintCalculator()">
+            </div>
+          </div>
+          <div class="widget-results">
+            <div class="result-box">
+              <span class="result-label">Horas Nominales Totales</span>
+              <span class="result-value" id="resTotalHours">320 hs</span>
+            </div>
+            <div class="result-box highlight">
+              <span class="result-label">Capacidad Efectiva Real</span>
+              <span class="result-value" id="resEffectiveHours">224 hs</span>
+            </div>
+            <div class="result-box highlight">
+              <span class="result-label">Story Points Recomendados</span>
+              <span class="result-value" id="resStoryPoints">~ 37 pts</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 8: TALLER DE EXAMEN Y PREGUNTAS RESUELTAS             -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap8">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 8</div>
+          <h2 class="chapter-title">Taller de Examen: Preguntas Teórico-Prácticas Resueltas</h2>
+        </div>
+
+        <p>
+          A continuación se presenta una batería representativa de preguntas de parcial y examen final de la UNLP, con resoluciones exhaustivas, criterios de evaluación y errores conceptuales típicos.
+        </p>
+
+        <!-- Ejercicio 1 -->
+        <div class="box-exercise">
+          <div class="box-exercise-title">Problema de Examen 1: Cascada vs Scrum ante Requerimientos Volátiles</div>
+          <p><strong>Enunciado:</strong> Una empresa de biotecnología desea desarrollar un sistema de análisis genómico experimental. Los científicos saben que los algoritmos de detección mutacional deberán cambiar semanalmente conforme surjan nuevas publicaciones científicas. El director de compras exige contratar el desarrollo bajo un modelo en cascada tradicional con alcance cerrado. Fundamente analíticamente por qué dicha decisión provocará el fracaso del proyecto y proponga una alternativa metodológica rigurosa.</p>
+          <div class="box-callout box-concept" style="margin-top:14px;">
+            <div class="box-callout-header"><span>Resolución Académica Modelo</span></div>
+            <p>
+              <strong>1. Diagnóstico del fallo de Cascada:</strong> El modelo en cascada se fundamenta en la premisa estricta de que los requerimientos pueden formalizarse, validarse y <em>congelarse</em> al inicio. Si los algoritmos cambian semanalmente, el proyecto sufrirá una reelaboración continua (rework) inasumible. Modificar un requerimiento en la fase de pruebas o despliegue en cascada cuesta entre 50 y 200 veces más que hacerlo en el análisis (Curva de Boehm). Intentar aplicar un contrato cerrado generará constantes renegociaciones, demandas legales y la entrega de un sistema obsoleto antes de nacer.<br>
+              <strong>2. Propuesta Alternativa:</strong> Se debe adoptar una metodología ágil como <strong>Scrum</strong> con sprints de 1 o 2 semanas. Al final de cada sprint, los científicos inspeccionan el incremento de software funcional ejecutable (Sprint Review) y reordenan el Product Backlog introduciendo los nuevos hallazgos genómicos para el siguiente Sprint. El contrato legal debe pactarse bajo la modalidad ágil <em>"Tiempo y Materiales con Alcance Variable"</em> fijando presupuesto y tiempo pero permitiendo priorizar el valor entregado.
+            </p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="box-exercise">
+          <div class="box-exercise-title">Problema de Examen 2: Técnica de Elicitación para Procesos Críticos No Formalizados</div>
+          <p><strong>Enunciado:</strong> En una fábrica química, los operadores de sala de control regulan manualmente las válvulas de presión basándose en su intuición y experiencia de años. No existen manuales escritos y las entrevistas individuales arrojan respuestas vagas ("simplemente sé cuándo abrir la válvula según el sonido del vapor"). ¿Qué combinación de técnicas de elicitación debe emplear el analista y qué fenómeno conductual debe prevenir?</p>
+          <div class="box-callout box-concept" style="margin-top:14px;">
+            <div class="box-callout-header"><span>Resolución Académica Modelo</span></div>
+            <p>
+              <strong>1. Combinación de Técnicas:</strong><br>
+              • <strong>Observación del Ambiente de Trabajo (Etnografía / Job Shadowing):</strong> Es la técnica reina ante la existencia de <em>conocimiento tácito</em>. El analista debe acompañar a los operadores en turnos reales completos registrando variables instrumentales (temperatura, presión en manómetro, ruidos audibles, hora del día) en el instante exacto en que operan la válvula.<br>
+              • <strong>Prototipado Exploratorio:</strong> Diseñar interfaces preliminares con indicadores simulados y someter a los operarios a simulaciones para que expresen en voz alta ("Think Aloud Protocol") sus razonamientos.<br>
+              • <strong>Sesión JRP / JAD:</strong> Con ingenieros químicos de planta y operarios para formalizar las reglas empíricas de seguridad en tablas de decisión estáticas.<br>
+              <strong>2. Prevención del Efecto Hawthorne:</strong> El analista debe extender las sesiones de observación durante varios días seguidos para que los operarios se acostumbren a su presencia y dejen de modificar artificialmente sus maniobras habituales.
+            </p>
+          </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="box-exercise">
+          <div class="box-exercise-title">Problema de Examen 3: Roles y Antipatrones en Scrum</div>
+          <p><strong>Enunciado:</strong> Durante una Daily Scrum, el Scrum Master asigna individualmente a cada programador las tareas que debe realizar en el día, mientras que el Product Owner exige que el equipo agregue urgentemente a mitad de sprint tres nuevas historias complejas solicitadas por el gerente de finanzas. Identifique todos los antipatrones y violaciones a la guía de Scrum presentes en este escenario.</p>
+          <div class="box-callout box-concept" style="margin-top:14px;">
+            <div class="box-callout-header"><span>Resolución Académica Modelo</span></div>
+            <p>
+              <strong>Violación 1 (Scrum Master actuando como Project Manager tradicional):</strong> El SM no es un jefe ni asigna tareas. Los <em>Developers</em> son autoorganizados y multifuncionales; ellos mismos deciden colaborativamente quién toma cada ítem del Sprint Backlog. El rol del SM en la Daily es únicamente asegurar que la reunión ocurra dentro del timebox de 15 minutos.<br>
+              <strong>Violación 2 (Introducción arbitraria de alcance a mitad de Sprint):</strong> Durante el Sprint, no se deben realizar cambios que pongan en peligro el <em>Sprint Goal</em>. Si el PO recibe requerimientos nuevos, debe incorporarlos al <em>Product Backlog</em>, priorizarlos y esperar a la próxima Sprint Planning. Solo si el objetivo del sprint queda completamente obsoleto por razones extremas del negocio, el PO tiene la facultad exclusiva de <strong>cancelar el Sprint</strong>, pero nunca de forzar alcance que desborde al equipo.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // 1. Barra de progreso de lectura
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    // 2. Colapsar/Expandir Barra Lateral
+    const appLayout = document.getElementById('appLayout');
+    const btnCollapse = document.getElementById('btnCollapseSidebar');
+    const btnExpand = document.getElementById('btnExpandSidebar');
+
+    function toggleSidebar() {
+      const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+      appLayout.classList.toggle('sidebar-collapsed', isCollapsed);
+      localStorage.setItem('is_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+    }
+
+    if (btnCollapse) btnCollapse.addEventListener('click', toggleSidebar);
+    if (btnExpand) btnExpand.addEventListener('click', toggleSidebar);
+
+    if (localStorage.getItem('is_sidebar_collapsed') === 'true') {
+      document.body.classList.add('sidebar-collapsed');
+      appLayout.classList.add('sidebar-collapsed');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+      if (e.key === 'm' || e.key === 'M') {
+        toggleSidebar();
+      }
+    });
+
+    // 3. Selector de Temas (Paper, Dark, Light)
+    const themeButtons = document.querySelectorAll('.btn-theme');
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-set-theme');
+        document.documentElement.setAttribute('data-theme', theme);
+        themeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        localStorage.setItem('is_theme', theme);
+      });
+    });
+
+    const savedTheme = localStorage.getItem('is_theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      themeButtons.forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-set-theme') === savedTheme);
+      });
+    }
+
+    // 4. Búsqueda en Sidebar
+    const searchInput = document.getElementById('sidebarSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const links = document.querySelectorAll('.sidebar-nav .nav-link');
+        links.forEach(l => {
+          const text = l.textContent.toLowerCase();
+          l.style.display = text.includes(query) ? 'flex' : 'none';
+        });
+      });
+    }
+
+    // 5. Lógica del Widget: Asesor Metodológico
+    function runMethodologyAdvisor() {
+      const reqs = document.getElementById('selReqs').value;
+      const team = document.getElementById('selTeam').value;
+      const risk = document.getElementById('selRisk').value;
+
+      let name = "Scrum Framework";
+      let riskLvl = "Moderado / Mitigado por Sprints";
+      let desc = "Recomendado para desarrollo ágil enfocado en producto con requerimientos dinámicos y entregas de valor frecuentes en ciclos de 2 a 4 semanas.";
+
+      if (risk === "high" && reqs === "stable") {
+        name = "Modelo en V / Cascada Rigurosa";
+        riskLvl = "Riesgo Mínimo de Verificación";
+        desc = "Ideal para sistemas de misión crítica (aeronáutica, médico, hardware) donde cada etapa exige trazabilidad formal y planes de prueba de aceptación estrictos.";
+      } else if (risk === "high" && reqs !== "stable") {
+        name = "Modelo en Espiral (Barry Boehm)";
+        riskLvl = "Gestión Continua de Riesgos Altos";
+        desc = "Recomendado para proyectos de alta complejidad y riesgo técnico elevado. Permite construir prototipos y evaluar viabilidad económica y técnica en cada vuelta de la espiral.";
+      } else if (team === "pairs") {
+        name = "Extreme Programming (XP)";
+        riskLvl = "Control de Calidad Máxima en Código";
+        desc = "Enfocado en excelencia técnica mediante TDD, programación en parejas, integración continua y refactorización incesante.";
+      } else if (reqs === "unclear") {
+        name = "Desarrollo Basado en Prototipos Desechables";
+        riskLvl = "Exploración de Incertidumbre";
+        desc = "Diseñado para proyectos donde el usuario desconoce sus necesidades reales. Se crean maquetas rápidas para elicitar requerimientos antes de codificar la arquitectura final.";
+      } else if (team === "large") {
+        name = "Rational Unified Process (RUP) / Scaled Agile";
+        riskLvl = "Riesgo Arquitectónico Controlado";
+        desc = "Estructura formal con 4 fases (Inicio, Elaboración, Construcción, Transición) y disciplinas orientadas a casos de uso para coordinar múltiples equipos.";
+      }
+
+      document.getElementById('resMethodologyName').textContent = name;
+      document.getElementById('resMethodologyRisk').textContent = riskLvl;
+      document.getElementById('resMethodologyDesc').textContent = desc;
+    }
+
+    // 6. Lógica del Widget: Simulador de Capacidad de Sprint
+    function runSprintCalculator() {
+      const devs = parseInt(document.getElementById('rngDevs').value);
+      const days = parseInt(document.getElementById('rngDays').value);
+      const focus = parseInt(document.getElementById('rngFocus').value) / 100;
+      const hoursPerSp = parseInt(document.getElementById('rngHoursPerSp').value);
+
+      document.getElementById('valDevs').textContent = devs;
+      document.getElementById('valDays').textContent = days;
+      document.getElementById('valFocus').textContent = Math.round(focus * 100) + '%';
+      document.getElementById('valHoursPerSp').textContent = hoursPerSp + ' hs';
+
+      const nominalHours = devs * days * 8;
+      const effectiveHours = Math.round(nominalHours * focus);
+      const storyPoints = Math.round(effectiveHours / hoursPerSp);
+
+      document.getElementById('resTotalHours').textContent = nominalHours + ' hs';
+      document.getElementById('resEffectiveHours').textContent = effectiveHours + ' hs';
+      document.getElementById('resStoryPoints').textContent = '~ ' + storyPoints + ' pts';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      runMethodologyAdvisor();
+      runSprintCalculator();
+    });
+    runMethodologyAdvisor();
+    runSprintCalculator();
+  </script>
+</body>
+</html>

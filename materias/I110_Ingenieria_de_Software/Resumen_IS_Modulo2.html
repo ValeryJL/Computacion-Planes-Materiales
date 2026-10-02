@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="paper">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingeniería de Software — Módulo 2: Requerimientos, DTE, Redes de Petri, Casos de Uso y HU | Guía Editorial A4</title>
+  
+  <!-- KaTeX para renderizado matemático vectorial nítido -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+          onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false});"></script>
+
+  <!-- Google Fonts: Newsreader, Source Sans 3, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, Monaco, monospace;
+      --ease-paper: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="paper"] {
+      --bg-body: #f9f6ef;
+      --bg-sidebar: #f2ece0;
+      --bg-card: #ffffff;
+      --bg-card-subtle: #f5efe3;
+      --border-color: #e4dccf;
+      --border-focus: #1c4573;
+      --text-main: #2c2825;
+      --text-muted: #6b645c;
+      --text-heading: #1a1715;
+      --text-bright: #1c4573;
+      --accent-ink: #1c4573;
+      --accent-ink-bg: rgba(28, 69, 115, 0.05);
+      --accent-terra: #9e3b2b;
+      --accent-terra-bg: rgba(158, 59, 43, 0.05);
+      --accent-sage: #2d5b3c;
+      --accent-sage-bg: rgba(45, 91, 60, 0.05);
+      --accent-ochre: #8c631e;
+      --accent-ochre-bg: rgba(140, 99, 30, 0.05);
+      --shadow-paper: 0 1px 3px rgba(44, 40, 37, 0.05), 0 4px 12px rgba(44, 40, 37, 0.03);
+      --shadow-paper-hover: 0 4px 14px rgba(44, 40, 37, 0.08), 0 8px 24px rgba(44, 40, 37, 0.05);
+      --scrollbar-thumb: #d8cebe;
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #191817;
+      --bg-sidebar: #1f1e1c;
+      --bg-card: #23211f;
+      --bg-card-subtle: #292724;
+      --border-color: #383530;
+      --border-focus: #cca362;
+      --text-main: #ded9d0;
+      --text-muted: #948d82;
+      --text-heading: #f4efe7;
+      --text-bright: #cca362;
+      --accent-ink: #7ba2c9;
+      --accent-ink-bg: rgba(123, 162, 201, 0.08);
+      --accent-terra: #d17567;
+      --accent-terra-bg: rgba(209, 117, 103, 0.08);
+      --accent-sage: #7ca887;
+      --accent-sage-bg: rgba(124, 168, 135, 0.08);
+      --accent-ochre: #cca362;
+      --accent-ochre-bg: rgba(204, 163, 98, 0.08);
+      --shadow-paper: 0 1px 4px rgba(0, 0, 0, 0.35);
+      --shadow-paper-hover: 0 6px 18px rgba(0, 0, 0, 0.5);
+      --scrollbar-thumb: #3a3733;
+    }
+
+    [data-theme="light"] {
+      --bg-body: #ffffff;
+      --bg-sidebar: #faf8f5;
+      --bg-card: #ffffff;
+      --bg-card-subtle: #f7f5f1;
+      --border-color: #e5e0d8;
+      --border-focus: #181715;
+      --text-main: #242220;
+      --text-muted: #666059;
+      --text-heading: #141312;
+      --text-bright: #1c4573;
+      --accent-ink: #1c4573;
+      --accent-ink-bg: rgba(28, 69, 115, 0.04);
+      --accent-terra: #a33b2a;
+      --accent-terra-bg: rgba(163, 59, 42, 0.04);
+      --accent-sage: #2c593b;
+      --accent-sage-bg: rgba(44, 89, 59, 0.04);
+      --accent-ochre: #8f641c;
+      --accent-ochre-bg: rgba(143, 100, 28, 0.04);
+      --shadow-paper: 0 1px 3px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.02);
+      --shadow-paper-hover: 0 4px 14px rgba(0,0,0,0.07);
+      --scrollbar-thumb: #dcd6cc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.72;
+      font-size: 15.5px;
+      transition: background-color 0.3s var(--ease-paper), color 0.3s var(--ease-paper);
+      overflow-x: hidden;
+    }
+
+    .app-layout { display: flex; min-height: 100vh; position: relative; }
+
+    .sidebar {
+      width: 320px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 100;
+      transition: margin-left 0.3s var(--ease-paper), opacity 0.25s ease;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+    }
+
+    body.sidebar-collapsed .sidebar,
+    .app-layout.sidebar-collapsed .sidebar {
+      margin-left: -320px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sidebar-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-brand { display: flex; flex-direction: column; }
+    .sidebar-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+    }
+    .sidebar-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-toggle-sidebar {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-toggle-sidebar:hover {
+      background: var(--bg-card);
+      color: var(--text-heading);
+      border-color: var(--border-focus);
+    }
+
+    .btn-floating-toc {
+      position: fixed;
+      top: 14px;
+      left: 18px;
+      z-index: 99999;
+      background: var(--bg-card);
+      color: var(--text-heading);
+      border: 1.5px solid var(--border-color);
+      border-radius: 6px;
+      padding: 7px 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+    body.sidebar-collapsed .btn-floating-toc,
+    .app-layout.sidebar-collapsed .btn-floating-toc {
+      display: flex;
+    }
+
+    .controls-panel {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-print {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-print:hover { border-color: var(--border-focus); background: var(--bg-card-subtle); }
+
+    .theme-buttons { display: flex; gap: 4px; }
+    .btn-theme {
+      flex: 1;
+      padding: 5px 8px;
+      font-size: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-theme:hover { color: var(--text-heading); border-color: var(--border-focus); }
+    .btn-theme.active {
+      background: var(--accent-ink);
+      color: #fff;
+      border-color: var(--accent-ink);
+    }
+
+    .search-box { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
+    .search-input {
+      width: 100%;
+      padding: 7px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      color: var(--text-heading);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--border-focus); }
+
+    .sidebar-nav { padding: 16px 12px 30px; display: flex; flex-direction: column; gap: 3px; }
+    .nav-group-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 12px 10px 4px;
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.86rem;
+      border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-link:hover { background: var(--bg-card); color: var(--accent-ink); }
+    .nav-link span {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      min-width: 16px;
+    }
+
+    .main-wrapper {
+      flex: 1;
+      padding: 48px 64px 100px;
+      max-width: 1040px;
+      margin: 0 auto;
+      min-width: 0;
+    }
+
+    .reading-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3.5px;
+      background: var(--accent-ink);
+      z-index: 100000;
+      width: 0%;
+      transition: width 0.1s;
+    }
+
+    .module-hero {
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 32px;
+      margin-bottom: 48px;
+    }
+    .module-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--accent-ink);
+      margin-bottom: 10px;
+    }
+    .module-hero h1 {
+      font-family: var(--font-serif);
+      font-size: 2.35rem;
+      line-height: 1.25;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .module-hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin-bottom: 20px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+    }
+    .hero-meta-item {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: var(--bg-card-subtle);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    .hero-meta-item strong { color: var(--text-heading); }
+
+    .chapter-section { margin-bottom: 64px; scroll-margin-top: 24px; }
+    .chapter-header { border-bottom: 1.5px solid var(--border-color); padding-bottom: 10px; margin-bottom: 24px; }
+    .chapter-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-ink);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .chapter-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.015em;
+      margin-top: 4px;
+    }
+
+    h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin: 32px 0 12px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    h4 {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin: 20px 0 8px;
+    }
+    p { margin-bottom: 14px; color: var(--text-main); }
+    ul, ol { margin-bottom: 16px; padding-left: 22px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text-heading); font-weight: 600; }
+
+    .box-callout {
+      border-radius: 5px;
+      padding: 18px 22px;
+      margin: 24px 0;
+      border-left: 4px solid;
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-paper);
+    }
+    .box-callout-header {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .box-concept { border-left-color: var(--accent-ink); background: var(--accent-ink-bg); }
+    .box-concept .box-callout-header { color: var(--accent-ink); }
+    .box-exam { border-left-color: var(--accent-ochre); background: var(--accent-ochre-bg); }
+    .box-exam .box-callout-header { color: var(--accent-ochre); }
+    .box-formula { border-left-color: var(--accent-sage); background: var(--accent-sage-bg); }
+    .box-formula .box-callout-header { color: var(--accent-sage); }
+    .box-trap { border-left-color: var(--accent-terra); background: var(--accent-terra-bg); }
+    .box-trap .box-callout-header { color: var(--accent-terra); }
+
+    .box-exercise {
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-sage);
+      background: var(--bg-card);
+      border-radius: 6px;
+      padding: 22px 24px;
+      margin: 28px 0;
+      box-shadow: var(--shadow-paper);
+    }
+    .box-exercise-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-sage);
+      margin-bottom: 12px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin: 22px 0 28px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-paper);
+    }
+    .table-styled {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    .table-styled th {
+      background: var(--bg-card-subtle);
+      color: var(--text-heading);
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-color);
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+    }
+    .table-styled td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: top;
+    }
+    .table-styled tr:last-child td { border-bottom: none; }
+    .table-styled tr:hover td { background: var(--accent-ink-bg); }
+
+    .interactive-widget {
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-card);
+      padding: 24px;
+      margin: 32px 0;
+      box-shadow: var(--shadow-paper);
+    }
+    .widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+    .widget-badge {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--accent-ink);
+      background: var(--accent-ink-bg);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    .widget-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; }
+    .widget-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      background: var(--bg-card-subtle);
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+    .control-group { display: flex; flex-direction: column; gap: 6px; }
+    .control-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    .widget-select, .widget-input {
+      padding: 7px 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-heading);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      border-radius: 4px;
+      outline: none;
+    }
+    .widget-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .result-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 12px 14px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .result-box.highlight { border-color: var(--accent-ink); background: var(--accent-ink-bg); }
+    .result-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .result-value {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-ink);
+    }
+
+    .diagram-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+      text-align: center;
+      box-shadow: var(--shadow-paper);
+    }
+    .diagram-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    @media print {
+      .no-print, .sidebar, .reading-progress-bar, .btn-floating-toc { display: none !important; }
+      .app-layout { display: block !important; }
+      .main-wrapper { max-width: 100% !important; padding: 0 !important; }
+      body { background: #fff !important; color: #000 !important; font-size: 12pt; }
+      .chapter-section { page-break-after: always; }
+      .box-callout, .box-exercise, .table-responsive { break-inside: avoid; }
+    }
+
+    @media (max-width: 900px) {
+      .main-wrapper { padding: 30px 20px 80px; }
+      .sidebar { position: fixed; left: 0; top: 0; transform: translateX(-100%); }
+      body.sidebar-open .sidebar { transform: translateX(0); }
+      .btn-floating-toc { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-progress-bar" id="progressBar"></div>
+  <button id="btnExpandSidebar" class="btn-floating-toc no-print" title="Abrir índice (Atajo: tecla M)">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <span>Abrir Índice</span>
+  </button>
+
+  <div class="app-layout" id="appLayout">
+    <aside class="sidebar no-print" id="sidebarNav">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="sidebar-title">Ingeniería de Software</div>
+          <div class="sidebar-subtitle">Módulo 2 — Teorías 3 y 4</div>
+        </div>
+        <button id="btnCollapseSidebar" class="btn-toggle-sidebar" title="Ocultar índice (Atajo: tecla M)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+      </div>
+
+      <div class="controls-panel">
+        <button class="btn-print" onclick="window.print()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Imprimir / PDF A4</span>
+        </button>
+        <div class="theme-buttons">
+          <button class="btn-theme active" data-set-theme="paper">Papel</button>
+          <button class="btn-theme" data-set-theme="dark">Oscuro</button>
+          <button class="btn-theme" data-set-theme="light">Claro</button>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="sidebarSearch" class="search-input" placeholder="Buscar concepto o diagrama...">
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group-title">Fundamentos y Requerimientos</div>
+        <a href="#cap1" class="nav-link"><span>1.</span> Ingeniería de Requerimientos y Boehm</a>
+        <a href="#cap2" class="nav-link"><span>2.</span> Requerimientos Funcionales y No Funcionales (RNF)</a>
+        <a href="#cap3" class="nav-link"><span>3.</span> Jerarquía: Iniciativas, Épicas y Desglose</a>
+
+        <div class="nav-group-title">Modelado Estático y Dinámico</div>
+        <a href="#cap4" class="nav-link"><span>4.</span> Técnicas Estáticas y Estándar IEEE 830</a>
+        <a href="#cap5" class="nav-link"><span>5.</span> Diagramas de Transición de Estados (DTE)</a>
+        <a href="#cap6" class="nav-link"><span>6.</span> Redes de Petri (Petri Nets)</a>
+        <a href="#cap7" class="nav-link"><span>7.</span> Casos de Uso UML y Plantillas Detalladas</a>
+
+        <div class="nav-group-title">Enfoque Ágil y Práctica</div>
+        <a href="#cap8" class="nav-link"><span>8.</span> Historias de Usuario (HU), INVEST y BDD</a>
+        <a href="#cap9" class="nav-link"><span>9.</span> Widgets Interactivos (Petri y HU)</a>
+        <a href="#cap10" class="nav-link"><span>10.</span> Taller de Examen y Ejercicios Resueltos</a>
+      </nav>
+    </aside>
+
+    <main class="main-wrapper">
+      <header class="module-hero">
+        <span class="module-eyebrow">Ingeniería de Software • Módulo 2 (Clases 3 y 4 + Práctica)</span>
+        <h1>Ingeniería de Requerimientos, Modelado Estático y Dinámico, Casos de Uso e Historias de Usuario</h1>
+        <p>
+          Tratado exhaustivo de las Teorías 3 y 4 de la cátedra de Ingeniería de Software (UNLP). Abarca desde la taxonomía formal de requerimientos (FURPS+, ISO 25010) y modelado formal (DTE, Redes de Petri concurrentes) hasta la especificación de Casos de Uso empresariales y la redacción ágil de Historias de Usuario bajo el estándar INVEST.
+        </p>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><strong>Alcance:</strong> Clases 3 y 4 teóricas + Guías prácticas RNF, Iniciativas, Épicas y HU</div>
+          <div class="hero-meta-item"><strong>Eje metodológico:</strong> De los objetivos estratégicos al modelado formal y ágil</div>
+          <div class="hero-meta-item"><strong>Resolución práctica:</strong> Ejercicio completo de Red de Petri con 3 surtidores + Casos de Uso reales</div>
+        </div>
+      </header>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 1: INGENIERÍA DE REQUERIMIENTOS Y CURVA DE BOEHM      -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap1">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 1</div>
+          <h2 class="chapter-title">Fundamentos de la Ingeniería de Requerimientos y Costo de Defectos</h2>
+        </div>
+
+        <p>
+          La <strong>Ingeniería de Requerimientos (IR)</strong> es la disciplina ingenieril dedicada a descubrir, analizar, documentar, verificar y gestionar los servicios y restricciones que el sistema informático debe proveer. Es la piedra angular de cualquier proyecto: un error de codificación afecta a una función; un error en los requerimientos invalida todo el sistema.
+        </p>
+
+        <h3>1.1. Definición Formal de Requerimiento</h3>
+        <div class="box-callout box-exam">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>Definición Oficial IEEE Standard 610.12</span>
+          </div>
+          <p>
+            Un requerimiento (o requisito) es:<br>
+            1. <em>"Una condición o capacidad que un usuario necesita para resolver un problema o alcanzar un objetivo."</em><br>
+            2. <em>"Una condición o capacidad que debe poseer o satisfacer un sistema o un componente de un sistema para cumplir un contrato, norma, especificación u otro documento formalmente impuesto."</em><br>
+            3. <em>"Una representación documentada de una condición o capacidad descrita en los puntos 1 o 2."</em>
+          </p>
+        </div>
+
+        <h3>1.2. La Curva de Boehm y el Costo Exponencial de Reparación</h3>
+        <p>
+          Barry Boehm demostró cuantitativamente que el coste financiero y temporal de corregir un error introducido durante la fase de requerimientos <strong>crece exponencialmente</strong> a medida que el proyecto avanza en su ciclo de vida:
+        </p>
+
+        <div class="diagram-container">
+          <svg viewBox="0 0 700 240" width="100%" height="220" xmlns="http://www.w3.org/2000/svg">
+            <line x1="60" y1="200" x2="650" y2="200" stroke="#6b645c" stroke-width="2"/>
+            <line x1="60" y1="20" x2="60" y2="200" stroke="#6b645c" stroke-width="2"/>
+            <text x="50" y="25" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9e3b2b" text-anchor="end">Costo Relativo</text>
+
+            <!-- Curva Exponencial -->
+            <path d="M 60 195 Q 250 190, 360 170 T 520 110 T 630 35" fill="none" stroke="#9e3b2b" stroke-width="3"/>
+            
+            <!-- Puntos y Etiquetas -->
+            <circle cx="90" cy="195" r="4" fill="#1c4573"/>
+            <text x="90" y="218" font-family="sans-serif" font-size="10" fill="#1c4573" text-anchor="middle">Requerimientos (1x)</text>
+
+            <circle cx="210" cy="190" r="4" fill="#1c4573"/>
+            <text x="210" y="218" font-family="sans-serif" font-size="10" fill="#1c4573" text-anchor="middle">Diseño (3x - 5x)</text>
+
+            <circle cx="350" cy="170" r="4" fill="#1c4573"/>
+            <text x="350" y="218" font-family="sans-serif" font-size="10" fill="#1c4573" text-anchor="middle">Código (10x)</text>
+
+            <circle cx="490" cy="120" r="4" fill="#1c4573"/>
+            <text x="490" y="218" font-family="sans-serif" font-size="10" fill="#1c4573" text-anchor="middle">Pruebas (20x - 50x)</text>
+
+            <circle cx="630" cy="35" r="5" fill="#9e3b2b"/>
+            <text x="610" y="25" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9e3b2b" text-anchor="end">Producción (100x - 200x)</text>
+          </svg>
+          <div class="diagram-caption">Figura 1.1: Curva de Barry Boehm. Coste relativo de corrección de defectos según la fase del ciclo de vida en que se detectan.</div>
+        </div>
+
+        <p>
+          Si un malentendido con el cliente ("el sistema debía calcular impuestos provinciales antes de descuentos y no después") se detecta en la entrevista inicial, basta con corregir una línea en el documento (coste: 1x). Si dicho defecto se detecta cuando el sistema ya fue desplegado en 500 sucursales, implica: rediseño de base de datos, reescritura de microservicios, migración de datos fiscales corruptos, auditorías legales y daño a la reputación corporativa (coste: 100x a 200x).
+        </p>
+
+        <h3>1.3. Fases del Proceso de Ingeniería de Requerimientos</h3>
+        <ol>
+          <li><strong>Estudio de Viabilidad (Feasibility Study):</strong> Evaluación temprana para determinar si el sistema propuesto es viable técnicamente, rentable económicamente, legalmente admisible y compatible con los objetivos del negocio. Responde a: <em>¿Vale la pena construirlo?</em></li>
+          <li><strong>Obtención y Análisis (Elicitation & Analysis):</strong> Descubrimiento de necesidades mediante interacción con partes interesadas, clasificación, resolución de conflictos entre usuarios y negociación de prioridades.</li>
+          <li><strong>Especificación (Specification):</strong> Redacción formal o semi-formal de los requerimientos en documentos estándar (SRS IEEE 830), diagramas o historias de usuario.</li>
+          <li><strong>Validación y Verificación (Validation & Verification):</strong> Revisión exhaustiva con el cliente para asegurar que los requerimientos representen fielmente sus intenciones (¿construimos el producto correcto?) y cumplan estándares de calidad técnica (¿están bien especificados?).</li>
+          <li><strong>Gestión de Requerimientos (Requirements Management):</strong> Control de cambios sistemático, trazabilidad bidireccional entre requerimientos, diseño, código y pruebas.</li>
+        </ol>
+
+        <h3>1.4. Propiedades de Calidad de los Requerimientos</h3>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Definición Rigurosa</th>
+                <th>Violación Común (Antipatrón)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>No Ambiguo</strong></td>
+                <td>Posee una y solo una interpretación semántica posible para cualquier lector.</td>
+                <td><em>"El sistema debe tener un tiempo de respuesta rápido y amigable."</em></td>
+              </tr>
+              <tr>
+                <td><strong>Completo</strong></td>
+                <td>Describe todos los escenarios posibles, incluyendo entradas anómalas y excepciones.</td>
+                <td>Especificar el flujo de pago exitoso pero omitir qué ocurre si el banco rechaza la tarjeta por fondos insuficientes.</td>
+              </tr>
+              <tr>
+                <td><strong>Consistente</strong></td>
+                <td>No entra en contradicción lógica con ningún otro requerimiento del sistema.</td>
+                <td>RF-04 exige que la sesión expire a los 5 minutos y RF-19 exige que una carga de datos larga de 20 minutos no se interrumpa.</td>
+              </tr>
+              <tr>
+                <td><strong>Verificable / Testeable</strong></td>
+                <td>Existe un procedimiento o prueba objetiva y finita mediante la cual una máquina o humano puede comprobar si el sistema lo satisface.</td>
+                <td><em>"El software nunca debe colapsar bajo estrés."</em> (Inverificable; debe especificarse: "MTBF $\ge$ 720 horas continuas con 2.000 usuarios concurrentes").</td>
+              </tr>
+              <tr>
+                <td><strong>Trazable</strong></td>
+                <td>Posee un identificador único persistente y permite rastrear su origen hacia los objetivos del negocio y su destino hacia el diseño y pruebas.</td>
+                <td>Párrafos sueltos de texto sin identificador único en un documento Word.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 2: REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES (RNF)  -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap2">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 2</div>
+          <h2 class="chapter-title">Requerimientos Funcionales y No Funcionales (RNF)</h2>
+        </div>
+
+        <p>
+          La cátedra de Ingeniería de Software clasifica formalmente los requerimientos en dos grandes universos: <strong>Requerimientos Funcionales (RF)</strong> y <strong>Requerimientos No Funcionales (RNF)</strong>. Ambos son de cumplimiento obligatorio, pero impactan en capas radicalmente distintas del proyecto.
+        </p>
+
+        <h3>2.1. Requerimientos Funcionales (RF)</h3>
+        <p>
+          Definen <strong>QUÉ</strong> debe hacer el sistema. Expresan los servicios, funciones, cálculos, transformaciones de datos y respuestas operativas ante entradas específicas:
+        </p>
+        <ul>
+          <li><em>Ejemplo RF-1:</em> "El sistema debe permitir a los alumnos consultar su historial académico filtrando por año de cursada y estado de aprobación."</li>
+          <li><em>Ejemplo RF-2:</em> "Al confirmar una compra, el sistema debe descontar automáticamente el stock del depósito central y enviar una factura electrónica en formato PDF al correo del comprador."</li>
+        </ul>
+
+        <h3>2.2. Requerimientos No Funcionales (RNF): Definición e Impacto</h3>
+        <p>
+          Definen <strong>CÓMO</strong> debe comportarse el sistema. Establecen cualidades globales, propiedades emergentes, criterios de calidad y restricciones tecnológicas o legales impuestas al producto:
+        </p>
+        <div class="box-callout box-trap">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Impacto Arquitectónico Crítico de los RNF</span>
+          </div>
+          <p>
+            Mientras que un Requerimiento Funcional habitualmente se implementa en un módulo o clase aislada, un Requerimiento No Funcional (como seguridad, concurrencia, disponibilidad o latencia) <strong>condiciona toda la arquitectura de software</strong>. Un sistema puede tener el 100% de sus funciones programadas, pero si tarda 45 segundos en abrir cada página o sufre caídas cada dos horas, el producto será un fracaso comercial inutilizable.
+          </p>
+        </div>
+
+        <h3>2.3. Taxonomía de Sommerville para RNF</h3>
+        <ol>
+          <li><strong>Requisitos del Producto:</strong> Especifican el comportamiento en ejecución (Rendimiento, Consumo de memoria, Fiabilidad, Disponibilidad, Usabilidad, Portabilidad).</li>
+          <li><strong>Requisitos Organizacionales:</strong> Derivan de las políticas de la empresa cliente o del desarrollador (Estándares de programación, Metodología de entrega, Entorno de integración continua, Plazos de auditoría).</li>
+          <li><strong>Requisitos Externos:</strong> Derivan del entorno legislativo, regulatorio o ético (Leyes de protección de datos personales como GDPR/LPDP, normativas fiscales de AFIP/ARBA, interoperabilidad con bancos centrales).</li>
+        </ol>
+
+        <h3>2.4. Modelo FURPS+ (Robert Grady / Hewlett-Packard)</h3>
+        <p>
+          El estándar FURPS+ clasifica los requerimientos en cinco dimensiones cualitativas y un conjunto de restricciones complementarias (+):
+        </p>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Dimensión FURPS+</th>
+                <th>Concepto Evaluado</th>
+                <th>Métricas y Atributos Específicos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>F - Functionality</strong></td>
+                <td>Capacidades funcionales, características y seguridad del sistema.</td>
+                <td>Conjunto de funciones, generalidad algorítmica, autenticación y autorización.</td>
+              </tr>
+              <tr>
+                <td><strong>U - Usability</strong></td>
+                <td>Factores humanos, estética y consistencia de la experiencia del usuario.</td>
+                <td>Tiempo de aprendizaje, tasa de error humano, satisfacción percibida, accesibilidad WCAG.</td>
+              </tr>
+              <tr>
+                <td><strong>R - Reliability</strong></td>
+                <td>Capacidad del sistema de operar sin fallos continuos durante periodos definidos.</td>
+                <td>MTBF (Tiempo Medio Entre Fallos), MTTR (Tiempo Medio de Recuperación), Disponibilidad ($99.9\%$).</td>
+              </tr>
+              <tr>
+                <td><strong>P - Performance</strong></td>
+                <td>Velocidad, consumo de recursos y respuesta bajo condiciones de carga.</td>
+                <td>Tiempo de respuesta en percentiles (P95 < 200ms), Throughput (transacciones por segundo), Uso de CPU y RAM.</td>
+              </tr>
+              <tr>
+                <td><strong>S - Supportability</strong></td>
+                <td>Facilidad para mantener, extender, configurar y adaptar el software.</td>
+                <td>Modularidad, extensibilidad, facilidad de instalación, localización idiomática, diagnóstico de logs.</td>
+              </tr>
+              <tr>
+                <td><strong>"+" (Restricciones)</strong></td>
+                <td>Limitaciones de diseño, implementación, interfaz y físicas.</td>
+                <td>Uso obligatorio de PostgreSQL 16; backend en Java 21; interfaz adaptable a pantallas táctiles industriales.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.5. Norma ISO/IEC 25010 (Modelo de Calidad del Producto de Software)</h3>
+        <p>
+          La norma internacional ISO/IEC 25010 descompone la calidad del producto en <strong>8 características cardinales</strong>:
+        </p>
+        <ul>
+          <li><strong>1. Adecuación Funcional:</strong> Completitud funcional, corrección funcional y pertinencia funcional.</li>
+          <li><strong>2. Eficiencia de Desempeño:</strong> Comportamiento temporal (latencias), utilización de recursos y capacidad de escalabilidad.</li>
+          <li><strong>3. Compatibilidad:</strong> Coexistencia en el mismo entorno de hardware/OS e interoperabilidad con otros sistemas vía APIs.</li>
+          <li><strong>4. Usabilidad:</strong> Reconocibilidad de adecuación, facilidad de aprendizaje, operabilidad, protección contra errores de usuario y estética de UI.</li>
+          <li><strong>5. Fiabilidad:</strong> Madurez, disponibilidad, tolerancia a fallos y capacidad de recuperación (resiliencia).</li>
+          <li><strong>6. Seguridad:</strong> Confidencialidad, integridad, no repudio, autenticidad y trazabilidad de accesos (auditoría).</li>
+          <li><strong>7. Mantenibilidad:</strong> Modularidad, reusabilidad, analizabilidad, modificabilidad y testeabilidad.</li>
+          <li><strong>8. Portabilidad:</strong> Adaptabilidad a nuevos entornos, facilidad de instalación y reemplazabilidad.</li>
+        </ul>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 3: JERARQUÍA DE REQUERIMIENTOS: INICIATIVAS Y ÉPICAS  -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap3">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 3</div>
+          <h2 class="chapter-title">Jerarquía de Requerimientos: De los Objetivos a las Épicas</h2>
+        </div>
+
+        <p>
+          En la práctica profesional no es posible pasar directamente de una conversación preliminar con el cliente a redactar requerimientos de software microscópicos. La cátedra establece una <strong>jerarquía de descomposición funcional descendente (Top-Down)</strong> que permite alinear los objetivos estratégicos de la empresa con la ejecución técnica diaria.
+        </p>
+
+        <div class="diagram-container">
+          <svg viewBox="0 0 650 200" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+            <rect x="235" y="10" width="180" height="32" rx="4" fill="#1c4573"/>
+            <text x="325" y="31" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">OBJETIVO ESTRATÉGICO</text>
+
+            <line x1="325" y1="42" x2="325" y2="60" stroke="#6b645c" stroke-width="2"/>
+
+            <rect x="215" y="60" width="220" height="32" rx="4" fill="#2d5b3c"/>
+            <text x="325" y="81" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">INICIATIVA (Alto Nivel / Visión)</text>
+
+            <line x1="325" y1="92" x2="325" y2="110" stroke="#6b645c" stroke-width="2"/>
+            <line x1="120" y1="110" x2="530" y2="110" stroke="#6b645c" stroke-width="2"/>
+
+            <rect x="50" y="125" width="140" height="30" rx="4" fill="#8c631e"/>
+            <text x="120" y="145" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ÉPICA 1</text>
+
+            <rect x="255" y="125" width="140" height="30" rx="4" fill="#8c631e"/>
+            <text x="325" y="145" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ÉPICA 2</text>
+
+            <rect x="460" y="125" width="140" height="30" rx="4" fill="#8c631e"/>
+            <text x="530" y="145" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ÉPICA 3</text>
+
+            <line x1="120" y1="110" x2="120" y2="125" stroke="#6b645c" stroke-width="1.5"/>
+            <line x1="325" y1="110" x2="325" y2="125" stroke="#6b645c" stroke-width="1.5"/>
+            <line x1="530" y1="110" x2="530" y2="125" stroke="#6b645c" stroke-width="1.5"/>
+          </svg>
+          <div class="diagram-caption">Figura 3.1: Estructura jerárquica de descomposición de requerimientos de la cátedra de Ingeniería de Software.</div>
+        </div>
+
+        <h3>3.1. Definición de Iniciativa</h3>
+        <p>
+          Una <strong>Iniciativa</strong> especifica el objetivo principal y abarcador que queremos alcanzar, definido a muy alto nivel. En caso de que sea posible por el contexto del proyecto, busca ser una meta ambiciosa pero realista para la organización.
+        </p>
+
+        <h3>3.2. Definición de Épica</h3>
+        <p>
+          Las <strong>Épicas</strong> desglosan la iniciativa en módulos más concretos de ejecución. Son grandes bloques de funcionalidad que bajan "a tierra" el objetivo principal, agrupando requerimientos funcionales y no funcionales afines. Por su tamaño, una épica no puede completarse en un único sprint o iteración corta.
+        </p>
+
+        <div class="box-callout box-exam">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Ejemplo Didáctico Canónico de la Cátedra: La Construcción de la Casa</span>
+          </div>
+          <p>
+            <strong>INICIATIVA:</strong> <em>"Construir una casa mínima e indispensable para que viva dignamente una persona."</em>
+          </p>
+          <p>
+            ¿Cómo se desglosa dicha iniciativa en <strong>Épicas</strong> concretas?:
+          </p>
+          <ul>
+            <li><strong>Épica 1:</strong> Un baño completo y funcional.</li>
+            <li><strong>Épica 2:</strong> Una habitación para descanso.</li>
+            <li><strong>Épica 3:</strong> Un espacio de cocina y comedor integrado.</li>
+          </ul>
+          <p>
+            <em>Antipatrón de Épica para esta iniciativa:</em> Incorporar como épica un "Garage con entrada para dos autos", una "Sala de juegos" o un "Quincho con pileta". Si bien son elementos deseables en una vivienda, <strong>violan la definición de la iniciativa</strong> ("mínima e indispensable"). Toda épica debe justificar su existencia demostrando que contribuye directamente al objetivo de su iniciativa contenedora.
+          </p>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- CAPITULO 4: TÉCNICAS ESTÁTICAS Y EL ESTÁNDAR IEEE 830 (SRS)   -->
+        <!-- ============================================================== -->
+        <section class="chapter-section" id="cap4">
+          <div class="chapter-header">
+            <div class="chapter-num">Capítulo 4</div>
+            <h2 class="chapter-title">Técnicas Estáticas de Especificación y el Estándar IEEE 830</h2>
+          </div>
+
+          <p>
+            Las técnicas de especificación de requerimientos se bifurcan en dos ramas metodológicas: <strong>técnicas estáticas</strong> (modelan condiciones lógicas, datos y restricciones que no dependen del tiempo ni de secuencias de eventos) y <strong>técnicas dinámicas</strong> (modelan el comportamiento interactivo a lo largo del tiempo).
+          </p>
+
+          <h3>4.1. Tablas de Decisión</h3>
+          <p>
+            Técnica estática tabular rigurosa ideal para modelar reglas de negocio complejas compuestas por combinaciones lógicas de condiciones booleanas y sus respectivas acciones resultantes.
+          </p>
+          <p>
+            Estructura formal de una Tabla de Decisión:
+          </p>
+          <ul>
+            <li><strong>Zona Superior Izquierda (Condiciones):</strong> Lista de todas las variables de entrada que influyen en la decisión.</li>
+            <li><strong>Zona Superior Derecha (Reglas / Entradas):</strong> Combinaciones de valores de verdad (Sí/No o Verdadero/Falso). Para $N$ condiciones binarias independientes, existen $2^N$ combinaciones teóricas posibles.</li>
+            <li><strong>Zona Inferior Izquierda (Acciones):</strong> Conjunto exhaustivo de respuestas o cálculos que el sistema debe ejecutar.</li>
+            <li><strong>Zona Inferior Derecha (Asignación de Acciones):</strong> Marcas (X) que indican qué acción se dispara bajo cada regla específica.</li>
+          </ul>
+
+          <div class="table-responsive">
+            <table class="table-styled">
+              <thead>
+                <tr>
+                  <th>Condiciones y Acciones</th>
+                  <th>Regla 1</th>
+                  <th>Regla 2</th>
+                  <th>Regla 3</th>
+                  <th>Regla 4</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>¿Cliente tiene membresía Gold?</td><td>Sí</td><td>Sí</td><td>No</td><td>No</td></tr>
+                <tr><td>¿Monto de compra > $100.000?</td><td>Sí</td><td>No</td><td>Sí</td><td>No</td></tr>
+                <tr style="border-top:2px solid var(--border-color); background:var(--bg-card-subtle);">
+                  <td><strong>Acción: Aplicar 25% de descuento</strong></td>
+                  <td><strong>X</strong></td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td><strong>Acción: Aplicar 10% de descuento</strong></td>
+                  <td>-</td>
+                  <td><strong>X</strong></td>
+                  <td><strong>X</strong></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td><strong>Acción: Cobrar precio regular de lista</strong></td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td><strong>X</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>4.2. Árboles de Decisión</h3>
+          <p>
+            Representación gráfica en forma de grafo dirigido donde los nodos internos representan evaluaciones de condiciones, las ramas representan los valores posibles de dicha condición y los nodos hoja representan las acciones o resultados finales. Son cognitivamente más sencillos de leer por los clientes del negocio cuando existe un orden secuencial natural de evaluación.
+          </p>
+
+          <h3>4.3. El Estándar IEEE 830 para Especificación de Requerimientos de Software (SRS)</h3>
+          <p>
+            El estándar <strong>IEEE 830-1998</strong> (posteriormente adaptado en la norma ISO/IEC/IEEE 29148) define la estructura formal de referencia para documentar exhaustivamente los requerimientos de un proyecto de software:
+          </p>
+          <div class="table-responsive">
+            <table class="table-styled">
+              <thead>
+                <tr>
+                  <th>Estructura Oficial IEEE 830</th>
+                  <th>Contenidos Obligatorios de la Sección</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. INTRODUCCIÓN</strong></td>
+                  <td>1.1 Propósito del documento SRS.<br>1.2 Alcance del producto de software proyectado.<br>1.3 Definiciones, acrónimos y abreviaturas.<br>1.4 Referencias bibliográficas y normativas.<br>1.5 Visión general del resto del documento.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. DESCRIPCIÓN GENERAL</strong></td>
+                  <td>2.1 Perspectiva del producto (independiente o subsistema de un entorno mayor).<br>2.2 Funciones generales del producto a alto nivel.<br>2.3 Características y perfiles de los usuarios (técnicos vs novatos).<br>2.4 Restricciones generales (legales, de hardware, estándares corporativos).<br>2.5 Suposiciones y dependencias externas.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. REQUISITOS ESPECÍFICOS</strong></td>
+                  <td>3.1 Requisitos comunes de interfaces externas (interfaces de usuario, hardware, software y comunicaciones).<br>3.2 Requisitos Funcionales detallados minuciosamente.<br>3.3 Requisitos de Rendimiento (tiempos de respuesta, tasas de transferencia).<br>3.4 Restricciones de Diseño e Implementación.<br>3.5 Atributos de Calidad del Software (fiabilidad, disponibilidad, seguridad, mantenibilidad).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- CAPITULO 5: DIAGRAMAS DE TRANSICIÓN DE ESTADOS (DTE)           -->
+        <!-- ============================================================== -->
+        <section class="chapter-section" id="cap5">
+          <div class="chapter-header">
+            <div class="chapter-num">Capítulo 5</div>
+            <h2 class="chapter-title">Técnicas Dinámicas I: Diagramas de Transición de Estados (DTE)</h2>
+          </div>
+
+          <p>
+            Un <strong>Diagrama de Transición de Estados (DTE)</strong> o Máquina de Estados Finitos (FSM) es una técnica dinámica utilizada para modelar el ciclo de vida y el comportamiento dependiente del tiempo de una entidad o subsistema reactivo. Es especialmente útil cuando el sistema debe responder de manera distinta al mismo evento en función de su historia previa.
+          </p>
+
+          <h3>5.1. Componentes Sintácticos de un DTE</h3>
+          <ul>
+            <li><strong>Estado (State):</strong> Una condición o situación en la vida de un objeto durante la cual satisface una condición, realiza una actividad o espera un evento externo. Gráficamente: rectángulo con esquinas redondeadas.</li>
+            <li><strong>Estado Inicial (Pseudoestado):</strong> Punto de partida del ciclo de vida. Gráficamente: círculo negro sólido.</li>
+            <li><strong>Estado Final:</strong> Conclusión del ciclo de vida de la entidad. Gráficamente: círculo negro rodeado por un anillo.</li>
+            <li><strong>Transición:</strong> Relación dirigida entre dos estados que indica que un objeto en el primer estado ejecutará ciertas acciones y pasará al segundo estado cuando acontezca un evento especificado.</li>
+            <li><strong>Sintaxis de la Etiqueta de Transición:</strong>
+              $$\text{Evento}(\text{argumentos}) \; [\text{Condición de Guarda}] \; / \; \text{Acción}$$
+              <ul>
+                <li><em>Evento:</em> Suceso que desencadena la evaluación de la transición.</li>
+                <li><em>Guarda [ ]:</em> Expresión booleana que debe ser verdadera para habilitar la transición.</li>
+                <li><em>Acción / :</em> Operación atómica e instantánea que se ejecuta durante el tránsito entre estados.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="box-exercise">
+            <div class="box-exercise-title">Ejercicio de Cátedra Resuelto: Ciclo de Vida de una Orden de Compra Digital</div>
+            <p><strong>Enunciado:</strong> Modele mediante un DTE el ciclo de vida de una Orden de Compra en una tienda electrónica. La orden nace en estado "Borrador". Cuando el cliente pulsa "Confirmar", pasa a "Pendiente de Pago". Si el banco aprueba el pago antes de 24 horas, pasa a "Pagada" y se emite la factura; si transcurren 24 horas sin pago o el cliente cancela, pasa a "Cancelada". Una orden "Pagada" puede pasar a "En Preparación" y luego a "Enviada". Al recibirla el comprador, pasa a "Entregada" (estado final). Si en tránsito se rompe o extravía, pasa a "Reclamada".</p>
+            
+            <div class="diagram-container">
+              <svg viewBox="0 0 740 260" width="100%" height="240" xmlns="http://www.w3.org/2000/svg">
+                <!-- Inicial -->
+                <circle cx="40" cy="80" r="10" fill="#1c4573"/>
+                <line x1="50" y1="80" x2="85" y2="80" stroke="#1c4573" stroke-width="2"/>
+
+                <!-- Borrador -->
+                <rect x="85" y="60" width="90" height="40" rx="6" fill="#fff" stroke="#1c4573" stroke-width="2"/>
+                <text x="130" y="84" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1c4573" text-anchor="middle">Borrador</text>
+
+                <!-- Pendiente de Pago -->
+                <line x1="175" y1="80" x2="235" y2="80" stroke="#1c4573" stroke-width="2"/>
+                <text x="205" y="72" font-family="sans-serif" font-size="9" fill="#6b645c" text-anchor="middle">Confirmar()</text>
+
+                <rect x="235" y="60" width="130" height="40" rx="6" fill="#fff" stroke="#1c4573" stroke-width="2"/>
+                <text x="300" y="84" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1c4573" text-anchor="middle">Pendiente de Pago</text>
+
+                <!-- A Cancelada -->
+                <path d="M 300 100 L 300 170 L 260 170" fill="none" stroke="#9e3b2b" stroke-width="2"/>
+                <text x="345" y="145" font-family="sans-serif" font-size="9" fill="#9e3b2b">Timeout 24h / Cancelar()</text>
+                <rect x="160" y="150" width="100" height="40" rx="6" fill="#fff" stroke="#9e3b2b" stroke-width="2"/>
+                <text x="210" y="174" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9e3b2b" text-anchor="middle">Cancelada</text>
+
+                <!-- A Pagada -->
+                <line x1="365" y1="80" x2="435" y2="80" stroke="#2d5b3c" stroke-width="2"/>
+                <text x="400" y="72" font-family="sans-serif" font-size="8.5" fill="#2d5b3c" text-anchor="middle">PagoExitoso() / Facturar()</text>
+
+                <rect x="435" y="60" width="90" height="40" rx="6" fill="#fff" stroke="#2d5b3c" stroke-width="2"/>
+                <text x="480" y="84" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2d5b3c" text-anchor="middle">Pagada</text>
+
+                <!-- A Enviada -->
+                <line x1="525" y1="80" x2="585" y2="80" stroke="#1c4573" stroke-width="2"/>
+                <text x="555" y="72" font-family="sans-serif" font-size="8.5" fill="#6b645c" text-anchor="middle">Despachar()</text>
+
+                <rect x="585" y="60" width="90" height="40" rx="6" fill="#fff" stroke="#1c4573" stroke-width="2"/>
+                <text x="630" y="84" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1c4573" text-anchor="middle">Enviada</text>
+
+                <!-- A Entregada (Final) -->
+                <path d="M 630 100 L 630 170 L 550 170" fill="none" stroke="#2d5b3c" stroke-width="2"/>
+                <text x="615" y="145" font-family="sans-serif" font-size="9" fill="#2d5b3c">Entregar()</text>
+                <circle cx="530" cy="170" r="14" fill="#fff" stroke="#2d5b3c" stroke-width="2"/>
+                <circle cx="530" cy="170" r="9" fill="#2d5b3c"/>
+              </svg>
+              <div class="diagram-caption">Figura 5.1: Diagrama de Transición de Estados modelando el ciclo de vida de la orden.</div>
+            </div>
+          </div>
+        </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 6: REDES DE PETRI (PETRI NETS)                        -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap6">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 6</div>
+          <h2 class="chapter-title">Técnicas Dinámicas II: Redes de Petri (Petri Nets)</h2>
+        </div>
+
+        <p>
+          Las <strong>Redes de Petri</strong>, formuladas en 1962 por el matemático alemán Carl Adam Petri, constituyen una herramienta formal gráfica y matemática indispensable para modelar sistemas <strong>concurrentes, asíncronos, paralelos, no deterministas y con recursos limitados</strong>. En la cátedra de Ingeniería de Software de la UNLP se estudian exhaustivamente para especificar protocolos de comunicación, semáforos de sincronización y procesos industriales con colas y servidores compartidos.
+        </p>
+
+        <h3>6.1. Definición Formal Matemática</h3>
+        <p>
+          Una Red de Petri es una 5-tupla formal:
+          $$N = (P, T, F, W, M_0)$$
+        </p>
+        <ul>
+          <li>$P = \{p_1, p_2, \dots, p_m\}$: Conjunto finito y no vacío de <strong>Plazas</strong> (representan condiciones, estados locales o depósitos de recursos). Gráficamente: círculos.</li>
+          <li>$T = \{t_1, t_2, \dots, t_n\}$: Conjunto finito y no vacío de <strong>Transiciones</strong> (representan eventos, acciones o transformaciones). Gráficamente: rectángulos sólidos o barras.</li>
+          <li>$P \cap T = \emptyset$: Los conjuntos de plazas y transiciones son disjuntos (un elemento no puede ser ambas cosas).</li>
+          <li>$F \subseteq (P \times T) \cup (T \times P)$: Conjunto de <strong>Arcos Dirigidos</strong> que conectan plazas con transiciones o transiciones con plazas (grafo bipartito: nunca se conecta plaza con plaza ni transición con transición).</li>
+          <li>$W: F \rightarrow \mathbb{N}^+$: Función de <strong>Peso de los Arcos</strong> (cantidad de marcas consumidas o producidas). Si no se indica número, el peso por defecto es 1.</li>
+          <li>$M_0: P \rightarrow \mathbb{N}$: <strong>Marcado Inicial</strong>, que asigna un número de <em>marcas (tokens)</em> a cada plaza del sistema en $t = 0$. Gráficamente: puntos negros en el interior de las plazas.</li>
+        </ul>
+
+        <h3>6.2. Dinámica de Ejecución: Regla de Disparo (Firing Rule)</h3>
+        <ol>
+          <li><strong>Condición de Habilitación:</strong> Una transición $t \in T$ está <em>habilitada (enabled)</em> si y solo si cada una de sus plazas de entrada $p \in \bullet t$ contiene al menos tantas marcas como el peso del arco que las une:
+            $$\forall p \in \bullet t, \quad M(p) \ge W(p, t)$$
+          </li>
+          <li><strong>Disparo de la Transición:</strong> El disparo de una transición habilitada es una operación atómica que produce un nuevo marcado $M'$:
+            $$M'(p) = M(p) - W(p, t) + W(t, p)$$
+            Consume $W(p, t)$ marcas de cada plaza de entrada y genera $W(t, p)$ marcas en cada plaza de salida.
+          </li>
+        </ol>
+
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            <span>Modelado de Patrones Concurrentes Clásicos en Redes de Petri</span>
+          </div>
+          <p>
+            • <strong>Secuencia:</strong> Plaza $P_1 \rightarrow$ Transición $T_1 \rightarrow$ Plaza $P_2$. Un evento precede estrictamente al siguiente.<br>
+            • <strong>Concurrencia (Bifurcación / Fork):</strong> Una transición $T$ tiene un arco de entrada desde $P_1$ y dos arcos de salida hacia $P_2$ y $P_3$. Al dispararse, activa dos hilos independientes simultáneos.<br>
+            • <strong>Sincronización (Unión / Join):</strong> Una transición $T$ tiene dos plazas de entrada $P_1$ y $P_2$. Solo podrá disparar cuando <em>ambos</em> procesos hayan depositado una marca (barrera de sincronización).<br>
+            • <strong>Exclusión Mutua / Semáforo:</strong> Una plaza $P_{\text{mutex}}$ con una única marca compartida entre dos transiciones competidoras. Solo una puede ejecutar su sección crítica a la vez.
+          </p>
+        </div>
+
+        <h3>6.3. Ejercicio Resuelto de Examen: Estación de Servicio con 3 Surtidores</h3>
+        <p>
+          Este problema, extraído directamente de la Clase 4 de la cátedra de la UNLP, evalúa la capacidad del estudiante para modelar concurrencia con recursos compartidos limitados:
+        </p>
+        <div class="box-exercise">
+          <div class="box-exercise-title">Enunciado Oficial de Cátedra: Modelado de Estación de Combustible</div>
+          <p>
+            <em>"Los autos llegan a una estación de servicios para cargar combustible. La estación dispone únicamente de <strong>3 surtidores</strong> (capacidad máxima: 1 auto por surtidor en simultáneo). Los autos que llegan entran a una cola de espera. Cuando hay un surtidor libre, el primer auto de la cola pasa a cargar combustible. Al finalizar la carga, el auto libera el surtidor y se retira de la estación."</em>
+          </p>
+
+          <p><strong>Definición del Marcado y Elementos de la Red:</strong></p>
+          <ul>
+            <li>$P_1$ (Generador / Afuera): Plaza que representa la llegada de nuevos vehículos.</li>
+            <li>$T_1$ (Llegar): Evento de arribo de un auto a la estación.</li>
+            <li>$P_2$ (Cola de Espera): Almacena los autos esperando surtidor.</li>
+            <li>$P_{\text{surtidores}}$ (Surtidores Libres): <strong>Plaza de recurso compartido que inicia con 3 marcas ($M_0 = 3$)</strong>.</li>
+            <li>$T_2$ (Ocupar Surtidor / Iniciar Carga): Transición que consume 1 marca de la $P_2$ (Cola) y 1 marca de $P_{\text{surtidores}}$.</li>
+            <li>$P_3$ (Cargando Combustible): Autos que están efectivamente siendo atendidos (máximo 3 concurrentes).</li>
+            <li>$T_3$ (Finalizar Carga): Evento de conclusión del despacho.</li>
+            <li>$P_4$ (Autos Atendidos / Salida): Acumulador de autos que abandonaron la estación.</li>
+            <li><strong>Arco de Realimentación:</strong> Desde $T_3$ hacia $P_{\text{surtidores}}$, que <em>devuelve</em> la marca liberada al pool de surtidores libres.</li>
+          </ul>
+
+          <div class="diagram-container">
+            <svg viewBox="0 0 740 260" width="100%" height="240" xmlns="http://www.w3.org/2000/svg">
+              <!-- P1: Afuera -->
+              <circle cx="60" cy="130" r="22" fill="#fff" stroke="#1c4573" stroke-width="2"/>
+              <text x="60" y="100" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1c4573" text-anchor="middle">P1: Afuera</text>
+              <circle cx="60" cy="130" r="5" fill="#1c4573"/>
+
+              <!-- T1: Llegada -->
+              <line x1="82" y1="130" x2="130" y2="130" stroke="#1c4573" stroke-width="2"/>
+              <rect x="130" y="110" width="12" height="40" fill="#1c4573"/>
+              <text x="136" y="165" font-family="sans-serif" font-size="9" fill="#1c4573" text-anchor="middle">T1: Arribo</text>
+
+              <!-- P2: Cola de Espera -->
+              <line x1="142" y1="130" x2="200" y2="130" stroke="#1c4573" stroke-width="2"/>
+              <circle cx="222" cy="130" r="22" fill="#fff" stroke="#1c4573" stroke-width="2"/>
+              <text x="222" y="100" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1c4573" text-anchor="middle">P2: En Cola</text>
+
+              <!-- P_surtidores: 3 Marcas -->
+              <circle cx="340" cy="45" r="24" fill="#f5efe3" stroke="#2d5b3c" stroke-width="2.5"/>
+              <text x="340" y="15" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2d5b3c" text-anchor="middle">P_surt: Surtidores Libres (3)</text>
+              <!-- 3 Tokens gráficos -->
+              <circle cx="333" cy="40" r="4" fill="#2d5b3c"/>
+              <circle cx="347" cy="40" r="4" fill="#2d5b3c"/>
+              <circle cx="340" cy="52" r="4" fill="#2d5b3c"/>
+
+              <!-- T2: Ocupar -->
+              <line x1="244" y1="130" x2="334" y2="130" stroke="#1c4573" stroke-width="2"/>
+              <path d="M 340 69 L 340 110" fill="none" stroke="#2d5b3c" stroke-width="2"/>
+              <rect x="334" y="110" width="12" height="40" fill="#1c4573"/>
+              <text x="340" y="165" font-family="sans-serif" font-size="9" fill="#1c4573" text-anchor="middle">T2: Ocupar Surtidor</text>
+
+              <!-- P3: Cargando -->
+              <line x1="346" y1="130" x2="440" y2="130" stroke="#1c4573" stroke-width="2"/>
+              <circle cx="462" cy="130" r="22" fill="#fff" stroke="#8c631e" stroke-width="2"/>
+              <text x="462" y="100" font-family="sans-serif" font-size="10" font-weight="bold" fill="#8c631e" text-anchor="middle">P3: Cargando</text>
+
+              <!-- T3: Liberar y Salir -->
+              <line x1="484" y1="130" x2="570" y2="130" stroke="#1c4573" stroke-width="2"/>
+              <rect x="570" y="110" width="12" height="40" fill="#1c4573"/>
+              <text x="576" y="165" font-family="sans-serif" font-size="9" fill="#1c4573" text-anchor="middle">T3: Fin Carga</text>
+
+              <!-- Retorno de marca liberada a P_surt -->
+              <path d="M 576 110 L 576 45 L 364 45" fill="none" stroke="#2d5b3c" stroke-width="2" stroke-dasharray="3"/>
+              <text x="470" y="38" font-family="sans-serif" font-size="8.5" fill="#2d5b3c">Libera 1 surtidor</text>
+
+              <!-- P4: Salida -->
+              <line x1="582" y1="130" x2="650" y2="130" stroke="#1c4573" stroke-width="2"/>
+              <circle cx="672" cy="130" r="22" fill="#fff" stroke="#1c4573" stroke-width="2"/>
+              <text x="672" y="100" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1c4573" text-anchor="middle">P4: Atendidos</text>
+            </svg>
+            <div class="diagram-caption">Figura 6.1: Red de Petri que modela la sincronización y exclusión mutua de 3 surtidores compartidos con retorno de marcas.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 7: CASOS DE USO UML Y PLANTILLAS TEXTUALES            -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap7">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 7</div>
+          <h2 class="chapter-title">Técnicas Dinámicas III: Casos de Uso (UML Use Cases)</h2>
+        </div>
+
+        <p>
+          Introducidos por <strong>Ivar Jacobson en 1992</strong> e incorporados formalmente al estándar UML, los <strong>Casos de Uso</strong> describen una secuencia completa de interacciones transaccionales entre un actor externo y el sistema de software, que produce un resultado observable de valor para dicho actor.
+        </p>
+
+        <h3>7.1. Componentes del Diagrama de Casos de Uso</h3>
+        <ul>
+          <li><strong>Actor:</strong> Entidad externa al sistema (humano, dispositivo de hardware o sistema informático legado) que interactúa con él intercambiando información. Gráficamente: figura humana ("stickman").</li>
+          <li><strong>Caso de Uso:</strong> Una unidad coherente de funcionalidad completa expresada como un verbo en infinitivo más un objeto directo (ej. "Descargar Artículo", "Pagar Factura"). Gráficamente: elipse horizontal.</li>
+          <li><strong>Límite del Sistema (System Boundary):</strong> Rectángulo que delimita la frontera computacional: los actores quedan fuera, los casos de uso dentro.</li>
+        </ul>
+
+        <h3>7.2. Relaciones entre Casos de Uso</h3>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Relación UML</th>
+                <th>Sintaxis Gráfica</th>
+                <th>Semántica y Regla de Obligatoriedad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Asociación (Association)</strong></td>
+                <td>Línea sólida entre Actor y Caso de Uso</td>
+                <td>Indica que el actor inicia el caso de uso o participa activamente en el intercambio de mensajes.</td>
+              </tr>
+              <tr>
+                <td><strong>Inclusión (&laquo;include&raquo;)</strong></td>
+                <td>Flecha discontinua con estereotipo: $CU_{\text{base}} \xrightarrow{\ll \text{include} \gg} CU_{\text{incluido}}$</td>
+                <td><strong>Obligatoria:</strong> El caso de uso incluido <em>siempre</em> se ejecuta como parte integral del caso base. Se utiliza para modularizar y reutilizar comportamiento común a múltiples casos de uso.</td>
+              </tr>
+              <tr>
+                <td><strong>Extensión (&laquo;extend&raquo;)</strong></td>
+                <td>Flecha discontinua con estereotipo: $CU_{\text{ext}} \xrightarrow{\ll \text{extend} \gg} CU_{\text{base}}$</td>
+                <td><strong>Opcional / Condicional:</strong> El caso extensor solo se ejecuta si se cumple una condición explícita en un <em>Punto de Extensión (Extension Point)</em> del caso base. El caso base no depende ni necesita conocer al extensor para completarse con éxito.</td>
+              </tr>
+              <tr>
+                <td><strong>Generalización</strong></td>
+                <td>Línea con triángulo cerrado hueco en el destino</td>
+                <td>Indica herencia: un caso de uso hijo hereda el comportamiento del padre y puede especializar pasos (ej. "Pagar con Tarjeta" generaliza a "Pagar").</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>7.3. Especificación Textual Detallada: Casos de Estudio de Cátedra</h3>
+        <p>
+          El diagrama UML es solo un índice visual. La verdadera especificación de requerimientos reside en la <strong>plantilla textual estructurada</strong> de cada caso de uso:
+        </p>
+
+        <!-- Plantilla 1: Iniciar Sesion -->
+        <div class="table-responsive">
+          <table class="table-styled">
+            <tbody>
+              <tr style="background:var(--bg-card-subtle);">
+                <th colspan="2">CASO DE USO: Iniciar Sesión (CU-01)</th>
+              </tr>
+              <tr>
+                <td style="width:25%;"><strong>Descripción</strong></td>
+                <td>Describe el evento mediante el cual un usuario registrado ingresa sus credenciales en el sistema para autenticarse y acceder a funciones privadas.</td>
+              </tr>
+              <tr>
+                <td><strong>Actores</strong></td>
+                <td>Usuario Registrado.</td>
+              </tr>
+              <tr>
+                <td><strong>Precondiciones</strong></td>
+                <td>El usuario debe haberse registrado previamente y poseer una cuenta activa. El usuario no debe haber iniciado sesión previamente.</td>
+              </tr>
+              <tr>
+                <td><strong>Curso Normal (Flujo Principal)</strong></td>
+                <td>
+                  1. El usuario selecciona la opción "Iniciar Sesión" en la cabecera.<br>
+                  2. El sistema solicita dirección de correo electrónico y contraseña.<br>
+                  3. El usuario ingresa sus datos y presiona "Ingresar".<br>
+                  4. El sistema valida las credenciales contra la base de datos de usuarios.<br>
+                  5. El sistema crea la sesión del usuario y muestra la pantalla principal personalizada.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Cursos Alternativos / Excepción</strong></td>
+                <td>
+                  <strong>4.a. Credenciales inválidas:</strong><br>
+                  &nbsp;&nbsp;4.a.1. El sistema informa un mensaje de error: "Usuario o contraseña incorrectos".<br>
+                  &nbsp;&nbsp;4.a.2. Se incrementa el contador de intentos fallidos.<br>
+                  &nbsp;&nbsp;4.a.3. Si los intentos fallidos superan 3, se bloquea la cuenta temporalmente por 15 minutos.<br>
+                  &nbsp;&nbsp;4.a.4. El flujo vuelve al paso 2.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Postcondiciones</strong></td>
+                <td>El usuario se encuentra autenticado en el sistema con un token de sesión válido.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Plantilla 2: Descargar Articulo -->
+        <div class="table-responsive">
+          <table class="table-styled">
+            <tbody>
+              <tr style="background:var(--bg-card-subtle);">
+                <th colspan="2">CASO DE USO: Descargar Artículo (CU-04)</th>
+              </tr>
+              <tr>
+                <td style="width:25%;"><strong>Descripción</strong></td>
+                <td>Describe el evento en el que un usuario registrado selecciona un artículo premium del catálogo para descargarlo en formato PDF a su dispositivo local.</td>
+              </tr>
+              <tr>
+                <td><strong>Actores</strong></td>
+                <td>Usuario Registrado, Pasarela de Pagos (Sistema Externo Secundario).</td>
+              </tr>
+              <tr>
+                <td><strong>Precondiciones</strong></td>
+                <td>El usuario debe haber iniciado sesión (CU-01). El artículo seleccionado debe encontrarse publicado y disponible.</td>
+              </tr>
+              <tr>
+                <td><strong>Curso Normal (Flujo Principal)</strong></td>
+                <td>
+                  1. El usuario navega al detalle de un artículo y pulsa el botón "Descargar PDF".<br>
+                  2. El sistema verifica que el usuario posee una suscripción activa o saldo suficiente.<br>
+                  3. El sistema <em>incluye</em> el caso de uso &laquo;Verificar Tarjeta / Cobro&raquo; comunicándose con la pasarela de pagos.<br>
+                  4. La pasarela aprueba la transacción y devuelve el código de autorización.<br>
+                  5. El sistema genera el archivo PDF con marca de agua personalizada del usuario.<br>
+                  6. El sistema inicia la descarga del archivo en el navegador del cliente.<br>
+                  7. El sistema registra la descarga en el historial de compras del usuario.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Cursos Alternativos / Excepción</strong></td>
+                <td>
+                  <strong>3.a. La pasarela rechaza la tarjeta por fondos insuficientes o fraude:</strong><br>
+                  &nbsp;&nbsp;3.a.1. El sistema informa el motivo del rechazo del banco.<br>
+                  &nbsp;&nbsp;3.a.2. Se ofrece ingresar un método de pago alternativo.<br>
+                  &nbsp;&nbsp;3.a.3. La descarga se cancela y no se genera el archivo.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Postcondiciones</strong></td>
+                <td>El archivo PDF se transfirió exitosamente; la transacción financiera quedó asentada y auditada.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 8: HISTORIAS DE USUARIO (HU), INVEST Y BDD GHERKIN    -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap8">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 8</div>
+          <h2 class="chapter-title">Técnicas Ágiles de Especificación: Historias de Usuario (HU)</h2>
+        </div>
+
+        <p>
+          En el desarrollo ágil, las <strong>Historias de Usuario (HU)</strong> reemplazan los pesados documentos de especificación monolíticos por representaciones breves, comprensibles y negociables del valor que el software debe brindar al cliente.
+        </p>
+
+        <h3>8.1. Anatomía y Formato Canónico Connextra</h3>
+        <p>
+          Toda Historia de Usuario profesional sigue una estructura gramatical estandarizada en tres cláusulas:
+        </p>
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>Plantilla Canónica de Historia de Usuario</span>
+          </div>
+          <p style="font-size:1.15rem; font-family:var(--font-serif); margin-bottom:8px;">
+            <strong>Como</strong> [rol o tipo de usuario específico],<br>
+            <strong>Quiero</strong> [acción, capacidad o interacción con el software],<br>
+            <strong>Para</strong> [beneficio intrínseco, resultado observable o valor de negocio obtenido].
+          </p>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0;">
+            <em>Regla de Oro:</em> Nunca redactar "Como usuario...". El rol debe representar un perfil concreto (ej. "Como alumno regular", "Como jefe de guardia", "Como cajero de sucursal"). La cláusula "Para" jamás debe omitirse: es la que justifica ante el Product Owner si vale la pena pagar por programarla.
+          </p>
+        </div>
+
+        <h3>8.2. El Modelo de las 3 C (Ron Jeffries)</h3>
+        <ul>
+          <li><strong>Card (Tarjeta):</strong> La historia debe ser lo suficientemente breve para escribirse en una tarjeta física de cartulina o post-it digital (Trello/Jira). No es un contrato detallado, sino un recordatorio físico para conversar.</li>
+          <li><strong>Conversation (Conversación):</strong> El detalle fino del requerimiento no se escribe al inicio, sino que surge de un diálogo continuo y dinámico entre el Product Owner, los desarrolladores y los usuarios a lo largo del Sprint.</li>
+          <li><strong>Confirmation (Confirmación):</strong> Son los <strong>Criterios de Aceptación</strong> objetivos acordados que dictaminan cuándo la historia está completamente terminada y puede ser aprobada.</li>
+        </ul>
+
+        <h3>8.3. Criterios de Calidad INVEST (Bill Wake)</h3>
+        <p>
+          Para que una Historia de Usuario sea admisible en un Sprint Backlog debe satisfacer rigurosamente las 6 propiedades del acrónimo <strong>INVEST</strong>:
+        </p>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Letra</th>
+                <th>Propiedad INVEST</th>
+                <th>Definición y Cómo Cumplirla</th>
+                <th>Antipatrón Típico de Examen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>I</strong></td>
+                <td><strong>Independent</strong> (Independiente)</td>
+                <td>La historia puede planificarse, desarrollarse e implementarse sin depender de que otra historia se termine antes. Evita bloqueos en cadena.</td>
+                <td>Separar el frontend en la historia A y el backend en la historia B. (Ambas deben ser un slice vertical completo de punta a punta).</td>
+              </tr>
+              <tr>
+                <td><strong>N</strong></td>
+                <td><strong>Negotiable</strong> (Negociable)</td>
+                <td>No es un contrato rígido. Los detalles de implementación pueden ajustarse en la conversación entre el equipo y el PO según costos y plazos.</td>
+                <td>Especificar detalles técnicos prematuros como el tamaño exacto en píxeles del botón o el nombre de las columnas de base de datos.</td>
+              </tr>
+              <tr>
+                <td><strong>V</strong></td>
+                <td><strong>Valuable</strong> (Valiosa)</td>
+                <td>Debe aportar valor tangible y perceptible directamente para el cliente o usuario final.</td>
+                <td>Redactar historias puramente técnicas: <em>"Como desarrollador quiero configurar la base de datos MySQL..."</em> (Eso es una tarea técnica, no una HU).</td>
+              </tr>
+              <tr>
+                <td><strong>E</strong></td>
+                <td><strong>Estimable</strong> (Estimable)</td>
+                <td>El equipo de desarrollo comprende la meta lo suficiente para dimensionar su esfuerzo en Story Points con confianza razonable.</td>
+                <td>Historias redactadas de forma tan vaga que el equipo no sabe si demandará 2 horas o 3 meses de programación.</td>
+              </tr>
+              <tr>
+                <td><strong>S</strong></td>
+                <td><strong>Small</strong> (Pequeña)</td>
+                <td>Debe dimensionarse de forma que el equipo pueda completarla holgadamente dentro de un único Sprint (típicamente 1 a 3 días de trabajo).</td>
+                <td>Mantener "Épicas monstruo" que abarcan todo un módulo de facturación dentro de una sola historia.</td>
+              </tr>
+              <tr>
+                <td><strong>T</strong></td>
+                <td><strong>Testable</strong> (Comprobable)</td>
+                <td>Posee criterios de aceptación claros y objetivos que permiten diseñar pruebas automatizadas o manuales de tipo pasa/no pasa.</td>
+                <td>Criterios vagos como: <em>"El procesamiento de datos debe ser rápido y no colapsar"</em>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>8.4. Criterios de Aceptación: Formato Tradicional vs BDD / Gherkin</h3>
+        <p>
+          Los criterios de aceptación definen los límites de la historia y guían los tests de aceptación:
+        </p>
+        <div class="box-callout box-exam">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>Ejemplo de Cátedra: HU de Ingreso al Blog con Formato BDD Gherkin</span>
+          </div>
+          <p>
+            <strong>ID:</strong> HU-01<br>
+            <strong>Título:</strong> Ingresar al blog corporativo<br>
+            <strong>Como</strong> suscriptor del blog,<br>
+            <strong>Quiero</strong> iniciar sesión con mi correo y contraseña,<br>
+            <strong>Para</strong> poder publicar comentarios en los artículos de investigación.
+          </p>
+          <p style="margin-top:10px;"><strong>Criterios de Aceptación en Formato BDD (Behavior-Driven Development):</strong></p>
+          <div style="background:var(--bg-card-subtle); padding:12px; border-radius:4px; font-family:var(--font-mono); font-size:0.84rem; border:1px solid var(--border-color);">
+            <strong>Escenario 1: Autenticación exitosa</strong><br>
+            &nbsp;&nbsp;<strong>Dado que</strong> el suscriptor se encuentra en la pantalla de login con su cuenta activa,<br>
+            &nbsp;&nbsp;<strong>Cuando</strong> introduce su email y contraseña correctos y pulsa "Entrar",<br>
+            &nbsp;&nbsp;<strong>Entonces</strong> el sistema redirige al feed principal y muestra su nombre en la esquina superior derecha.<br><br>
+            <strong>Escenario 2: Contraseña errónea</strong><br>
+            &nbsp;&nbsp;<strong>Dado que</strong> el suscriptor introduce una contraseña inválida,<br>
+            &nbsp;&nbsp;<strong>Cuando</strong> pulsa "Entrar",<br>
+            &nbsp;&nbsp;<strong>Entonces</strong> el sistema muestra el mensaje de error: "Credenciales inválidas" sin indicar si el fallo fue el correo o la clave, y permanece en la misma pantalla.
+          </div>
+        </div>
+
+        <h3>8.5. Técnicas de Slicing (Descomposición Vertical de Épicas)</h3>
+        <p>
+          Cuando una historia es demasiado grande para un Sprint (viola la "S" de INVEST), se debe cortar en <strong>rebanadas verticales (vertical slices)</strong> mediante diversas estrategias:
+        </p>
+        <ol>
+          <li><strong>Por pasos del flujo de trabajo:</strong> Separar el flujo feliz principal (Happy Path) de los flujos de excepción complejos.</li>
+          <li><strong>Por operaciones CRUD:</strong> Separar la creación/lectura básica de la edición avanzada y la baja lógica.</li>
+          <li><strong>Por reglas de negocio:</strong> Implementar primero la regla estándar de cobro y postergar para otra historia los recargos por mora o descuentos de feriados.</li>
+          <li><strong>Por interfaz de usuario:</strong> Implementar primero una interfaz HTML plana funcional y postergar la interfaz interactiva con drag-and-drop y animaciones.</li>
+        </ol>
+
+        <h3>8.6. Comparación Analítica: Casos de Uso vs Historias de Usuario</h3>
+        <div class="table-responsive">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th>Dimensión Comparativa</th>
+                <th>Casos de Uso (UML)</th>
+                <th>Historias de Usuario (Ágil)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Filosofía y Propósito</strong></td>
+                <td>Documentar de manera formal y exhaustiva una transacción completa con todos sus caminos alternativos y excepciones.</td>
+                <td>Facilitar la planificación ágil, la estimación relativa y servir como recordatorio para una conversación continua de valor.</td>
+              </tr>
+              <tr>
+                <td><strong>Nivel de Detalle</strong></td>
+                <td>Muy alto desde el inicio; especifica flujos paso a paso y precondiciones/postcondiciones rígidas.</td>
+                <td>Deliberadamente bajo al inicio; el detalle fino se posterga hasta el Sprint en que se va a programar.</td>
+              </tr>
+              <tr>
+                <td><strong>Ciclo de Vida</strong></td>
+                <td>Son artefactos formales permanentes que se mantienen a lo largo de toda la vida útil del sistema como documentación de referencia.</td>
+                <td>Son artefactos transitorios de trabajo; una vez implementada y aceptada la historia, el código y las pruebas automatizadas son la verdad.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 9: WIDGETS INTERACTIVOS (PETRI Y HU)                  -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap9">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 9</div>
+          <h2 class="chapter-title">Widgets Interactivos: Simulador de Red de Petri y Evaluador INVEST</h2>
+        </div>
+
+        <p>
+          Experimenta de forma interactiva con los dos pilares del modelado dinámico y ágil:
+        </p>
+
+        <!-- WIDGET 1: Simulador de Red de Petri -->
+        <div class="interactive-widget">
+          <div class="widget-header">
+            <h3 class="widget-title">Simulador de Red de Petri: Estación con 3 Surtidores</h3>
+            <span class="widget-badge">Simulación Dinámica</span>
+          </div>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            Presiona los botones para disparar transiciones e inspecciona cómo viajan las marcas y cómo se respeta el límite máximo de 3 surtidores.
+          </p>
+          <div class="widget-results" style="margin-bottom:16px;">
+            <div class="result-box">
+              <span class="result-label">P1: Cola de Espera</span>
+              <span class="result-value" id="petriCola">0 autos</span>
+            </div>
+            <div class="result-box highlight">
+              <span class="result-label">P_surt: Surtidores Libres</span>
+              <span class="result-value" id="petriLibres">3 libres</span>
+            </div>
+            <div class="result-box highlight">
+              <span class="result-label">P3: Cargando Combustible</span>
+              <span class="result-value" id="petriCargando" style="color:var(--accent-ochre);">0 autos</span>
+            </div>
+            <div class="result-box">
+              <span class="result-label">P4: Autos Atendidos</span>
+              <span class="result-value" id="petriAtendidos" style="color:var(--accent-sage);">0 autos</span>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn-theme active" style="flex:1; padding:8px;" onclick="petriArribo()">+ Arribo de Auto (T1)</button>
+            <button class="btn-theme active" style="flex:1; padding:8px; background:var(--accent-ochre); border-color:var(--accent-ochre);" onclick="petriOcupar()">Ocupar Surtidor (T2)</button>
+            <button class="btn-theme active" style="flex:1; padding:8px; background:var(--accent-sage); border-color:var(--accent-sage);" onclick="petriFinalizar()">Fin de Carga (T3)</button>
+            <button class="btn-theme" style="padding:8px 14px;" onclick="petriReset()">Reiniciar</button>
+          </div>
+          <div style="margin-top:12px; font-size:0.84rem; color:var(--text-muted);" id="petriLog">
+            Estado inicial: 3 surtidores listos para operar. No hay autos en cola.
+          </div>
+        </div>
+
+        <!-- WIDGET 2: Validador y Constructor INVEST de Historias de Usuario -->
+        <div class="interactive-widget">
+          <div class="widget-header">
+            <h3 class="widget-title">Auditor y Constructor INVEST de Historias de Usuario</h3>
+            <span class="widget-badge">Auditoría Ágil</span>
+          </div>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            Escribe las 3 cláusulas de tu historia y evalúa instantáneamente el cumplimiento de los principios INVEST y su adecuación al formato Connextra.
+          </p>
+          <div class="widget-controls" style="grid-template-columns:1fr;">
+            <div class="control-group">
+              <label class="control-label">Como [Rol]:</label>
+              <input type="text" id="huRol" class="widget-input" value="Estudiante de ingeniería" oninput="auditUserStory()">
+            </div>
+            <div class="control-group">
+              <label class="control-label">Quiero [Acción]:</label>
+              <input type="text" id="huAccion" class="widget-input" value="descargar el resumen oficial en PDF" oninput="auditUserStory()">
+            </div>
+            <div class="control-group">
+              <label class="control-label">Para [Beneficio]:</label>
+              <input type="text" id="huBeneficio" class="widget-input" value="estudiar sin conexión a internet antes del examen" oninput="auditUserStory()">
+            </div>
+          </div>
+          <div class="widget-results">
+            <div class="result-box highlight">
+              <span class="result-label">Veredicto INVEST</span>
+              <span class="result-value" id="huVeredicto" style="font-size:1.05rem;">Historia Válida y Aceptable</span>
+            </div>
+            <div class="result-box">
+              <span class="result-label">Diagnóstico de Calidad</span>
+              <span class="result-value" id="huDiagnostico" style="font-size:0.88rem; font-family:var(--font-sans); color:var(--text-main);">Cumple con rol específico, acción funcional y beneficio claro de usuario.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 10: TALLER DE EXAMEN Y EJERCICIOS RESUELTOS           -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap10">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 10</div>
+          <h2 class="chapter-title">Taller de Examen: Problemas Teórico-Prácticos Resueltos</h2>
+        </div>
+
+        <p>
+          Batería de problemas de examen parcial y final de Ingeniería de Software (UNLP) resueltos con justificación analítica exhaustiva.
+        </p>
+
+        <!-- Problema 1 -->
+        <div class="box-exercise">
+          <div class="box-exercise-title">Problema de Examen 1: Clasificación y Cuantificación de RNF (FURPS+ / ISO 25010)</div>
+          <p><strong>Enunciado:</strong> Dado el siguiente requerimiento provisto por el cliente de una clínica médica: <em>"El sistema debe responder rápido y ser ultra seguro para que nadie robe los datos de los pacientes"</em>. Explique por qué está mal especificado, clasifíquelo según el modelo FURPS+ y reescríbalo de forma no ambigua y objetivamente verificable.</p>
+          <div class="box-callout box-concept" style="margin-top:14px;">
+            <div class="box-callout-header"><span>Resolución Académica Modelo</span></div>
+            <p>
+              <strong>1. Diagnóstico de Defectos:</strong> El requerimiento viola las propiedades cardinales de <strong>No Ambigüedad</strong> y <strong>Verificabilidad</strong>. Los términos <em>"rápido"</em> y <em>"ultra seguro"</em> son juicios de valor subjetivos imposibles de someter a una prueba objetiva de pasa/no pasa.<br>
+              <strong>2. Clasificación FURPS+:</strong><br>
+              • "Responder rápido": Corresponde a <strong>Performance (Rendimiento)</strong> / Eficiencia de Desempeño (ISO 25010).<br>
+              • "Ultra seguro": Corresponde a <strong>Functionality / Security</strong> (Seguridad de la Información).<br>
+              <strong>3. Reescritura Cuantificada y Verificable:</strong><br>
+              • <em>RNF-P1 (Rendimiento):</em> "El tiempo de respuesta del sistema para la consulta de historias clínicas en pantalla no debe exceder los 800 milisegundos en el percentil 95 (P95), bajo una carga simultánea de 250 usuarios concurrentes en la red local del hospital."<br>
+              • <em>RNF-S1 (Seguridad):</em> "Todos los datos médicos de los pacientes deben almacenarse cifrados en reposo utilizando el algoritmo AES-256, y transmitirse mediante protocolo TLS 1.3 con certificados X.509 validados. El acceso a registros clínicos exige autenticación multifactor (MFA)."
+            </p>
+          </div>
+        </div>
+
+        <!-- Problema 2 -->
+        <div class="box-exercise">
+          <div class="box-exercise-title">Problema de Examen 2: Diferenciación Rigurosa entre &laquo;include&raquo; y &laquo;extend&raquo;</div>
+          <p><strong>Enunciado:</strong> En un diagrama de Casos de Uso para un Cajero Automático, un alumno modeló que el caso de uso "Extraer Dinero" tiene una relación &laquo;extend&raquo; hacia "Imprimir Comprobante Fiscal" y una relación &laquo;extend&raquo; hacia "Validar Clave PIN". Evalúe la corrección técnica del diagrama y fundamente.</p>
+          <div class="box-callout box-concept" style="margin-top:14px;">
+            <div class="box-callout-header"><span>Resolución Académica Modelo</span></div>
+            <p>
+              <strong>1. Evaluación de "Validar Clave PIN":</strong> <strong>INCORRECTO.</strong> La validación del PIN es una condición ineludible y obligatoria para poder dispensar billetes. Un caso de uso nunca puede completarse exitosamente sin validar credenciales. Por ende, la relación debe ser obligatoria: <strong>&laquo;include&raquo;</strong> ("Extraer Dinero" &laquo;include&raquo; "Validar Clave PIN"). Además, "Validar Clave PIN" se reutiliza en "Consultar Saldo" y "Transferir Fondos", cumpliendo a la perfección el propósito del include.<br>
+              <strong>2. Evaluación de "Imprimir Comprobante Fiscal":</strong> <strong>CORRECTO.</strong> La emisión del comprobante es una opción facultativa del usuario ("¿Desea imprimir recibo?"). Si el usuario pulsa "No" o si el cajero no tiene papel, la extracción de dinero concluye con éxito igualmente. Por ende, debe modelarse como una extensión opcional: <strong>&laquo;extend&raquo;</strong> ("Imprimir Comprobante" &laquo;extend&raquo; "Extraer Dinero"), asociando un <em>Punto de Extensión (Extension Point: Tras Dispensar Efectivo)</em> en el caso base.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // 1. Barra de progreso de lectura
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    // 2. Colapsar/Expandir Barra Lateral
+    const appLayout = document.getElementById('appLayout');
+    const btnCollapse = document.getElementById('btnCollapseSidebar');
+    const btnExpand = document.getElementById('btnExpandSidebar');
+
+    function toggleSidebar() {
+      const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+      appLayout.classList.toggle('sidebar-collapsed', isCollapsed);
+      localStorage.setItem('is2_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+    }
+
+    if (btnCollapse) btnCollapse.addEventListener('click', toggleSidebar);
+    if (btnExpand) btnExpand.addEventListener('click', toggleSidebar);
+
+    if (localStorage.getItem('is2_sidebar_collapsed') === 'true') {
+      document.body.classList.add('sidebar-collapsed');
+      appLayout.classList.add('sidebar-collapsed');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+      if (e.key === 'm' || e.key === 'M') toggleSidebar();
+    });
+
+    // 3. Selector de Temas (Paper, Dark, Light)
+    const themeButtons = document.querySelectorAll('.btn-theme');
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-set-theme');
+        document.documentElement.setAttribute('data-theme', theme);
+        themeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        localStorage.setItem('is_theme', theme);
+      });
+    });
+
+    const savedTheme = localStorage.getItem('is_theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      themeButtons.forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-set-theme') === savedTheme);
+      });
+    }
+
+    // 4. Búsqueda en Sidebar
+    const searchInput = document.getElementById('sidebarSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const links = document.querySelectorAll('.sidebar-nav .nav-link');
+        links.forEach(l => {
+          const text = l.textContent.toLowerCase();
+          l.style.display = text.includes(query) ? 'flex' : 'none';
+        });
+      });
+    }
+
+    // 5. Lógica del Widget: Red de Petri
+    let petri_cola = 0;
+    let petri_libres = 3;
+    let petri_cargando = 0;
+    let petri_atendidos = 0;
+
+    function updatePetriUI(msg) {
+      document.getElementById('petriCola').textContent = petri_cola + ' autos';
+      document.getElementById('petriLibres').textContent = petri_libres + ' libres';
+      document.getElementById('petriCargando').textContent = petri_cargando + ' autos';
+      document.getElementById('petriAtendidos').textContent = petri_atendidos + ' autos';
+      if (msg) document.getElementById('petriLog').textContent = msg;
+    }
+
+    function petriArribo() {
+      petri_cola++;
+      updatePetriUI('Transición T1 disparada: Un nuevo vehículo llegó a la cola de espera.');
+    }
+
+    function petriOcupar() {
+      if (petri_cola > 0 && petri_libres > 0) {
+        petri_cola--;
+        petri_libres--;
+        petri_cargando++;
+        updatePetriUI('Transición T2 disparada: Un auto de la cola ocupó 1 surtidor y comenzó a cargar combustible.');
+      } else if (petri_cola === 0) {
+        updatePetriUI('Transición T2 NO habilitada: No hay autos en la cola de espera.');
+      } else {
+        updatePetriUI('Transición T2 NO habilitada: Todos los surtidores (3) están ocupados. El auto debe esperar.');
+      }
+    }
+
+    function petriFinalizar() {
+      if (petri_cargando > 0) {
+        petri_cargando--;
+        petri_libres++;
+        petri_atendidos++;
+        updatePetriUI('Transición T3 disparada: Un auto completó la carga, liberó 1 surtidor al pool y abandonó la estación.');
+      } else {
+        updatePetriUI('Transición T3 NO habilitada: No hay ningún vehículo cargando actualmente.');
+      }
+    }
+
+    function petriReset() {
+      petri_cola = 0;
+      petri_libres = 3;
+      petri_cargando = 0;
+      petri_atendidos = 0;
+      updatePetriUI('Red de Petri reiniciada al marcado inicial M0: 3 surtidores disponibles.');
+    }
+
+    // 6. Lógica del Widget: Auditor INVEST
+    function auditUserStory() {
+      const rol = document.getElementById('huRol').value.trim();
+      const accion = document.getElementById('huAccion').value.trim();
+      const beneficio = document.getElementById('huBeneficio').value.trim();
+
+      let veredicto = "Historia Válida y Aceptable";
+      let diag = "Cumple con rol específico, capacidad requerida y beneficio comercial.";
+      let esValida = true;
+
+      if (!rol || rol.toLowerCase() === "usuario") {
+        veredicto = "Violación de Rol: Antipatrón 'Usuario Genérico'";
+        diag = "Especifique un rol de negocio o actor concreto (ej. 'Docente', 'Alumno', 'Cajero'). Evite 'usuario'.";
+        esValida = false;
+      } else if (!accion || accion.length < 5) {
+        veredicto = "Falta de Acción o Capacidad";
+        diag = "La cláusula 'Quiero' debe expresar una funcionalidad o interacción clara con el sistema.";
+        esValida = false;
+      } else if (!beneficio || beneficio.length < 5) {
+        veredicto = "Violación 'Valuable' (INVEST): Falta Beneficio";
+        diag = "La cláusula 'Para' es obligatoria. Sin beneficio, el Product Owner no puede evaluar el valor de negocio.";
+        esValida = false;
+      }
+
+      const veredictoEl = document.getElementById('huVeredicto');
+      veredictoEl.textContent = veredicto;
+      veredictoEl.style.color = esValida ? "var(--accent-sage)" : "var(--accent-terra)";
+      document.getElementById('huDiagnostico').textContent = diag;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      auditUserStory();
+    });
+    auditUserStory();
+  </script>
+</body>
+</html>
