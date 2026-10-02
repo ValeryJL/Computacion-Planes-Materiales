@@ -1,38 +1,30 @@
 # I110 - Ingeniería de Software
 
-- **Año y Semestre**: Tercer año - Segundo semestre
-- **Estado**: En_curso
-- **Carga horaria**: 9 hs/sem (144 hs totales)
-- **Correlativas**: I108 (Conceptos de Bases de Datos) y I102 (Programación II)
-- **Sitio de Cátedra**: http://blogs.unlp.edu.ar/ingenieriadesoftware/
+Repositorio oficial y materiales interactivos organizados para **Ingeniería de Software (I110)** de la Facultad de Informática.
+
+## 📚 Materiales de Cátedra y Resúmenes Interactivos
+
+### 🌐 Resúmenes Web Interactivos (Diseño Editorial A4 Responsive)
+1. **[Resumen_IS_Teoria_Completa.html](Resumen_IS_Teoria_Completa.html)** (o [Resumen_IS_Modulo1.html](Resumen_IS_Modulo1.html)):
+   - **Alcance**: Las **4 Clases Teóricas Completas** de la materia.
+   - **Contenido**: Fundamentos de ingeniería de software, crisis de 1968, leyes de Lehman, modelos tradicionales (Cascada, V, Espiral, RUP), filosofías ágiles (Scrum, XP, Kanban, MDD), comunicación, Viewpoints, técnicas de elicitación, fundamentos de IR, Curva de Boehm, RNF (FURPS+, ISO 25010), técnicas estáticas (IEEE 830) y dinámicas (DTE, Redes de Petri concurrentes con simulador interactivo de los 3 surtidores, Casos de Uso, Historias de Usuario con INVEST y BDD Gherkin).
+2. **[Resumen_IS_Practica_Emprendimiento.html](Resumen_IS_Practica_Emprendimiento.html)** (o [Resumen_IS_Modulo2.html](Resumen_IS_Modulo2.html)):
+   - **Alcance**: **Presentación de la Cátedra** + **Guías Prácticas 1 a 5** resueltas y ampliadas paso a paso sobre un **Emprendimiento Tecnológico Ficticio**.
+   - **Caso de Estudio**: *AgroSense IoT & Cloud Platform* (agricultura de precisión, microcontroladores ESP32, red LoRaWAN y plataforma web en el cordón hortícola bonaerense).
+   - **Contenido**: Pautas oficiales, grupos, consultas de 40 min, parcial reducido vs completo, entrevistas con guion y template Moodle (Guía 1), cuestionario Google Forms, mapa perceptual de posicionamiento y competidores con gráfica SVG (Guía 5), desglose de Iniciativa en 4 Épicas (Guía 3), catálogo de RNF cuantificados bajo template oficial (Guía 2), Historias de Usuario con INVEST, Planning Poker y BDD Gherkin (Guía 4), diagramas complementarios (Casos de Uso y DTE), generador interactivo de texto para Moodle y tablero de Planning Poker.
 
 ---
 
-## 📚 Materiales de Estudio y Resúmenes Interactivos
-
-### 🌐 Resúmenes Web Interactivos (Guías Editoriales A4)
-1. **[Resumen_IS_Modulo1.html](Resumen_IS_Modulo1.html)**:
-   - **Alcance**: Clases Teóricas 1 y 2 + Guías Prácticas de Elicitación y Análisis de Competencia.
-   - **Temas**: Fundamentos de la Ingeniería de Software, crisis del software (Garmisch 1968), Leyes de Lehman, código de ética ACM/IEEE, modelos de procesos tradicionales (Cascada, Modelo en V, Prototipos, Incremental, Espiral de Boehm, RUP), filosofías ágiles (Manifiesto Ágil, Scrum a fondo, XP, Kanban, MDD/MDA), barreras comunicacionales, técnicas completas de elicitación (entrevistas, encuestas, observación, JRP/JAD, brainstorming) y mapas perceptuales de competencia.
-   - **Interactividad**: Asesor de selección metodológica, simulador de capacidad y sprint Scrum, selector de temas (Papel, Oscuro, Claro) y soporte para impresión en PDF A4.
-
-2. **[Resumen_IS_Modulo2.html](Resumen_IS_Modulo2.html)**:
-   - **Alcance**: Clases Teóricas 3 y 4 + Guías Prácticas de RNF, Iniciativas, Épicas e Historias de Usuario.
-   - **Temas**: Proceso de Ingeniería de Requerimientos, Curva de Boehm del costo de defectos, Requerimientos Funcionales (RF) vs Requerimientos No Funcionales (RNF: FURPS+, ISO/IEC 25010 y métricas), descomposición jerárquica (Objetivos $\rightarrow$ Iniciativas $\rightarrow$ Épicas $\rightarrow$ Historias/Casos de Uso), técnicas estáticas (tablas y árboles de decisión, estándar SRS IEEE 830), técnicas dinámicas (Diagramas de Transición de Estados / DTE, Redes de Petri concurrentes con resolución del ejercicio de los 3 surtidores de cátedra, Casos de Uso UML con escenarios textuales completos) e Historias de Usuario bajo el marco INVEST, regla de las 3C, slicing vertical y criterios de aceptación BDD Gherkin.
-   - **Interactividad**: Simulador visual de Red de Petri (3 surtidores concurrentes), auditor interactivo de Historias de Usuario INVEST y BDD.
-
----
-
-### 📑 Diapositivas Oficiales de Teoría
+### 📄 Clases Teóricas Oficiales (PDFs)
 - `Clase_1_Introduccion_Modelos_Procesos.pdf`
 - `Clase_2_Tecnicas_de_Comunicacion.pdf`
 - `Clase_3_Ingenieria_de_Requerimientos.pdf`
 - `Clase_4_Especificacion_de_Requerimientos.pdf`
 
-### 📝 Guías Prácticas de Cátedra
+### 🛠️ Guías Prácticas Oficiales y Cátedra (PDFs)
+- `Presentacion_Practica_Materia.pdf`
 - `Guia_1_Tecnicas_de_Elicitacion.pdf`
 - `Guia_2_Requerimientos_No_Funcionales.pdf`
 - `Guia_3_Iniciativas_y_Epicas.pdf`
 - `Guia_4_Historias_de_Usuario.pdf`
 - `Guia_5_Analisis_de_Competencia.pdf`
-- `Presentacion_Practica_Materia.pdf`

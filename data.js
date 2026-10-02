@@ -1019,18 +1019,18 @@ window.ACADEMIC_DATA = {
       "folder_rel": "materias/I110_Ingenieria_de_Software",
       "materials": [
         {
-          "title": "Resumen Ingeniería de Software - Módulo 1 (Teorías 1 y 2)",
-          "filename": "Resumen_IS_Modulo1.html",
-          "path": "materias/I110_Ingenieria_de_Software/Resumen_IS_Modulo1.html",
+          "title": "Resumen Teórico Completo (Clases 1 a 4)",
+          "filename": "Resumen_IS_Teoria_Completa.html",
+          "path": "materias/I110_Ingenieria_de_Software/Resumen_IS_Teoria_Completa.html",
           "type": "html",
           "category": "resumenes",
           "badge": "HTML Interactivo",
           "desc": "Fundamentos del software, crisis del software, modelos de procesos tradicionales (Cascada, V, Espiral, RUP), filosofías ágiles (Scrum, XP, Kanban, MDD), comunicación, técnicas de elicitación y análisis de competencia."
         },
         {
-          "title": "Resumen Ingeniería de Software - Módulo 2 (Teorías 3 y 4)",
-          "filename": "Resumen_IS_Modulo2.html",
-          "path": "materias/I110_Ingenieria_de_Software/Resumen_IS_Modulo2.html",
+          "title": "Resumen Práctico Integral y Emprendimiento (Guías 1 a 5)",
+          "filename": "Resumen_IS_Practica_Emprendimiento.html",
+          "path": "materias/I110_Ingenieria_de_Software/Resumen_IS_Practica_Emprendimiento.html",
           "type": "html",
           "category": "resumenes",
           "badge": "HTML Interactivo",
