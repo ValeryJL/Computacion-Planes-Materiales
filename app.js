@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const optOverride = overrides[activeOptCode] || overrides[m.code] || {};
           const status = optOverride.status || 'pendiente';
           const grade = optOverride.grade;
-          const failed = !!optOverride.has_failed;
+          const optHasFailed = !!optOverride.has_failed;
 
           if (status === 'aprobada') {
             approved++;
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             pending++;
           }
-          if (failed) failed++;
+          if (optHasFailed) failed++;
           return;
         }
       }
@@ -508,14 +508,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let toastTimer = null;
-  function showToast(msg) {
+  function showToast(msg, duration = 2400) {
     if (!toastNotice) return;
     toastNotice.textContent = msg;
     toastNotice.classList.add('show');
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toastNotice.classList.remove('show');
-    }, 2400);
+    }, duration);
   }
 
   function flashSavedIndicator() {
@@ -841,6 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hideMobilePill();
             openDrawer(effectiveDrawerCode);
           } else {
+            clearFullChain();
             mobileActiveCode = code;
             highlightFullChain(code, node);
             showMobilePill(code, effectiveDrawerCode);
@@ -890,12 +891,13 @@ document.addEventListener('DOMContentLoaded', () => {
       activeAnimationId = null;
     }
 
-    // If state filter was active, clear filter highlight classes so the path takes clear focus
-    if (activeStateFilter) {
-      document.querySelectorAll('.subject-node').forEach(node => {
+    // Always clear previous path classes from all nodes before applying new highlights
+    document.querySelectorAll('.subject-node').forEach(node => {
+      node.classList.remove('is-hovered', 'is-ancestor', 'is-descendant');
+      if (activeStateFilter) {
         node.classList.remove('is-filter-highlighted', 'is-filter-dimmed');
-      });
-    }
+      }
+    });
 
     matrixContainer.classList.add('has-active-path');
     hoveredNode.classList.add('is-hovered');
@@ -1880,6 +1882,8 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('Notas, optativas y estado exportados como JSON');
   };
 
+
+
   function importAcademicData(parsed) {
     if (!parsed) return;
 
@@ -1998,9 +2002,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSideExportNotes = document.getElementById('btnSideExportNotes');
   const inputImportNotes = document.getElementById('inputImportNotes');
   const inputSideImportNotes = document.getElementById('inputSideImportNotes');
+  const inputImportGuarani = document.getElementById('inputImportGuarani');
+  const inputSideImportGuarani = document.getElementById('inputSideImportGuarani');
   const drawerExportBtn = document.getElementById('drawerExportBtn');
   const btnSideResetNotes = document.getElementById('btnSideResetNotes');
   const btnResetNotes = document.getElementById('btnResetNotes');
+
+
 
   if (btnExportNotes) {
     btnExportNotes.addEventListener('click', () => window.exportAcademicStatus());
@@ -2022,30 +2030,619 @@ document.addEventListener('DOMContentLoaded', () => {
     btnResetNotes.addEventListener('click', () => window.resetAcademicStatus());
   }
 
-  function wireJsonImport(inputElement) {
-    if (!inputElement) return;
-    inputElement.addEventListener('change', (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const parsed = JSON.parse(event.target.result);
-          importAcademicData(parsed);
-        } catch (err) {
-          console.error(err);
-          alert('Error al leer el archivo JSON. Verifica que sea un JSON válido.');
-        } finally {
-          inputElement.value = '';
-        }
-      };
-      reader.readAsText(file);
+  // Registro del Service Worker para PWA y soporte offline
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then((reg) => {
+          console.log('[PWA] Service Worker registrado:', reg.scope);
+        })
+        .catch((err) => {
+          console.warn('[PWA] Fallo de registro de Service Worker:', err);
+        });
     });
   }
 
-  wireJsonImport(inputImportNotes);
-  wireJsonImport(inputSideImportNotes);
+  // =========================================================================
+  // IMPORTACIÓN DE HISTORIA ACADÉMICA (PDF, XLS, XLSX, CSV, TSV, JSON)
+  // =========================================================================
+
+  function loadExternalScript(url) {
+    return new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${url}"]`)) {
+        resolve();
+        return;
+      }
+      const s = document.createElement('script');
+      s.src = url;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error(`No se pudo cargar la librería externa: ${url}`));
+      document.head.appendChild(s);
+    });
+  }
+
+  function parseAcademicDate(dStr) {
+    if (!dStr) return 0;
+    const parts = String(dStr).trim().split(/[\/\-]/);
+    if (parts.length === 3) {
+      const d = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const y = parseInt(parts[2], 10);
+      return new Date(y, m, d).getTime();
+    }
+    return 0;
+  }
+
+  function normalizeName(str) {
+    if (!str) return '';
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function extractGuaraniSubjectCode(actividad) {
+    if (!actividad) return '';
+    const match = actividad.match(/\(([^)]+)\)$/);
+    if (match) return match[1].trim().toUpperCase();
+
+    // Fallback search by normalized name
+    const norm = normalizeName(actividad);
+    if (norm.includes('curso de ingreso de ingenieria') || norm.includes('ingreso ingenieria') || norm.includes('mate pi')) {
+      return 'CUNI1';
+    }
+    if (norm.includes('curso de ingreso informatica') || norm.includes('ingreso informatica') || norm.includes('introduccion a la informatica') || norm.includes('iai')) {
+      return 'CUNI2';
+    }
+    if (norm.includes('suficiencia de ingles') || norm.includes('prueba de suficiencia')) {
+      return 'INFIN';
+    }
+
+    const allMaterias = [
+      ...(PLANS['2011']?.materias || []),
+      ...(PLANS['2024']?.materias || [])
+    ];
+    for (const m of allMaterias) {
+      if (m.name && normalizeName(m.name) === norm) return m.code;
+      if (m.short_name && normalizeName(m.short_name) === norm) return m.code;
+    }
+
+    if (window.OPTATIVAS_CATALOG) {
+      for (const opt of window.OPTATIVAS_CATALOG) {
+        if (opt.name && normalizeName(opt.name) === norm) return opt.code_2011 || opt.code_2024;
+      }
+    }
+
+    return '';
+  }
+
+  function parseGuaraniDelimitedText(text) {
+    const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    if (lines.length === 0) return [];
+
+    const sample = lines.slice(0, 15).join('\n');
+    const commaCount = (sample.match(/,/g) || []).length;
+    const semiCount = (sample.match(/;/g) || []).length;
+    const tabCount = (sample.match(/\t/g) || []).length;
+
+    let delim = ',';
+    if (semiCount > commaCount && semiCount > tabCount) delim = ';';
+    else if (tabCount > commaCount && tabCount > semiCount) delim = '\t';
+
+    return lines.map(line => {
+      const row = [];
+      let inQuotes = false;
+      let current = '';
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"' || char === "'") {
+          inQuotes = !inQuotes;
+        } else if (char === delim && !inQuotes) {
+          row.push(current.trim());
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      row.push(current.trim());
+      return row;
+    });
+  }
+
+  function parseGuaraniHtmlTable(htmlText) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlText, 'text/html');
+    const rows = [];
+    const trs = doc.querySelectorAll('tr');
+    trs.forEach(tr => {
+      const cells = Array.from(tr.querySelectorAll('td, th')).map(c => c.textContent.trim());
+      if (cells.length > 0) rows.push(cells);
+    });
+    return rows;
+  }
+
+  function parseGuaraniLineText(line) {
+    const dateMatch = line.match(/\b(\d{2}\/\d{2}\/\d{4})\b/);
+    if (!dateMatch) return null;
+
+    const dateIdx = dateMatch.index;
+    const fecha = dateMatch[1];
+    const actividad = line.substring(0, dateIdx).trim();
+    const remainder = line.substring(dateIdx + fecha.length).trim();
+
+    const code = extractGuaraniSubjectCode(actividad);
+    if (!code) return null;
+
+    let tipo = '';
+    let nota = null;
+    let resultado = '';
+
+    if (/en\s+curso/i.test(remainder)) {
+      tipo = 'En curso';
+      resultado = 'En curso';
+    } else {
+      const gradeMatch = remainder.match(/\b([1-9]|10)(\.\d+)?\b/);
+      if (gradeMatch) {
+        nota = parseFloat(gradeMatch[0]);
+      }
+
+      const tipoMatch = remainder.match(/\b(Regularidad|Examen|Promoci[oó]n|Coloquio|Equivalencia|Resoluci[oó]n)\b/i);
+      if (tipoMatch) {
+        tipo = tipoMatch[1];
+      }
+
+      const resMatch = remainder.match(/\b(Aprobado|Aprobada|Promocionado|Promocionada|Reprobado|Reprobada|Ausente|Desaprobado|Desaprobada)\b/i);
+      if (resMatch) {
+        resultado = resMatch[1];
+      }
+    }
+
+    return {
+      actividad,
+      code,
+      fecha,
+      time: parseAcademicDate(fecha),
+      tipo,
+      nota,
+      resultado
+    };
+  }
+
+  function processGuaraniRows(rows) {
+    let headerIdx = -1;
+    let colAct = 0, colFecha = 1, colTipo = 2, colNota = 3, colRes = 4;
+
+    for (let i = 0; i < Math.min(rows.length, 15); i++) {
+      const r = rows[i].map(c => String(c).toLowerCase());
+      const actIdx = r.findIndex(c => c.includes('actividad') || c.includes('materia') || c.includes('asignatura'));
+      const fechaIdx = r.findIndex(c => c.includes('fecha'));
+      if (actIdx !== -1 && fechaIdx !== -1) {
+        headerIdx = i;
+        colAct = actIdx;
+        colFecha = fechaIdx;
+        const tipoIdx = r.findIndex(c => c.includes('tipo'));
+        if (tipoIdx !== -1) colTipo = tipoIdx;
+        const notaIdx = r.findIndex(c => c.includes('nota'));
+        if (notaIdx !== -1) colNota = notaIdx;
+        const resIdx = r.findIndex(c => c.includes('resultado'));
+        if (resIdx !== -1) colRes = resIdx;
+        break;
+      }
+    }
+
+    const startRow = headerIdx !== -1 ? headerIdx + 1 : 0;
+    const records = [];
+
+    for (let i = startRow; i < rows.length; i++) {
+      const row = rows[i];
+      if (!row || row.length < 2) continue;
+
+      const actividad = String(row[colAct] || '').trim();
+      const fecha = String(row[colFecha] || '').trim();
+      const tipo = String(row[colTipo] || '').trim();
+      const notaRaw = String(row[colNota] || '').trim();
+      const resultado = String(row[colRes] || '').trim();
+
+      if (!actividad || !fecha) continue;
+      if (actividad.toLowerCase().startsWith('actividad')) continue;
+
+      const code = extractGuaraniSubjectCode(actividad);
+      if (!code) continue;
+
+      const nota = notaRaw ? parseFloat(notaRaw.replace(',', '.')) : null;
+
+      records.push({
+        actividad,
+        code,
+        fecha,
+        time: parseAcademicDate(fecha),
+        tipo,
+        nota: (nota !== null && !isNaN(nota)) ? nota : null,
+        resultado
+      });
+    }
+
+    return records;
+  }
+
+  async function parseGuaraniPdf(file) {
+    if (!window.pdfjsLib) {
+      await loadExternalScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+    }
+    if (!window.pdfjsLib) {
+      throw new Error('No se pudo inicializar la librería PDF.js.');
+    }
+
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const arrayBuffer = await file.arrayBuffer();
+    const loadingTask = window.pdfjsLib.getDocument({ data: arrayBuffer });
+    const pdf = await loadingTask.promise;
+
+    const allRecords = [];
+
+    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+      const page = await pdf.getPage(pageNum);
+      const textContent = await page.getTextContent();
+      const items = textContent.items.filter(item => item.str && item.str.trim().length > 0);
+
+      const lineBuckets = [];
+      for (const item of items) {
+        const y = item.transform ? item.transform[5] : 0;
+        const x = item.transform ? item.transform[4] : 0;
+        let bucket = lineBuckets.find(b => Math.abs(b.y - y) <= 4);
+        if (!bucket) {
+          bucket = { y, items: [] };
+          lineBuckets.push(bucket);
+        }
+        bucket.items.push({ x, str: item.str });
+      }
+
+      lineBuckets.sort((a, b) => b.y - a.y);
+
+      for (const bucket of lineBuckets) {
+        bucket.items.sort((a, b) => a.x - b.x);
+        const lineStr = bucket.items.map(it => it.str).join(' ').replace(/\s+/g, ' ').trim();
+        const record = parseGuaraniLineText(lineStr);
+        if (record) allRecords.push(record);
+      }
+    }
+
+    return allRecords;
+  }
+
+  async function parseGuaraniSpreadsheet(file) {
+    // 1. First test if it's text-based (CSV, TSV, or HTML table with .xls extension)
+    const text = await file.text();
+    const trimmed = text.trim();
+
+    if (trimmed.startsWith('<') && (trimmed.includes('<table') || trimmed.includes('<tr'))) {
+      const rows = parseGuaraniHtmlTable(trimmed);
+      return processGuaraniRows(rows);
+    }
+
+    if (trimmed.includes('Actividad') || trimmed.includes('actividad') || trimmed.includes('Propuesta')) {
+      const rows = parseGuaraniDelimitedText(trimmed);
+      const records = processGuaraniRows(rows);
+      if (records.length > 0) return records;
+    }
+
+    // 2. Binary Excel (XLS / XLSX) via SheetJS
+    if (!window.XLSX) {
+      await loadExternalScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');
+    }
+    if (window.XLSX) {
+      const buffer = await file.arrayBuffer();
+      const workbook = window.XLSX.read(buffer, { type: 'array' });
+      const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+      const rows = window.XLSX.utils.sheet_to_json(firstSheet, { header: 1, defval: '' });
+      return processGuaraniRows(rows);
+    }
+
+    throw new Error('No se pudo procesar el archivo Excel. Verifica el formato.');
+  }
+
+  function applyAcademicHistoryRecords(records) {
+    if (!records || records.length === 0) {
+      alert('No se encontraron registros de historia académica válidos en el archivo.');
+      return;
+    }
+
+    // Group records by subject code
+    const grouped = {};
+    for (const r of records) {
+      if (!grouped[r.code]) grouped[r.code] = [];
+      grouped[r.code].push(r);
+    }
+
+    const evaluated = {};
+    for (const code of Object.keys(grouped)) {
+      const entries = grouped[code].sort((a, b) => a.time - b.time);
+
+      let isApproved = false;
+      let finalGrade = null;
+      let isEnCurso = false;
+      let cursadaAprobada = false;
+      let hasFailed = false;
+
+      for (const e of entries) {
+        const t = (e.tipo || '').toLowerCase();
+        const res = (e.resultado || '').toLowerCase();
+
+        if (t === 'en curso' || res === 'en curso') {
+          isEnCurso = true;
+        }
+
+        if (res === 'aprobado' || res === 'aprobada' || res === 'promocionado' || res === 'promocionada') {
+          if (t === 'promocion' || t === 'promoción' || t === 'examen' || t === 'coloquio' || t === 'equivalencia' || t === 'resolucion' || t === 'resolución' || res.startsWith('promocion')) {
+            isApproved = true;
+            if (e.nota !== null && !isNaN(e.nota)) {
+              finalGrade = e.nota;
+            }
+          } else if (t === 'regularidad') {
+            cursadaAprobada = true;
+            if (e.nota !== null && !isNaN(e.nota) && finalGrade === null) {
+              finalGrade = e.nota;
+            }
+          }
+        } else if (res === 'reprobado' || res === 'reprobada' || res === 'desaprobado' || res === 'desaprobada') {
+          if (!isApproved) {
+            hasFailed = true;
+            cursadaAprobada = false;
+          }
+        }
+      }
+
+      // Check last entry status
+      const lastEntry = entries[entries.length - 1];
+      const lastT = (lastEntry.tipo || '').toLowerCase();
+      const lastRes = (lastEntry.resultado || '').toLowerCase();
+
+      let status = 'pendiente';
+      let grade = null;
+      let finalHasFailed = false;
+
+      if (isApproved) {
+        status = 'aprobada';
+        grade = finalGrade;
+        finalHasFailed = false;
+      } else if (lastT === 'en curso' || lastRes === 'en curso') {
+        status = 'en_curso';
+        grade = null;
+        finalHasFailed = false;
+      } else if (cursadaAprobada) {
+        status = 'cursada_aprobada';
+        grade = null;
+        finalHasFailed = false;
+      } else if (lastRes === 'reprobado' || lastRes === 'desaprobada' || lastRes === 'desaprobado') {
+        status = 'pendiente';
+        grade = null;
+        finalHasFailed = true;
+      } else {
+        status = 'pendiente';
+        grade = null;
+        finalHasFailed = hasFailed;
+      }
+
+      evaluated[code] = { status, grade, has_failed: finalHasFailed };
+    }
+
+    // Persist all evaluated codes to localStorage overrides
+    const newOverrides = getStoredOverrides();
+
+    const saveSubjectToOverrides = (code, info) => {
+      newOverrides[code] = {
+        status: info.status,
+        grade: info.grade,
+        has_failed: info.has_failed
+      };
+    };
+
+    for (const [code, info] of Object.entries(evaluated)) {
+      saveSubjectToOverrides(code, info);
+
+      // Ingreso mappings (CUNI1 / CUNI2)
+      if (code === 'CUNI1' || code === 'MATE-PI' || code === 'D1001') {
+        saveSubjectToOverrides('CUNI1', info);
+        saveSubjectToOverrides('MATE-PI', info);
+        saveSubjectToOverrides('D1001', info);
+      } else if (code === 'CUNI2' || code === 'IAI' || code === 'I1001') {
+        saveSubjectToOverrides('CUNI2', info);
+        saveSubjectToOverrides('IAI', info);
+        saveSubjectToOverrides('I1001', info);
+      }
+
+      // Standard Plan Equivalences
+      const equiv = PLAN_EQUIVALENCES[code];
+      if (equiv) {
+        saveSubjectToOverrides(equiv, info);
+      }
+    }
+
+    // Special Handling for merged Probabilidades y Estadística (F1315 vs F0307 + F0312)
+    const est = evaluated['F0307'];
+    const prob = evaluated['F0312'];
+    if (est || prob) {
+      let f1315Status = 'pendiente';
+      let f1315Grade = null;
+      let f1315Failed = false;
+
+      if (est?.status === 'aprobada' && prob?.status === 'aprobada') {
+        f1315Status = 'aprobada';
+        f1315Grade = (est.grade && prob.grade) ? Math.round(((est.grade + prob.grade) / 2) * 10) / 10 : (est.grade || prob.grade);
+      } else if (est?.status === 'aprobada' || prob?.status === 'aprobada') {
+        if (est?.status === 'en_curso' || prob?.status === 'en_curso') f1315Status = 'en_curso';
+        else f1315Status = 'cursada_aprobada';
+      } else if (est?.status === 'en_curso' || prob?.status === 'en_curso') {
+        f1315Status = 'en_curso';
+      } else if (est?.status === 'cursada_aprobada' || prob?.status === 'cursada_aprobada') {
+        f1315Status = 'cursada_aprobada';
+      } else if (est?.has_failed || prob?.has_failed) {
+        f1315Failed = true;
+      }
+
+      saveSubjectToOverrides('F1315', { status: f1315Status, grade: f1315Grade, has_failed: f1315Failed });
+    }
+
+    // Optativas handling: Assign to available optativa slot if matched
+    if (window.OPTATIVAS_CATALOG) {
+      const selections = getSelectedOptativas();
+      for (const [code, info] of Object.entries(evaluated)) {
+        const opt = window.OPTATIVAS_CATALOG.find(item => item.code_2011 === code || item.code_2024 === code);
+        if (opt) {
+          saveSubjectToOverrides(opt.code_2011, info);
+          saveSubjectToOverrides(opt.code_2024, info);
+
+          // If not assigned to current plan slots, assign to first free slot
+          ['2011', '2024'].forEach(pKey => {
+            const planSlots = PLANS[pKey]?.materias?.filter(m => m.is_optativa_slot) || [];
+            const isAssigned = Object.values(selections[pKey] || {}).includes(opt.code_2011) || Object.values(selections[pKey] || {}).includes(opt.code_2024);
+            if (!isAssigned) {
+              const freeSlot = planSlots.find(slot => !selections[pKey][slot.code]);
+              if (freeSlot) {
+                selections[pKey][freeSlot.code] = (pKey === '2024' ? opt.code_2024 : opt.code_2011) || opt.code_2011;
+              }
+            }
+          });
+        }
+      }
+      saveSelectedOptativas(selections);
+    }
+
+    // Sync in-memory objects of all plans (so switching plans immediately shows updated data)
+    ['2011', '2024'].forEach(pKey => {
+      const pData = PLANS[pKey];
+      if (pData && pData.materias) {
+        pData.materias.forEach(m => {
+          if (!m.code) return;
+          const o = newOverrides[m.code] || (PLAN_EQUIVALENCES[m.code] ? newOverrides[PLAN_EQUIVALENCES[m.code]] : null);
+          if (o) {
+            if (o.status !== undefined) m.status = o.status;
+            if (o.grade !== undefined) m.grade = o.grade;
+            if (o.has_failed !== undefined) m.has_failed = o.has_failed;
+          }
+        });
+      }
+    });
+
+    saveStoredOverrides(newOverrides);
+    applyStoredOverrides();
+    renderMatrix();
+    recalculateStats();
+
+    if (currentDrawerCode) {
+      openDrawer(currentDrawerCode);
+    }
+
+    let cApproved = 0, cEnCurso = 0, cCursada = 0, cRecursa = 0, cPendiente = 0;
+    for (const val of Object.values(evaluated)) {
+      if (val.status === 'aprobada') cApproved++;
+      else if (val.status === 'en_curso') cEnCurso++;
+      else if (val.status === 'cursada_aprobada') cCursada++;
+      else if (val.has_failed) cRecursa++;
+      else cPendiente++;
+    }
+
+    const summaryMsg = `📋 Historia Académica actualizada: ${cApproved} aprobadas, ${cEnCurso} en curso, ${cCursada} cursadas, ${cRecursa} recursa (${Object.keys(evaluated).length} materias procesadas)`;
+    showToast(summaryMsg, 6000);
+  }
+
+  async function handleAcademicFileImport(file) {
+    if (!file) return;
+    const name = file.name.toLowerCase();
+
+    if (name.endsWith('.json') || file.type === 'application/json') {
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      importAcademicData(parsed);
+      return;
+    }
+
+    if (name.endsWith('.pdf') || file.type === 'application/pdf') {
+      const records = await parseGuaraniPdf(file);
+      applyAcademicHistoryRecords(records);
+      return;
+    }
+
+    if (name.endsWith('.xls') || name.endsWith('.xlsx')) {
+      const records = await parseGuaraniSpreadsheet(file);
+      applyAcademicHistoryRecords(records);
+      return;
+    }
+
+    if (name.endsWith('.csv') || name.endsWith('.tsv') || name.endsWith('.txt') || (file.type && file.type.includes('text'))) {
+      const text = await file.text();
+      const rows = parseGuaraniDelimitedText(text);
+      const records = processGuaraniRows(rows);
+      applyAcademicHistoryRecords(records);
+      return;
+    }
+
+    // Default fallback: try reading as delimited text or JSON
+    const text = await file.text();
+    try {
+      const parsed = JSON.parse(text);
+      importAcademicData(parsed);
+      return;
+    } catch (e) {
+      const rows = parseGuaraniDelimitedText(text);
+      const records = processGuaraniRows(rows);
+      if (records.length > 0) {
+        applyAcademicHistoryRecords(records);
+        return;
+      }
+    }
+
+    throw new Error('Formato de archivo no soportado. Sube un archivo PDF, XLS, XLSX, CSV o JSON de Historia Académica.');
+  }
+
+  window.importAcademicFile = handleAcademicFileImport;
+  window.applyAcademicHistoryRecords = applyAcademicHistoryRecords;
+
+  function wireAcademicImport(inputElement) {
+    if (!inputElement) return;
+    inputElement.addEventListener('change', async (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      try {
+        showToast(`Cargando archivo ${file.name}...`, 2500);
+        await handleAcademicFileImport(file);
+      } catch (err) {
+        console.error('Error al procesar el archivo académico:', err);
+        alert('Error al procesar el archivo: ' + (err.message || 'Formato no reconocido.'));
+      } finally {
+        inputElement.value = '';
+      }
+    });
+  }
+
+  wireAcademicImport(inputImportNotes);
+  wireAcademicImport(inputSideImportNotes);
+  wireAcademicImport(inputImportGuarani);
+  wireAcademicImport(inputSideImportGuarani);
+
+  // Global Drag & Drop Support for Academic Files
+  window.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
+
+  window.addEventListener('drop', async (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file) {
+      try {
+        showToast(`Cargando archivo ${file.name}...`, 2500);
+        await handleAcademicFileImport(file);
+      } catch (err) {
+        console.error('Error al procesar el archivo arrastrado:', err);
+        alert('Error al procesar el archivo: ' + (err.message || 'Formato no reconocido.'));
+      }
+    }
+  });
 
   // Side Menu Drawer Elements & Event Wiring
   const sideMenuDrawer = document.getElementById('sideMenuDrawer');

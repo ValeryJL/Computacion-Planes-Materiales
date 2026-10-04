@@ -268,10 +268,11 @@ body {
 .hud-telemetry {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-family: 'JetBrains Mono', monospace;
   flex-shrink: 0;
   white-space: nowrap;
+  margin-left: auto;
 }
 
 .hud-item {
@@ -319,10 +320,10 @@ body {
 .hud-legend {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   font-size: 0.68rem;
   font-family: 'JetBrains Mono', monospace;
-  padding-left: 10px;
+  padding-left: 8px;
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   white-space: nowrap;
   flex-shrink: 0;
@@ -444,8 +445,8 @@ body {
 .hud-actions {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding-left: 10px;
+  gap: 3px;
+  padding-left: 8px;
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
 }
@@ -453,13 +454,13 @@ body {
 .hud-action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   cursor: pointer;
-  padding: 3px 7px;
+  padding: 3px 5px;
   border-radius: 5px;
   user-select: none;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.66rem;
+  font-size: 0.63rem;
   font-weight: 700;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.14);
@@ -2871,10 +2872,10 @@ dialog.side-menu-drawer::backdrop {
 }
 
 /* ==========================================================================
-   ADAPTIVE RESPONSIVENESS: Laptops, Split-Screen & Non-Full-Screen Windows (WIDTH < 1250px)
+   ADAPTIVE RESPONSIVENESS: Laptops, Split-Screen & Non-Full-Screen Windows (WIDTH < 1400px)
    ========================================================================== */
 
-@media (max-width: 1250px) {
+@media (max-width: 1400px) {
   .map-viewport {
     overflow-x: auto !important;
     overflow-y: auto !important;
@@ -2936,7 +2937,7 @@ dialog.side-menu-drawer::backdrop {
     min-height: 100%;
   }
 
-  /* Clean Single-Row Header for Laptops & Split-Screen Windows (<= 1250px) */
+  /* Clean Single-Row Header for Laptops & Split-Screen Windows (<= 1400px) */
   .canvas-header {
     height: var(--header-height) !important;
     min-height: var(--header-height) !important;
@@ -2958,6 +2959,7 @@ dialog.side-menu-drawer::backdrop {
   /* Show hamburger menu toggle button */
   .nav-menu-toggle {
     display: inline-flex !important;
+    flex-shrink: 0 !important;
   }
 
   .brand-group {
@@ -2974,6 +2976,7 @@ dialog.side-menu-drawer::backdrop {
     gap: 8px !important;
     overflow: visible !important;
     flex: 0 0 auto !important;
+    margin-left: auto !important;
   }
 
   .hud-item {

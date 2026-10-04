@@ -22,7 +22,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=16">
+  <!-- PWA Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="stylesheet" href="styles.css?v=17">
 </head>
 <body>
   <!-- Blueprint Grid Pattern -->
@@ -91,11 +94,15 @@
         <!-- Data Sync Actions: Import / Export / Reset Notes -->
         <div class="hud-actions" role="group" aria-label="Gestión de notas y respaldo">
           <button type="button" class="hud-action-btn" id="btnExportNotes" title="Exportar notas y estados a un archivo JSON">
-            <span class="hud-action-icon">⬇</span> Exportar
+            <span class="hud-action-icon">⬇</span> JSON
           </button>
-          <label class="hud-action-btn" id="btnImportNotesLabel" title="Importar notas y estados desde un archivo JSON">
-            <span class="hud-action-icon">⬆</span> Importar
-            <input type="file" id="inputImportNotes" accept=".json,application/json" style="display: none;">
+          <label class="hud-action-btn" id="btnImportNotesLabel" title="Importar notas y estados desde JSON o Guaraní">
+            <span class="hud-action-icon">⬆</span> Cargar
+            <input type="file" id="inputImportNotes" accept=".json,application/json,.pdf,.xls,.xlsx,.csv,.tsv,.txt" style="display: none;">
+          </label>
+          <label class="hud-action-btn" id="btnImportGuaraniLabel" title="Cargar historia académica de Guaraní (PDF, XLS, CSV)">
+            <span class="hud-action-icon">📋</span> Guaraní
+            <input type="file" id="inputImportGuarani" accept=".pdf,.xls,.xlsx,.csv,.tsv,.txt" style="display: none;">
           </label>
           <button type="button" class="hud-action-btn hud-action-btn-danger" id="btnResetNotes" title="Borrar y restablecer notas y optativas a valores iniciales">
             <span class="hud-action-icon">↺</span> Borrar
@@ -368,16 +375,21 @@
 
       <!-- Section: Backup & Restore -->
       <div class="side-menu-section">
-        <h3 class="side-menu-section-title">Respaldo y Datos</h3>
+        <h3 class="side-menu-section-title">Respaldo de Notas</h3>
         <div class="side-actions-group">
           <button type="button" class="side-action-btn" id="btnSideExportNotes">
             <span class="side-action-icon">⬇</span>
             <span>Exportar notas (JSON)</span>
           </button>
+          <label class="side-action-btn" id="btnSideImportGuaraniLabel">
+            <span class="side-action-icon">📋</span>
+            <span>Cargar Guaraní (PDF / XLS / CSV)</span>
+            <input type="file" id="inputSideImportGuarani" accept=".pdf,.xls,.xlsx,.csv,.tsv,.txt" style="display: none;">
+          </label>
           <label class="side-action-btn" id="btnSideImportNotesLabel">
             <span class="side-action-icon">⬆</span>
-            <span>Importar notas (JSON)</span>
-            <input type="file" id="inputSideImportNotes" accept=".json,application/json" style="display: none;">
+            <span>Importar datos (JSON / Guaraní)</span>
+            <input type="file" id="inputSideImportNotes" accept=".json,application/json,.pdf,.xls,.xlsx,.csv,.tsv,.txt" style="display: none;">
           </label>
           <button type="button" class="side-action-btn side-btn-danger" id="btnSideResetNotes">
             <span class="side-action-icon">↺</span>
@@ -411,10 +423,14 @@
   <!-- Toast Notice -->
   <div id="toastNotice" class="toast-notice" aria-live="polite"></div>
 
+  <!-- External Parsers for SIU Guaraní Academic History (PDF & Spreadsheets) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
   <!-- Scripts -->
   <script src="optativas_data.js?v=3"></script>
   <script src="data.js?v=3"></script>
   <script src="data_2024.js?v=3"></script>
-  <script src="app.js?v=16"></script>
+  <script src="app.js?v=17"></script>
 </body>
 </html>
