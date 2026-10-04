@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="paper">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ingeniería de Software — Resumen Práctico Integral y Emprendimiento Tecnológico | Guía Editorial A4</title>
-  
+  <title>Ingeniería de Software — Resumen Práctico Integral & Guía Metodológica de Cátedra</title>
+
   <!-- KaTeX para renderizado matemático vectorial nítido -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
-          onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false});"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false});"></script>
 
   <!-- Google Fonts: Newsreader, Source Sans 3, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
 
   <style>
+
     :root {
       --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
       --font-sans: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -91,15 +95,30 @@
       --accent-sage-bg: rgba(44, 89, 59, 0.04);
       --accent-ochre: #8f641c;
       --accent-ochre-bg: rgba(143, 100, 28, 0.04);
-      --shadow-paper: 0 1px 3px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.02);
-      --shadow-paper-hover: 0 4px 14px rgba(0,0,0,0.07);
+      --shadow-paper: 0 1px 3px rgba(0, 0, 0, 0.04), 0 3px 8px rgba(0, 0, 0, 0.02);
+      --shadow-paper-hover: 0 4px 14px rgba(0, 0, 0, 0.07);
       --scrollbar-thumb: #dcd6cc;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 3px;
+    }
 
     body {
       font-family: var(--font-sans);
@@ -111,7 +130,11 @@
       overflow-x: hidden;
     }
 
-    .app-layout { display: flex; min-height: 100vh; position: relative; }
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
 
     .sidebar {
       width: 320px;
@@ -126,7 +149,7 @@
       flex-shrink: 0;
       z-index: 100;
       transition: margin-left 0.3s var(--ease-paper), opacity 0.25s ease;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
     }
 
     body.sidebar-collapsed .sidebar,
@@ -144,7 +167,11 @@
       justify-content: space-between;
     }
 
-    .sidebar-brand { display: flex; flex-direction: column; }
+    .sidebar-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
     .sidebar-title {
       font-family: var(--font-serif);
       font-size: 1.15rem;
@@ -152,6 +179,7 @@
       color: var(--text-heading);
       letter-spacing: -0.01em;
     }
+
     .sidebar-subtitle {
       font-size: 0.78rem;
       color: var(--text-muted);
@@ -173,6 +201,7 @@
       justify-content: center;
       transition: all 0.2s;
     }
+
     .btn-toggle-sidebar:hover {
       background: var(--bg-card);
       color: var(--text-heading);
@@ -196,10 +225,13 @@
       display: none;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     }
+
     body.sidebar-collapsed .btn-floating-toc,
-    .app-layout.sidebar-collapsed .btn-floating-toc { display: flex; }
+    .app-layout.sidebar-collapsed .btn-floating-toc {
+      display: flex;
+    }
 
     .controls-panel {
       padding: 12px 20px;
@@ -208,6 +240,7 @@
       flex-direction: column;
       gap: 10px;
     }
+
     .btn-print {
       display: flex;
       align-items: center;
@@ -224,9 +257,17 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .btn-print:hover { border-color: var(--border-focus); background: var(--bg-card-subtle); }
 
-    .theme-buttons { display: flex; gap: 4px; }
+    .btn-print:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card-subtle);
+    }
+
+    .theme-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
     .btn-theme {
       flex: 1;
       padding: 5px 8px;
@@ -239,14 +280,23 @@
       font-weight: 600;
       transition: all 0.2s;
     }
-    .btn-theme:hover { color: var(--text-heading); border-color: var(--border-focus); }
+
+    .btn-theme:hover {
+      color: var(--text-heading);
+      border-color: var(--border-focus);
+    }
+
     .btn-theme.active {
       background: var(--accent-ink);
       color: #fff;
       border-color: var(--accent-ink);
     }
 
-    .search-box { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
+    .search-box {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
     .search-input {
       width: 100%;
       padding: 7px 12px;
@@ -259,9 +309,18 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .search-input:focus { border-color: var(--border-focus); }
 
-    .sidebar-nav { padding: 16px 12px 30px; display: flex; flex-direction: column; gap: 3px; }
+    .search-input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
     .nav-group-title {
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -270,6 +329,7 @@
       font-weight: 700;
       padding: 12px 10px 4px;
     }
+
     .nav-link {
       display: flex;
       align-items: center;
@@ -281,7 +341,12 @@
       border-radius: 4px;
       transition: background 0.15s, color 0.15s;
     }
-    .nav-link:hover { background: var(--bg-card); color: var(--accent-ink); }
+
+    .nav-link:hover {
+      background: var(--bg-card);
+      color: var(--accent-ink);
+    }
+
     .nav-link span {
       font-family: var(--font-mono);
       font-size: 0.76rem;
@@ -314,6 +379,7 @@
       padding-bottom: 32px;
       margin-bottom: 48px;
     }
+
     .module-eyebrow {
       display: inline-block;
       font-size: 0.8rem;
@@ -323,6 +389,7 @@
       color: var(--accent-ink);
       margin-bottom: 10px;
     }
+
     .module-hero h1 {
       font-family: var(--font-serif);
       font-size: 2.35rem;
@@ -332,12 +399,14 @@
       letter-spacing: -0.02em;
       margin-bottom: 16px;
     }
+
     .module-hero p {
       font-size: 1.1rem;
       color: var(--text-muted);
       max-width: 820px;
       margin-bottom: 20px;
     }
+
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
@@ -345,6 +414,7 @@
       padding-top: 14px;
       border-top: 1px dashed var(--border-color);
     }
+
     .hero-meta-item {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -353,10 +423,22 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
     }
-    .hero-meta-item strong { color: var(--text-heading); }
 
-    .chapter-section { margin-bottom: 64px; scroll-margin-top: 24px; }
-    .chapter-header { border-bottom: 1.5px solid var(--border-color); padding-bottom: 10px; margin-bottom: 24px; }
+    .hero-meta-item strong {
+      color: var(--text-heading);
+    }
+
+    .chapter-section {
+      margin-bottom: 64px;
+      scroll-margin-top: 24px;
+    }
+
+    .chapter-header {
+      border-bottom: 1.5px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+    }
+
     .chapter-num {
       font-family: var(--font-mono);
       font-size: 0.85rem;
@@ -365,6 +447,7 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
+
     .chapter-title {
       font-family: var(--font-serif);
       font-size: 1.75rem;
@@ -383,6 +466,7 @@
       padding-bottom: 5px;
       border-bottom: 1px solid var(--border-color);
     }
+
     h4 {
       font-family: var(--font-sans);
       font-size: 1.05rem;
@@ -390,10 +474,26 @@
       color: var(--text-heading);
       margin: 20px 0 8px;
     }
-    p { margin-bottom: 14px; color: var(--text-main); }
-    ul, ol { margin-bottom: 16px; padding-left: 22px; }
-    li { margin-bottom: 6px; }
-    strong { color: var(--text-heading); font-weight: 600; }
+
+    p {
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 16px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    strong {
+      color: var(--text-heading);
+      font-weight: 600;
+    }
 
     .box-callout {
       border-radius: 5px;
@@ -406,6 +506,7 @@
       background: var(--bg-card);
       box-shadow: var(--shadow-paper);
     }
+
     .box-callout-header {
       font-family: var(--font-serif);
       font-weight: 700;
@@ -415,14 +516,42 @@
       gap: 8px;
       margin-bottom: 10px;
     }
-    .box-concept { border-left-color: var(--accent-ink); background: var(--accent-ink-bg); }
-    .box-concept .box-callout-header { color: var(--accent-ink); }
-    .box-exam { border-left-color: var(--accent-ochre); background: var(--accent-ochre-bg); }
-    .box-exam .box-callout-header { color: var(--accent-ochre); }
-    .box-formula { border-left-color: var(--accent-sage); background: var(--accent-sage-bg); }
-    .box-formula .box-callout-header { color: var(--accent-sage); }
-    .box-trap { border-left-color: var(--accent-terra); background: var(--accent-terra-bg); }
-    .box-trap .box-callout-header { color: var(--accent-terra); }
+
+    .box-concept {
+      border-left-color: var(--accent-ink);
+      background: var(--accent-ink-bg);
+    }
+
+    .box-concept .box-callout-header {
+      color: var(--accent-ink);
+    }
+
+    .box-exam {
+      border-left-color: var(--accent-ochre);
+      background: var(--accent-ochre-bg);
+    }
+
+    .box-exam .box-callout-header {
+      color: var(--accent-ochre);
+    }
+
+    .box-formula {
+      border-left-color: var(--accent-sage);
+      background: var(--accent-sage-bg);
+    }
+
+    .box-formula .box-callout-header {
+      color: var(--accent-sage);
+    }
+
+    .box-trap {
+      border-left-color: var(--accent-terra);
+      background: var(--accent-terra-bg);
+    }
+
+    .box-trap .box-callout-header {
+      color: var(--accent-terra);
+    }
 
     .box-exercise {
       border: 1px solid var(--border-color);
@@ -433,6 +562,7 @@
       margin: 28px 0;
       box-shadow: var(--shadow-paper);
     }
+
     .box-exercise-title {
       font-family: var(--font-serif);
       font-size: 1.15rem;
@@ -449,12 +579,14 @@
       background: var(--bg-card);
       box-shadow: var(--shadow-paper);
     }
+
     .table-styled {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.88rem;
       text-align: left;
     }
+
     .table-styled th {
       background: var(--bg-card-subtle);
       color: var(--text-heading);
@@ -464,14 +596,21 @@
       font-family: var(--font-serif);
       font-size: 0.92rem;
     }
+
     .table-styled td {
       padding: 11px 14px;
       border-bottom: 1px solid var(--border-color);
       color: var(--text-main);
       vertical-align: top;
     }
-    .table-styled tr:last-child td { border-bottom: none; }
-    .table-styled tr:hover td { background: var(--accent-ink-bg); }
+
+    .table-styled tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table-styled tr:hover td {
+      background: var(--accent-ink-bg);
+    }
 
     .interactive-widget {
       border: 1.5px solid var(--border-color);
@@ -481,6 +620,7 @@
       margin: 32px 0;
       box-shadow: var(--shadow-paper);
     }
+
     .widget-header {
       display: flex;
       align-items: center;
@@ -489,6 +629,7 @@
       padding-bottom: 12px;
       margin-bottom: 18px;
     }
+
     .widget-badge {
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -500,7 +641,13 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
     }
-    .widget-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; }
+
+    .widget-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
     .widget-controls {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -511,7 +658,13 @@
       border: 1px solid var(--border-color);
       margin-bottom: 16px;
     }
-    .control-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
     .control-label {
       font-size: 0.82rem;
       font-weight: 600;
@@ -519,7 +672,9 @@
       display: flex;
       justify-content: space-between;
     }
-    .widget-select, .widget-input {
+
+    .widget-select,
+    .widget-input {
       padding: 7px 10px;
       border: 1px solid var(--border-color);
       background: var(--bg-card);
@@ -529,11 +684,13 @@
       border-radius: 4px;
       outline: none;
     }
+
     .widget-results {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px;
     }
+
     .result-box {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -543,7 +700,12 @@
       flex-direction: column;
       gap: 4px;
     }
-    .result-box.highlight { border-color: var(--accent-ink); background: var(--accent-ink-bg); }
+
+    .result-box.highlight {
+      border-color: var(--accent-ink);
+      background: var(--accent-ink-bg);
+    }
+
     .result-label {
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -551,6 +713,7 @@
       color: var(--text-muted);
       font-weight: 700;
     }
+
     .result-value {
       font-family: var(--font-mono);
       font-size: 1.1rem;
@@ -567,6 +730,7 @@
       text-align: center;
       box-shadow: var(--shadow-paper);
     }
+
     .diagram-caption {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -575,27 +739,261 @@
     }
 
     @media print {
-      .no-print, .sidebar, .reading-progress-bar, .btn-floating-toc { display: none !important; }
-      .app-layout { display: block !important; }
-      .main-wrapper { max-width: 100% !important; padding: 0 !important; }
-      body { background: #fff !important; color: #000 !important; font-size: 12pt; }
-      .chapter-section { page-break-after: always; }
-      .box-callout, .box-exercise, .table-responsive { break-inside: avoid; }
+
+      .no-print,
+      .sidebar,
+      .reading-progress-bar,
+      .btn-floating-toc {
+        display: none !important;
+      }
+
+      .app-layout {
+        display: block !important;
+      }
+
+      .main-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 12pt;
+      }
+
+      .chapter-section {
+        page-break-after: always;
+      }
+
+      .box-callout,
+      .box-exercise,
+      .table-responsive {
+        break-inside: avoid;
+      }
     }
 
     @media (max-width: 900px) {
-      .main-wrapper { padding: 30px 20px 80px; }
-      .sidebar { position: fixed; left: 0; top: 0; transform: translateX(-100%); }
-      body.sidebar-open .sidebar { transform: translateX(0); }
-      .btn-floating-toc { display: flex; }
+      .main-wrapper {
+        padding: 30px 20px 80px;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+      }
+
+      body.sidebar-open .sidebar {
+        transform: translateX(0);
+      }
+
+      .btn-floating-toc {
+        display: flex;
+      }
     }
+  
+
+    /* Table Styling for all tables and wrappers */
+    .table-wrapper, .table-responsive {
+      overflow-x: auto;
+      max-width: 100%;
+      display: block;
+      margin: 22px 0 28px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-paper);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-ink) var(--bg-card-subtle);
+    }
+
+    .table-wrapper::-webkit-scrollbar {
+      height: 7px;
+    }
+    .table-wrapper::-webkit-scrollbar-track {
+      background: var(--bg-card-subtle);
+      border-radius: 4px;
+    }
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-ink);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      text-align: left;
+    }
+
+    table.table-dense {
+      font-size: 0.84rem;
+    }
+    table.table-dense th {
+      padding: 10px 8px;
+      font-size: 0.86rem;
+    }
+    table.table-dense td {
+      padding: 8px 8px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    tr.risk-cut-line td {
+      border-bottom: 2.5px dashed var(--accent-terra) !important;
+    }
+
+    table th {
+      background: var(--bg-card-subtle);
+      color: var(--text-heading);
+      padding: 13px 16px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-color);
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+    }
+
+    table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] table tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    table tr:hover td {
+      background: var(--accent-ink-bg);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-primary { background: var(--accent-ink-bg); color: var(--accent-ink); border: 1px solid var(--accent-ink); }
+    .badge-success { background: var(--accent-sage-bg); color: var(--accent-sage); border: 1px solid var(--accent-sage); }
+    .badge-warning { background: var(--accent-ochre-bg); color: var(--accent-ochre); border: 1px solid var(--accent-ochre); }
+    .badge-danger { background: var(--accent-terra-bg); color: var(--accent-terra); border: 1px solid var(--accent-terra); }
+
+    /* Risk Matrix Styling */
+    .risk-high { background-color: rgba(158, 59, 43, 0.18); font-weight: 600; }
+    .risk-med { background-color: rgba(140, 99, 30, 0.15); }
+    .risk-low { background-color: rgba(45, 91, 60, 0.12); }
+
+    .risk-cut-line {
+      border-bottom: 3px dashed var(--accent-terra) !important;
+    }
+
+    /* Template card styling */
+    .template-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 18px 0;
+      box-shadow: var(--shadow-paper);
+    }
+    .template-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Step flow */
+    .step-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 16px;
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 14px 18px;
+    }
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-ink);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .step-content {
+      flex: 1;
+    }
+    .step-content h4 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      color: var(--text-heading);
+      font-size: 1rem;
+    }
+    .step-content p {
+      margin-bottom: 0;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    /* Gherkin code box */
+    .gherkin-box {
+      background: var(--bg-card-subtle);
+      border-left: 3px solid var(--accent-sage);
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      border-radius: 0 6px 6px 0;
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+    .gherkin-keyword {
+      color: var(--accent-ink);
+      font-weight: 700;
+    }
+
   </style>
 </head>
 <body>
-  <div class="reading-progress-bar" id="progressBar"></div>
-  <button id="btnExpandSidebar" class="btn-floating-toc no-print" title="Abrir índice (Atajo: tecla M)">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    <span>Abrir Índice</span>
+  <div class="reading-progress" id="progressBar"></div>
+  <button id="btnExpandSidebar" class="btn-expand-sidebar no-print" title="Mostrar índice lateral (Atajo: tecla M)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
   </button>
 
   <div class="app-layout" id="appLayout">
@@ -603,7 +1001,7 @@
       <div class="sidebar-header">
         <div class="sidebar-brand">
           <div class="sidebar-title">Ingeniería de Software</div>
-          <div class="sidebar-subtitle">Práctica y Emprendimiento</div>
+          <div class="sidebar-subtitle">Manual Práctico & Metodológico</div>
         </div>
         <button id="btnCollapseSidebar" class="btn-toggle-sidebar" title="Ocultar índice (Atajo: tecla M)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
@@ -627,848 +1025,1365 @@
       </div>
 
       <nav class="sidebar-nav">
-        <div class="nav-group-title">Presentación de Cátedra</div>
-        <a href="#cap1" class="nav-link"><span>1.</span> Modalidad y Pautas de Cursada</a>
-        <a href="#cap2" class="nav-link"><span>2.</span> Emprendimiento: AgroSense IoT</a>
+        <div class="nav-group-title">Marco de la Cátedra</div>
+        <a href="#cap1" class="nav-link"><span>1.</span> Ciclo Metodológico de la Práctica</a>
+        <a href="#cap2" class="nav-link"><span>2.</span> Caso de Estudio: Repartos Ya</a>
 
-        <div class="nav-group-title">Guías Prácticas Aplicadas</div>
-        <a href="#cap3" class="nav-link"><span>3.</span> Elicitación: Entrevista y Forms</a>
-        <a href="#cap4" class="nav-link"><span>4.</span> Análisis de Competencia y Mapa</a>
-        <a href="#cap5" class="nav-link"><span>5.</span> Iniciativas y Desglose en Épicas</a>
-        <a href="#cap6" class="nav-link"><span>6.</span> Requerimientos No Funcionales (RNF)</a>
-        <a href="#cap7" class="nav-link"><span>7.</span> Historias de Usuario (INVEST/BDD)</a>
+        <div class="nav-group-title">Guías Prácticas de Cátedra</div>
+        <a href="#cap3" class="nav-link"><span>3.</span> Guía 1: Técnicas de Elicitación</a>
+        <a href="#cap4" class="nav-link"><span>4.</span> Guía 5: Análisis de Competencia</a>
+        <a href="#cap5" class="nav-link"><span>5.</span> Guía 3: Iniciativas y Épicas</a>
+        <a href="#cap6" class="nav-link"><span>6.</span> Guía 2: Requerimientos No Funcionales</a>
+        <a href="#cap7" class="nav-link"><span>7.</span> Guía 4: Historias de Usuario (INVEST/BDD)</a>
 
-        <div class="nav-group-title">Entregas y Modelado</div>
-        <a href="#cap8" class="nav-link"><span>8.</span> Casos de Uso y DTE de Entrega</a>
-        <a href="#cap9" class="nav-link"><span>9.</span> Generador de Entregas Moodle</a>
-        <a href="#cap10" class="nav-link"><span>10.</span> Guía de Supervivencia Práctica</a>
+        <div class="nav-group-title">Modelado y Gestión</div>
+        <a href="#cap8" class="nav-link"><span>8.</span> Modelado: Casos de Uso y DTE</a>
+        <a href="#cap9" class="nav-link"><span>9.</span> Plan de Gestión (PGP IEEE 1058)</a>
+        <a href="#cap10" class="nav-link"><span>10.</span> Guía de Calidad y Checklist Moodle</a>
       </nav>
     </aside>
 
     <main class="main-wrapper">
       <header class="module-hero">
-        <span class="module-eyebrow">Ingeniería de Software • Guía Práctica Integral & Emprendimiento Tecnológico</span>
-        <h1>Manual Práctico de Cátedra y Caso de Emprendimiento Tecnológico</h1>
+        <span class="module-eyebrow">Ingeniería en Computación • Ingeniería de Software 2026</span>
+        <h1>Manual Práctico de Cátedra & Síntesis Metodológica</h1>
         <p>
-          Guía integral basada en la <strong>Presentación Oficial de la Cátedra</strong> y en las <strong>Guías Prácticas 1 a 5</strong> de Ingeniería de Software (UNLP). Todos los conceptos de elicitación, análisis competitivo, iniciativas, épicas, RNF e historias de usuario se aplican y resuelven exhaustivamente de punta a punta sobre un emprendimiento tecnológico real: <em>AgroSense IoT & Cloud Platform</em>.
+          Guía integral de estudio para el desarrollo de proyectos y trabajos prácticos en <strong>Ingeniería de Software</strong>. Cubre rigurosamente las <strong>Guías 1 a 5 de la cátedra</strong> (Elicitación, RNF, Iniciativas, Épicas, Historias de Usuario con BDD Gherkin y Análisis de Competencia con Mapa Perceptual) junto con el <strong>Plan de Gestión de Proyecto (PGP según IEEE Std 1058)</strong>, articulados de punta a punta a través de un caso de estudio demostrativo: <em>Repartos Ya (Logística y Envíos Urbanos)</em>.
         </p>
         <div class="hero-meta">
-          <div class="hero-meta-item"><strong>Alcance:</strong> Presentación práctica + Guías 1 a 5 completas</div>
-          <div class="hero-meta-item"><strong>Caso aplicado:</strong> Startup IoT y Telemetría Agronómica en Tiempo Real</div>
-          <div class="hero-meta-item"><strong>Utilidad:</strong> Templates listos para entregar en Moodle y Google Forms</div>
+          <div class="hero-meta-item"><strong>Alcance:</strong> Guías Prácticas 1 a 5 + PGP IEEE 1058 + Casos de Uso / DTE</div>
+          <div class="hero-meta-item"><strong>Enfoque:</strong> Metodología de cátedra con templates y ejemplos aplicados</div>
+          <div class="hero-meta-item"><strong>Caso demostrativo:</strong> Repartos Ya (Plataforma Logística y Envíos Urbanos)</div>
         </div>
       </header>
 
       <!-- ============================================================== -->
-      <!-- CAPITULO 1: PRESENTACIÓN DE CÁTEDRA Y MODALIDAD PRÁCTICA       -->
+      <!-- CAPITULO 1: CICLO METODOLÓGICO DE LA PRÁCTICA PROFESIONAL       -->
       <!-- ============================================================== -->
       <section class="chapter-section" id="cap1">
         <div class="chapter-header">
-          <div class="chapter-num">Capítulo 1 • Presentación Oficial</div>
-          <h2 class="chapter-title">Modalidad, Pautas y Régimen de la Práctica</h2>
+          <div class="chapter-num">Capítulo 1 • Marco de Cátedra</div>
+          <h2 class="chapter-title">Ciclo Metodológico y Régimen de la Práctica</h2>
         </div>
 
         <p>
-          La práctica de <strong>Ingeniería de Software (Ingeniería en Computación - UNLP)</strong> está estructurada como una simulación profesional inmersiva donde los estudiantes no resuelven ejercicios aislados de pizarrón, sino que atraviesan todas las fases del ciclo de vida de un proyecto de software real interactuando con un cliente humano.
-        </p>
-
-        <h3>1.1. Requisitos Académicos para Cursar</h3>
-        <ul>
-          <li><strong>Plan 2011:</strong> Cursada aprobada de <em>Conceptos de Bases de Datos (I108)</em> y de <em>Programación II (I102)</em>.</li>
-          <li><strong>Plan 2024:</strong> Cursada aprobada de <em>Programación II (I1102)</em>.</li>
-          <li>Inscripción formal confirmada en SIU-Guaraní y matriculación en el curso virtual <em>"Ing. de Software - Ing. en Computación"</em> en Moodle.</li>
-        </ul>
-
-        <h3>1.2. Equipo Docente y Canales de Comunicación</h3>
-        <p>
-          Docentes a cargo de la práctica: <strong>Kristian Petkoff Bankoff, Facundo Cadaa, Emmanuel Copes y Francisco Estrada</strong>.
-        </p>
-        <ul>
-          <li><strong>Clases de Explicación Práctica:</strong> Lunes 14:30 hs (Aula 10B).</li>
-          <li><strong>Consultas Semanales con Ayudante Asignado:</strong> Viernes en bloques estrictos de 40 minutos (08:00 hs, 08:40 hs, 09:20 hs, 10:00 hs) en Aula 10B.</li>
-          <li><strong>Discord Oficial:</strong> Canal de mensajería para seguimiento continuo entre los grupos de 6 integrantes y su ayudante guía (<em>importante: no reemplaza la consulta obligatoria presencial de los viernes</em>).</li>
-        </ul>
-
-        <h3>1.3. Las 5 Etapas del Proyecto Grupal</h3>
-        <ol>
-          <li><strong>Contacto con el cliente:</strong> Entrevistas formales para relevar y descubrir sus necesidades de negocio reales.</li>
-          <li><strong>Identificación de ideas principales:</strong> Definir la visión, la iniciativa y las características del producto de software.</li>
-          <li><strong>Planificación de tareas e integración:</strong> Desglose en épicas e historias de usuario acordando interfaces entre subsistemas.</li>
-          <li><strong>Implementación y entrega preliminar:</strong> Prototipado y construcción de una primera versión funcional de cada parte.</li>
-          <li><strong>Integración final y análisis de desvíos:</strong> Puesta en común del producto terminado frente al resultado originalmente pactado.</li>
-        </ol>
-
-        <h3>1.4. Régimen de Aprobación de la Cursada</h3>
-        <p>
-          Para aprobar la cursada se requiere la aprobación de todos los hitos y entregas del proyecto grupal más un <strong>examen parcial individual</strong> al final del semestre. La cátedra ofrece dos vías:
-        </p>
-        <div class="box-callout box-exam">
-          <div class="box-callout-header">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span>Modalidad de Examen Parcial Individual</span>
-          </div>
-          <p>
-            • <strong>Opción A (Parcial Reducido):</strong> Los estudiantes pueden rendir <strong>DOS parcialitos opcionales</strong> durante la cursada. Si se aprueban ambos, el examen parcial final se rinde con temario reducido.<br>
-            • <strong>Opción B (Parcial Completo):</strong> Rendir el examen parcial regular integrador que abarca la totalidad del temario teórico-práctico.
-          </p>
-        </div>
-
-        <h3>1.5. Pautas de la Primera Entrega Formal</h3>
-        <p>
-          La primera entrega obligatoria del proyecto debe presentarse cumpliendo tres componentes ineludibles:
-        </p>
-        <div class="table-responsive">
-          <table class="table-styled">
-            <thead>
-              <tr><th>Componente de Entrega</th><th>Canal de Envío</th><th>Requisitos Formales</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>1. Registro de Entrevista</strong></td>
-                <td>Vía Moodle</td>
-                <td>Documentar cada entrevista realizada utilizando el template oficial de cátedra (preguntas, respuestas y acuerdos).</td>
-              </tr>
-              <tr>
-                <td><strong>2. Cuestionario Cuantitativo</strong></td>
-                <td>Vía Google Forms</td>
-                <td>Formulario en línea diseñado profesionalmente, justificando a qué segmento de usuarios está dirigido.</td>
-              </tr>
-              <tr>
-                <td><strong>3. Requerimientos No Funcionales</strong></td>
-                <td>Vía Moodle</td>
-                <td>Matriz estructurada de RNF identificados y clasificados bajo el template oficial de cátedra.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- ============================================================== -->
-      <!-- CAPITULO 2: EMPRENDIMIENTO FICTICIO: AGROSENSE IOT             -->
-      <!-- ============================================================== -->
-      <section class="chapter-section" id="cap2">
-        <div class="chapter-header">
-          <div class="chapter-num">Capítulo 2 • Caso de Estudio Integral</div>
-          <h2 class="chapter-title">El Emprendimiento Ficticio: "AgroSense IoT & Cloud Platform"</h2>
-        </div>
-
-        <p>
-          Para aplicar de manera exhaustiva y conectada todos los conceptos de las guías prácticas y presentaciones de la cátedra, utilizaremos un caso de estudio integrador de alta relevancia para la carrera de Ingeniería en Computación: <strong>AgroSense IoT</strong>.
+          La práctica de <strong>Ingeniería de Software</strong> está diseñada como una simulación profesional inmersiva. Su objetivo central es experimentar de manera vivencial la diferencia radical entre la <em>programación en solitario</em> y la <em>ingeniería de software en equipo</em>: la necesidad ineludible de comunicarse con clientes humanos no técnicos, gestionar la ambigüedad, modelar requerimientos verificables, estimar esfuerzo con rigor y mitigar riesgos antes de que se conviertan en fallas catastróficas.
         </p>
 
         <div class="box-callout box-concept">
-          <div class="box-callout-header">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span>Descripción del Proyecto de Software: AgroSense</span>
-          </div>
           <p>
-            <strong>Problema del Cliente:</strong> Los productores frutihortícolas del Cinturón Verde de La Plata sufren cuantiosas pérdidas económicas anuales por dos causas críticas: (1) <em>heladas tardías imprevistas</em> durante la noche que destruyen cosechas enteras en menos de 2 horas si no se activan aspersores térmicos; y (2) <em>ineficiencia y desperdicio de agua y energía</em> por riego manual a ciegas, sin medir la humedad real en la raíz del cultivo.
-          </p>
-          <p>
-            <strong>Solución Proyectada:</strong> Un sistema ciberfísico compuesto por: (a) nodos sensores de campo autónomos con panel solar que miden temperatura, humedad ambiente y humedad volumétrica del suelo; (b) comunicación por radioenlace LoRaWAN/4G hacia una pasarela central; (c) backend en la nube con motor de reglas y alertas automáticas por WhatsApp/SMS; y (d) plataforma web y móvil para que el productor monitoree sus parcelas y accione remotamente electroválvulas de riego.
+            <strong>El Principio Rector de la Cátedra:</strong> Todo requerimiento de software nace de un problema del mundo real. Un ingeniero de software no asume lo que el cliente necesita: <em>lo descubre, lo cuestiona, lo valida y lo especifica</em> con formalismo metodológico y trazabilidad estricta.
           </p>
         </div>
 
-        <div class="diagram-container">
-          <svg viewBox="0 0 720 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="50" width="130" height="60" rx="6" fill="#2d5b3c"/>
-            <text x="85" y="78" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Nodos Sensores</text>
-            <text x="85" y="96" fill="#fff" font-family="sans-serif" font-size="9" text-anchor="middle">Campo / LoRaWAN</text>
+        <h3>1.1. Las 5 Fases del Proyecto Práctico</h3>
+        <p>
+          A lo largo del semestre, los equipos de trabajo atraviesan cinco fases secuenciales e iterativas que culminan en la entrega y defensa de un producto documentado y defendible:
+        </p>
 
-            <line x1="150" y1="80" x2="200" y2="80" stroke="#6b645c" stroke-width="2" stroke-dasharray="4"/>
+        <div class="step-container">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Fase 1: Elicitación y Análisis de Mercado</h4>
+              <p>Inmersión en el dominio del problema mediante entrevistas al cliente, diseño de cuestionarios cuantitativos (Google Forms), sesiones de lluvia de ideas (brainstorming) y benchmarking competitivo (matriz de competencia y mapa perceptual de posicionamiento).</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Fase 2: Modelado de Requerimientos (Iniciativas, Épicas y RNF)</h4>
+              <p>Descomposición top-down del alcance: formulación de la iniciativa estratégica, desglose en módulos de ejecución concretos (épicas) e identificación de requerimientos no funcionales (RNF) bajo la norma ISO/IEC 25010 con métricas objetivamente contrastables.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Fase 3: Especificación Ágil con Historias de Usuario (HU)</h4>
+              <p>Desglose de las épicas en Historias de Usuario que cumplen los principios INVEST y el modelo 3C. Redacción formal de reglas de dominio del sistema y criterios de aceptación mediante escenarios de prueba en lenguaje natural y BDD (Gherkin Dado/Cuando/Entonces), estimadas con Planning Poker.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Fase 4: Modelado Dinámico y Arquitectura</h4>
+              <p>Formalización de los Casos de Uso del sistema y construcción de Diagramas de Transición de Estados (DTE) para gobernar el ciclo de vida de las entidades críticas del dominio (pedidos, envíos, pagos).</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h4>Fase 5: Plan de Gestión de Proyecto (PGP según IEEE Std 1058)</h4>
+              <p>Consolidación del plan formal: WBS (Estructura de Desglose del Trabajo), cálculo de esfuerzo persona-hora, determinación del presupuesto comercial ($) y Matriz de Riesgos 5x5 con línea de corte, planes de mitigación preventiva y contingencia reactiva.</p>
+            </div>
+          </div>
+        </div>
 
-            <rect x="200" y="50" width="130" height="60" rx="6" fill="#1c4573"/>
-            <text x="265" y="78" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Gateway / IoT Hub</text>
-            <text x="265" y="96" fill="#fff" font-family="sans-serif" font-size="9" text-anchor="middle">Procesamiento Local</text>
+        <h3>1.2. Criterios de Evaluación y Calidad de las Entregas</h3>
+        <p>
+          Las correcciones de los ayudantes y docentes aplican criterios de calidad de industria:
+        </p>
+        <ul>
+          <li><strong>Trazabilidad Vertical Total:</strong> Cada Historia de Usuario debe pertenecer estrictamente a una Épica, cada Épica a una Iniciativa, y cada iniciativa responder a una necesidad validada en la fase de elicitación. No se admiten requerimientos "huérfanos".</li>
+          <li><strong>Verificabilidad Sin Ambigüedades:</strong> Un RNF redactado como <em>"el sistema debe ser rápido"</em> o <em>"la app debe ser intuitiva"</em> es rechazado automáticamente. Todo requerimiento no funcional debe incorporar su unidad de medida, valor objetivo y método de verificación formal.</li>
+          <li><strong>Separación entre Regla de Negocio y Prueba:</strong> En las HU, las <em>reglas a considerar</em> definen restricciones y políticas del dominio; los <em>criterios de aceptación</em> definen los escenarios de prueba exactos que se ejecutarán en la demo ante el cliente.</li>
+        </ul>
+      </section>
 
-            <line x1="330" y1="80" x2="380" y2="80" stroke="#6b645c" stroke-width="2"/>
+      <!-- ============================================================== -->
+      <!-- CAPITULO 2: CASO DE ESTUDIO DIDÁCTICO: REPARTOS YA             -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap2">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 2 • Caso de Estudio Demostrativo</div>
+          <h2 class="chapter-title">Caso Demostrativo: "Repartos Ya" (Plataforma Logística PyME)</h2>
+        </div>
 
-            <rect x="380" y="50" width="140" height="60" rx="6" fill="#8c631e"/>
-            <text x="450" y="78" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Servidor Cloud</text>
-            <text x="450" y="96" fill="#fff" font-family="sans-serif" font-size="9" text-anchor="middle">API REST / Reglas</text>
+        <p>
+          Para ilustrar de forma tangible y didáctica la aplicación de cada guía de la cátedra de manera totalmente consistente con el trabajo práctico grupal, utilizaremos como hilo conductor a <strong>Repartos Ya</strong>: una plataforma tecnológica de logística urbana y distribución de última milla para pequeñas y medianas empresas de fletes y paquetería.
+        </p>
 
-            <line x1="520" y1="80" x2="570" y2="80" stroke="#6b645c" stroke-width="2"/>
+        <div class="box-callout box-alert">
+          <p>
+            <strong>El Problema del Negocio:</strong> Una distribuidora de paquetería local opera con 14 choferes independientes. La asignación de paquetes se realiza mediante pizarras de corcho y planillas de papel, los estados de entrega se informan de manera caótica mediante audios de WhatsApp mientras conducen, y los destinatarios llaman constantemente por teléfono al despachador preguntando <em>"¿por dónde viene mi paquete?"</em>. Los remitos firmados en papel frecuentemente se pierden o llegan manchados con aceite, impidiendo la facturación y la cobranza en término.
+          </p>
+        </div>
 
-            <rect x="570" y="50" width="130" height="60" rx="6" fill="#9e3b2b"/>
-            <text x="635" y="78" fill="#fff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Web & Móvil</text>
-            <text x="635" y="96" fill="#fff" font-family="sans-serif" font-size="9" text-anchor="middle">Alertas / Control</text>
+        <h3>2.1. Visión del Producto y Propuesta de Valor</h3>
+        <p>
+          <em>Repartos Ya</em> es una solución de software modular de bajo costo operativo que integra tres componentes sincronizados en tiempo real:
+        </p>
+        <ol>
+          <li><strong>Panel Web de Despacho (Administración):</strong> Carga rápida de envíos, asignación de zonas a choferes, monitoreo en vivo de 7 estados del paquete y rendición de cuentas/finanzas con acceso restringido.</li>
+          <li><strong>Aplicación Móvil para Choferes (Android Offline-First):</strong> Lista de entregas del día, botones grandes sin jerga técnica, operación sin conexión en zonas rurales o sótanos, y confirmación de entrega con captura fotográfica del remito/factura.</li>
+          <li><strong>Portal Web de Tracking Público:</strong> Página liviana accesible desde cualquier celular o PC donde el destinatario final ingresa su código de seguimiento alfanumérico para conocer el estado exacto de su envío sin llamar por teléfono.</li>
+        </ol>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Actor del Sistema</th>
+                <th>Rol en el Negocio</th>
+                <th>Interés Principal / Dolores Cotidianos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Administrador / Despachador (Martín)</strong></td>
+                <td>Dueño de la logística. Administra rutas y cobranzas.</td>
+                <td>Despachar rápido, saber qué chofer tiene cada paquete y evitar el colapso de WhatsApp y llamadas de reclamo.</td>
+              </tr>
+              <tr>
+                <td><strong>Chofer / Transportista (Jorge)</strong></td>
+                <td>Conduce su utilitario propio haciendo 20-40 paradas/día.</td>
+                <td>App extremadamente simple (sin distracciones al manejar), registrar entregas rápido y que no se pierdan sus comprobantes de pago.</td>
+              </tr>
+              <tr>
+                <td><strong>Cliente Emisor (Comercio / Fábrica)</strong></td>
+                <td>Tienda que contrata a Repartos Ya para entregar pedidos.</td>
+                <td>Seguridad de que el paquete llegó al cliente final y disponibilidad de comprobante de entrega digitalizado.</td>
+              </tr>
+              <tr>
+                <td><strong>Destinatario Final (Comprador)</strong></td>
+                <td>Persona que espera el paquete en su domicilio.</td>
+                <td>Saber si el paquete llega hoy por la mañana o por la tarde mediante un link de tracking simple sin registrarse.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.2. Arquitectura de Módulos de Repartos Ya</h3>
+        <p>
+          El siguiente esquema sintetiza los tres componentes de la plataforma y sus flujos de datos:
+        </p>
+
+        <div class="diagram-card">
+          <div class="diagram-title">Arquitectura Modular de Repartos Ya</div>
+          <svg viewBox="0 0 880 280" width="100%" height="auto" style="max-width:880px; display:block; margin:0 auto; font-family:var(--font-sans);">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent-ink)" />
+              </marker>
+            </defs>
+
+            <!-- Módulo 1: Despacho Web -->
+            <rect x="30" y="40" width="220" height="200" rx="8" fill="var(--bg-card-subtle)" stroke="var(--border-color)" stroke-width="1.5" />
+            <text x="140" y="68" text-anchor="middle" font-weight="700" fill="var(--text-heading)" font-size="14">PANEL WEB DESPACHO</text>
+            <rect x="50" y="85" width="180" height="42" rx="5" fill="var(--bg-card)" stroke="var(--accent-ink)" stroke-width="1.5" />
+            <text x="140" y="110" text-anchor="middle" font-weight="600" fill="var(--text-heading)" font-size="12">Carga y Asignación</text>
+            <rect x="50" y="135" width="180" height="42" rx="5" fill="var(--bg-card)" stroke="var(--accent-sage)" stroke-width="1.5" />
+            <text x="140" y="160" text-anchor="middle" font-weight="600" fill="var(--text-heading)" font-size="12">Monitoreo 7 Estados</text>
+            <rect x="50" y="185" width="180" height="38" rx="5" fill="var(--bg-card)" stroke="var(--accent-ochre)" stroke-width="1.5" />
+            <text x="140" y="209" text-anchor="middle" font-size="11" fill="var(--text-muted)">Finanzas y Rendición</text>
+
+            <!-- Flecha a Cloud -->
+            <path d="M 250 140 L 330 140" fill="none" stroke="var(--accent-ink)" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Nube Central -->
+            <rect x="330" y="50" width="220" height="180" rx="8" fill="var(--bg-card-subtle)" stroke="var(--border-color)" stroke-width="1.5" />
+            <text x="440" y="78" text-anchor="middle" font-weight="700" fill="var(--text-heading)" font-size="14">CLOUD BACKEND & DB</text>
+            <rect x="350" y="95" width="180" height="40" rx="5" fill="var(--bg-card)" stroke="var(--accent-ink)" stroke-width="1.5" />
+            <text x="440" y="120" text-anchor="middle" font-weight="600" fill="var(--text-heading)" font-size="12">API RESTful / HTTPS</text>
+            <rect x="350" y="145" width="180" height="40" rx="5" fill="var(--bg-card)" stroke="var(--accent-terra)" stroke-width="1.5" />
+            <text x="440" y="170" text-anchor="middle" font-weight="600" fill="var(--text-heading)" font-size="12">Persistencia & Sync</text>
+            <text x="440" y="210" text-anchor="middle" font-size="11" fill="var(--text-muted)">Aislamiento Criptográfico</text>
+
+            <!-- Flechas a Clientes -->
+            <path d="M 550 110 L 630 85" fill="none" stroke="var(--accent-sage)" stroke-width="2" marker-end="url(#arrow)" />
+            <path d="M 550 170 L 630 195" fill="none" stroke="var(--accent-ink)" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Modulo 2: App Chofer -->
+            <rect x="630" y="30" width="220" height="100" rx="8" fill="var(--bg-card-subtle)" stroke="var(--accent-sage)" stroke-width="1.5" />
+            <text x="740" y="55" text-anchor="middle" font-weight="700" fill="var(--accent-sage)" font-size="13">APP MÓVIL CHOFER</text>
+            <text x="740" y="75" text-anchor="middle" font-size="11" fill="var(--text-heading)">Lista de Envíos del Día</text>
+            <text x="740" y="93" text-anchor="middle" font-size="11" fill="var(--text-muted)">Foto Comprobante + Offline</text>
+            <text x="740" y="112" text-anchor="middle" font-size="10" font-weight="600" fill="var(--accent-sage)">Sync Automática al volver 4G</text>
+
+            <!-- Modulo 3: Tracking Destinatario -->
+            <rect x="630" y="150" width="220" height="100" rx="8" fill="var(--bg-card-subtle)" stroke="var(--accent-ink)" stroke-width="1.5" />
+            <text x="740" y="175" text-anchor="middle" font-weight="700" fill="var(--accent-ink)" font-size="13">TRACKING PÚBLICO</text>
+            <text x="740" y="195" text-anchor="middle" font-size="11" fill="var(--text-heading)">Consulta por Código</text>
+            <text x="740" y="213" text-anchor="middle" font-size="11" fill="var(--text-muted)">Historial de Estado en Vivo</text>
+            <text x="740" y="232" text-anchor="middle" font-size="10" font-weight="600" fill="var(--accent-ink)">Sin Registro / Acceso Directo</text>
           </svg>
-          <div class="diagram-caption">Figura 2.1: Arquitectura ciberfísica modular del emprendimiento tecnológico AgroSense.</div>
+          <div class="diagram-caption">Topología modular de Repartos Ya: Despacho Web centralizado, App Móvil Offline-first y Tracking Público.</div>
         </div>
       </section>
 
       <!-- ============================================================== -->
-      <!-- CAPITULO 3: GUÍA 1 APLICADA: TÉCNICAS DE ELICITACIÓN           -->
+      <!-- CAPITULO 3: GUÍA 1 - TÉCNICAS DE ELICITACIÓN EN REPARTOS YA   -->
       <!-- ============================================================== -->
       <section class="chapter-section" id="cap3">
         <div class="chapter-header">
-          <div class="chapter-num">Capítulo 3 • Guía Práctica 1</div>
-          <h2 class="chapter-title">Técnicas de Elicitación Aplicadas: Entrevista, Forms y Brainstorming</h2>
+          <div class="chapter-num">Capítulo 3 • Guía 1 de Cátedra</div>
+          <h2 class="chapter-title">Técnicas de Elicitación de Requerimientos</h2>
         </div>
 
         <p>
-          Siguiendo la <strong>Guía Práctica 1 (TE)</strong>, el equipo de analistas ejecuta las actividades para la Primera Entrega de la cursada:
+          La <strong>elicitación</strong> es el proceso de descubrir, interpretar y documentar las necesidades reales de los interesados. Las diapositivas oficiales de la cátedra destacan tres técnicas fundamentales:
         </p>
+        <ol>
+          <li><strong>Entrevistas:</strong> Diálogo directo en profundidad con stakeholders clave. Requiere preparación previa estricta y <em>hablar el mismo lenguaje del cliente</em> (evitando jerga técnica de programación que genere desconexión).</li>
+          <li><strong>Cuestionarios:</strong> Instrumentos cuantitativos (típicamente en Google Forms) para sondear a una muestra amplia y representativa, estructurados con escalas Likert y opciones cerradas.</li>
+          <li><strong>Brainstorming:</strong> Sesiones creativas grupales divididas en dos fases: <em>divergencia</em> (generación sin juzgar) y <em>convergencia</em> (selección, categorización y descarte justificado).</li>
+        </ol>
 
-        <h3>3.1. La Primera Entrevista con el Cliente (Viernes 04/09 en Aula 10B)</h3>
+        <h3>3.1. Entrevista con Template Oficial de la Cátedra</h3>
         <p>
-          Siguiendo las pautas de cátedra ("traer las preguntas listas para arrancar"), el equipo estructuró un guión semiestructurado con preguntas abiertas y preguntas de sondeo:
+          A continuación se presenta la minuta de entrevista realizada al dueño de la logística, respetando el template oficial exigido en las entregas de la cátedra:
         </p>
 
-        <!-- Template de Entrevista para Moodle -->
-        <div class="table-responsive">
-          <table class="table-styled">
-            <tbody>
-              <tr style="background:var(--bg-card-subtle);">
-                <th colspan="2">TEMPLATE DE ENTREVISTA DE CÁTEDRA — PRIMERA ENTREGA</th>
-              </tr>
-              <tr>
-                <td style="width:28%;"><strong>Fecha y Lugar</strong></td>
-                <td>Viernes 04/09, 08:40 hs — Aula 10B (Consulta de 40 minutos con ayudante).</td>
-              </tr>
-              <tr>
-                <td><strong>Entrevistado (Rol Cliente)</strong></td>
-                <td>Ing. Agrónomo Roberto Rossi (Productor y asesor técnico de quintas hortícolas).</td>
-              </tr>
-              <tr>
-                <td><strong>Entrevistadores (Equipo)</strong></td>
-                <td>Analistas del Grupo de Software (6 estudiantes de Ingeniería en Computación).</td>
-              </tr>
-              <tr>
-                <td><strong>Objetivo de la Sesión</strong></td>
-                <td>Identificar necesidades críticas en el manejo de heladas, fuentes de agua, automatización de riego y restricciones de conectividad en el campo.</td>
-              </tr>
-              <tr>
-                <td><strong>Transcripción Sintética del Diálogo</strong></td>
-                <td>
-                  <strong>Analista:</strong> <em>"¿Cómo detecta actualmente una helada nocturna y qué protocolo activa?"</em><br>
-                  <strong>Cliente:</strong> <em>"Miramos el pronóstico por televisión a la tarde. Si anuncian frío extremo, me pongo alarmas en el despertador a las 2, 4 y 6 de la mañana para mirar el termómetro de mercurio afuera. Si bajó de 1°C, salgo al barro a prender las bombas de riego para pulverizar agua sobre las plantas y que el hielo no queme la flor. Muchas veces me quedé dormido y perdí media hectárea de tomate."</em><br><br>
-                  <strong>Analista:</strong> <em>"¿Hay señal celular 4G en toda la extensión del campo?"</em><br>
-                  <strong>Cliente:</strong> <em>"No. En la tranquera y la casa principal hay algo de 3G/4G, pero en los fondos de las parcelas la señal es nula."</em><br><br>
-                  <strong>Analista:</strong> <em>"¿Qué presupuesto estiman viable por hectárea instalada?"</em><br>
-                  <strong>Cliente:</strong> <em>"No más de $300 a $400 USD por nodo instalado. Las empresas multinacionales cobran $2.000 USD y nos resulta imposible."</em>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Acuerdos y Conclusiones Validadas</strong></td>
-                <td>
-                  1. El sistema debe enviar alerta sonora crítica al celular ante temperatura $\le 1.5^\circ\text{C}$.<br>
-                  2. La comunicación entre los sensores y la casa debe ser autónoma sin depender de 4G en cada parcela (se acuerda usar LoRaWAN o radiofrecuencia).<br>
-                  3. Las electroválvulas deben poder accionarse tanto automáticamente por regla como manualmente desde la aplicación web/móvil.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>Template de Cátedra: Registro Formal de Entrevista #01</span>
+            <span class="badge badge-primary">Guía 1</span>
+          </div>
+          <p><strong>Fecha y Modalidad:</strong> 04 de Septiembre • Entrevista presencial semiestructurada</p>
+          <p><strong>Entrevistado:</strong> Martín Gómez (Titular y Despachador de Distribuidora de Fletes)</p>
+          <p><strong>Entrevistadores:</strong> Equipo de Ingeniería (Valery Luna, Responsable de Requerimientos)</p>
+          <p><strong>Objetivo de la Entrevista:</strong> Comprender el circuito diario de despacho, los puntos críticos de pérdida de información y las fricciones de comunicación entre el despachador, los choferes y los destinatarios finales.</p>
+
+          <h4 style="margin-top:14px; font-size:1rem; color:var(--text-heading);">Cuestionario Planificado y Respuestas del Cliente:</h4>
+          
+          <p><strong>1. ¿Cómo asignan y despachan actualmente los paquetes que ingresan cada mañana?</strong><br>
+          <em>Respuesta del cliente:</em> "Llegan los paquetes de las tiendas entre las 7 y las 8:30. Anotamos en una pizarra con marcador el barrio y el chofer asignado. Le damos al chofer un remito en papel por cada paquete. Es un lío bárbaro: si cambian una dirección a último momento, tengo que mandar un audio de WhatsApp que el chofer escucha cuando ya está a 10 kilómetros del lugar."</p>
+
+          <p><strong>2. ¿Qué ocurre cuando un chofer no encuentra a nadie en el domicilio?</strong><br>
+          <em>Respuesta del cliente:</em> "Me manda un mensaje al WhatsApp personal: <em>'Che, en calle 45 no me atiende nadie'</em>. Yo le digo que espere 5 minutos o que pruebe tocar timbre en lo del vecino. A veces el chofer se va y el destinatario me llama a los 10 minutos indignado diciendo que estuvo todo el día esperando y que nadie tocó timbre. No tengo cómo comprobar quién dice la verdad."</p>
+
+          <p><strong>3. ¿Cómo manejan el cobro contra entrega y la rendición de comprobantes?</strong><br>
+          <em>Respuesta del cliente:</em> "Al final del día, los 14 choferes vuelven a la oficina a rendir el dinero en efectivo y los remitos firmados. Frecuentemente falta un remito, o la firma no se entiende, o el papel se manchó con mate en la camioneta. Si el cliente emisor me pide el comprobante para pagar la factura y no lo tengo, pierdo el cobro."</p>
+
+          <div class="box-callout box-concept" style="margin-top:12px;">
+            <strong>Hallazgos Clave de Elicitación:</strong>
+            <ul style="margin-bottom:0;">
+              <li>El cliente necesita <strong>estados de envío estandarizados</strong> (no audios informales) con registro de fecha, hora y geolocalización.</li>
+              <li>La confirmación de entrega requiere <strong>evidencia fotográfica digital</strong> (foto del remito/factura o fachada) tomada desde el celular del chofer.</li>
+              <li>Existe una necesidad urgente de <strong>tracking público por código</strong> para que los destinatarios no llamen por teléfono a la distribuidora.</li>
+            </ul>
+          </div>
         </div>
 
         <h3>3.2. Cuestionario Cuantitativo en Google Forms</h3>
         <p>
-          Requisito de cátedra: <em>"UN CUESTIONARIO (pensar a quién estaría dirigido) VÍA GOOGLE FORMS"</em>. Se diseñó un formulario formal dirigido a <strong>45 productores frutihortícolas de la provincia</strong> para validar cuantitativamente los hallazgos de la entrevista:
+          Para validar la necesidad en comercios clientes que contratan logística urbana, se administró un cuestionario a 45 comercios de la zona:
         </p>
-        <ol>
-          <li>¿Cuántas hectáreas productivas administra su establecimiento? <em>(Opciones: < 2 ha / 2 a 5 ha / > 5 ha)</em></li>
-          <li>En los últimos 3 años, ¿ha sufrido pérdidas económicas directas por heladas imprevistas? <em>(Dicotómica: Sí / No)</em></li>
-          <li><em>Escala Likert (1: Totalmente en desacuerdo a 5: Totalmente de acuerdo):</em> "Considero que el método actual de control de riego en mi campo desperdicia agua o energía eléctrica."</li>
-          <li><em>Escala Likert (1 a 5):</em> "Estaría dispuesto a implementar una alarma automática a mi teléfono móvil que me despierte ante heladas inminentes."</li>
-          <li>¿Qué tipo de conectividad posee en el interior de sus parcelas de cultivo? <em>(Selección: 4G buena / 4G intermitente / Sin señal celular)</em></li>
-          <li><em>Pregunta Abierta de opinión:</em> "¿Cuál es su mayor temor o duda al incorporar tecnología de sensores en su campo?"</li>
-        </ol>
 
-        <h3>3.3. Sesión de Lluvia de Ideas (Brainstorming)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Pregunta del Cuestionario</th>
+                <th>Tipo de Escala / Opciones</th>
+                <th>Resultado de la Muestra (n=45)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>¿Con qué frecuencia sus clientes reclaman por no saber el horario estimado de llegada de su compra?</td>
+                <td>Escala Likert 1 (Nunca) a 5 (Constantemente)</td>
+                <td><strong>Promedio: 4.5 / 5</strong> (El 82% respondió 4 o 5).</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>¿Ha tenido demoras en cobrar envíos por pérdida o rotura de remitos de papel?</td>
+                <td>Dicotómica (Sí / No)</td>
+                <td><strong>73% responde SÍ</strong> (Confirma la necesidad de digitalización fotográfica inmediata).</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>¿Considera indispensable que el destinatario pueda verificar el estado de su envío online sin llamar por teléfono?</td>
+                <td>Escala Likert 1 (Prescindible) a 5 (Indispensable)</td>
+                <td><strong>Promedio: 4.8 / 5</strong> (Validación total del Portal de Tracking Público).</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>¿Qué canal prefieren los choferes para enterarse de una reasignación de ruta?</td>
+                <td>Preferencia única</td>
+                <td><strong>68% Notificación sonora en App dedicada</strong>, 27% WhatsApp, 5% Llamada.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3.3. Sesión de Brainstorming y Matriz de Filtrado</h3>
         <p>
-          Siguiendo la técnica de la Guía 1 (<em>"Se libera la imaginación colectiva prohibiendo censurar cualquier idea... Flujo libre, en círculo, ideas escritas"</em>), el equipo realizó una sesión para resolver: <strong>¿Cómo garantizamos que la alerta de helada llegue si se corta la electricidad de la zona rural?</strong>
+          En la sesión de lluvia de ideas con el equipo de trabajo se evaluaron diversas propuestas para el MVP:
         </p>
         <ul>
-          <li><strong>Divergencia (Ideas generadas sin censura):</strong> Batería de moto de respaldo; sirena náutica de 120 dB alimentada a 12V en el techo del galpón; llamar por teléfono a un vecino; encender una bengala; repetidor de radio con panel solar.</li>
-          <li><strong>Convergencia (Selección y Viabilidad):</strong> Se adopta una <em>batería de respaldo LiFePO4 de 12V con sirena física local de alta potencia en la vivienda</em> más transmisión de SMS de emergencia mediante un módem celular industrial GSM conectado al gateway.</li>
+          <li><span class="badge badge-success">Aprobada</span> <strong>Modo Offline en App Chofer:</strong> Almacenamiento local en SQLite de las entregas y sincronización automática en cola cuando el dispositivo recupera señal 4G.</li>
+          <li><span class="badge badge-success">Aprobada</span> <strong>Captura de Foto de Factura con Compresión:</strong> Comprimir la imagen en el dispositivo a menos de 200 KB antes de transmitirla para ahorrar datos móviles.</li>
+          <li><span class="badge badge-danger">Descartada (Fase 1)</span> <strong>Cálculo de rutas óptimas mediante Inteligencia Artificial y Machine Learning:</strong> Descartada por complejidad matemática excesiva y porque los choferes ya conocen los atajos y el sentido de las calles mejor que un algoritmo genérico.</li>
         </ul>
       </section>
 
       <!-- ============================================================== -->
-      <!-- CAPITULO 4: GUÍA 5 APLICADA: ANÁLISIS DE COMPETENCIA           -->
+      <!-- CAPITULO 4: GUÍA 5 - ANÁLISIS DE COMPETENCIA EN REPARTOS YA   -->
       <!-- ============================================================== -->
       <section class="chapter-section" id="cap4">
         <div class="chapter-header">
-          <div class="chapter-num">Capítulo 4 • Guía Práctica 5</div>
-          <h2 class="chapter-title">Análisis de Competencia y Mapa Perceptual de Posicionamiento</h2>
+          <div class="chapter-num">Capítulo 4 • Guía 5 de Cátedra</div>
+          <h2 class="chapter-title">Análisis de Competencia y Posicionamiento</h2>
         </div>
 
         <p>
-          Aplicando la <strong>Guía Práctica 5</strong>, una organización que busca diferenciarse debe conocer su ventaja competitiva analizando competidores directos, indirectos y sustitutos.
+          El <strong>análisis de competencia</strong> es una tarea obligatoria para determinar si un producto de software posee una <em>ventaja competitiva real</em> frente a las alternativas del mercado. Las diapositivas oficiales de la cátedra diferencian formalmente dos tipos de competidores:
         </p>
-
-        <h3>4.1. Identificación de Competidores en el Mercado Agrícola</h3>
         <ul>
-          <li><strong>Competidores Directos:</strong> Ofrecen exactamente telemetría IoT de suelo y riego en el mercado agropecuario. <em>Ejemplo:</em> <strong>CropX</strong> y <strong>Pessl Instruments (FieldClimate)</strong>. Dispositivos muy potentes pero con costo prohibitivo en dólares y sin servicio técnico local.</li>
-          <li><strong>Competidores Indirectos:</strong> Ofrecen productos distintos pero satisfacen la necesidad de monitoreo climático. <em>Ejemplo:</em> <strong>Estaciones meteorológicas hogareñas (Davis Instruments)</strong> o boletines meteorológicos del <strong>INTA</strong>. Miden clima general pero no la humedad a nivel radicular dentro del invernadero.</li>
-          <li><strong>Competidores Sustitutos / No Digitales:</strong> Métodos tradicionales manuales. <em>Ejemplo:</em> El productor recorre a pie la quinta con una pala para palpar la tierra con la mano y un termómetro de vidrio colgado en un poste.</li>
+          <li><strong>Competidores Directos:</strong> Ofrecen un producto igual o casi igual al nuestro y operan en el mismo segmento de mercado (mismo público objetivo y misma tecnología).</li>
+          <li><strong>Competidores Indirectos (o Sustitutos):</strong> Ofrecen un producto distinto, pero <em>satisfacen la misma necesidad de fondo</em> en el mismo mercado (por ejemplo, planillas de Excel, mensajes de voz de WhatsApp o remitos de papel).</li>
         </ul>
 
-        <h3>4.2. Mapa Perceptual de Posicionamiento en 3 Pasos</h3>
-        <p>
-          Siguiendo estrictamente la metodología de cátedra:
-        </p>
-        <ol>
-          <li><strong>PASO 1: Identificar competidores:</strong> CropX, Davis Weather, Termómetro Tradicional y AgroSense.</li>
-          <li><strong>PASO 2: Definir dos atributos clave:</strong>
-            <ul>
-              <li><strong>Eje X:</strong> <em>Accesibilidad Económica y Facilidad de Instalación DIY</em> (de baja a muy alta).</li>
-              <li><strong>Eje Y:</strong> <em>Capacidad de Alerta Temprana Automatizada en Tiempo Real</em> (de nula a muy alta).</li>
-            </ul>
-          </li>
-          <li><strong>PASO 3: Ubicación gráfica y detección del nicho desatendido (Océano Azul):</strong></li>
-        </ol>
-
-        <div class="diagram-container">
-          <svg viewBox="0 0 680 320" width="100%" height="280" xmlns="http://www.w3.org/2000/svg">
-            <line x1="60" y1="160" x2="620" y2="160" stroke="#6b645c" stroke-width="2"/>
-            <line x1="340" y1="20" x2="340" y2="300" stroke="#6b645c" stroke-width="2"/>
-            <polygon points="620,156 630,160 620,164" fill="#6b645c"/>
-            <polygon points="336,20 340,10 344,20" fill="#6b645c"/>
-
-            <text x="615" y="180" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1c4573" text-anchor="end">Alta Accesibilidad Económica / DIY (+)</text>
-            <text x="65" y="180" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#6b645c">Costo Elevado / Exclusivo (-)</text>
-            <text x="350" y="25" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1c4573">Alerta Automatizada Tiempo Real (+)</text>
-            <text x="350" y="295" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#6b645c">Monitoreo Manual / Retrasado (-)</text>
-
-            <!-- CropX: Caro, Muy automatizado -->
-            <circle cx="160" cy="70" r="16" fill="#9e3b2b" opacity="0.85"/>
-            <text x="160" y="74" fill="#fff" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">CropX</text>
-            <text x="160" y="98" fill="#9e3b2b" font-family="sans-serif" font-size="9.5" text-anchor="middle">Corporativo / $2000 USD</text>
-
-            <!-- Tradicional / Pala: Muy barato, cero alerta en tiempo real -->
-            <circle cx="530" cy="250" r="15" fill="#8c631e" opacity="0.85"/>
-            <text x="530" y="254" fill="#fff" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">Manual</text>
-            <text x="530" y="278" fill="#8c631e" font-family="sans-serif" font-size="9.5" text-anchor="middle">Pala / Termómetro Vidrio</text>
-
-            <!-- Davis Weather: Medio -->
-            <circle cx="200" cy="210" r="13" fill="#6b645c" opacity="0.75"/>
-            <text x="200" y="214" fill="#fff" font-family="sans-serif" font-size="8.5" font-weight="bold" text-anchor="middle">Davis</text>
-
-            <!-- AGROSENSE: OCÉANO AZUL -->
-            <circle cx="530" cy="70" r="22" fill="#2d5b3c" stroke="#1c4573" stroke-width="2.5"/>
-            <text x="530" y="74" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">AgroSense</text>
-            <rect x="440" y="100" width="180" height="24" rx="4" fill="#2d5b3c"/>
-            <text x="530" y="116" fill="#fff" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle">★ Océano Azul: DIY + Tiempo Real</text>
-          </svg>
-          <div class="diagram-caption">Figura 4.1: Mapa Perceptual de Posicionamiento que demuestra la ventaja competitiva de AgroSense.</div>
+        <h3>4.1. Matriz Comparativa de Capacidades (Benchmarking)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 25%;">Solución / Alternativa</th>
+                <th style="width: 20%;">Tipo de Competidor</th>
+                <th style="width: 27%;">Ventajas Principales</th>
+                <th style="width: 28%;">Desventajas / Brechas Frente a Repartos Ya</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Statu Quo Manual (Excel + WhatsApp + Papel)</strong></td>
+                <td><span class="badge badge-warning">Indirecto / Sustituto</span></td>
+                <td>Costo inicial nulo, uso de herramientas cotidianas sin capacitación formal.</td>
+                <td>Descontrol total de paquetes, llamadas incesantes de clientes, pérdida de remitos y riesgo de desvío de dinero.</td>
+              </tr>
+              <tr>
+                <td><strong>Software Enterprise Corporativo (SAP / Andreani / QuadMinds)</strong></td>
+                <td><span class="badge badge-primary">Directo</span></td>
+                <td>Trazabilidad total, ruteo avanzado, reportería ejecutiva completa.</td>
+                <td>Costos de licenciamiento en dólares prohibitivos para PyMEs locales, meses de consultoría y apps complejas para choferes.</td>
+              </tr>
+              <tr>
+                <td><strong>Repartos Ya (Nuestra Solución)</strong></td>
+                <td><span class="badge badge-success">Propuesta de Valor</span></td>
+                <td>App chofer minimalista offline-first, foto de factura digital, tracking público por código y costo accesible en pesos.</td>
+                <td>Enfocado en logística PyME urbana (hasta 30 choferes); no incluye optimización interprovincial de flotas pesadas.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </section>
 
-      <!-- ========================================== -->
-      <!-- CAPÍTULO 5: INICIATIVAS Y ÉPICAS (GUÍA 3) -->
-      <!-- ========================================== -->
-      <section id="cap5" class="content-section">
-        <h2 class="section-title">5. Iniciativas y Épicas Aplicadas a AgroSense (Guía 3)</h2>
-        <p class="section-lead">
-          La <strong>Guía 3</strong> establece la descomposición ágil de alto nivel. Una <em>Iniciativa</em> representa la gran meta estratégica de negocio de la organización. Esta se descompone en <em>Épicas</em>, que son grandes bloques de funcionalidad orientados al usuario que no pueden completarse en un único sprint y requieren ser subdivididos posteriormente en Historias de Usuario individuales.
+        <h3>4.2. Los 3 Pasos del Mapa Perceptual de Posicionamiento</h3>
+        <p>
+          Siguiendo estrictamente el procedimiento metodológico dictado por la cátedra:
         </p>
-
-        <div class="card p-3 my-3">
-          <h3 style="color:var(--primary); margin-top:0;">5.1 Iniciativa Estratégica AgroSense</h3>
-          <p><strong>Declaración Estratégica:</strong></p>
-          <div class="card card-callout p-3">
-            <em>"Proveer una plataforma integral y modular de agricultura de precisión (hardware IoT + nube) de ultra-bajo costo para productores del cordón hortícola bonaerense, permitiendo reducir las pérdidas por heladas en un 80% y optimizar el consumo de agua subterránea en un 35% durante el primer año de adopción."</em>
+        <div class="step-container">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Paso 1: Identificar a los competidores directos e indirectos</h4>
+              <p>Relevamiento de soluciones actuales en el mercado: software corporativo de gran escala (SAP/Andreani) frente a la informalidad cotidiana (Excel, WhatsApp y papel).</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Paso 2: Definir dos atributos clave ortogonales para los Ejes X e Y</h4>
+              <p>
+                • <strong>Eje X (Horizontal):</strong> <em>Accesibilidad de Costo y Simplicidad de Mantenimiento</em> (desde licencias enterprise caras en dólares hasta costos accesibles en moneda local para PyMEs).<br>
+                • <strong>Eje Y (Vertical):</strong> <em>Grado de Trazabilidad Digital en Tiempo Real</em> (desde gestión analógica en papel y WhatsApp sin control hasta trazabilidad sincronizada en la nube con app y tracking público).
+              </p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Paso 3: Ubicar los productos en la matriz en base a la percepción estratégica</h4>
+              <p>Visualización del posicionamiento estratégico: <strong>Repartos Ya</strong> se ubica en el cuadrante superior derecho, combinando alta trazabilidad digital con costos accesibles y mínima curva de aprendizaje para choferes.</p>
+            </div>
           </div>
         </div>
 
-        <h3>5.2 Descomposición en Épicas del Emprendimiento</h3>
-        <p>Siguiendo la metodología de la cátedra, la iniciativa se descompone en 4 Épicas exhaustivas:</p>
+        <div class="diagram-card">
+          <div class="diagram-title">Mapa Perceptual de Posicionamiento Estratégico para Repartos Ya</div>
+          <svg viewBox="0 0 920 520" width="100%" height="auto" style="max-width:920px; display:block; margin:0 auto; font-family:'Source Sans 3', sans-serif;" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="900" height="500" rx="10" fill="var(--bg-card-subtle)" stroke="var(--border-color)" stroke-width="1.5"/>
 
-        <div class="table-container">
-          <table class="academic-table">
+            <!-- Fondo Cuadrante Destacado -->
+            <rect x="460" y="50" width="390" height="210" fill="rgba(28, 69, 115, 0.05)" rx="4"/>
+            <text x="835" y="75" text-anchor="end" font-size="11" font-weight="700" fill="var(--accent-ink)" letter-spacing="0.5">ALTA TRAZABILIDAD / COSTO PyME</text>
+
+            <!-- Ejes -->
+            <line x1="80" y1="260" x2="840" y2="260" stroke="var(--border-focus)" stroke-width="2.2"/>
+            <line x1="460" y1="50" x2="460" y2="450" stroke="var(--border-focus)" stroke-width="2.2"/>
+
+            <!-- Flechas -->
+            <polygon points="454,50 460,36 466,50" fill="var(--border-focus)"/>
+            <polygon points="454,450 460,464 466,450" fill="var(--border-focus)"/>
+            <polygon points="80,254 66,260 80,266" fill="var(--border-focus)"/>
+            <polygon points="840,254 854,260 840,266" fill="var(--border-focus)"/>
+
+            <!-- Etiquetas de Ejes Principales -->
+            <text x="460" y="28" font-size="13" font-weight="700" fill="var(--accent-ink)" text-anchor="middle">▲ ALTA TRAZABILIDAD DIGITAL EN TIEMPO REAL (App Móvil + Panel Web + Cloud) (+)</text>
+            <text x="460" y="488" font-size="13" font-weight="700" fill="var(--text-muted)" text-anchor="middle">▼ BAJA O NULA TRAZABILIDAD (Gestión Manual, Remitos en Papel, WhatsApp Desordenado) (-)</text>
+            <text x="840" y="285" font-size="13" font-weight="700" fill="var(--accent-sage)" text-anchor="end">COSTO ACCESIBLE PyME / BAJO MANTENIMIENTO (+)</text>
+            <text x="80" y="285" font-size="13" font-weight="700" fill="var(--accent-terra)" text-anchor="start">(-) LICENCIAMIENTO ENTERPRISE CARO / PROHIBITIVO</text>
+
+            <!-- Competidor 1: SAP / Andreani (Top-Left) -->
+            <circle cx="240" cy="130" r="16" fill="#a33b2a" stroke="#ffffff" stroke-width="3"/>
+            <rect x="145" y="80" width="190" height="38" rx="6" fill="#a33b2a"/>
+            <text x="240" y="104" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">SAP / Andreani</text>
+            
+            <rect x="120" y="160" width="240" height="46" rx="6" fill="var(--bg-card)" stroke="#a33b2a" stroke-width="1.5"/>
+            <text x="240" y="180" font-size="12" font-weight="700" fill="var(--text-heading)" text-anchor="middle">Software Corporativo</text>
+            <text x="240" y="196" font-size="11" fill="var(--text-muted)" text-anchor="middle">Inaccesible para PyMEs de 14 choferes</text>
+
+            <!-- Competidor 2: Excel / WhatsApp (Bottom-Right) -->
+            <circle cx="680" cy="350" r="16" fill="#8c631e" stroke="#ffffff" stroke-width="3"/>
+            <rect x="580" y="300" width="200" height="38" rx="6" fill="#8c631e"/>
+            <text x="680" y="324" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">Excel / WhatsApp</text>
+            
+            <rect x="550" y="380" width="260" height="46" rx="6" fill="var(--bg-card)" stroke="#8c631e" stroke-width="1.5"/>
+            <text x="680" y="400" font-size="12" font-weight="700" fill="var(--text-heading)" text-anchor="middle">Statu Quo Manual (Sustituto)</text>
+            <text x="680" y="416" font-size="11" fill="var(--text-muted)" text-anchor="middle">Sin trazabilidad, errores y descontrol</text>
+
+            <!-- Target: Repartos Ya (Top-Right) -->
+            <circle cx="680" cy="130" r="16" fill="#1c4573" stroke="#2d5b3c" stroke-width="3"/>
+            <rect x="570" y="78" width="220" height="40" rx="6" fill="#1c4573" stroke="#2d5b3c" stroke-width="2"/>
+            <text x="680" y="104" fill="#ffffff" font-size="16" font-weight="800" text-anchor="middle">Repartos Ya</text>
+            
+            <rect x="550" y="160" width="260" height="50" rx="6" fill="var(--bg-card)" stroke="#1c4573" stroke-width="1.5"/>
+            <text x="680" y="181" font-size="12.5" font-weight="700" fill="var(--text-heading)" text-anchor="middle">Plataforma Logística PyME</text>
+            <text x="680" y="198" font-size="11" fill="var(--text-muted)" text-anchor="middle">App Choferes + Panel + Tracking</text>
+          </svg>
+          <div class="diagram-caption">Figura 4.1: Mapa Perceptual de Posicionamiento Estratégico para Repartos Ya.</div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 5: GUÍA 3 - INICIATIVAS Y ÉPICAS EN REPARTOS YA      -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap5">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 5 • Guía 3 de Cátedra</div>
+          <h2 class="chapter-title">Descomposición Funcional: Iniciativas y Épicas</h2>
+        </div>
+
+        <p>
+          Las diapositivas oficiales de la cátedra definen con exactitud la jerarquía de requerimientos del proyecto de software:
+        </p>
+
+        <div class="diagram-card" style="padding:15px; margin:16px 0;">
+          <svg viewBox="0 0 860 110" width="100%" height="auto" style="max-width:860px; display:block; margin:0 auto; font-family:'Source Sans 3', sans-serif;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow-flow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--text-muted)" />
+              </marker>
+            </defs>
+
+            <!-- Iniciativa -->
+            <rect x="20" y="15" width="220" height="80" rx="8" fill="var(--bg-card)" stroke="var(--accent-ink)" stroke-width="2"/>
+            <text x="130" y="42" text-anchor="middle" font-weight="700" fill="var(--accent-ink)" font-size="15">INICIATIVA</text>
+            <text x="130" y="65" text-anchor="middle" fill="var(--text-muted)" font-size="11.5">Objetivo estratégico a alto nivel</text>
+            <text x="130" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="11.5">(Visión ambiciosa del negocio)</text>
+
+            <!-- Arrow 1 -->
+            <path d="M 255 55 L 305 55" stroke="var(--text-muted)" stroke-width="2.5" marker-end="url(#arrow-flow)"/>
+
+            <!-- Épicas -->
+            <rect x="320" y="15" width="220" height="80" rx="8" fill="var(--bg-card)" stroke="var(--accent-sage)" stroke-width="2"/>
+            <text x="430" y="42" text-anchor="middle" font-weight="700" fill="var(--accent-sage)" font-size="15">ÉPICAS</text>
+            <text x="430" y="65" text-anchor="middle" fill="var(--text-muted)" font-size="11.5">Módulos concretos de ejecución</text>
+            <text x="430" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="11.5">("Bajar a tierra" la iniciativa)</text>
+
+            <!-- Arrow 2 -->
+            <path d="M 555 55 L 605 55" stroke="var(--text-muted)" stroke-width="2.5" marker-end="url(#arrow-flow)"/>
+
+            <!-- Historias de Usuario -->
+            <rect x="620" y="15" width="220" height="80" rx="8" fill="var(--bg-card)" stroke="var(--accent-ochre)" stroke-width="2"/>
+            <text x="730" y="42" text-anchor="middle" font-weight="700" fill="var(--accent-ochre)" font-size="15">HISTORIAS DE USUARIO</text>
+            <text x="730" y="65" text-anchor="middle" fill="var(--text-muted)" font-size="11.5">Requerimientos detallados</text>
+            <text x="730" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="11.5">Contados desde el usuario</text>
+          </svg>
+        </div>
+
+        <h3>5.1. Iniciativa Estratégica (Template Oficial de Cátedra)</h3>
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>Iniciativa: INIC-01</span>
+            <span class="badge badge-primary">Estratégica</span>
+          </div>
+          <p><strong>Título:</strong> Transformación Digital y Trazabilidad Integral de la Logística Urbana de Última Milla en Repartos Ya.</p>
+          <p><strong>Descripción:</strong> Desarrollar una plataforma informática unificada que reemplace por completo el circuito informal basado en planillas de papel, pizarras y audios de WhatsApp, centralizando la carga y asignación de envíos en un panel web para el despachador, proveyendo a los transportistas una aplicación móvil intuitiva con modo offline para registrar entregas con foto de factura, y habilitando a los clientes un portal web de tracking público por código en tiempo real.</p>
+          <p><strong>Métricas de Éxito (KPIs):</strong></p>
+          <ul style="margin-bottom:0;">
+            <li>Reducción del 80% en llamadas y mensajes de consulta de clientes al despachador.</li>
+            <li>Disminución a 0% de pérdidas de comprobantes de entrega o facturas de cobro.</li>
+            <li>Reducción del tiempo de despacho y armado de rutas matutino de 90 a menos de 20 minutos.</li>
+          </ul>
+        </div>
+
+        <h3>5.2. Descomposición en Épicas del Emprendimiento</h3>
+        <p>
+          Siguiendo la metodología de la cátedra, la iniciativa <strong>INIC-01</strong> se desglosa en cuatro épicas modulares e independientes:
+        </p>
+
+        <div class="table-wrapper">
+          <table>
             <thead>
               <tr>
-                <th style="width:12%;">ID Épica</th>
-                <th style="width:24%;">Nombre de la Épica</th>
-                <th style="width:40%;">Descripción Funcional y Alcance</th>
-                <th style="width:24%;">Criterio de Éxito de Negocio</th>
+                <th style="width: 12%;">ID Épica</th>
+                <th style="width: 28%;">Nombre del Módulo</th>
+                <th style="width: 35%;">Alcance Funcional Concreto</th>
+                <th style="width: 25%;">Valor de Negocio Aportado</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>EP-01</strong></td>
-                <td><strong>Telemetría Ambiental y de Suelo en Tiempo Real</strong></td>
-                <td>Captura continua en campo (humedad volumétrica de suelo a dos profundidades, temperatura ambiente y foliar, radiación UV), almacenamiento temporal offline en nodo sensor y transmisión LoRaWAN hacia el concentrador central.</td>
-                <td>Disponibilidad de datos en el servidor &ge; 99.5% con lecturas cada 10 minutos por nodo.</td>
+                <td><strong>Carga, Gestión y Asignación de Envíos</strong></td>
+                <td>Carga individual y masiva de paquetes en el panel web, validación de domicilios, asignación de chofer por zona y generación de código de seguimiento único.</td>
+                <td>Organiza el despacho matutino y elimina el uso de pizarras manuales de corcho.</td>
               </tr>
               <tr>
                 <td><strong>EP-02</strong></td>
-                <td><strong>Automatización y Control Remoto de Riego</strong></td>
-                <td>Control de electroválvulas solenoides de 12V en sectores de cultivo y motobomba mediante actuadores inalámbricos. Incluye modo manual desde smartphone y modo automático gobernado por umbrales de humedad de suelo programables.</td>
-                <td>Respuesta de apertura/cierre de válvulas en campo en menos de 5 segundos desde la orden.</td>
+                <td><strong>App Móvil de Choferes con Operación Offline</strong></td>
+                <td>Lista de entregas del día, cambio de estados (En Viaje, Entregado, No Entregado), captura fotográfica obligatoria de factura/remito y sincronización automática.</td>
+                <td>Garantiza trazabilidad en ruta y respaldo digital de cada entrega sin depender de 4G constante.</td>
               </tr>
               <tr>
                 <td><strong>EP-03</strong></td>
-                <td><strong>Motor Predictivo y Sistema de Alertas Críticas (Heladas)</strong></td>
-                <td>Algoritmo que calcula la probabilidad de helada radiativa combinando la tasa de caída térmica por hora, el punto de rocío y el pronóstico meteorológico satelital, despachando alertas sonoras push y mensajes SMS prioritarios al productor.</td>
-                <td>Anticipación mínima de alerta de helada crítica &ge; 90 minutos antes del umbral de 0°C.</td>
+                <td><strong>Portal de Tracking Público para Destinatarios</strong></td>
+                <td>Página web responsiva abierta donde el destinatario final consulta el estado de su envío con código alfanumérico sin necesidad de crear cuenta ni login.</td>
+                <td>Elimina las llamadas telefónicas reiteradas de clientes ansiosos a la distribuidora.</td>
               </tr>
               <tr>
                 <td><strong>EP-04</strong></td>
-                <td><strong>Panel de Control Agronómico y Métricas de Rendimiento</strong></td>
-                <td>Dashboard web y móvil responsivo que ofrece visualización geoespacial de parcelas con mapas de calor de humedad, curvas históricas de variables y reportes automáticos exportables para certificaciones de riego sostenible.</td>
-                <td>Tiempo de adopción autónoma por productores no técnicos &le; 15 minutos en la primera sesión.</td>
+                <td><strong>Control de Cobranzas y Finanzas de Choferes</strong></td>
+                <td>Registro de cobros contra entrega (efectivo, transferencia), cierre diario de caja por chofer y aislamiento estricto de datos financieros (bloqueados para choferes).</td>
+                <td>Transparencia total en el dinero recaudado y liquidación exacta de fletes a fin de mes.</td>
               </tr>
             </tbody>
           </table>
         </div>
+      </section>
 
-        <div class="card card-alert p-3 my-3">
-          <strong>⚠️ Advertencia de Cátedra sobre la Redacción de Épicas:</strong>
-          <ul class="mb-0 mt-2">
-            <li><strong>Error común:</strong> Redactar una épica como una tarea técnica interna (ej. <em>"Configurar servidor AWS EC2 y base PostgreSQL"</em>). Una épica DEBE aportar valor tangible perceptible por el usuario de negocio.</li>
-            <li><strong>Error de granularidad:</strong> Definir una épica que puede resolverse en una simple tarde de programación. Si cabe en un sprint de 3 días, es una Historia de Usuario, no una Épica.</li>
-          </ul>
+      <!-- ============================================================== -->
+      <!-- CAPITULO 6: GUÍA 2 - REQUERIMIENTOS NO FUNCIONALES (RNF)      -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap6">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 6 • Guía 2 de Cátedra</div>
+          <h2 class="chapter-title">Requerimientos No Funcionales (RNF)</h2>
+        </div>
+
+        <p>
+          Los <strong>Requerimientos No Funcionales (RNF)</strong> definen atributos de calidad, restricciones operativas y propiedades emergentes que el sistema debe satisfacer. Tal como señala la cátedra en sus diapositivas mediante el ejemplo de la construcción de una casa (<em>"presupuesto de 20 millones", "terreno de 80 m²", "estar pensada para zona inundable"</em>), los RNF no describen <em>qué hace</em> el sistema, sino <em>bajo qué condiciones y restricciones de calidad</em> debe operar.
+        </p>
+
+        <div class="box-callout box-alert">
+          <p>
+            <strong>Regla de Oro en Correcciones de Cátedra:</strong> Todo RNF debe ser <em>objetivamente contrastable</em>. Si no existe una métrica numérica precisa y un método de prueba para verificar su cumplimiento, el requerimiento es considerado ambiguo e inválido.
+          </p>
+        </div>
+
+        <h3>6.1. Marco Normativo ISO/IEC 25010</h3>
+        <p>
+          La cátedra clasifica los RNF según el estándar internacional <strong>ISO/IEC 25010</strong> en ocho características principales: <em>Adecuación Funcional, Eficiencia de Desempeño (Rendimiento), Compatibilidad, Usabilidad, Confiabilidad, Seguridad, Mantenibilidad y Portabilidad</em>.
+        </p>
+
+        <h3>6.2. Catálogo Oficial de RNF para Repartos Ya</h3>
+        <p>
+          A continuación se presenta el catálogo formal exigido en la entrega de la Guía 2:
+        </p>
+
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>RNF-01 • Eficiencia de Desempeño (Rendimiento en Tracking)</span>
+            <span class="badge badge-primary">ISO 25010</span>
+          </div>
+          <p><strong>Descripción:</strong> El portal web de tracking público debe responder a las consultas de los destinatarios con latencia mínima, incluso en picos de alta concurrencia.</p>
+          <p><strong>Métrica Objetiva:</strong> Tiempo de respuesta del servidor $\le 1.5\text{ segundos}$ en el percentil 95 ($P_{95}$) para la consulta de estado de un código alfanumérico, bajo una carga simulada de 500 solicitudes concurrentes por minuto.</p>
+          <p><strong>Método de Verificación:</strong> Prueba de estrés automatizada mediante script de k6/JMeter contra el endpoint público de consulta durante 30 minutos continuos.</p>
+        </div>
+
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>RNF-02 • Confiabilidad & Operación Offline-First</span>
+            <span class="badge badge-success">ISO 25010</span>
+          </div>
+          <p><strong>Descripción:</strong> La aplicación móvil de los choferes debe operar sin interrupciones en zonas sin cobertura 4G/datos móviles (subsuelos, áreas periurbanas o galpones industriales).</p>
+          <p><strong>Métrica Objetiva:</strong> Almacenamiento local persistente en SQLite de al menos 200 entregas con sus fotografías asociadas en cola local. Sincronización automática completa con la nube en un tiempo $\le 120\text{ segundos}$ una vez restablecida la conexión a Internet, sin pérdida ni duplicación de registros.</p>
+          <p><strong>Método de Verificación:</strong> Poner el dispositivo móvil en Modo Avión durante 4 horas, registrar 15 entregas con fotos de remitos, desactivar Modo Avión y comprobar la llegada íntegra al panel web.</p>
+        </div>
+
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>RNF-03 • Seguridad y Aislamiento de Información Financiera</span>
+            <span class="badge badge-danger">ISO 25010</span>
+          </div>
+          <p><strong>Descripción:</strong> La información financiera de la empresa (facturación global, comisiones totales y balances de la distribuidora) debe estar estrictamente bloqueada para el personal de reparto.</p>
+          <p><strong>Métrica Objetiva:</strong> Control de acceso basado en roles (RBAC) con tokens JWT expirables a los 60 minutos. Tasa de acceso no autorizado a endpoints de finanzas = 0%. Tráfico 100% cifrado mediante TLS 1.3 en tránsito y base de datos con AES-256 en reposo.</p>
+          <p><strong>Método de Verificación:</strong> Intento deliberado de consumo de endpoints de balance y facturación utilizando credenciales de chofer mediante Postman/curl, verificando retorno estricto de código HTTP 403 Forbidden.</p>
+        </div>
+
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>RNF-04 • Usabilidad y Tiempo de Carga de Paquetes</span>
+            <span class="badge badge-warning">ISO 25010</span>
+          </div>
+          <p><strong>Descripción:</strong> El despachador debe ser capaz de ingresar y asignar nuevos envíos al sistema con máxima agilidad durante el pico operativo de la mañana.</p>
+          <p><strong>Métrica Objetiva:</strong> Un operador capacitado debe tardar un tiempo promedio $\le 45\text{ segundos}$ en cargar un nuevo paquete individual con todos sus datos obligatorios (remitente, destinatario, dirección, franja horaria y chofer asignado).</p>
+          <p><strong>Método de Verificación:</strong> Prueba de tiempo y movimiento cronometrando la carga continua de un lote de 20 paquetes por dos operadores distintos.</p>
+        </div>
+
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>RNF-05 • Portabilidad & Eficiencia de Recursos Móviles</span>
+            <span class="badge badge-primary">Restricción Técnica</span>
+          </div>
+          <p><strong>Descripción:</strong> La app móvil debe funcionar en los teléfonos de gama baja o media propios de los transportistas sin saturar memoria ni consumir en exceso su plan de datos personales.</p>
+          <p><strong>Métrica Objetiva:</strong> Compatibilidad garantizada con Android 8.0 (API 26) o superior. Consumo de memoria RAM $\le 65\text{ MB}$ en ejecución y consumo de datos móviles $\le 25\text{ MB}$ por jornada laboral completa de 40 entregas (mediante compresión local de imágenes a $\le 200\text{ KB}$ antes del envío).</p>
+          <p><strong>Método de Verificación:</strong> Profiling de memoria con Android Studio Profiler y medición de consumo de datos en emulador durante simulación de jornada de reparto.</p>
         </div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- CAPÍTULO 6: REQUERIMIENTOS NO FUNCIONALES (GUÍA 2) -->
-      <!-- ========================================== -->
-      <section id="cap6" class="content-section">
-        <h2 class="section-title">6. Requerimientos No Funcionales en Template Oficial (Guía 2)</h2>
-        <p class="section-lead">
-          La <strong>Guía 2</strong> de la cátedra exige que los Requerimientos No Funcionales (RNF) no sean formulados como buenas intenciones vagas (ej: <em>"el sistema debe ser rápido y seguro"</em>), sino especificados mediante métricas objetivas, verificables y categorizados rigurosamente bajo el estándar <strong>FURPS+</strong> o <strong>ISO 25010</strong>.
+      <!-- ============================================================== -->
+      <!-- CAPITULO 7: GUÍA 4 - HISTORIAS DE USUARIO EN REPARTOS YA      -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap7">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 7 • Guía 4 de Cátedra</div>
+          <h2 class="chapter-title">Historias de Usuario (INVEST y BDD Gherkin)</h2>
+        </div>
+
+        <p>
+          Las <strong>Historias de Usuario (HU)</strong> son especificaciones de requerimientos funcionales contadas estrictamente desde la perspectiva del usuario que interactúa con el sistema. La cátedra exige dos pilares metodológicos:
+        </p>
+        <ul>
+          <li><strong>El Modelo 3C (Ron Jeffries):</strong> <em>Card</em> (tarjeta física/digital con la frase formal), <em>Conversation</em> (diálogo continuo con el cliente para refinar detalles) y <em>Confirmation</em> (criterios de aceptación que determinan cuándo está terminada).</li>
+          <li><strong>Criterios INVEST (Bill Wake):</strong> <strong>I</strong>ndependiente, <strong>N</strong>egociable, <strong>V</strong>aliosa, <strong>E</strong>stimable, <strong>S</strong>mall (pequeña) y <strong>T</strong>esteable (verificable).</li>
+        </ul>
+
+        <h3>7.1. Estructura Oficial de la Cátedra para una HU</h3>
+        <p>
+          Tal como se expone en las diapositivas oficiales de la cátedra (clase HU, págs. 9 a 25), cada historia de usuario debe contener sin excepción cuatro apartados:
+        </p>
+        <ol>
+          <li><strong>ID de la Historia y Épica Asociada:</strong> Trazabilidad vertical (ej. HU-01 vinculada a EP-01).</li>
+          <li><strong>Título Formal:</strong> Estructura canónica <code>Como [ROL], quiero [ACCIÓN/FUNCIONALIDAD], para [BENEFICIO/VALOR]</code>.</li>
+          <li><strong>Reglas a Considerar:</strong> Restricciones de negocio y consideraciones puntuales del dominio del sistema para esa HU específica.</li>
+          <li><strong>Criterios de Aceptación (Escenarios de Prueba):</strong> Definición de las pruebas concretas que se realizarán durante la demo ante el cliente, detallando tanto <em>casos de éxito</em> como <em>casos de fallo</em>.</li>
+        </ol>
+
+        <h3>7.2. Catálogo Detallado de Historias de Usuario para Repartos Ya</h3>
+
+        <!-- HU-01 -->
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>HU-01 • Asignación Masiva de Envíos a Chofer por Zona</span>
+            <div>
+              <span class="badge badge-primary">EP-01</span>
+              <span class="badge badge-warning">5 Story Points</span>
+            </div>
+          </div>
+          <p><strong>Título:</strong> Como <em>Despachador (Martín)</em>, quiero <em>asignar un lote de paquetes pendientes a un chofer específico filtrando por barrio o zona</em>, para <em>organizar las hojas de ruta de la mañana en menos de 15 minutos sin errores de duplicación</em>.</p>
+          
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Reglas a Considerar:</h4>
+          <ul>
+            <li>Solo los usuarios con rol <code>Despachador</code> o <code>Administrador</code> pueden asignar o reasignar envíos.</li>
+            <li>Un paquete no puede ser asignado si ya se encuentra en estado "En Camino" o "Entregado".</li>
+            <li>Al asignar el lote, el estado de todos los paquetes seleccionados cambia automáticamente de "Pendiente" a "Asignado".</li>
+          </ul>
+
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Criterios de Aceptación (Escenarios BDD):</h4>
+          
+          <div class="gherkin-box">
+            <span class="gherkin-keyword">ESCENARIO 1 (Éxito):</span> Asignación masiva exitosa de 12 paquetes a un chofer activo<br>
+            <span class="gherkin-keyword">DADO</span> que el despachador visualiza la tabla de envíos pendientes y filtra por zona "La Plata Centro"<br>
+            <span class="gherkin-keyword">Y</span> selecciona 12 paquetes pendientes mediante los checkboxes<br>
+            <span class="gherkin-keyword">CUANDO</span> elige al chofer "Jorge Benítez" en el selector desplegable y pulsa "Confirmar Asignación"<br>
+            <span class="gherkin-keyword">ENTONCES</span> el sistema actualiza los 12 paquetes a estado "Asignado"<br>
+            <span class="gherkin-keyword">Y</span> el chofer Jorge recibe una notificación inmediata en su teléfono móvil con su nueva hoja de ruta.
+          </div>
+
+          <div class="gherkin-box">
+            <span class="gherkin-keyword">ESCENARIO 2 (Fallo):</span> Intento de asignación a un chofer dado de baja o inactivo<br>
+            <span class="gherkin-keyword">DADO</span> que el despachador selecciona un paquete pendiente<br>
+            <span class="gherkin-keyword">CUANDO</span> intenta forzar la asignación a un chofer marcado como "Inactivo por Licencia"<br>
+            <span class="gherkin-keyword">ENTONCES</span> el sistema bloquea la acción, no modifica el paquete y muestra un mensaje de advertencia: "No se pueden asignar envíos a choferes fuera de servicio".
+          </div>
+        </div>
+
+        <!-- HU-02 -->
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>HU-02 • Confirmación de Entrega con Foto de Comprobante / Factura</span>
+            <div>
+              <span class="badge badge-primary">EP-02</span>
+              <span class="badge badge-warning">5 Story Points</span>
+            </div>
+          </div>
+          <p><strong>Título:</strong> Como <em>Chofer (Jorge)</em>, quiero <em>marcar un paquete como entregado tomando una fotografía del remito firmado o de la fachada del domicilio</em>, para <em>dejar constancia digital irrefutable de la entrega y habilitar el cobro sin riesgo de extravío de papeles</em>.</p>
+
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Reglas a Considerar:</h4>
+          <ul>
+            <li>La captura fotográfica es obligatoria; la app no permite confirmar la entrega sin al menos una imagen adjunta.</li>
+            <li>La imagen capturada debe comprimirse automáticamente a $\le 200\text{ KB}$ antes de encolar su envío para ahorrar datos móviles.</li>
+            <li>Si el chofer no tiene conexión 4G en ese momento, la entrega debe quedar guardada en estado local offline y sincronizarse en segundo plano.</li>
+          </ul>
+
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Criterios de Aceptación (Escenarios BDD):</h4>
+
+          <div class="gherkin-box">
+            <span class="gherkin-keyword">ESCENARIO 1 (Éxito en línea):</span> Confirmación de entrega con cámara y conectividad 4G<br>
+            <span class="gherkin-keyword">DADO</span> que el chofer tiene el paquete #RY-8492 en estado "En Camino"<br>
+            <span class="gherkin-keyword">CUANDO</span> pulsa "Entregar", toma la fotografía del remito con la cámara y pulsa "Finalizar"<br>
+            <span class="gherkin-keyword">ENTONCES</span> el sistema registra la entrega con fecha, hora y coordenadas GPS<br>
+            <span class="gherkin-keyword">Y</span> el estado del paquete cambia a "Entregado" visible de inmediato en el panel web y en el tracking público.
+          </div>
+
+          <div class="gherkin-box">
+            <span class="gherkin-keyword">ESCENARIO 2 (Éxito en modo offline):</span> Registro de entrega en zona sin cobertura celular<br>
+            <span class="gherkin-keyword">DADO</span> que el chofer se encuentra en un garaje sin señal de datos móviles<br>
+            <span class="gherkin-keyword">CUANDO</span> toma la foto y confirma la entrega del paquete<br>
+            <span class="gherkin-keyword">ENTONCES</span> la app guarda la información en la base de datos local SQLite con estado "Pendiente de Sincronización"<br>
+            <span class="gherkin-keyword">Y</span> al recuperar señal 4G, transmite automáticamente el paquete sin requerir intervención del chofer.
+          </div>
+        </div>
+
+        <!-- HU-03 -->
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>HU-03 • Consulta de Tracking Público por Código Alfanumérico</span>
+            <div>
+              <span class="badge badge-primary">EP-03</span>
+              <span class="badge badge-warning">3 Story Points</span>
+            </div>
+          </div>
+          <p><strong>Título:</strong> Como <em>Destinatario Final</em>, quiero <em>ingresar el código alfanumérico de mi envío en la página web pública</em>, para <em>conocer la fecha estimada de llegada y el estado exacto de mi compra sin tener que llamar por teléfono</em>.</p>
+
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Reglas a Considerar:</h4>
+          <ul>
+            <li>No se debe requerir creación de cuenta, inicio de sesión ni contraseña para consultar el tracking.</li>
+            <li>Por privacidad, nunca se debe mostrar el nombre completo del chofer ni su número de teléfono celular personal.</li>
+            <li>El código de seguimiento tiene formato estricto de 8 caracteres alfanuméricos en mayúsculas (ej. <code>RY-8492A</code>).</li>
+          </ul>
+
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Criterios de Aceptación (Escenarios BDD):</h4>
+
+          <div class="gherkin-box">
+            <span class="gherkin-keyword">ESCENARIO 1 (Éxito):</span> Consulta válida con código existente<br>
+            <span class="gherkin-keyword">DADO</span> que el destinatario ingresa al sitio web de Repartos Ya desde su navegador web<br>
+            <span class="gherkin-keyword">CUANDO</span> ingresa el código "RY-8492A" y pulsa "Buscar Envío"<br>
+            <span class="gherkin-keyword">ENTONCES</span> el sistema muestra la línea de tiempo del paquete con fecha y hora de cada etapa (Creado, En Camino, En Reparto)<br>
+            <span class="gherkin-keyword">Y</span> muestra la franja horaria estimada de entrega para el día de hoy.
+          </div>
+
+          <div class="gherkin-box">
+            <span class="gherkin-keyword">ESCENARIO 2 (Fallo):</span> Código inexistente o mal tipeado<br>
+            <span class="gherkin-keyword">DADO</span> que el usuario ingresa un código no registrado en el sistema (ej. "XYZ-9999")<br>
+            <span class="gherkin-keyword">CUANDO</span> pulsa "Buscar Envío"<br>
+            <span class="gherkin-keyword">ENTONCES</span> el sistema muestra un mensaje claro: "Código de envío no encontrado. Verifique los caracteres en su ticket de compra".
+          </div>
+        </div>
+
+        <!-- HU-04 -->
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>HU-04 • Cierre de Caja y Rendición de Cobranzas en Efectivo</span>
+            <div>
+              <span class="badge badge-primary">EP-04</span>
+              <span class="badge badge-warning">8 Story Points</span>
+            </div>
+          </div>
+          <p><strong>Título:</strong> Como <em>Despachador (Martín)</em>, quiero <em>generar el balance diario de cobranzas contra entrega por chofer al finalizar la tarde</em>, para <em>cotejar el dinero en efectivo rendido contra las entregas registradas en la app</em>.</p>
+
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Reglas a Considerar:</h4>
+          <ul>
+            <li>El sistema debe sumar automáticamente los importes de todos los envíos con modalidad "Pago Contra Entrega" marcados como "Entregado" en el día.</li>
+            <li>Si existe una discrepancia entre el total del sistema y el monto rendido físicamente, se debe registrar una observación de balance.</li>
+            <li>Una vez cerrada la rendición diaria del chofer, los envíos involucrados quedan bloqueados para modificaciones.</li>
+          </ul>
+
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Criterios de Aceptación (Escenarios BDD):</h4>
+
+          <div class="gherkin-box">
+            <span class="gherkin-keyword">ESCENARIO 1 (Éxito):</span> Rendición de cuentas exacta sin diferencias<br>
+            <span class="gherkin-keyword">DADO</span> que el chofer Jorge finalizó su turno con 15 paquetes entregados, de los cuales 5 requerían cobro sumando $45.000 ARS<br>
+            <span class="gherkin-keyword">CUANDO</span> el despachador ingresa el importe de $45.000 ARS en el módulo de rendición<br>
+            <span class="gherkin-keyword">ENTONCES</span> el sistema emite el comprobante de "Caja Cuadrada OK"<br>
+            <span class="gherkin-keyword">Y</span> habilita la descarga de la planilla resumen en formato PDF.
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 8: MODELADO DINÁMICO: CASOS DE USO Y DTE             -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap8">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 8 • Modelado Dinámico</div>
+          <h2 class="chapter-title">Casos de Uso Formales y Diagrama de Transición de Estados (DTE)</h2>
+        </div>
+
+        <p>
+          Las Historias de Usuario capturan la perspectiva ágil del usuario, pero el modelado dinámico formal mediante <strong>Casos de Uso</strong> y <strong>Diagramas de Transición de Estados (DTE)</strong> es indispensable para asegurar que no queden flujos de excepción sin contemplar y para gobernar el comportamiento interno de las entidades de software.
         </p>
 
-        <h3>6.1 Catálogo Oficial de RNF para AgroSense</h3>
+        <h3>8.1. Especificación Formal de Caso de Uso (Template de Cátedra)</h3>
+        <div class="template-card">
+          <div class="template-card-title">
+            <span>Caso de Uso: CU-02 • Registrar Entrega de Paquete en Destino</span>
+            <span class="badge badge-primary">Especificación Formal</span>
+          </div>
+          <p><strong>Actor Primario:</strong> Chofer / Transportista.</p>
+          <p><strong>Precondición:</strong> El chofer inició sesión en la aplicación móvil y tiene el paquete en estado "En Camino" asignado a su hoja de ruta del día.</p>
+          <p><strong>Disparador (Trigger):</strong> El chofer arriba al domicilio del destinatario y abre los detalles del envío en la app móvil.</p>
+          
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Flujo Principal (Happy Path):</h4>
+          <ol style="margin-bottom:12px;">
+            <li>El chofer presiona el botón "Llegué a Destino" en la tarjeta del paquete. El estado cambia a "En Domicilio".</li>
+            <li>El destinatario se presenta, recibe el paquete y firma el remito/factura en papel.</li>
+            <li>El chofer presiona "Confirmar Entrega". La app abre la cámara fotográfica del teléfono.</li>
+            <li>El chofer enfoca y toma la foto del remito firmado (o de la fachada con el paquete).</li>
+            <li>La app comprime la fotografía localmente y solicita confirmar el método de pago recibido (Efectivo / Ya Pagado).</li>
+            <li>El chofer presiona "Finalizar Entrega".</li>
+            <li>El sistema valida la integridad de la foto, registra timestamp y geolocalización GPS, y actualiza el estado a "Entregado".</li>
+            <li>El paquete desaparece de la lista de pendientes del chofer y se actualiza el panel web del despachador y el portal de tracking.</li>
+          </ol>
 
-        <div class="table-container">
-          <table class="academic-table">
+          <h4 style="font-size:0.95rem; color:var(--text-heading); margin-top:10px;">Flujos Alternativos y Excepciones:</h4>
+          <ul>
+            <li><strong>2a. Nadie atiende en el domicilio (Destinatario Ausente):</strong> El chofer espera 5 minutos reglamentarios, presiona "No Entregado", selecciona el motivo "Ausente / No responde timbre", toma foto de la fachada como evidencia de visita y el paquete pasa a estado "No Entregado (Reintento)".</li>
+            <li><strong>2b. Dirección errónea o inexistente:</strong> El chofer selecciona "Dirección Incorrecta", la app solicita escribir una aclaración textual y dispara una alerta inmediata al panel del despachador para comunicarse con el comercio emisor.</li>
+            <li><strong>4a. Dispositivo sin conexión celular (Offline):</strong> El sistema almacena la foto y los datos en la base de datos local SQLite, avisa al chofer "Entrega registrada offline" y encola la sincronización para cuando retorne la señal 4G.</li>
+          </ul>
+          <p><strong>Postcondición:</strong> El paquete queda registrado con comprobante fotográfico digital, se descuenta de la carga pendiente del chofer y queda disponible para rendición de cuentas.</p>
+        </div>
+
+        <h3>8.2. Diagrama de Transición de Estados (DTE) de un Envío en Repartos Ya</h3>
+        <p>
+          El ciclo de vida de un paquete en <strong>Repartos Ya</strong> se modela mediante el siguiente DTE con sus <strong>7 estados canónicos</strong> de forma completamente lineal y progresiva de izquierda a derecha, respetando las normas UML:
+        </p>
+
+        <div class="diagram-card">
+          <div class="diagram-title">DTE: Ciclo de Vida de un Envío en Repartos Ya (7 Estados Canónicos)</div>
+          <svg viewBox="0 0 920 320" width="100%" height="auto" style="max-width:920px; display:block; margin:0 auto; font-family:'Source Sans 3', sans-serif;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="dte-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--text-heading)" />
+              </marker>
+              <marker id="dte-arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent-sage)" />
+              </marker>
+              <marker id="dte-arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent-terra)" />
+              </marker>
+              <marker id="dte-arrow-ochre" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent-ochre)" />
+              </marker>
+            </defs>
+
+            <!-- LÍNEA PRINCIPAL (HAPPY PATH DE IZQUIERDA A DERECHA) -->
+
+            <!-- 0. Estado Inicial -->
+            <circle cx="36" cy="88" r="11" fill="var(--accent-ink)" />
+
+            <!-- Transición: Crear / Cargar -->
+            <path d="M 48 88 L 88 88" fill="none" stroke="var(--text-heading)" stroke-width="2" marker-end="url(#dte-arrow)" />
+
+            <!-- Estado 1: PENDIENTE -->
+            <rect x="88" y="58" width="112" height="60" rx="7" fill="var(--bg-card)" stroke="var(--accent-ink)" stroke-width="2" />
+            <text x="144" y="83" text-anchor="middle" font-weight="700" font-size="12.5" fill="var(--text-heading)">PENDIENTE</text>
+            <text x="144" y="101" text-anchor="middle" font-size="10.5" fill="var(--text-muted)">En depósito</text>
+
+            <!-- Transición a ASIGNADO -->
+            <path d="M 200 88 L 244 88" fill="none" stroke="var(--text-heading)" stroke-width="2" marker-end="url(#dte-arrow)" />
+            <text x="222" y="80" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text-muted)">Asignar</text>
+
+            <!-- Estado 2: ASIGNADO -->
+            <rect x="244" y="58" width="112" height="60" rx="7" fill="var(--bg-card)" stroke="var(--accent-ink)" stroke-width="2" />
+            <text x="300" y="83" text-anchor="middle" font-weight="700" font-size="12.5" fill="var(--text-heading)">ASIGNADO</text>
+            <text x="300" y="101" text-anchor="middle" font-size="10.5" fill="var(--text-muted)">En hoja de ruta</text>
+
+            <!-- Transición a EN CAMINO -->
+            <path d="M 356 88 L 400 88" fill="none" stroke="var(--text-heading)" stroke-width="2" marker-end="url(#dte-arrow)" />
+            <text x="378" y="80" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text-muted)">Despacho</text>
+
+            <!-- Estado 3: EN CAMINO -->
+            <rect x="400" y="58" width="116" height="60" rx="7" fill="var(--bg-card)" stroke="var(--accent-sage)" stroke-width="2" />
+            <text x="458" y="83" text-anchor="middle" font-weight="700" font-size="12.5" fill="var(--accent-sage)">EN CAMINO</text>
+            <text x="458" y="101" text-anchor="middle" font-size="10.5" fill="var(--text-muted)">En camioneta</text>
+
+            <!-- Transición a EN DOMICILIO -->
+            <path d="M 516 88 L 560 88" fill="none" stroke="var(--text-heading)" stroke-width="2" marker-end="url(#dte-arrow)" />
+            <text x="538" y="80" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text-muted)">Arribo</text>
+
+            <!-- Estado 4: EN DOMICILIO -->
+            <rect x="560" y="58" width="125" height="60" rx="7" fill="var(--bg-card)" stroke="var(--accent-ochre)" stroke-width="2" />
+            <text x="622" y="83" text-anchor="middle" font-weight="700" font-size="12.5" fill="var(--accent-ochre)">EN DOMICILIO</text>
+            <text x="622" y="101" text-anchor="middle" font-size="10.5" fill="var(--text-muted)">En puerta destino</text>
+
+            <!-- Transición a ENTREGADO (Directa adelante) -->
+            <path d="M 685 88 L 745 88" fill="none" stroke="var(--accent-sage)" stroke-width="2.5" marker-end="url(#dte-arrow-green)" />
+            <text x="715" y="79" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--accent-sage)">[Foto + Firma]</text>
+
+            <!-- Estado Final 5: ENTREGADO (Doble Borde UML) -->
+            <rect x="745" y="53" width="145" height="70" rx="8" fill="rgba(45, 91, 60, 0.08)" stroke="var(--accent-sage)" stroke-width="2.5" />
+            <rect x="749" y="57" width="137" height="62" rx="6" fill="none" stroke="var(--accent-sage)" stroke-width="1.2" />
+            <text x="817" y="82" text-anchor="middle" font-weight="800" font-size="13" fill="var(--accent-sage)">✔ ENTREGADO</text>
+            <text x="817" y="100" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--text-heading)">Comprobante OK</text>
+
+            <!-- RAMIFICACIÓN INFERIOR (CASOS DE NO ENTREGA) -->
+
+            <!-- Transición vertical hacia NO ENTREGADO -->
+            <path d="M 622 118 L 622 195" fill="none" stroke="var(--accent-terra)" stroke-width="2.2" marker-end="url(#dte-arrow-red)" />
+            <rect x="562" y="145" width="120" height="20" rx="3" fill="var(--bg-card)" stroke="var(--accent-terra)" stroke-width="1" />
+            <text x="622" y="159" text-anchor="middle" font-size="10" font-weight="700" fill="var(--accent-terra)">[Ausente / Error]</text>
+
+            <!-- Estado 6: NO ENTREGADO -->
+            <rect x="560" y="195" width="125" height="60" rx="7" fill="rgba(158, 59, 43, 0.07)" stroke="var(--accent-terra)" stroke-width="2" stroke-dasharray="5,4" />
+            <text x="622" y="220" text-anchor="middle" font-weight="700" font-size="12" fill="var(--accent-terra)">NO ENTREGADO</text>
+            <text x="622" y="238" text-anchor="middle" font-size="10.5" fill="var(--text-heading)">Foto Fachada</text>
+
+            <!-- Bucle de Reprogramación: De NO ENTREGADO hacia ASIGNADO -->
+            <path d="M 560 225 L 300 225 L 300 124" fill="none" stroke="var(--accent-ochre)" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#dte-arrow-ochre)" />
+            <rect x="385" y="213" width="125" height="22" rx="4" fill="var(--bg-card)" stroke="var(--accent-ochre)" stroke-width="1" />
+            <text x="447" y="228" text-anchor="middle" font-size="10" font-weight="700" fill="var(--accent-ochre)">Reprogramar (Reintento)</text>
+
+            <!-- Transición a DEVUELTO (3 visitas fallidas / Rechazado) -->
+            <path d="M 685 225 L 745 225" fill="none" stroke="var(--accent-terra)" stroke-width="2.2" marker-end="url(#dte-arrow-red)" />
+            <text x="715" y="217" text-anchor="middle" font-size="9" font-weight="700" fill="var(--accent-terra)">[Rechazado]</text>
+
+            <!-- Estado Final 7: DEVUELTO (Doble Borde UML) -->
+            <rect x="745" y="190" width="145" height="70" rx="8" fill="rgba(158, 59, 43, 0.08)" stroke="var(--accent-terra)" stroke-width="2.5" />
+            <rect x="749" y="194" width="137" height="62" rx="6" fill="none" stroke="var(--accent-terra)" stroke-width="1.2" />
+            <text x="817" y="219" text-anchor="middle" font-weight="800" font-size="13" fill="var(--accent-terra)">✖ DEVUELTO</text>
+            <text x="817" y="237" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--text-heading)">A Remitente</text>
+          </svg>
+          <div class="diagram-caption">Figura 8.1: Diagrama de Transición de Estados completo para Repartos Ya con sus 7 estados estandarizados.</div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- CAPITULO 9: PLAN DE GESTIÓN DE PROYECTO (PGP IEEE 1058)        -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap9">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 9 • Gestión de Proyectos</div>
+          <h2 class="chapter-title">Plan de Gestión de Proyecto (PGP según IEEE Std 1058)</h2>
+        </div>
+
+        <p>
+          El <strong>Plan de Gestión de Proyecto (PGP)</strong> es el documento formal que gobierna la ejecución técnica, temporal y económica del proyecto de software. La cátedra provee una plantilla basada en el estándar internacional <strong>IEEE Std 1058-1998</strong>, estructurada en cinco secciones obligatorias:
+        </p>
+        <ol>
+          <li><strong>Introducción:</strong> Propósito y alcance del plan, definiciones, acrónimos y referencias normativas.</li>
+          <li><strong>Planes Generales:</strong> Entregables del proyecto con fechas de hito, calendario, restricciones del cliente y plan de personal (cantidad, roles y duración).</li>
+          <li><strong>Presupuesto:</strong> Desglose de actividades (WBS/EDT), asignación de esfuerzo persona-hora y cálculo formal del presupuesto total.</li>
+          <li><strong>Administración de Riesgos:</strong> Tabla ordenada de riesgos, cálculo de exposición ($E = P \times I$), línea de corte con al menos 6 riesgos, responsable, plan de mitigación preventiva y plan de contingencia reactiva.</li>
+          <li><strong>Competencia:</strong> Mapeo perceptual y justificación de ventajas competitivas (integrado con la Guía 5).</li>
+        </ol>
+
+        <h3>9.1. Estructura de Desglose del Trabajo (WBS) y Estimación de Esfuerzo</h3>
+        <p>
+          Siguiendo la indicación de la plantilla oficial de representar el desarrollo a través de las épicas identificadas para <strong>Repartos Ya</strong>:
+        </p>
+
+        <div class="table-wrapper">
+          <table>
             <thead>
               <tr>
-                <th style="width:10%;">ID RNF</th>
-                <th style="width:16%;">Categoría FURPS+</th>
-                <th style="width:38%;">Enunciado Específico y Medible</th>
-                <th style="width:20%;">Métrica / Criterio de Aceptación</th>
-                <th style="width:16%;">Técnica de Verificación</th>
+                <th>Código WBS</th>
+                <th>Actividad Principal del Proyecto</th>
+                <th>Personal Asignado</th>
+                <th>Esfuerzo Unitario (hs)</th>
+                <th>Esfuerzo Total (hs)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>RNF-01</strong></td>
-                <td><strong>Confiabilidad (Reliability)</strong></td>
-                <td>Ante cortes de enlace de red celular o radio LoRaWAN, cada nodo sensor debe preservar las mediciones agronómicas localmente en memoria Flash SPI no volátil sin pérdida de información.</td>
-                <td>Buffer local con capacidad &ge; 72 horas continuas de telemetría (1032 lecturas completas por nodo).</td>
-                <td>Test de desconexión física de antena por 48 horas y verificación de integridad de descarga posterior.</td>
+                <td><strong>1.0</strong></td>
+                <td><strong>Elicitación y Análisis de Requerimientos</strong> (Entrevistas a Martín/Jorge, Forms, Competencia)</td>
+                <td>6 personas</td>
+                <td>15 hs</td>
+                <td><strong>90 hs</strong></td>
               </tr>
               <tr>
-                <td><strong>RNF-02</strong></td>
-                <td><strong>Rendimiento (Performance)</strong></td>
-                <td>Cuando un nodo sensor detecta una caída de temperatura ambiente por debajo de 1.5°C con gradiente negativo &gt; 1°C/hora, la notificación push y SMS debe alcanzar el teléfono del productor.</td>
-                <td>Latencia de entrega &le; 3 segundos desde la detección física del sensor hasta el despacho de red.</td>
-                <td>Monitoreo de timestamps entre log del nodo sensor y confirmación de recepción del gateway SMS.</td>
+                <td><strong>2.0</strong></td>
+                <td><strong>Especificación de Requerimientos</strong> (Iniciativa, 4 Épicas, 5 RNF y HUs)</td>
+                <td>6 personas</td>
+                <td>20 hs</td>
+                <td><strong>120 hs</strong></td>
               </tr>
               <tr>
-                <td><strong>RNF-03</strong></td>
-                <td><strong>Soporte / Físico (Supportability / Physical)</strong></td>
-                <td>Las carcasas de los nodos de campo y actuadores deben resistir la intemperie rural extrema, humedad del 100%, lluvia torrencial, exposición solar directa y vapores de agroquímicos y fertilizantes.</td>
-                <td>Certificación de grado de protección <strong>IP67</strong> y rango operativo térmico de -10°C a +60°C.</td>
-                <td>Ensayos en cámara de niebla salina, inmersión a 1m durante 30 min y exposición térmica controlada.</td>
+                <td><strong>3.0</strong></td>
+                <td><strong>Arquitectura de Software y Modelado Dinámico</strong> (Casos de Uso, DTE de Envíos, Base de Datos)</td>
+                <td>3 desarrolladores</td>
+                <td>25 hs</td>
+                <td><strong>75 hs</strong></td>
               </tr>
               <tr>
-                <td><strong>RNF-04</strong></td>
-                <td><strong>Usabilidad (Usability)</strong></td>
-                <td>La interfaz móvil del productor debe diseñarse para ser operada con una sola mano, a plena luz solar y por usuarios rurales con escasa alfabetización digital.</td>
-                <td>Contraste tipográfico WCAG AAA (relación &ge; 7:1), iconos táctiles &ge; 48x48px, y curva de éxito de primera tarea &ge; 90% sin capacitación.</td>
-                <td>Pruebas de usabilidad con 5 quinteros reales en invernáculo a mediodía registrando tiempos y errores.</td>
+                <td><strong>4.1</strong></td>
+                <td><strong>Desarrollo EP-01:</strong> Panel Web de Carga, Gestión y Asignación de Envíos</td>
+                <td>3 desarrolladores</td>
+                <td>40 hs</td>
+                <td><strong>120 hs</strong></td>
               </tr>
               <tr>
-                <td><strong>RNF-05</strong></td>
-                <td><strong>Restricción Legal / Regulatoria (+)</strong></td>
-                <td>La frecuencia y potencia de transmisión inalámbrica de los módulos de radio LoRaWAN debe ajustarse a las regulaciones vigentes en la República Argentina.</td>
-                <td>Cumplimiento estricto con la normativa ENACOM para la banda ISM de 915 MHz a 928 MHz, con potencia isotrópica radiada &le; 1 Watt.</td>
-                <td>Medición con analizador de espectro de RF en laboratorio de radiofrecuencia.</td>
+                <td><strong>4.2</strong></td>
+                <td><strong>Desarrollo EP-02:</strong> App Móvil para Choferes (Offline-First y Captura de Foto)</td>
+                <td>3 desarrolladores</td>
+                <td>45 hs</td>
+                <td><strong>135 hs</strong></td>
               </tr>
               <tr>
-                <td><strong>RNF-06</strong></td>
-                <td><strong>Eficiencia Energética (Supportability)</strong></td>
-                <td>Cada nodo sensor instalado en las parcelas debe operar de manera completamente autónoma sin necesidad de recambio ni intervención humana durante al menos una temporada completa de cultivo.</td>
-                <td>Autonomía &ge; 12 meses alimentado exclusivamente con una batería LiFePO4 de 2000 mAh y un panel solar de 1W.</td>
-                <td>Cálculo de presupuesto energético en reposo (Deep Sleep &le; 15 &mu;A) y consumo en ráfaga de transmisión.</td>
+                <td><strong>4.3</strong></td>
+                <td><strong>Desarrollo EP-03:</strong> Portal Web de Tracking Público por Código Alfanumérico</td>
+                <td>2 desarrolladores</td>
+                <td>25 hs</td>
+                <td><strong>50 hs</strong></td>
+              </tr>
+              <tr>
+                <td><strong>4.4</strong></td>
+                <td><strong>Desarrollo EP-04:</strong> Módulo de Cobranzas, Rendición de Caja y Finanzas</td>
+                <td>2 desarrolladores</td>
+                <td>30 hs</td>
+                <td><strong>60 hs</strong></td>
+              </tr>
+              <tr>
+                <td><strong>5.0</strong></td>
+                <td><strong>Testing Integral, Pruebas Offline y Seguridad RBAC</strong></td>
+                <td>4 personas</td>
+                <td>15 hs</td>
+                <td><strong>60 hs</strong></td>
+              </tr>
+              <tr>
+                <td><strong>6.0</strong></td>
+                <td><strong>Puesta en Marcha, Manual de Usuario y Entrega Final</strong></td>
+                <td>6 personas</td>
+                <td>8 hs</td>
+                <td><strong>50 hs</strong></td>
+              </tr>
+              <tr style="background:var(--bg-card-subtle); font-weight:700;">
+                <td colspan="4" style="text-align:right;">TOTAL DE HORAS DEL PROYECTO:</td>
+                <td style="color:var(--accent-ink); font-size:1.05rem;">760 horas</td>
               </tr>
             </tbody>
           </table>
         </div>
-      </section>
 
-      <!-- ========================================== -->
-      <!-- CAPÍTULO 7: HISTORIAS DE USUARIO Y BDD (GUÍA 4) -->
-      <!-- ========================================== -->
-      <section id="cap7" class="content-section">
-        <h2 class="section-title">7. Historias de Usuario con INVEST y BDD Gherkin (Guía 4)</h2>
-        <p class="section-lead">
-          La <strong>Guía 4</strong> es el núcleo del diseño ágil evaluado por la cátedra. Exige que cada Historia de Usuario cumpla con la plantilla estándar <strong>Connextra</strong> (<em>Como... Quiero... Para...</em>), supere la validación del acrónimo <strong>INVEST</strong>, esté estimada formalmente (con Planning Poker) y tenga Criterios de Aceptación especificados en formato <strong>BDD Gherkin</strong> (<em>Dado que... Cuando... Entonces...</em>).
+        <h3>9.2. Presupuesto Final del Proyecto (Fórmula Oficial)</h3>
+        <p>
+          De acuerdo con el apartado 3c de la plantilla PGP de la cátedra:
         </p>
-
-        <h3>7.1 Catálogo Detallado de Historias de Usuario</h3>
-
-        <!-- HU-01 -->
-        <div class="card p-3 my-3">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-            <h4 style="color:var(--primary); margin:0;">HU-01: Visualización Rápida del Nivel de Humedad de Parcela</h4>
-            <span class="badge badge-success">Épica: EP-01 | Story Points: 3 (Fibonacci)</span>
-          </div>
-          <hr style="margin: 0.5rem 0;">
-          <p><strong>Enunciado Connextra:</strong></p>
-          <div class="card card-callout p-2 mb-2">
-            <strong>Como</strong> productor quintero con múltiples naves de invernáculo,<br>
-            <strong>Quiero</strong> ver en la pantalla principal de mi celular una tarjeta con código de semáforo (Verde, Amarillo, Rojo) que indique el estado de humedad del suelo de cada nave,<br>
-            <strong>Para</strong> saber en menos de 5 segundos si alguna parcela necesita riego urgente sin tener que recorrer a pie todo el campo.
-          </div>
-
-          <p><strong>Validación INVEST:</strong></p>
-          <ul>
-            <li><strong>I (Independiente):</strong> Puede implementarse y desplegarse sin depender de la automatización de válvulas ni de las alertas de heladas.</li>
-            <li><strong>N (Negociable):</strong> El diseño exacto del semáforo y los umbrales numéricos pueden ajustarse con el productor durante el sprint.</li>
-            <li><strong>V (Valiosa):</strong> Ahorra hasta 1 hora diaria de caminata y evita errores visuales subjetivos de inspección.</li>
-            <li><strong>E (Estimable):</strong> El equipo técnico tiene clara la API de consulta y los componentes UI necesarios (3 puntos).</li>
-            <li><strong>S (Small / Pequeña):</strong> Se puede maquetar, conectar al backend y probar en 2 días de desarrollo.</li>
-            <li><strong>T (Testeable):</strong> Se valida inyectando diferentes valores de humedad en la base de datos y observando el cambio de color.</li>
-          </ul>
-
-          <p><strong>Criterios de Aceptación BDD (Gherkin):</strong></p>
-          <pre><code class="language-gherkin">Escenario: Suelo seco requiere riego urgente (Semáforo Rojo)
-  Dado que el sensor de la Parcela 3 tiene una humedad de suelo del 18%
-  Y el umbral óptimo configurado para Tomate Platense es de 35% a 65%
-  Cuando el productor abre la aplicación móvil
-  Entonces la tarjeta de la Parcela 3 debe mostrarse con fondo Rojo brillante
-  Y debe mostrar el texto "CRÍTICO: Riego Requerido (18%)"
-  Y debe mostrar un botón de acceso directo "Regar Ahora".
-
-Escenario: Suelo en condición óptima (Semáforo Verde)
-  Dado que el sensor de la Parcela 1 tiene una humedad de suelo del 52%
-  Cuando el productor visualiza el panel principal
-  Entonces la tarjeta de la Parcela 1 debe mostrarse con fondo Verde
-  Y el indicador debe marcar "Nivel Óptimo".</code></pre>
+        <div class="box-callout box-concept">
+          $$\text{Presupuesto Total} = (\text{Cantidad de Horas del Proyecto} \times \text{Precio por Hora}) + \text{Recursos Adicionales}$$
         </div>
-
-        <!-- HU-02 -->
-        <div class="card p-3 my-3">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-            <h4 style="color:var(--primary); margin:0;">HU-02: Configuración de Reglas de Riego Automático</h4>
-            <span class="badge badge-success">Épica: EP-02 | Story Points: 5 (Fibonacci)</span>
-          </div>
-          <hr style="margin: 0.5rem 0;">
-          <p><strong>Enunciado Connextra:</strong></p>
-          <div class="card card-callout p-2 mb-2">
-            <strong>Como</strong> administrador agronómico de la finca,<br>
-            <strong>Quiero</strong> fijar umbrales mínimos y máximos de humedad de suelo junto a horarios de riego permitidos,<br>
-            <strong>Para</strong> que el sistema encienda y apague las electroválvulas automáticamente sin desperdiciar agua en horas de alta evaporación solar.
-          </div>
-
-          <p><strong>Criterios de Aceptación BDD (Gherkin):</strong></p>
-          <pre><code class="language-gherkin">Escenario: Activación automática por caída debajo del umbral mínimo
-  Dado que la Parcela 2 tiene una regla de riego con humedad mínima del 25%
-  Y la hora actual (06:30 hs) se encuentra dentro de la franja habilitada (05:00 a 09:00 hs)
-  Cuando el sensor reporta una humedad de suelo del 23%
-  Entonces el sistema debe enviar la orden de apertura a la Electroválvula 2
-  Y registrar en la bitácora el evento "Riego automático iniciado - Humedad 23%".
-
-Escenario: Bloqueo de riego en horario de alta evaporación
-  Dado que la humedad de la Parcela 2 cae al 20%
-  Pero la hora actual es 13:30 hs (franja de restricción solar de 11:00 a 17:00 hs)
-  Cuando el sistema evalúa la regla de riego
-  Entonces la Electroválvula 2 debe permanecer CERRADA
-  Y debe registrar una advertencia: "Riego postergado por franja térmica horaria".</code></pre>
-        </div>
-
-        <!-- HU-03 -->
-        <div class="card p-3 my-3">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-            <h4 style="color:var(--primary); margin:0;">HU-03: Despacho de Alerta Temprana de Helada Crítica</h4>
-            <span class="badge badge-danger">Épica: EP-03 | Story Points: 8 (Fibonacci - Complejidad Alta)</span>
-          </div>
-          <hr style="margin: 0.5rem 0;">
-          <p><strong>Enunciado Connextra:</strong></p>
-          <div class="card card-callout p-2 mb-2">
-            <strong>Como</strong> productor de hortalizas bajo cubierta vulnerable a heladas,<br>
-            <strong>Quiero</strong> recibir una alarma sonora persistente en mi teléfono celular y un SMS de respaldo cuando la proyección térmica indique inminencia de helada,<br>
-            <strong>Para</strong> levantarme a encender los quemadores o las mantas térmicas antes de que las hojas sufran daños por congelamiento celular.
-          </div>
-
-          <p><strong>Criterios de Aceptación BDD (Gherkin):</strong></p>
-          <pre><code class="language-gherkin">Escenario: Detección de tendencia de helada y disparo de alarma sonora
-  Dado que el sensor exterior marca 3.0°C a las 02:00 hs
-  Y a las 03:00 hs la temperatura descendió a 1.2°C (caída > 1.5°C/hora)
-  Cuando el motor predictivo calcula un tiempo hasta 0°C menor a 90 minutos
-  Entonces la app del productor debe sonar con el tono de alarma de máxima prioridad aun estando en silencio
-  Y enviar un mensaje SMS al celular registrado con el texto: "ALERTA AGROSENSE: Riesgo de helada inminente en Finca Norte. Temp actual: 1.2°C".</code></pre>
-        </div>
-      </section>
-
-      <!-- ========================================== -->
-      <!-- CAPÍTULO 8: MODELADO COMPLEMENTARIO DE ENTREGA -->
-      <!-- ========================================== -->
-      <section id="cap8" class="content-section">
-        <h2 class="section-title">8. Modelado Complementario de Entrega Práctica</h2>
-        <p class="section-lead">
-          Para articular la transición entre las Historias de Usuario ágiles y la arquitectura técnica verificable, la cátedra suele solicitar artefactos formales complementarios: el <strong>Diagrama de Casos de Uso</strong> general del sistema y el <strong>Diagrama de Transición de Estados (DTE)</strong> del ciclo de vida del nodo sensor IoT.
-        </p>
-
-        <h3>8.1 Casos de Uso Principales de AgroSense</h3>
-        <p>Los tres actores identificados interactúan con el sistema según los siguientes casos de uso medulares:</p>
         <ul>
-          <li><strong>Productor Rural:</strong> Consulta estado de parcelas (CU-01), activa riego manual de emergencia (CU-02), recibe y silencia alertas de helada (CU-03).</li>
-          <li><strong>Ingeniero Agrónomo:</strong> Calibra umbrales de humedad por tipo de cultivo (CU-04), programa calendario de fertilirriego (CU-05), exporta auditoría de consumo hídrico (CU-06).</li>
-          <li><strong>Nodo Sensor IoT (Actor Secundario / Sistema Externo):</strong> Envía paquete periódico de telemetría (CU-07), reporta anomalía o batería crítica (CU-08).</li>
+          <li><strong>Horas Totales del Proyecto:</strong> 760 horas de ingeniería de software.</li>
+          <li><strong>Precio por Hora de Desarrollo:</strong> $15.000 ARS / hora (tarifa pactada del equipo).</li>
+          <li><strong>Costo de Mano de Obra:</strong> $760 \times \$15.000 = \$11.400.000\text{ ARS}$.</li>
+          <li><strong>Recursos Adicionales Requeridos:</strong>
+            <ul>
+              <li>Infraestructura Cloud (Hosting backend, base de datos PostgreSQL y almacenamiento S3 para fotos de remitos): $380.000 ARS anuales.</li>
+              <li>Dominio web <code>repartosya.com.ar</code> y certificados SSL: $35.000 ARS anuales.</li>
+              <li>Cuenta de Google Play Console para publicación de la APK de choferes: $35.000 ARS (pago único $25 USD).</li>
+              <li>Subtotal Recursos Adicionales: $450.000 ARS.</li>
+            </ul>
+          </li>
+          <li><strong style="color:var(--accent-ink); font-size:1.1rem;">Presupuesto Final Presupuestado: $11.850.000 ARS.</strong></li>
         </ul>
 
-        <h3>8.2 DTE del Ciclo de Vida del Nodo Sensor IoT</h3>
-        <p>El nodo sensor opera con restricciones energéticas severas (batería LiFePO4 solar). Su comportamiento se modela formalmente como una máquina de estados finitos:</p>
-
-        <div class="diagram-container">
-          <svg viewBox="0 0 700 240" width="100%" height="220" xmlns="http://www.w3.org/2000/svg">
-            <!-- Estado Inicial -->
-            <circle cx="50" cy="110" r="12" fill="#1c4573"/>
-            <line x1="62" y1="110" x2="110" y2="110" stroke="#1c4573" stroke-width="2" marker-end="url(#arrow)"/>
-
-            <!-- Estado: Deep Sleep -->
-            <rect x="110" y="80" width="120" height="60" rx="8" fill="#e8eff7" stroke="#1c4573" stroke-width="2"/>
-            <text x="170" y="105" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1c4573" text-anchor="middle">Deep Sleep</text>
-            <text x="170" y="125" font-family="sans-serif" font-size="9" fill="#6b645c" text-anchor="middle">Consumo &lt; 15 uA</text>
-
-            <!-- Transición Sleep -> Muestreo -->
-            <path d="M 230 95 L 300 95" stroke="#1c4573" stroke-width="2"/>
-            <polygon points="300,95 292,91 292,99" fill="#1c4573"/>
-            <text x="265" y="88" font-family="sans-serif" font-size="8.5" fill="#1c4573" text-anchor="middle">Timer 10 min</text>
-
-            <!-- Estado: Muestreo Sensores -->
-            <rect x="300" y="80" width="120" height="60" rx="8" fill="#e8f5e9" stroke="#2d5b3c" stroke-width="2"/>
-            <text x="360" y="105" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2d5b3c" text-anchor="middle">Muestreo</text>
-            <text x="360" y="125" font-family="sans-serif" font-size="9" fill="#6b645c" text-anchor="middle">Lectura ADC/I2C</text>
-
-            <!-- Transición Muestreo -> Transmisión LoRa -->
-            <path d="M 420 95 L 490 95" stroke="#2d5b3c" stroke-width="2"/>
-            <polygon points="490,95 482,91 482,99" fill="#2d5b3c"/>
-            <text x="455" y="88" font-family="sans-serif" font-size="8.5" fill="#2d5b3c" text-anchor="middle">Datos Válidos</text>
-
-            <!-- Estado: Transmisión LoRa -->
-            <rect x="490" y="80" width="130" height="60" rx="8" fill="#fff8e1" stroke="#8c631e" stroke-width="2"/>
-            <text x="555" y="105" font-family="sans-serif" font-size="11" font-weight="bold" fill="#8c631e" text-anchor="middle">Transmisión LoRa</text>
-            <text x="555" y="125" font-family="sans-serif" font-size="9" fill="#6b645c" text-anchor="middle">TX ráfaga 915MHz</text>
-
-            <!-- Retorno a Deep Sleep -->
-            <path d="M 555 140 Q 555 200 360 200 Q 170 200 170 140" fill="none" stroke="#6b645c" stroke-width="2" stroke-dasharray="4,4"/>
-            <polygon points="170,140 166,148 174,148" fill="#6b645c"/>
-            <text x="360" y="215" font-family="sans-serif" font-size="9" fill="#6b645c" text-anchor="middle">ACK recibido o Timeout [Dormir]</text>
-          </svg>
-          <div class="diagram-caption">Figura 8.1: DTE del microcontrolador ESP32 del nodo sensor AgroSense.</div>
-        </div>
-      </section>
-
-      <!-- ========================================== -->
-      <!-- CAPÍTULO 9: WIDGETS INTERACTIVOS DE CURSADA -->
-      <!-- ========================================== -->
-      <section id="cap9" class="content-section">
-        <h2 class="section-title">9. Widgets Interactivos para la Práctica de IS</h2>
-        <p class="section-lead">
-          Herramientas interactivas integradas para agilizar las entregas en Moodle y realizar simulaciones de estimación ágil con el equipo de trabajo de la cátedra.
+        <h3>9.3. Administración de Riesgos y Matriz 5x5 con Línea de Corte</h3>
+        <p>
+          El estándar IEEE Std 1058 exige cuantificar el <strong>Factor de Exposición</strong> ($E = P \times I$) para cada riesgo, donde tanto la Probabilidad ($P$) como el Impacto ($I$) se evalúan en una escala del 1 al 5. Los riesgos se ordenan descendentemente y se traza una <strong>Línea de Corte (Cut-off line)</strong> con al menos 6 riesgos gestionados activamente:
         </p>
 
-        <!-- WIDGET 1: GENERADOR DE ENTREGAS MOODLE -->
-        <div class="card p-3 my-3">
-          <h3 style="color:var(--primary); margin-top:0;">📝 Widget 1: Generador Oficial de Entregas Moodle</h3>
-          <p>Seleccioná el tipo de guía y completá los campos para obtener el texto estructurado según las pautas de corrección:</p>
-
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
-            <div>
-              <label><strong>Guía a Entregar:</strong></label>
-              <select id="w-guia-tipo" class="form-control" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--surface); color:var(--text);" onchange="updateMoodleTemplate()">
-                <option value="g1">Guía 1: Entrevista y Cuestionario (Elicitación)</option>
-                <option value="g2">Guía 2: Requerimientos No Funcionales (RNF)</option>
-                <option value="g3">Guía 3: Iniciativa y Épicas</option>
-                <option value="g4">Guía 4: Historias de Usuario e INVEST</option>
-                <option value="g5">Guía 5: Análisis de Competencia y Posicionamiento</option>
-              </select>
-            </div>
-            <div>
-              <label><strong>Número de Grupo / Nombre del Emprendimiento:</strong></label>
-              <input type="text" id="w-grupo-nombre" class="form-control" value="Grupo 08 - AgroSense" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--surface); color:var(--text);" oninput="updateMoodleTemplate()">
-            </div>
-          </div>
-
-          <div style="margin-bottom:12px;">
-            <label><strong>Texto Generado para Entrega Moodle:</strong></label>
-            <textarea id="w-moodle-output" rows="8" style="width:100%; font-family:monospace; font-size:12px; padding:10px; border-radius:6px; border:1px solid var(--border); background:var(--code-bg); color:var(--text);" readonly></textarea>
-          </div>
-          <button class="btn btn-primary" onclick="copyMoodleText()">📋 Copiar Texto para Pegar en Moodle</button>
-          <span id="copy-status" style="margin-left:10px; font-weight:bold; color:var(--secondary);"></span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:0.8rem; color:var(--text-muted);">
+          <span>Matriz de Riesgos según IEEE Std 1058 (Línea de corte en exposición 9)</span>
+          <span style="font-weight:600;">↔ Desplazar horizontalmente si es necesario</span>
         </div>
 
-        <!-- WIDGET 2: SIMULADOR PLANNING POKER -->
-        <div class="card p-3 my-3">
-          <h3 style="color:var(--primary); margin-top:0;">🃏 Widget 2: Tablero de Planning Poker (Estimación Fibonacci)</h3>
-          <p>Hacé clic en una carta de Story Points para simular la votación del equipo sobre la Historia de Usuario seleccionada:</p>
-          
-          <div style="margin-bottom:12px;">
-            <strong>Historia de Usuario actual:</strong>
-            <select id="poker-hu-select" class="form-control" style="width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid var(--border); background:var(--surface); color:var(--text);" onchange="resetPoker()">
-              <option value="HU-01">HU-01: Visualización Rápida del Nivel de Humedad (Estimación de Cátedra: 3)</option>
-              <option value="HU-02">HU-02: Configuración de Reglas de Riego Automático (Estimación de Cátedra: 5)</option>
-              <option value="HU-03">HU-03: Despacho de Alerta Temprana de Helada Crítica (Estimación de Cátedra: 8)</option>
-            </select>
-          </div>
-
-          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:15px 0;">
-            <button class="btn poker-card" onclick="votePoker(1)">1</button>
-            <button class="btn poker-card" onclick="votePoker(2)">2</button>
-            <button class="btn poker-card" onclick="votePoker(3)">3</button>
-            <button class="btn poker-card" onclick="votePoker(5)">5</button>
-            <button class="btn poker-card" onclick="votePoker(8)">8</button>
-            <button class="btn poker-card" onclick="votePoker(13)">13</button>
-            <button class="btn poker-card" onclick="votePoker(20)">20</button>
-            <button class="btn poker-card" onclick="votePoker('?')">?</button>
-          </div>
-
-          <div id="poker-result" class="card card-callout p-2 text-center" style="display:none;">
-            <!-- Dinámico -->
-          </div>
+        <div class="table-wrapper">
+          <table class="table-dense">
+            <thead>
+              <tr>
+                <th style="width: 48px; text-align: center;">ID</th>
+                <th style="min-width: 140px;">Descripción del Riesgo</th>
+                <th style="width: 32px; text-align: center;">P</th>
+                <th style="width: 32px; text-align: center;">I</th>
+                <th style="width: 44px; text-align: center;">Exp</th>
+                <th style="min-width: 105px;">Responsable</th>
+                <th style="min-width: 165px;">Plan de Mitigación (Preventivo)</th>
+                <th style="min-width: 165px;">Plan de Contingencia (Reactivo)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="risk-high">
+                <td style="text-align: center; font-weight: 700;">R-01</td>
+                <td>Pérdida de conectividad móvil 4G del chofer durante la confirmación de entregas en zonas de sombra celular.</td>
+                <td style="text-align: center; font-weight: 600;">5</td>
+                <td style="text-align: center; font-weight: 600;">4</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-terra);">20</td>
+                <td>Nicolás R. (Arquitectura)</td>
+                <td>Implementar arquitectura Offline-First con base de datos local SQLite y cola de sincronización en segundo plano con reintentos exponenciales.</td>
+                <td>La app confirma la entrega localmente al chofer con marca visual "Guardado en equipo" y sincroniza en silencio al recuperar señal.</td>
+              </tr>
+              <tr class="risk-high">
+                <td style="text-align: center; font-weight: 700;">R-02</td>
+                <td>Agotamiento de batería del teléfono celular del chofer a mitad de la jornada de reparto (uso continuo de pantalla y cámara).</td>
+                <td style="text-align: center; font-weight: 600;">4</td>
+                <td style="text-align: center; font-weight: 600;">4</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-terra);">16</td>
+                <td>Valery L. (Líder Técnico)</td>
+                <td>Optimizar consumo desactivando GPS cuando la app está en reposo y recomendar cargadores de 12V para encendedor de utilitario.</td>
+                <td>El chofer reporta por llamada al despachador; éste marca la entrega manual transitoria en el panel web desde la oficina.</td>
+              </tr>
+              <tr class="risk-high">
+                <td style="text-align: center; font-weight: 700;">R-03</td>
+                <td>Fotografía del remito borrosa, ilegible o tomada a oscuras, impidiendo la verificación de la firma.</td>
+                <td style="text-align: center; font-weight: 600;">4</td>
+                <td style="text-align: center; font-weight: 600;">3</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-terra);">12</td>
+                <td>Martín S. (Frontend Móvil)</td>
+                <td>Incorporar en la app un visor previo que evalúe enfoque y obligue a encender el flash LED del celular si hay poca luz.</td>
+                <td>El sistema solicita al chofer reintentar la fotografía antes de permitirle retirarse del domicilio.</td>
+              </tr>
+              <tr class="risk-med">
+                <td style="text-align: center; font-weight: 700;">R-04</td>
+                <td>Falla o caída del servidor backend en la nube durante el horario pico matutino de despacho (08:00 a 10:00 hs).</td>
+                <td style="text-align: center; font-weight: 600;">2</td>
+                <td style="text-align: center; font-weight: 600;">5</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-ochre);">10</td>
+                <td>Camila T. (DevOps)</td>
+                <td>Configurar alertas automáticas de uptime y despliegue sobre infraestructura con reinicio automático de contenedores (Docker/PM2).</td>
+                <td>Restauración de backup de base de datos de la hora anterior en servidor de réplica secundaria en menos de 15 minutos.</td>
+              </tr>
+              <tr class="risk-med">
+                <td style="text-align: center; font-weight: 700;">R-05</td>
+                <td>Discrepancia en el arqueo diario de dinero en efectivo entre lo cobrado por el chofer y lo ingresado en el sistema.</td>
+                <td style="text-align: center; font-weight: 600;">3</td>
+                <td style="text-align: center; font-weight: 600;">3</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-ochre);">9</td>
+                <td>Lucas M. (Módulo Pagos)</td>
+                <td>Solicitar al chofer confirmación del monto exacto cobrado al momento de fotografiar el comprobante en destino.</td>
+                <td>El panel genera un reporte de inconsistencia detallando cada paquete cobrado para revisión conjunta entre Martín y el chofer.</td>
+              </tr>
+              <tr class="risk-med risk-cut-line">
+                <td style="text-align: center; font-weight: 700;">R-06</td>
+                <td>Resistencia de choferes mayores a utilizar la aplicación móvil por considerarla complicada frente al remito de papel.</td>
+                <td style="text-align: center; font-weight: 600;">3</td>
+                <td style="text-align: center; font-weight: 600;">3</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-ochre);">9</td>
+                <td>Sofía G. (UX/Capacitación)</td>
+                <td>Diseñar interfaz con botones gigantes de alto contraste, textos claros en español rioplatense y sin términos técnicos de computación.</td>
+                <td>Taller presencial de 20 minutos con cada chofer simulando dos entregas en el patio de la distribuidora.</td>
+              </tr>
+              <!-- LÍNEA DE CORTE (CUT-OFF LINE) -->
+              <tr class="risk-low" style="opacity:0.75;">
+                <td style="text-align: center; font-weight: 700;">R-07</td>
+                <td>Destinatario ingresa código de seguimiento con espacios o minúsculas en el portal web de tracking.</td>
+                <td style="text-align: center; font-weight: 600;">4</td>
+                <td style="text-align: center; font-weight: 600;">1</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-sage);">4</td>
+                <td>Equipo General</td>
+                <td>Sanitizar automáticamente la entrada convirtiendo a mayúsculas y eliminando guiones y espacios en blanco.</td>
+                <td>El buscador corrige la cadena de forma transparente para el usuario final.</td>
+              </tr>
+              <tr class="risk-low" style="opacity:0.75;">
+                <td style="text-align: center; font-weight: 700;">R-08</td>
+                <td>Llegada de paquetes con códigos de barras dañados o etiquetas de despacho despegadas.</td>
+                <td style="text-align: center; font-weight: 600;">2</td>
+                <td style="text-align: center; font-weight: 600;">2</td>
+                <td style="text-align: center; font-weight: 800; color: var(--accent-sage);">4</td>
+                <td>Equipo General</td>
+                <td>Permitir búsqueda manual por nombre del destinatario o dirección en el buscador del panel de despacho.</td>
+                <td>Reimpresión de etiqueta con nuevo código de seguimiento desde el panel web en 1 clic.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <p style="font-size:0.88rem; color:var(--text-muted); font-style:italic;">
+          * La línea punteada roja representa la <strong>Línea de Corte (Cut-off line)</strong>: los 6 riesgos ubicados por encima son objeto de seguimiento estricto en cada iteración del proyecto con responsables asignados y acciones de mitigación preventivas.
+        </p>
       </section>
 
-      <!-- ========================================== -->
-      <!-- CAPÍTULO 10: GUÍA DE SUPERVIVENCIA DE LA PRÁCTICA -->
-      <!-- ========================================== -->
-      <section id="cap10" class="content-section">
-        <h2 class="section-title">10. Guía de Supervivencia de la Cursada Práctica</h2>
-        <p class="section-lead">
-          Consejos estratégicos recopilados de las correcciones semanales de los docentes y la estructura estricta de evaluación de la cátedra de Ingeniería de Software.
+      <!-- ============================================================== -->
+      <!-- CAPITULO 10: GUÍA METODOLÓGICA DE SUPERVIVENCIA Y CHECKLIST    -->
+      <!-- ============================================================== -->
+      <section class="chapter-section" id="cap10">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 10 • Supervivencia Práctica</div>
+          <h2 class="chapter-title">Guía Metodológica de Supervivencia y Checklist de Calidad</h2>
+        </div>
+
+        <p>
+          A partir de los señalamientos más recurrentes efectuados por los ayudantes y profesores en las correcciones de los trabajos prácticos, se sintetizan las reglas de oro para evitar desaprobaciones o reentregas:
         </p>
 
-        <div class="card p-3 my-3">
-          <h3 style="color:var(--primary); margin-top:0;">10.1 Puntos Clave para la Consulta de los Viernes (40 min)</h3>
-          <ul>
-            <li><strong>Llevar las dudas redactadas por escrito:</strong> No llegues a improvisar. Tené abierto el Google Doc con los puntos exactos a discutir para no perder los 40 minutos reglamentarios.</li>
-            <li><strong>Mostrar alternativas, no pedir soluciones:</strong> En lugar de preguntar <em>"¿Está bien esta épica?"</em>, presentá: <em>"Formulamos la épica de estas dos maneras; elegimos la opción A por este motivo, ¿coinciden con el criterio?"</em>. Demuestra madurez de análisis.</li>
-            <li><strong>Todo el grupo debe participar:</strong> Si uno solo habla, los ayudantes asumen falta de cohesión en el equipo. Repartir quién presenta cada tema.</li>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento de Entrega</th>
+                <th>Anti-Patrón Habitual (Rechazado)</th>
+                <th>Forma Correcta Exigida por la Cátedra</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Entrevista (Guía 1)</strong></td>
+                <td>Preguntas técnicas sobre código o base de datos ("¿Quiere que usemos PostgreSQL o MongoDB?").</td>
+                <td>Hablar el lenguaje del cliente, indagando sobre problemas de negocio, tiempos de respuesta y dolores cotidianos.</td>
+              </tr>
+              <tr>
+                <td><strong>Cuestionario (Guía 1)</strong></td>
+                <td>Preguntas abiertas ambiguas enviadas a amigos o familiares sin definir la muestra objetivo.</td>
+                <td>Preguntas con escalas Likert (1 a 5) o cerradas, dirigidas a un segmento real del dominio del problema.</td>
+              </tr>
+              <tr>
+                <td><strong>Competidores (Guía 5)</strong></td>
+                <td>Listar únicamente aplicaciones idénticas de software ignorando métodos tradicionales.</td>
+                <td>Diferenciar rigurosamente entre competidores <em>directos</em> e <em>indirectos/sustitutos</em> (incluyendo procesos manuales en papel).</td>
+              </tr>
+              <tr>
+                <td><strong>Iniciativa vs Épica (Guía 3)</strong></td>
+                <td>Redactar una pantalla aislada como si fuera una iniciativa ("Pantalla de Login").</td>
+                <td>La iniciativa es el objetivo estratégico de negocio; las épicas son los módulos concretos que la descomponen.</td>
+              </tr>
+              <tr>
+                <td><strong>RNF (Guía 2)</strong></td>
+                <td>"El sistema debe ser rápido, intuitivo y seguro".</td>
+                <td>Métrica contrastable según ISO 25010: "Tiempo de respuesta $\le 1.5\text{ s}$ en el 95% de los casos", verificado mediante prueba de carga.</td>
+              </tr>
+              <tr>
+                <td><strong>Historias de Usuario (Guía 4)</strong></td>
+                <td>Mezclar reglas de negocio con pasos de prueba, o escribir criterios de aceptación vagos como "que funcione bien".</td>
+                <td>Apartado de <em>Reglas a considerar</em> para restricciones de dominio, y <em>Criterios de Aceptación</em> detallando escenarios de éxito y fallo en BDD.</td>
+              </tr>
+              <tr>
+                <td><strong>Gestión de Riesgos (PGP)</strong></td>
+                <td>Listar riesgos genéricos sin ordenarlos ni trazar la línea de corte con responsables.</td>
+                <td>Calcular $E = P \times I$, ordenar de mayor a menor exposición, trazar línea de corte y redactar mitigación (antes) y contingencia (después).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>10.1. Checklist Previo al Envío en Moodle</h3>
+        <p>
+          Antes de subir cualquier archivo DOCX/PDF o formulario a la plataforma Moodle, verifique los siguientes puntos:
+        </p>
+        <div class="template-card">
+          <ul style="list-style-type:none; padding-left:0; margin-bottom:0;">
+            <li style="margin-bottom:8px;">☑️ <strong>Trazabilidad completa:</strong> ¿Cada Historia de Usuario referencia explícitamente a su Épica contenedora?</li>
+            <li style="margin-bottom:8px;">☑️ <strong>Template oficial respetado:</strong> ¿Se utilizaron los encabezados, tablas y formatos estipulados en las plantillas de la cátedra?</li>
+            <li style="margin-bottom:8px;">☑️ <strong>RNF cuantificados:</strong> ¿Todos los requerimientos no funcionales poseen unidad de medida, valor umbral y método de prueba?</li>
+            <li style="margin-bottom:8px;">☑️ <strong>Casos de fallo contemplados:</strong> ¿Las Historias de Usuario incluyen escenarios de excepción (ej. credenciales inválidas, pérdida de conexión)?</li>
+            <li style="margin-bottom:8px;">☑️ <strong>PGP consistente:</strong> ¿La suma de horas de las épicas coincide con las horas totales de la estimación presupuestaria?</li>
+            <li>☑️ <strong>Sin jerga técnica innecesaria en la visión:</strong> ¿La iniciativa y las entrevistas reflejan la voz del cliente y no la arquitectura interna del código?</li>
           </ul>
-
-          <h3 style="color:var(--primary);">10.2 Los 5 Motivos más Frecuentes de Rechazo en Moodle</h3>
-          <ol>
-            <li><strong>Redactar Requerimientos Funcionales como No Funcionales:</strong> Confundir una regla de negocio (ej. "el sistema debe enviar un mail") con un atributo de calidad (ej. "el envío de mail debe tardar &lt; 2s").</li>
-            <li><strong>RNF sin métrica cuantitativa:</strong> Escribir que el sistema será "fácil de usar" o "muy seguro" sin citar una unidad medible ni la técnica de prueba.</li>
-            <li><strong>Épicas técnicas en lugar de épicas de usuario:</strong> Escribir "Migrar base a Docker" en vez de una capacidad orientada al negocio.</li>
-            <li><strong>Criterios de Aceptación ambiguos en Historias de Usuario:</strong> No usar la estructura BDD (Dado / Cuando / Entonces) o escribir "debe funcionar bien".</li>
-            <li><strong>Mapa Perceptual sin justificación de ejes:</strong> Poner nombres de ejes que son sinónimos o que no discriminan a los competidores.</li>
-          </ol>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- SCRIPTS INTERACTIVOS -->
   <script>
-    // Progress Bar
+    // Reading progress bar
     window.addEventListener('scroll', () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById('readingProgress').style.width = scrolled + '%';
+      document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
     });
 
-    // Theme Toggle
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      const target = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', target);
-      localStorage.setItem('theme', target);
+    // Sidebar collapse/expand
+    const appLayout = document.getElementById('appLayout');
+    const btnCollapse = document.getElementById('btnCollapseSidebar');
+    const btnExpand = document.getElementById('btnExpandSidebar');
+
+    function toggleSidebar() {
+      const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+      appLayout.classList.toggle('sidebar-collapsed', isCollapsed);
+      localStorage.setItem('isp_sidebar_collapsed', isCollapsed ? 'true' : 'false');
     }
-    const savedTheme = localStorage.getItem('theme');
+    if (btnCollapse) btnCollapse.addEventListener('click', toggleSidebar);
+    if (btnExpand) btnExpand.addEventListener('click', toggleSidebar);
+    if (localStorage.getItem('isp_sidebar_collapsed') === 'true') {
+      document.body.classList.add('sidebar-collapsed');
+      appLayout.classList.add('sidebar-collapsed');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === 'm' || e.key === 'M') toggleSidebar();
+    });
+
+    // Theme Switcher (Paper, Dark, Light)
+    const themeButtons = document.querySelectorAll('[data-set-theme]');
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-set-theme');
+        document.documentElement.setAttribute('data-theme', theme);
+        themeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        localStorage.setItem('isp_theme', theme);
+      });
+    });
+    const savedTheme = localStorage.getItem('isp_theme');
     if (savedTheme) {
       document.documentElement.setAttribute('data-theme', savedTheme);
+      themeButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-set-theme') === savedTheme));
     }
 
-    // Sidebar Toggle
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('active');
-    }
-
-    // Buscador
-    function filterNav() {
-      const q = document.getElementById('searchNav').value.toLowerCase();
-      const links = document.querySelectorAll('.nav-list a');
-      links.forEach(l => {
-        const text = l.textContent.toLowerCase();
-        l.style.display = text.includes(q) ? 'flex' : 'none';
+    // Sidebar Search Filter
+    const searchInput = document.getElementById('sidebarSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => {
+          l.style.display = l.textContent.toLowerCase().includes(query) ? 'flex' : 'none';
+        });
       });
-    }
-
-    // Generador de Entregas Moodle
-    function updateMoodleTemplate() {
-      const tipo = document.getElementById('w-guia-tipo').value;
-      const grupo = document.getElementById('w-grupo-nombre').value;
-      let out = "";
-      if (tipo === 'g1') {
-        out = "INGENIERÍA DE SOFTWARE - ENTREGA GUÍA 1: ELICITACIÓN\n" +
-              "Grupo: " + grupo + "\n" +
-              "1. Técnica 1 (Entrevista Semiestructurada):\n" +
-              "   - Entrevistado: Don Juan Giménez (Productor Hortícola, Finca San Cayetano)\n" +
-              "   - Objetivos: Relevar procesos actuales de riego y detección de heladas.\n" +
-              "   - Hallazgos Críticos: Pérdida del 40% por helada imprevista; riego manual a ojo.\n" +
-              "2. Técnica 2 (Cuestionario Masivo): 10 preguntas Google Forms, 24 encuestados.\n" +
-              "3. Técnica 3 (Brainstorming Rural): 15 ideas priorizadas con método MoSCoW.";
-      } else if (tipo === 'g2') {
-        out = "INGENIERÍA DE SOFTWARE - ENTREGA GUÍA 2: RNF\n" +
-              "Grupo: " + grupo + "\n" +
-              "- RNF-01 (Confiabilidad): Buffer local offline >= 72h sin pérdida ante corte LoRa.\n" +
-              "- RNF-02 (Rendimiento): Despacho de alerta de helada < 3s desde lectura crítica.\n" +
-              "- RNF-03 (Físico): Carcasa IP67 resistente a intemperie e hidrocarburos/agroquímicos.\n" +
-              "- RNF-04 (Legal): Cumplimiento normativa ENACOM banda 915 MHz ISM < 1W.";
-      } else if (tipo === 'g3') {
-        out = "INGENIERÍA DE SOFTWARE - ENTREGA GUÍA 3: INICIATIVAS Y ÉPICAS\n" +
-              "Grupo: " + grupo + "\n" +
-              "Iniciativa: Plataforma de telemetría IoT y riego inteligente de bajo costo para el cordón verde.\n" +
-              "- EP-01: Telemetría Ambiental y de Suelo en Tiempo Real.\n" +
-              "- EP-02: Automatización y Control Remoto de Riego.\n" +
-              "- EP-03: Motor Predictivo y Sistema de Alertas Críticas (Heladas).\n" +
-              "- EP-04: Panel de Control Agronómico y Métricas de Rendimiento.";
-      } else if (tipo === 'g4') {
-        out = "INGENIERÍA DE SOFTWARE - ENTREGA GUÍA 4: HISTORIAS DE USUARIO\n" +
-              "Grupo: " + grupo + "\n" +
-              "HU-01: Como productor quiero ver semáforo de humedad para decidir riego en 5s. (3 pts)\n" +
-              "  Criterio BDD: Dado que humedad < 20%, cuando abro app, entonces semáforo en Rojo.\n" +
-              "HU-02: Como agrónomo quiero programar umbrales automáticos de riego. (5 pts)\n" +
-              "HU-03: Como productor quiero alarma sonora persistente de helada crítica. (8 pts)";
-      } else {
-        out = "INGENIERÍA DE SOFTWARE - ENTREGA GUÍA 5: COMPETENCIA\n" +
-              "Grupo: " + grupo + "\n" +
-              "Competidores Mapeados: CropX (Directo global), Monitoreo Manual tradicional (Sustituto).\n" +
-              "Ejes Mapa Perceptual: Eje X = Nivel de Inversión Inicial; Eje Y = Alerta en Tiempo Real.\n" +
-              "Nicho Desatendido (Océano Azul): Hardware accesible + conectividad local LoRaWAN.";
-      }
-      document.getElementById('w-moodle-output').value = out;
-    }
-    updateMoodleTemplate();
-
-    function copyMoodleText() {
-      const textarea = document.getElementById('w-moodle-output');
-      textarea.select();
-      navigator.clipboard.writeText(textarea.value).then(() => {
-        const status = document.getElementById('copy-status');
-        status.textContent = "✓ ¡Copiado al portapapeles!";
-        setTimeout(() => { status.textContent = ""; }, 3000);
-      });
-    }
-
-    // Planning Poker
-    function votePoker(val) {
-      const res = document.getElementById('poker-result');
-      const hu = document.getElementById('poker-hu-select').value;
-      res.style.display = 'block';
-      let correct = (hu === 'HU-01' && val == 3) || (hu === 'HU-02' && val == 5) || (hu === 'HU-03' && val == 8);
-      if (correct) {
-        res.innerHTML = "<strong>✅ ¡Consenso de Equipo!</strong> Votaste <strong>" + val + " Story Points</strong>. Coincide exactamente con la estimación recomendada para " + hu + ".";
-        res.style.borderLeftColor = "var(--secondary)";
-      } else {
-        res.innerHTML = "<strong>💬 Debate en Planning Poker:</strong> Votaste <strong>" + val + " Story Points</strong>. La cátedra asignó otra puntuación de referencia para " + hu + ". Recuerda justificar complejidad de algoritmos o integración de hardware.";
-        res.style.borderLeftColor = "var(--accent)";
-      }
-    }
-
-    function resetPoker() {
-      document.getElementById('poker-result').style.display = 'none';
     }
   </script>
 </body>

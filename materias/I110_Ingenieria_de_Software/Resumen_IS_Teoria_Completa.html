@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="paper">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ingeniería de Software — Resumen Teórico Integral (Clases 1 a 4) | Guía Editorial A4</title>
-  
+
   <!-- KaTeX para renderizado matemático vectorial nítido -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
-          onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false});"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false});"></script>
 
   <!-- Google Fonts: Newsreader, Source Sans 3, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -91,15 +94,30 @@
       --accent-sage-bg: rgba(44, 89, 59, 0.04);
       --accent-ochre: #8f641c;
       --accent-ochre-bg: rgba(143, 100, 28, 0.04);
-      --shadow-paper: 0 1px 3px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.02);
-      --shadow-paper-hover: 0 4px 14px rgba(0,0,0,0.07);
+      --shadow-paper: 0 1px 3px rgba(0, 0, 0, 0.04), 0 3px 8px rgba(0, 0, 0, 0.02);
+      --shadow-paper-hover: 0 4px 14px rgba(0, 0, 0, 0.07);
       --scrollbar-thumb: #dcd6cc;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 3px;
+    }
 
     body {
       font-family: var(--font-sans);
@@ -111,7 +129,11 @@
       overflow-x: hidden;
     }
 
-    .app-layout { display: flex; min-height: 100vh; position: relative; }
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
 
     .sidebar {
       width: 320px;
@@ -126,7 +148,7 @@
       flex-shrink: 0;
       z-index: 100;
       transition: margin-left 0.3s var(--ease-paper), opacity 0.25s ease;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
     }
 
     body.sidebar-collapsed .sidebar,
@@ -144,7 +166,11 @@
       justify-content: space-between;
     }
 
-    .sidebar-brand { display: flex; flex-direction: column; }
+    .sidebar-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
     .sidebar-title {
       font-family: var(--font-serif);
       font-size: 1.15rem;
@@ -152,6 +178,7 @@
       color: var(--text-heading);
       letter-spacing: -0.01em;
     }
+
     .sidebar-subtitle {
       font-size: 0.78rem;
       color: var(--text-muted);
@@ -173,6 +200,7 @@
       justify-content: center;
       transition: all 0.2s;
     }
+
     .btn-toggle-sidebar:hover {
       background: var(--bg-card);
       color: var(--text-heading);
@@ -196,8 +224,9 @@
       display: none;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     }
+
     body.sidebar-collapsed .btn-floating-toc,
     .app-layout.sidebar-collapsed .btn-floating-toc {
       display: flex;
@@ -210,6 +239,7 @@
       flex-direction: column;
       gap: 10px;
     }
+
     .btn-print {
       display: flex;
       align-items: center;
@@ -226,9 +256,17 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .btn-print:hover { border-color: var(--border-focus); background: var(--bg-card-subtle); }
 
-    .theme-buttons { display: flex; gap: 4px; }
+    .btn-print:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card-subtle);
+    }
+
+    .theme-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
     .btn-theme {
       flex: 1;
       padding: 5px 8px;
@@ -241,14 +279,23 @@
       font-weight: 600;
       transition: all 0.2s;
     }
-    .btn-theme:hover { color: var(--text-heading); border-color: var(--border-focus); }
+
+    .btn-theme:hover {
+      color: var(--text-heading);
+      border-color: var(--border-focus);
+    }
+
     .btn-theme.active {
       background: var(--accent-ink);
       color: #fff;
       border-color: var(--accent-ink);
     }
 
-    .search-box { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
+    .search-box {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
     .search-input {
       width: 100%;
       padding: 7px 12px;
@@ -261,9 +308,18 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .search-input:focus { border-color: var(--border-focus); }
 
-    .sidebar-nav { padding: 16px 12px 30px; display: flex; flex-direction: column; gap: 3px; }
+    .search-input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
     .nav-group-title {
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -272,6 +328,7 @@
       font-weight: 700;
       padding: 12px 10px 4px;
     }
+
     .nav-link {
       display: flex;
       align-items: center;
@@ -283,7 +340,12 @@
       border-radius: 4px;
       transition: background 0.15s, color 0.15s;
     }
-    .nav-link:hover { background: var(--bg-card); color: var(--accent-ink); }
+
+    .nav-link:hover {
+      background: var(--bg-card);
+      color: var(--accent-ink);
+    }
+
     .nav-link span {
       font-family: var(--font-mono);
       font-size: 0.76rem;
@@ -316,6 +378,7 @@
       padding-bottom: 32px;
       margin-bottom: 48px;
     }
+
     .module-eyebrow {
       display: inline-block;
       font-size: 0.8rem;
@@ -325,6 +388,7 @@
       color: var(--accent-ink);
       margin-bottom: 10px;
     }
+
     .module-hero h1 {
       font-family: var(--font-serif);
       font-size: 2.35rem;
@@ -334,12 +398,14 @@
       letter-spacing: -0.02em;
       margin-bottom: 16px;
     }
+
     .module-hero p {
       font-size: 1.1rem;
       color: var(--text-muted);
       max-width: 820px;
       margin-bottom: 20px;
     }
+
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
@@ -347,6 +413,7 @@
       padding-top: 14px;
       border-top: 1px dashed var(--border-color);
     }
+
     .hero-meta-item {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -355,10 +422,22 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
     }
-    .hero-meta-item strong { color: var(--text-heading); }
 
-    .chapter-section { margin-bottom: 64px; scroll-margin-top: 24px; }
-    .chapter-header { border-bottom: 1.5px solid var(--border-color); padding-bottom: 10px; margin-bottom: 24px; }
+    .hero-meta-item strong {
+      color: var(--text-heading);
+    }
+
+    .chapter-section {
+      margin-bottom: 64px;
+      scroll-margin-top: 24px;
+    }
+
+    .chapter-header {
+      border-bottom: 1.5px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+    }
+
     .chapter-num {
       font-family: var(--font-mono);
       font-size: 0.85rem;
@@ -367,6 +446,7 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
+
     .chapter-title {
       font-family: var(--font-serif);
       font-size: 1.75rem;
@@ -385,6 +465,7 @@
       padding-bottom: 5px;
       border-bottom: 1px solid var(--border-color);
     }
+
     h4 {
       font-family: var(--font-sans);
       font-size: 1.05rem;
@@ -392,10 +473,26 @@
       color: var(--text-heading);
       margin: 20px 0 8px;
     }
-    p { margin-bottom: 14px; color: var(--text-main); }
-    ul, ol { margin-bottom: 16px; padding-left: 22px; }
-    li { margin-bottom: 6px; }
-    strong { color: var(--text-heading); font-weight: 600; }
+
+    p {
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 16px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    strong {
+      color: var(--text-heading);
+      font-weight: 600;
+    }
 
     .box-callout {
       border-radius: 5px;
@@ -408,6 +505,7 @@
       background: var(--bg-card);
       box-shadow: var(--shadow-paper);
     }
+
     .box-callout-header {
       font-family: var(--font-serif);
       font-weight: 700;
@@ -417,14 +515,42 @@
       gap: 8px;
       margin-bottom: 10px;
     }
-    .box-concept { border-left-color: var(--accent-ink); background: var(--accent-ink-bg); }
-    .box-concept .box-callout-header { color: var(--accent-ink); }
-    .box-exam { border-left-color: var(--accent-ochre); background: var(--accent-ochre-bg); }
-    .box-exam .box-callout-header { color: var(--accent-ochre); }
-    .box-formula { border-left-color: var(--accent-sage); background: var(--accent-sage-bg); }
-    .box-formula .box-callout-header { color: var(--accent-sage); }
-    .box-trap { border-left-color: var(--accent-terra); background: var(--accent-terra-bg); }
-    .box-trap .box-callout-header { color: var(--accent-terra); }
+
+    .box-concept {
+      border-left-color: var(--accent-ink);
+      background: var(--accent-ink-bg);
+    }
+
+    .box-concept .box-callout-header {
+      color: var(--accent-ink);
+    }
+
+    .box-exam {
+      border-left-color: var(--accent-ochre);
+      background: var(--accent-ochre-bg);
+    }
+
+    .box-exam .box-callout-header {
+      color: var(--accent-ochre);
+    }
+
+    .box-formula {
+      border-left-color: var(--accent-sage);
+      background: var(--accent-sage-bg);
+    }
+
+    .box-formula .box-callout-header {
+      color: var(--accent-sage);
+    }
+
+    .box-trap {
+      border-left-color: var(--accent-terra);
+      background: var(--accent-terra-bg);
+    }
+
+    .box-trap .box-callout-header {
+      color: var(--accent-terra);
+    }
 
     .box-exercise {
       border: 1px solid var(--border-color);
@@ -435,6 +561,7 @@
       margin: 28px 0;
       box-shadow: var(--shadow-paper);
     }
+
     .box-exercise-title {
       font-family: var(--font-serif);
       font-size: 1.15rem;
@@ -451,12 +578,14 @@
       background: var(--bg-card);
       box-shadow: var(--shadow-paper);
     }
+
     .table-styled {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.88rem;
       text-align: left;
     }
+
     .table-styled th {
       background: var(--bg-card-subtle);
       color: var(--text-heading);
@@ -466,14 +595,21 @@
       font-family: var(--font-serif);
       font-size: 0.92rem;
     }
+
     .table-styled td {
       padding: 11px 14px;
       border-bottom: 1px solid var(--border-color);
       color: var(--text-main);
       vertical-align: top;
     }
-    .table-styled tr:last-child td { border-bottom: none; }
-    .table-styled tr:hover td { background: var(--accent-ink-bg); }
+
+    .table-styled tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table-styled tr:hover td {
+      background: var(--accent-ink-bg);
+    }
 
     .interactive-widget {
       border: 1.5px solid var(--border-color);
@@ -483,6 +619,7 @@
       margin: 32px 0;
       box-shadow: var(--shadow-paper);
     }
+
     .widget-header {
       display: flex;
       align-items: center;
@@ -491,6 +628,7 @@
       padding-bottom: 12px;
       margin-bottom: 18px;
     }
+
     .widget-badge {
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -502,7 +640,13 @@
       border-radius: 4px;
       border: 1px solid var(--border-color);
     }
-    .widget-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; }
+
+    .widget-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
     .widget-controls {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -513,7 +657,13 @@
       border: 1px solid var(--border-color);
       margin-bottom: 16px;
     }
-    .control-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
     .control-label {
       font-size: 0.82rem;
       font-weight: 600;
@@ -521,7 +671,9 @@
       display: flex;
       justify-content: space-between;
     }
-    .widget-select, .widget-input {
+
+    .widget-select,
+    .widget-input {
       padding: 7px 10px;
       border: 1px solid var(--border-color);
       background: var(--bg-card);
@@ -531,11 +683,13 @@
       border-radius: 4px;
       outline: none;
     }
+
     .widget-results {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px;
     }
+
     .result-box {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -545,7 +699,12 @@
       flex-direction: column;
       gap: 4px;
     }
-    .result-box.highlight { border-color: var(--accent-ink); background: var(--accent-ink-bg); }
+
+    .result-box.highlight {
+      border-color: var(--accent-ink);
+      background: var(--accent-ink-bg);
+    }
+
     .result-label {
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -553,6 +712,7 @@
       color: var(--text-muted);
       font-weight: 700;
     }
+
     .result-value {
       font-family: var(--font-mono);
       font-size: 1.1rem;
@@ -569,6 +729,7 @@
       text-align: center;
       box-shadow: var(--shadow-paper);
     }
+
     .diagram-caption {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -577,26 +738,71 @@
     }
 
     @media print {
-      .no-print, .sidebar, .reading-progress-bar, .btn-floating-toc { display: none !important; }
-      .app-layout { display: block !important; }
-      .main-wrapper { max-width: 100% !important; padding: 0 !important; }
-      body { background: #fff !important; color: #000 !important; font-size: 12pt; }
-      .chapter-section { page-break-after: always; }
-      .box-callout, .box-exercise, .table-responsive { break-inside: avoid; }
+
+      .no-print,
+      .sidebar,
+      .reading-progress-bar,
+      .btn-floating-toc {
+        display: none !important;
+      }
+
+      .app-layout {
+        display: block !important;
+      }
+
+      .main-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 12pt;
+      }
+
+      .chapter-section {
+        page-break-after: always;
+      }
+
+      .box-callout,
+      .box-exercise,
+      .table-responsive {
+        break-inside: avoid;
+      }
     }
 
     @media (max-width: 900px) {
-      .main-wrapper { padding: 30px 20px 80px; }
-      .sidebar { position: fixed; left: 0; top: 0; transform: translateX(-100%); }
-      body.sidebar-open .sidebar { transform: translateX(0); }
-      .btn-floating-toc { display: flex; }
+      .main-wrapper {
+        padding: 30px 20px 80px;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+      }
+
+      body.sidebar-open .sidebar {
+        transform: translateX(0);
+      }
+
+      .btn-floating-toc {
+        display: flex;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="reading-progress-bar" id="progressBar"></div>
   <button id="btnExpandSidebar" class="btn-floating-toc no-print" title="Abrir índice (Atajo: tecla M)">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
     <span>Abrir Índice</span>
   </button>
 
@@ -608,13 +814,19 @@
           <div class="sidebar-subtitle">Teoría Completa (Clases 1 a 4)</div>
         </div>
         <button id="btnCollapseSidebar" class="btn-toggle-sidebar" title="Ocultar índice (Atajo: tecla M)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
         </button>
       </div>
 
       <div class="controls-panel">
         <button class="btn-print" onclick="window.print()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+          </svg>
           <span>Imprimir / PDF A4</span>
         </button>
         <div class="theme-buttons">
@@ -660,11 +872,15 @@
         <span class="module-eyebrow">Ingeniería de Software • Tratado Teórico Completo (Clases 1, 2, 3 y 4)</span>
         <h1>Tratado Teórico Integral de la Ingeniería de Software</h1>
         <p>
-          Compendio académico exhaustivo de las cuatro clases teóricas de la cátedra de Ingeniería de Software (UNLP). Abarca desde la ontología del software y los modelos de procesos (prescriptivos y ágiles) hasta las técnicas de comunicación, elicitación, ingeniería de requerimientos, modelado dinámico formal (DTE, Redes de Petri concurrentes), Casos de Uso e Historias de Usuario.
+          Compendio académico exhaustivo de las cuatro clases teóricas de la cátedra de Ingeniería de Software (UNLP).
+          Abarca desde la ontología del software y los modelos de procesos (prescriptivos y ágiles) hasta las técnicas
+          de comunicación, elicitación, ingeniería de requerimientos, modelado dinámico formal (DTE, Redes de Petri
+          concurrentes), Casos de Uso e Historias de Usuario.
         </p>
         <div class="hero-meta">
           <div class="hero-meta-item"><strong>Alcance:</strong> Clases Teóricas 1, 2, 3 y 4 completas</div>
-          <div class="hero-meta-item"><strong>Enfoque:</strong> Rigor conceptual formal + Modelado matemático y UML</div>
+          <div class="hero-meta-item"><strong>Enfoque:</strong> Rigor conceptual formal + Modelado matemático y UML
+          </div>
           <div class="hero-meta-item"><strong>Formato:</strong> Editorial A4, KaTeX vectorial y diagramas SVG</div>
         </div>
       </header>
@@ -678,50 +894,379 @@
           <h2 class="chapter-title">Fundamentos del Software y la Ingeniería de Software</h2>
         </div>
 
+        <h3>¿Qué es el Software?</h3>
         <p>
-          El <strong>software</strong> es una entidad lógica e intangible que difiere radicalmente de las manufacturas de la ingeniería tradicional. En la cátedra de Ingeniería de Software (UNLP), el software comprende tres elementos inseparables:
+          El <strong>software</strong> es una entidad lógica e intangible que difiere radicalmente de las manufacturas
+          de la ingeniería tradicional. En la cátedra de Ingeniería de Software (UNLP) se define formalmente como un
+          conjunto que comprende tres elementos inseparables:
         </p>
         <ol>
-          <li><strong>Instrucciones y Programas de Computadora:</strong> Algoritmos y código ejecutable que satisfacen requerimientos funcionales y de rendimiento.</li>
-          <li><strong>Estructuras de Datos:</strong> Mecanismos lógicos y bases de datos que permiten almacenar y transformar la información.</li>
-          <li><strong>Documentación y Manuales:</strong> Guías descriptivas que explican el funcionamiento y mantenimiento del sistema.</li>
+          <li><strong>Instrucciones y Programas de Computadora:</strong> Algoritmos y código ejecutable que, cuando se
+            ejecutan, proporcionan la función y el comportamiento deseados.</li>
+          <li><strong>Estructuras de Datos (Datos en sí):</strong> La información misma que el sistema contiene y que los programas manipulan adecuadamente (como por ejemplo información sensible de usuarios o de la empresa).</li>
+          <li><strong>Documentación y Reglas:</strong> Guías descriptivas, manuales y procedimientos que explican la
+            operación, uso y mantenimiento del sistema (IEEE).</li>
         </ol>
+
+        <h4>Tipos de Producto y Clasificación</h4>
+        <p>Los productos de software se pueden categorizar por su modelo de negocio en:</p>
+        <ul>
+          <li><strong>Genéricos:</strong> Sistemas aislados producidos por organizaciones para venderse libremente en el
+            mercado abierto a cualquier cliente.</li>
+          <li><strong>Personalizados:</strong> Sistemas requeridos y diseñados para un cliente en particular o
+            desarrollados internamente por la organización que los usará.</li>
+        </ul>
+        <p>A nivel técnico, se clasifican según su naturaleza en: <strong>De Sistemas</strong> (sirven a otros
+          programas), <strong>De Gestión</strong> (procesan información comercial), <strong>Científico</strong>
+          (algoritmos numéricos), <strong>Empotrado</strong> (residen en hardware/memoria local), <strong>De Tiempo
+            Real</strong> (controlan sucesos estrictos del mundo físico), <strong>Basados en Web</strong> y de
+          <strong>Inteligencia Artificial</strong> (heurísticas y algoritmos no numéricos para problemas complejos).
+        </p>
 
         <div class="box-callout box-concept">
           <div class="box-callout-header">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
             <span>Diferencias Esenciales: Software vs. Hardware</span>
           </div>
           <p>
-            1. <strong>El software se desarrolla, no se manufactura:</strong> El costo marginal de reproducción es prácticamente cero. La inversión radica en el diseño intelectual.<br>
-            2. <strong>El software no se desgasta físicamente:</strong> No sufre fricción ni corrosión (a diferencia de la <em>Curva de la Bañera</em> del hardware), pero <em>se deteriora por entropía lógica</em> debido a modificaciones y parches continuos.<br>
-            3. <strong>Gran componente a medida:</strong> A pesar del ensamblaje de componentes, la mayoría del software se diseña a medida del cliente.
+            1. <strong>El software se desarrolla, no se manufactura:</strong> El costo marginal de reproducción es
+            prácticamente cero. La gran inversión (costo) radica en el trabajo de ingeniería intelectual, no en la
+            cadena de producción.<br>
+            2. <strong>El software no se desgasta físicamente:</strong> No sufre fricción ni corrosión. Mientras que el
+            hardware tiene una "Curva de la Bañera" (fallos al inicio por fabricación y al final por desgaste físico),
+            el software sufre fallos al inicio, se estabiliza, pero <em>se deteriora por entropía lógica</em> debido a
+            modificaciones y parches continuos solicitados por el entorno.<br>
+            3. <strong>Gran componente a medida:</strong> A pesar de la tendencia al ensamblaje de componentes
+            preexistentes, la mayoría del software complejo aún se construye total o parcialmente a medida.
           </p>
         </div>
 
-        <h3>La Crisis del Software (Garmisch, 1968)</h3>
-        <p>
-          Conferencia de la OTAN donde se acuñó el término. Síntomas: sobrecostos exponenciales, retrasos masivos, calidad deficiente, código espagueti e inmantenible y falta de adecuación a las necesidades reales del usuario.
-        </p>
-
-        <h3>Definición Formal IEEE Standard 610.12 (1990)</h3>
-        <div class="box-callout box-exam">
-          <p>
-            <em>"La Ingeniería de Software es la aplicación de un enfoque sistemático, disciplinado y cuantificable al desarrollo, operación y mantenimiento del software; es decir, la aplicación de la ingeniería al software, y el estudio de estos enfoques."</em>
-          </p>
-        </div>
-
-        <h3>Leyes de Lehman de la Evolución del Software</h3>
+        <h3>Historia y Evolución: Las Eras del Software</h3>
+        <p>A lo largo de las décadas, la industria superó distintas eras impulsadas por la evolución del entorno
+          tecnológico:</p>
         <ul>
-          <li><strong>I. Cambio Continuo:</strong> Un sistema de software debe adaptarse continuamente a su entorno o perderá utilidad progresivamente.</li>
-          <li><strong>II. Complejidad Creciente:</strong> Al evolucionar, la complejidad interna aumenta a menos que se invierta trabajo explícito en reducirla (refactorización).</li>
-          <li><strong>III. Autorregulación:</strong> El proceso de evolución presenta dinámicas estables y ritmos medibles a nivel organizacional.</li>
+          <li><strong>1950–1960 (Era Funcional):</strong> Hardware de propósito general, desarrollo sin planificación
+            formal, procesamiento por lotes (batch). Documentación casi inexistente.</li>
+          <li><strong>1960–1970 (Sistemas y Multiprogramación):</strong> Minicomputadoras, bases de datos y tiempo real.
+            Nace el concepto de "producto de software". Comienzan los enormes problemas y costos de
+            <em>mantenimiento</em>.
+          </li>
+          <li><strong>1970–1990 (Era de Costos):</strong> Microprocesadores, computadoras personales (PC) y redes. La
+            productividad de los programadores se vuelve vital. Nacen los modelos de ciclos de vida.</li>
+          <li><strong>1990–2000 (Era de la Calidad):</strong> Tecnologías Orientadas a Objetos (OO). Se consolidan los
+            procesos paralelos y se eleva la disciplina a "Ingeniería".</li>
+          <li><strong>2000–Act. (Conectividad y Web):</strong> Sistemas en red, computación ubicua y código abierto
+            (Open Source). Foco en la "Comunicación y Distribución".</li>
+          <li><strong>2010–2015+ (Ubicuidad y Datos):</strong> Internet de las Cosas (IoT), dispositivos móviles,
+            procesamiento de colosales volúmenes de datos e Inteligencia Artificial.</li>
         </ul>
 
-        <h3>Responsabilidad Profesional y Ética (ACM / IEEE-CS)</h3>
+        <h3>La Crisis del Software (1960s)</h3>
         <p>
-          8 principios éticos rectores: Público (interés social), Cliente y Empleador, Producto (máxima calidad y pruebas rigurosas), Juicio independiente, Gestión justa, Profesión, Colegas y Uno Mismo (aprendizaje continuo).
+          En los años 60, la sofisticación del software desbordó los recursos técnicos de una profesión heterogénea
+          basada en la intuición individual. Los síntomas eran sobrecostos exponenciales, retrasos crónicos y código
+          espagueti. En <strong>1968 (Garmisch)</strong> y <strong>1969 (Roma)</strong>, la OTAN organizó conferencias
+          fundacionales para identificar la raíz de estos problemas, naciendo allí el término "Ingeniería de Software".
         </p>
+
+        <h3>¿Qué es la Ingeniería de Software?</h3>
+        <div class="box-callout box-exam">
+          <p>
+            <em>"La Ingeniería de Software es la aplicación de un enfoque sistemático, disciplinado y cuantificable al
+              desarrollo, operación y mantenimiento del software; es decir, la aplicación de la ingeniería al software,
+              y el estudio de estos enfoques."</em> (Definición Formal IEEE Standard 610.12 - 1990)
+          </p>
+          <ul>
+            <li>
+              <strong>Usa métodos sistemáticos "Cuantificables":</strong> La cuantificación rigurosa de recursos,
+              procesos y productos es una precondición para optimizar productividad y calidad. La "metrificación" y
+              el control estadístico de procesos son claves en Ingeniería de Software.
+            </li>
+            <li>
+              <strong>"Dentro de tiempos y costos estimados":</strong> Un Ingeniero de Software debe cumplir contratos
+              en tiempo y costos como es normal en obras de Ingeniería. Ello presupone la capacidad de medir, estimar,
+              planificar y administrar proyectos.
+            </li>
+            <li>
+              <strong>Para el "Desarrollo, operación y mantenimiento":</strong> La Ingeniería de Software se ocupa de
+              todo el ciclo de vida de un producto, desde su etapa inicial de planificación y análisis de
+              requerimientos hasta la estrategia para determinar cuándo y cómo debe ser retirado de servicio.
+            </li>
+          </ul>
+        </div>
+        <p>
+          Surge como reacción al desarrollo basado únicamente en habilidad e intuición. Su objetivo es aplicar
+          estándares y métodos rigurosos que permitan producir software confiable, eficiente y al menor costo y tiempo
+          estimados posible.
+        </p>
+        <p>
+          <strong>Diferencia con las Ciencias de la Computación:</strong> La Ciencia de la Computación se refiere a las
+          teorías formales y abstractas subyacentes. La Ingeniería de Software es una <em>disciplina tecnológica y
+            administrativa de producción y evolución de productos reales</em>; no trata temas netamente abstractos, sino
+          que aplica las teorías para resolver problemas de clientes.
+        </p>
+
+        <h4>Participantes en el Desarrollo</h4>
+        <ul>
+          <li><strong>Cliente / Ejecutivo:</strong> Patrocina el proyecto, proporciona el financiamiento y tiene
+            obligaciones contractuales.</li>
+          <li><strong>Usuario:</strong> Es quien utilizará efectivamente el sistema. Tiene necesidades concretas.</li>
+          <li><strong>Desarrollador:</strong> Equipo que construye el sistema de software interactuando con las partes.
+          </li>
+        </ul>
+
+        <h4>Conocimientos y Competencias del Ingeniero de Software</h4>
+        <p>
+          A diferencia del científico de la computación puramente teórico o del programador artesanal, el Ingeniero
+          de Software debe poseer una sólida combinación de conocimientos científicos, metodológicos, tecnológicos y
+          administrativos (Clase 1 de Teoría):
+        </p>
+        <ul>
+          <li>
+            <strong>Científicos y Formales:</strong> Aplicación de métodos formales, lógica matemática, análisis
+            estadístico de procesos, simulación y notaciones formales de modelización y verificación.
+          </li>
+          <li>
+            <strong>Metodológicos:</strong> Dominio de metodologías de documentación, elicitación, análisis,
+            especificación, arquitectura, implementación, testing y evolución. Debe conocer con precisión las ventajas,
+            costos y limitaciones de cada notación y técnica: <em>saber cómo y cuándo aplicarlas</em> según el contexto.
+          </li>
+          <li>
+            <strong>Tecnológicos y de Producto:</strong> Dominio de tecnologías vigentes: sistemas operativos,
+            lenguajes, frameworks, bases de datos (SQL y NoSQL), generadores de interfaz, bibliotecas y herramientas CASE.
+          </li>
+          <li>
+            <strong>Administrativos y de Gestión de Proyectos:</strong> Planificación temporal y económica, estimación de
+            costos y plazos, gestión de riesgos, aseguramiento de la calidad (QA), seguimiento de métricas y control de
+            equipos y subcontratistas.
+          </li>
+        </ul>
+
+        <h3>Evolución del Software y Leyes de Lehman</h3>
+        <p>
+          Una de las características cardinales del software es que <strong>no se desgasta físicamente</strong>. No sigue
+          la curva clásica de envejecimiento del hardware ("Curva de la Bañera" con fallos físicos por desgaste de materiales).
+          En el software, <em>el problema esencial no radica en el tiempo de operación, sino en los cambios continuos</em>.
+        </p>
+        <p>
+          A partir de investigaciones empíricas sobre sistemas empresariales de gran escala, <strong>Meir M. Lehman</strong>
+          (1974–1996) postuló sus reconocidas <em>Leyes de Evolución del Software</em> aplicables a sistemas del mundo real
+          denominados <strong>Sistemas de Tipo E</strong> (sistemas que se integran en un entorno socio-operativo del mundo real;
+          al funcionar alteran su propio entorno, generando inevitablemente nuevas demandas y requisitos que fuerzan su
+          modificación continua).
+        </p>
+
+        <div class="box-callout box-exam">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+            <span>Las 3 Leyes de Lehman Fundamentales (Foco Examen Parcial / Final)</span>
+          </div>
+          <ul style="margin-bottom: 0;">
+            <li>
+              <strong>I. Ley del Cambio Continuo (<em>Continuing Change</em>):</strong>
+              <p style="margin: 4px 0 6px 0;">
+                <em>"Un sistema de software utilizado en el mundo real debe adaptarse y cambiar continuamente o, de lo
+                contrario, se vuelve progresivamente menos satisfactorio e inútil."</em>
+              </p>
+              <div style="font-size:0.92em; color:var(--text-muted); line-height: 1.5;">
+                • <strong>Fundamento:</strong> El contexto de negocio, las leyes, la tecnología subyacente y las expectativas de los usuarios evolucionan sin cesar.<br>
+                • <strong>Impacto en la práctica:</strong> Un sistema de software nunca se considera "congelado" ni definitivamente "terminado". El mantenimiento y la evolución absorben entre el <strong>60% y el 80%</strong> del presupuesto total del ciclo de vida.
+              </div>
+            </li>
+            <li style="margin-top: 14px;">
+              <strong>II. Ley de la Complejidad Creciente (<em>Increasing Complexity</em>):</strong>
+              <p style="margin: 4px 0 6px 0;">
+                <em>"A medida que un sistema de software evoluciona y se le incorporan sucesivas modificaciones, su
+                complejidad interna crece y su estructura arquitectónica se degrada, a menos que se invierta un trabajo
+                deliberado y explícito en mantenerla o simplificarla."</em>
+              </p>
+              <div style="font-size:0.92em; color:var(--text-muted); line-height: 1.5;">
+                • <strong>Fundamento:</strong> Los parches apresurados, soluciones contingentes y adiciones de funcionalidades rompen la coherencia arquitectónica original (entropía del software y acumulación de deuda técnica).<br>
+                • <strong>Impacto en la práctica:</strong> Es imprescindible dedicar recursos programados a la <strong>refactorización continua (<em>refactoring</em>)</strong>, reingeniería de módulos y automatización de pruebas de regresión. Si no se refactoriza, el costo y riesgo de cada nuevo cambio crece exponencialmente hasta hacer inviable el sistema.
+              </div>
+            </li>
+            <li style="margin-top: 14px;">
+              <strong>III. Ley de la Autorregulación (<em>Self-Regulation</em>):</strong>
+              <p style="margin: 4px 0 6px 0;">
+                <em>"El proceso de evolución del software es un proceso autorregulado con una distribución estadísticamente
+                estable e invariante de medidas de producto y proceso a lo largo del tiempo."</em>
+              </p>
+              <div style="font-size:0.92em; color:var(--text-muted); line-height: 1.5;">
+                • <strong>Fundamento:</strong> Los equipos de desarrollo, los canales de comunicación y la inercia organizacional establecen un ritmo intrínseco y natural de producción y entrega de versiones.<br>
+                • <strong>Impacto en la práctica:</strong> La velocidad de entrega tiende a estabilizarse (principio empírico de la <em>velocidad de equipo</em> en Scrum y Agile). Forzar plazos agregando personal intempestivamente rompe este equilibrio, disparando la tasa de defectos y retrasando aún más el proyecto (<em>Ley de Brooks</em>).
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="table-responsive" style="margin-top: 18px;">
+          <table class="table-styled">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Ley de Lehman</th>
+                <th style="width: 40%;">Principio Canónico</th>
+                <th style="width: 35%;">Aplicación Práctica / Examen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>I. Cambio Continuo</strong></td>
+                <td>Debe adaptarse constantemente o volverse progresivamente inservible.</td>
+                <td>Evolución constante; el software nunca es una obra estática finalizada.</td>
+              </tr>
+              <tr>
+                <td><strong>II. Complejidad Creciente</strong></td>
+                <td>La estructura interna se deteriora si no se invierte en refactorización.</td>
+                <td>Mitigar la deuda técnica mediante <em>refactoring</em> y modularidad continua.</td>
+              </tr>
+              <tr>
+                <td><strong>III. Autorregulación</strong></td>
+                <td>El proceso de evolución mantiene una dinámica y ritmo estadísticamente estables.</td>
+                <td>Base de las métricas y velocidad constante de equipo en Scrum/Ágil.</td>
+              </tr>
+              <tr>
+                <td><strong>IV. Estabilidad Organizacional</strong></td>
+                <td>La tasa de actividad efectiva promedio en un proyecto tiende a ser constante.</td>
+                <td>Sobrecargar al equipo no incrementa el rendimiento útil real.</td>
+              </tr>
+              <tr>
+                <td><strong>V. Conservación de la Familiaridad</strong></td>
+                <td>El contenido de cambio por release debe mantenerse controlado y constante.</td>
+                <td>Entregas incrementales pequeñas para que usuarios y desarrolladores dominen los cambios.</td>
+              </tr>
+              <tr>
+                <td><strong>VI. Crecimiento Continuo</strong></td>
+                <td>La capacidad funcional debe crecer sostenidamente para satisfacer al usuario.</td>
+                <td>Gestión continua del Product Backlog agregando valor en cada sprint.</td>
+              </tr>
+              <tr>
+                <td><strong>VII. Calidad Declinante</strong></td>
+                <td>La calidad aparente decae salvo riguroso mantenimiento y adaptación al entorno.</td>
+                <td>Pruebas continuas de regresión y adecuación operativa permanente.</td>
+              </tr>
+              <tr>
+                <td><strong>VIII. Sistema de Retroalimentación</strong></td>
+                <td>La evolución es un sistema de control multinivel que requiere bucles de feedback.</td>
+                <td>Instancias formales de feedback: Revisiones de Sprint, Demos y Retrospectivas.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Responsabilidad Profesional y Ética (ACM / IEEE)</h3>
+        <p>
+          La Ingeniería de Software no es meramente una práctica técnica ni se reduce a escribir líneas de código:
+          <strong>se desarrolla dentro de un marco económico, social, ético y legal</strong>. Puesto que las decisiones de
+          los ingenieros de software impactan en la seguridad física, patrimonial y privada de personas y organizaciones,
+          los profesionales deben aceptar responsabilidades mucho más amplias que la destreza de desarrollo.
+        </p>
+
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span>Principio Fundamental y los 4 Pilares Profesionales (Clase 1 - Cátedra UNLP)</span>
+          </div>
+          <p style="font-weight: 700; color: var(--accent-ink); margin-bottom: 12px; font-size: 1.02rem;">
+            "El Ingeniero de Software no debe utilizar sus capacidades y habilidades de forma deshonesta, ni de modo
+            que deshonre o perjudique a la profesión."
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 12px;">
+            <div style="background: var(--bg-card-subtle); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--border-color);">
+              <h5 style="margin: 0 0 6px 0; color: var(--accent-ink); font-size: 0.95rem;">1. Confidencialidad</h5>
+              <p style="font-size: 0.9em; margin: 0; line-height: 1.45;">
+                Respetar de forma irrestricta la confidencialidad de empleadores, socios y clientes en todo momento,
+                <strong>independientemente de si se firmó o no un acuerdo explícito formal (NDA)</strong>. Está prohibido
+                revelar secretos comerciales, bases de datos de clientes, código fuente propietario o información comercial
+                estratégica.
+              </p>
+            </div>
+            <div style="background: var(--bg-card-subtle); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--border-color);">
+              <h5 style="margin: 0 0 6px 0; color: var(--accent-ink); font-size: 0.95rem;">2. Competencia</h5>
+              <p style="font-size: 0.9em; margin: 0; line-height: 1.45;">
+                <strong>No falsear, distorsionar ni exagerar el nivel real de competencia técnica, formación o credenciales</strong>.
+                No aceptar deliberadamente proyectos o responsabilidades que excedan la capacidad técnica propia o del equipo,
+                a menos que se informe previamente con total transparencia y se garantice la capacitación, asesoría o supervisión
+                necesaria.
+              </p>
+            </div>
+            <div style="background: var(--bg-card-subtle); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--border-color);">
+              <h5 style="margin: 0 0 6px 0; color: var(--accent-ink); font-size: 0.95rem;">3. Derechos de Propiedad Intelectual</h5>
+              <p style="font-size: 0.9em; margin: 0; line-height: 1.45;">
+                Conocer y acatar rigurosamente las leyes vigentes sobre <strong>patentes, copyright, marcas registradas y licencias de software</strong>
+                (comerciales, código abierto, MIT, GPL, Apache). Prohibición absoluta de plagiar código de terceros, utilizar
+                software pirata o violar los términos de licencias de librerías utilizadas en los entregables.
+              </p>
+            </div>
+            <div style="background: var(--bg-card-subtle); padding: 14px 16px; border-radius: 6px; border: 1px solid var(--border-color);">
+              <h5 style="margin: 0 0 6px 0; color: var(--accent-ink); font-size: 0.95rem;">4. Uso Inapropiado de Computadoras</h5>
+              <p style="font-size: 0.9em; margin: 0; line-height: 1.45;">
+                <strong>No utilizar los conocimientos técnicos ni los privilegios de acceso para intervenir, vulnerar, sabotear o
+                acceder sin debida autorización a computadoras o redes ajenas</strong>. Abarca desde actividades delictivas
+                (malware, exploits, robo de datos) hasta abusos laborales como emplear servidores del cliente para beneficio o recreación personal no autorizada.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h4>Código de Ética Conjunto ACM / IEEE-CS: Los 8 Principios Rectores</h4>
+        <p>
+          Las dos instituciones profesionales de referencia mundial, <strong>ACM</strong> (<em>Association for Computing Machinery</em>)
+          y <strong>IEEE Computer Society</strong>, promulgaron el estándar ético universal que rige la conducta del ingeniero de software:
+        </p>
+        <ol style="margin-left: 20px; line-height: 1.6; font-size: 0.95rem;">
+          <li><strong>PÚBLICO:</strong> Los ingenieros de software actuarán en forma congruente con el interés social y la seguridad pública (prioridad rectora que prevalece ante cualquier beneficio económico o empresarial).</li>
+          <li><strong>CLIENTE Y EMPLEADOR:</strong> Actuarán de la mejor manera para los intereses del cliente y empleador, siempre que sea congruente con el interés público.</li>
+          <li><strong>PRODUCTO:</strong> Garantizarán que los productos y modificaciones cumplan con los más altos estándares profesionales posibles de calidad, robustez y verificación.</li>
+          <li><strong>JUICIO:</strong> Mantendrán integridad, objetividad e independencia en sus juicios y decisiones profesionales (rechazando sobornos, conflictos de interés o presiones espurias).</li>
+          <li><strong>ADMINISTRACIÓN / GESTIÓN:</strong> Los líderes y gerentes promoverán y suscribirán un enfoque ético en la gestión del desarrollo, estableciendo plazos y presupuestos realistas y justos.</li>
+          <li><strong>PROFESIÓN:</strong> Fomentarán la integridad, credibilidad y reputación de la profesión en concordancia con el bienestar social.</li>
+          <li><strong>COLEGAS:</strong> Tratarán a sus colegas con equidad, respeto y cooperación, apoyando su desarrollo y reconociendo sus aportes.</li>
+          <li><strong>UNO MISMO:</strong> Se comprometerán en el aprendizaje y perfeccionamiento profesional continuo a lo largo de toda su vida activa.</li>
+        </ol>
+
+        <div class="box-callout box-trap">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <span>Articulación con la Práctica (Caso Valkery SRL / Repartos Ya) y Criterio de Examen</span>
+          </div>
+          <p>
+            <strong>¿Cómo traslada la cátedra estos conceptos a los enunciados de examen?</strong>
+          </p>
+          <ul style="margin-top: 6px;">
+            <li>
+              <strong>Leyes de Lehman en la Práctica:</strong> En el proyecto Valkery SRL, cuando el dueño solicita incorporar
+              geolocalización y nuevos canales de mensajería, se aplica la <em>Ley de Cambio Continuo</em>. Si el equipo implementa
+              estas solicitudes "pegando parches" en el backend sin refactorizar el modelo relacional ni separar responsabilidades,
+              opera la <em>Ley de Complejidad Creciente</em> (deuda técnica que volverá inestable la plataforma). Además, no es viable
+              duplicar las historias de usuario en un sprint pensando que se entregará el doble de rápido, ya que la
+              <em>Ley de Autorregulación</em> impone una velocidad de equipo natural y medible.
+            </li>
+            <li>
+              <strong>Responsabilidad Ética en la Práctica:</strong> En Valkery se gestionan domicilios particulares, teléfonos de
+              destinatarios y fotos de comprobantes de entrega; descuidar estos datos o dejarlos accesibles públicamente vulnera el
+              deber ético de <em>Confidencialidad</em>. Por otro lado, prometer al cliente un algoritmo automático de optimización
+              logística NP-hard si el equipo solo domina asignación manual viola la <em>Competencia</em> técnica. Asimismo, utilizar
+              librerías de mapas (como OpenStreetMap o Mapbox) exige respetar sus <em>Derechos de Propiedad Intelectual</em> y términos de
+              licencia; y asegurar que los transportistas solo visualicen su propia hoja de ruta previene el <em>Uso Inapropiado</em> de las credenciales.
+            </li>
+          </ul>
+        </div>
       </section>
 
       <section class="chapter-section" id="cap2">
@@ -731,50 +1276,152 @@
         </div>
 
         <p>
-          Un <strong>modelo de proceso</strong> define las actividades metodológicas marco: Comunicación, Planificación, Modelado, Construcción y Despliegue.
+          Un <strong>proceso de software</strong> es un conjunto estructurado de actividades (con entradas, salidas,
+          restricciones y recursos) que derivan en la producción de un software. Las 4 actividades universales son:
+          Especificación, Desarrollo, Validación y Evolución. Un <strong>modelo de proceso</strong> (o paradigma de
+          software) es una representación abstracta y simplificada de dicho proceso.
         </p>
         <ul>
-          <li><strong>Modelo en Cascada (Waterfall / Royce 1970):</strong> Secuencia lineal estricta. Asume requisitos congelados. Desventajas: software funcional tardío, efecto bloqueo y costo astronómico si se descubren errores al final. Viable solo con requerimientos perfectamente estables y críticos (aviónica).</li>
-          <li><strong>Modelo en V (V-Model):</strong> Simetría estricta entre diseño y pruebas: Requerimientos $\leftrightarrow$ Pruebas de Aceptación; Sistema $\leftrightarrow$ Pruebas de Sistema; Arquitectura $\leftrightarrow$ Pruebas de Integración; Código $\leftrightarrow$ Pruebas Unitarias.</li>
-          <li><strong>Prototipado:</strong> Desechable (*Throwaway*) para mitigar incertidumbre de requisitos vs. Evolutivo como base del sistema final.</li>
-          <li><strong>Incremental e Iterativo:</strong> Entregas en releases funcionales utilizables del núcleo (*Core*).</li>
-          <li><strong>Modelo en Espiral (Barry Boehm 1988):</strong> Guiado por análisis continuo de riesgos en 4 cuadrantes (Objetivos, Análisis de Riesgos, Desarrollo y Verificación, Planificación del siguiente ciclo).</li>
-          <li><strong>RUP (Rational Unified Process):</strong> Dirigido por casos de uso, centrado en arquitectura, iterativo e incremental. 4 fases temporales: Inicio (*Inception*), Elaboración (*Elaboration* - línea base de arquitectura), Construcción (*Construction*) y Transición (*Transition*).</li>
+          <li><strong>Modelos Prescriptivos:</strong> Definen o "prescriben" estrictamente un conjunto de reglas, flujo
+            de trabajo, aseguramiento de calidad y mecanismos de control que <em>deberían</em> seguirse.</li>
+          <li><strong>Modelos Descriptivos:</strong> Describen la forma en la que se desarrollan los proyectos en la
+            <em>realidad</em> (donde suele haber superposición, retrocesos o caos). Idealmente, prescriptivo y
+            descriptivo deberían coincidir.
+          </li>
+        </ul>
+
+        <h3>Paradigmas y Modelos Principales</h3>
+        <ul>
+          <li>
+            <strong>Modelo en Cascada (Waterfall / Royce 1970):</strong> Secuencia lineal donde cada etapa (Requisitos
+            $\rightarrow$ Diseño $\rightarrow$ Código $\rightarrow$ Pruebas) debe completarse antes de pasar a la
+            siguiente.
+            <em>Ventajas:</em> Es muy simple de entender y explicar al cliente.
+            <em>Dificultades:</em> No produce resultados tangibles hasta el final del ciclo; las fallas triviales de
+            análisis se descubren recién en las pruebas tardías, haciendo que su corrección cueste fortunas; es irreal
+            obligar al cliente a "congelar" requisitos de antemano.
+          </li>
+          <li>
+            <strong>Modelo en V (V-Model):</strong> Muestra explícitamente cómo las actividades tempranas de
+            especificación dictaminan las actividades tardías de prueba. Por ejemplo, la especificación de
+            requerimientos se valida con las pruebas de aceptación. Si ocurre un fallo en la validación derecha, se debe
+            volver al escalón simétrico del lado izquierdo para rediseñar.
+          </li>
+          <li>
+            <strong>Modelo de Prototipos:</strong> Construcción de versiones parciales y ejecutables tempranas. Permite
+            a clientes y desarrolladores despejar incertidumbre técnica o de diseño (UI).
+            <ul>
+              <li><em>Descartables (Throwaway):</em> No poseen calidad de producción y se tiran tras validar el modelo.
+              </li>
+              <li><em>Evolutivos:</em> Forman la base arquitectónica del sistema a entregar.</li>
+              <li><em>Condiciones de éxito:</em> Deben ser baratos (costar menos del 10% del proyecto total),
+                desarrollarse muy rápido, con equipo pequeño y lenguajes dinámicos de alto nivel.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Desarrollo por Fases:</strong>
+            <ul>
+              <li><em>Incremental:</em> Se entrega el producto final particionado por <strong>subsistemas</strong>, de
+                forma que el cliente suma funcionalidad por bloques autónomos.</li>
+              <li><em>Iterativo:</em> Se entrega el <strong>sistema completo en versión abstracta o básica</strong> en
+                la primera entrega, y en las siguientes iteraciones se va refinando (añadiendo profundidad y robustez a
+                cada pieza).</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Modelo en Espiral (Barry Boehm):</strong> Paradigma iterativo enfocado centralmente en la
+            <strong>Gestión de Riesgos</strong>. Cada bucle consta de 4 fases: 1) Determinar metas, alternativas y
+            restricciones; 2) Análisis de riesgo y prototipado; 3) Desarrollar y probar; 4) Planificar la siguiente
+            fase. Evita el bloqueo del modelo cascada permitiendo vueltas atrás controladas.
+          </li>
         </ul>
       </section>
 
       <section class="chapter-section" id="cap3">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 3 • Clase Teórica 1</div>
-          <h2 class="chapter-title">Metodologías Ágiles: Scrum, XP, Kanban y Enfoque MDD</h2>
+          <h2 class="chapter-title">Metodologías Ágiles y Enfoque MDD</h2>
+        </div>
+
+        <p>
+          Frente al enfoque tradicional caracterizado por grandes equipos, alta burocracia, fuerte documentación,
+          resistencia al cambio y normas externas rigurosas, surgen en la década de los 90 las metodologías ágiles.
+        </p>
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+            <span>Diferencias: Ágil vs Tradicional</span>
+          </div>
+          <p>
+            • <strong>Tradicional:</strong> Basado en normas externas, contratos prefijados y rígidos, resistencia a los
+            cambios, equipos grandes y distribuidos, control burocrático alto, y excesivos artefactos documentales.<br>
+            • <strong>Ágil:</strong> Basado en heurísticas del propio equipo (autoorganización), cliente in-situ e
+            interacción continua sin contrato rígido detallado, bienvenida activa a cambios, equipos pequeños (&lt;10
+            personas), control interno y pocos artefactos formales.
+          </p>
         </div>
 
         <h3>El Manifiesto Ágil (Snowbird, Utah, 2001)</h3>
-        <p>Los 4 valores cardinales:</p>
+        <p>Se establecieron 4 valores cardinales (la izquierda es más importante que la derecha, aunque ambas existen):
+        </p>
         <ol>
           <li><strong>Individuos e interacciones</strong> sobre procesos y herramientas.</li>
           <li><strong>Software funcionando</strong> sobre documentación exhaustiva.</li>
           <li><strong>Colaboración con el cliente</strong> sobre negociación contractual.</li>
           <li><strong>Respuesta ante el cambio</strong> sobre seguimiento de un plan rígido.</li>
         </ol>
-
-        <h3>Scrum Framework en Profundidad</h3>
-        <ul>
-          <li><strong>Pilares empíricos:</strong> Transparencia, Inspección, Adaptación.</li>
-          <li><strong>Roles:</strong> Product Owner (maximiza el valor y gestiona el Product Backlog), Scrum Master (líder servicial y coach del marco, remueve impedimentos) y Developers (equipo multifuncional y autoorganizado).</li>
-          <li><strong>Artefactos y Compromisos:</strong> Product Backlog (*Product Goal*), Sprint Backlog (*Sprint Goal*), Incremento (*Definition of Done - DoD*).</li>
-          <li><strong>Eventos timeboxed:</strong> Sprint (1 a 4 semanas), Sprint Planning, Daily Scrum (15 min), Sprint Review y Sprint Retrospective.</li>
-        </ul>
+        <p>
+          Además, se pautan <strong>12 principios rectores</strong>, destacando: la entrega temprana y continua de
+          valor, la aceptación de cambios incluso tarde en el ciclo, el trabajo diario en conjunto entre desarrolladores
+          y el negocio, comunicación cara a cara, simplicidad ("el arte de maximizar el trabajo no realizado"),
+          excelencia técnica incesante y reflexión periódica (retrospectivas).
+        </p>
 
         <h3>Extreme Programming (XP - Kent Beck)</h3>
         <p>
-          Enfocada en la excelencia técnica: TDD (*Test-Driven Development: Red-Green-Refactor*), Programación en parejas (*Driver & Navigator*), Integración Continua (CI), Refactorización incesante, Propiedad colectiva del código y Cliente en el sitio (*On-site customer*).
+          Enfocada en la excelencia técnica del código. Se sostiene sobre 5 valores: <strong>Sencillez, Comunicación,
+            Retroalimentación, Valentía y Respeto</strong>.
+          Sus prácticas clave incluyen: Desarrollo Guiado por Pruebas (TDD), Programación en Parejas (pair programming),
+          propiedad colectiva del código, integración continua, refactorización incesante, diseño simple, cliente en el
+          sitio de forma permanente y cero horas extras como regla de sanidad.
         </p>
 
-        <h3>Desarrollo Dirigido por Modelos (MDD / MDA - OMG)</h3>
+        <h3>Scrum Framework</h3>
         <p>
-          La abstracción se traslada de código a modelos formales: CIM (Modelo de Negocio), PIM (Independiente de Plataforma), PSM (Específico de Plataforma) con transformaciones automáticas M2M (modelo a modelo) y M2T (modelo a código).
+          Proceso diseñado empíricamente para entornos donde reina el caos, la incertidumbre y la altísima dinámica
+          tecnológica.
         </p>
+        <ul>
+          <li><strong>Roles:</strong> Product Owner (define el <em>qué</em> y prioriza el backlog), Scrum Master (coach
+            del equipo, protector contra presiones externas, remueve bloqueos) y Team (desarrolladores multifuncionales
+            que deciden el <em>cómo</em>).</li>
+          <li><strong>Artefactos:</strong> <em>Product Backlog</em> (lista maestra de deseos priorizada) y <em>Sprint
+              Backlog</em> (compromiso táctico del equipo para el ciclo actual). Se usa el <em>Burndown Chart</em> para
+            seguir gráficamente el trabajo acumulativo día a día.</li>
+          <li><strong>Sprints:</strong> Iteraciones *timeboxed* (de 1 a 4 semanas) al final de las cuales se debe
+            entregar software funcionando libre de errores ("demo"). Es iterativo e incremental, comparable a una
+            formación de rugby donde todos empujan juntos en paralelo sin fases de cascada puras.</li>
+        </ul>
+
+        <h3>Desarrollo de Software Dirigido por Modelos (MDD / MDA)</h3>
+        <p>
+          Nacido de los conceptos de Tom DeMarco en los 70s, el MDD postula que la ingeniería de software debe centrarse
+          en construir abstracciones matemáticas o gráficas rigurosas antes (y por encima) de escribir código.
+        </p>
+        <p><strong>El adjetivo "Dirigido" (Driven):</strong> A diferencia de "basado en", indica que los modelos no son
+          solo bocetos pasivos o documentación post-mortem, sino <em>artefactos vivos y primarios</em> a partir de los
+          cuales se genera el producto.</p>
+        <ul>
+          <li><strong>PIM (Platform Independent Model):</strong> Un modelo puro del negocio que ignora por completo la
+            base de datos, el framework web o el sistema operativo subyacente.</li>
+          <li><strong>PSM (Platform Specific Model):</strong> Un modelo enriquecido que incluye detalles técnicos
+            particulares (ej. anotaciones de JPA para Hibernate o directivas de React).</li>
+          <li><strong>Transformaciones Automáticas:</strong> Reglas sistemáticas y no ambiguas para convertir
+            automáticamente un PIM en PSM y un PSM en código fuente ejecutable, protegiendo las reglas de negocio de la
+            obsolescencia tecnológica (reuso y longevidad).</li>
+        </ul>
       </section>
 
       <!-- ============================================================== -->
@@ -783,19 +1430,121 @@
       <section class="chapter-section" id="cap4">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 4 • Clase Teórica 2</div>
-          <h2 class="chapter-title">La Comunicación en la Ingeniería de Software</h2>
+          <h2 class="chapter-title">La Comunicación y la Ingeniería de Requerimientos</h2>
         </div>
 
         <p>
-          Más del 60% de los fallos de software nacen de deficiencias comunicacionales entre el cliente y el equipo técnico.
+          Saber lo que el usuario quiere, cómo lo quiere, cuándo y por qué, es la primera y fundamental actividad al
+          iniciar un proyecto. Más del 60% de los fallos críticos de software no nacen de errores de código, sino de
+          <strong>deficiencias comunicacionales</strong> entre el cliente y el equipo técnico.
+        </p>
+
+        <h3>Problemas de Comunicación</h3>
+        <p>Los problemas se dividen principalmente según su origen:</p>
+        <ul>
+          <li><strong>Por parte del Cliente/Usuario:</strong> Dificultad para expresar claramente las necesidades,
+            ignorancia tecnológica (miedo a parecer incompetente), no ser conscientes de sus propias necesidades reales,
+            cultura y vocabularios diferentes, resistencia al cambio (temor a que el sistema los deje sin trabajo).</li>
+          <li><strong>Por parte del Desarrollador (Limitaciones Cognitivas):</strong> No conocer el dominio del negocio,
+            hacer suposiciones erróneas sobre el problema o los aspectos tecnológicos, y hacer simplificaciones
+            excesivas.</li>
+        </ul>
+
+        <h3>Concepto de Requerimiento y Stakeholders</h3>
+        <p>
+          Un requerimiento es una característica que el sistema debe poseer para satisfacer el propósito del mismo.
+          Según la <strong>IEEE-Std-610</strong>, es: <em>"Una condición o capacidad que necesita el usuario para
+            resolver un problema, o que debe satisfacer un sistema para cumplir un contrato/estándar."</em>
+        </p>
+        <p>
+          Los <strong>Stakeholders</strong> son cualquier persona o grupo que se verá afectado (directa o
+          indirectamente) por el sistema. Dado que cada stakeholder percibe el sistema de manera distinta, se los
+          clasifica por sus <strong>Puntos de Vista (Viewpoints)</strong>:
         </p>
         <ul>
-          <li><strong>Ambigüedad del Lenguaje Natural:</strong> Análisis formal de la frase de clase: <em>"Fred vio el avión volando sobre Zurich"</em> (admite 3 interpretaciones operativas totalmente distintas).</li>
-          <li><strong>Barreras Comunicacionales:</strong> Conocimiento tácito (habilidades que el usuario no sabe verbalizar), jerga dispar, resistencia psicológica al cambio y sesgos de solución preconcebida.</li>
-          <li><strong>Enfoque de Puntos de Vista (Viewpoints):</strong> Directos (operadores en contacto con la UI), Indirectos (directivos, compras, auditores) y del Dominio (normativas legales, seguridad y estándares industriales).</li>
+          <li><strong>Punto de Vista de los Interactuadores:</strong> Representan a las personas o sistemas externos que
+            interactúan directamente con el sistema a construir (ej. operadores, usuarios finales).</li>
+          <li><strong>Punto de Vista Indirecto:</strong> Representan a stakeholders que no usan el sistema directamente
+            pero influyen en él (ej. directivos, gerentes, auditores, marketing).</li>
+          <li><strong>Punto de Vista del Dominio:</strong> Representan las restricciones, estándares industriales o
+            regulaciones legales que obligan al sistema a comportarse de cierta forma (ej. leyes fiscales, protocolos de
+            seguridad).</li>
         </ul>
       </section>
 
+      <section class="chapter-section" id="cap5">
+        <div class="chapter-header">
+          <div class="chapter-num">Capítulo 5 • Clase Teórica 2</div>
+          <h2 class="chapter-title">Técnicas de Elicitación de Requisitos</h2>
+        </div>
+
+        <p>
+          La elicitación ("sonsacar") es el proceso de adquirir todo el conocimiento relevante para producir un modelo
+          de requerimientos. Es una actividad <strong>principalmente social y psicológica</strong>, más que técnica. A
+          continuación se detallan las técnicas formales:
+        </p>
+
+        <h3>1. Entrevistas</h3>
+        <p>Interacción cara a cara para explorar opiniones y sentimientos. Requieren cuidadosa planificación.</p>
+        <ul>
+          <li><strong>Abiertas:</strong> Sin preparación rígida, exploratorias. Respuestas largas (Lentas, difíciles de
+            analizar, pero permiten mucha profundidad).</li>
+          <li><strong>Cerradas:</strong> Conjunto específico de preguntas precisas (Rápidas, fáciles de analizar, pero
+            limitan la espontaneidad y los detalles).</li>
+        </ul>
+        <p><strong>Estructuras de Entrevista:</strong> <em>Piramidal/Inductivo</em> (Inicia cerrada, termina abierta),
+          <em>Embudo/Deductivo</em> (Inicia abierta, termina cerrada), <em>Diamante</em> (Combina embudo y pirámide).
+        </p>
+        <div class="box-callout box-concept">
+          <div class="box-callout-header">
+            <span>¿Cómo escuchar?</span>
+          </div>
+          <p>Es vital diferenciar entre oír y escuchar. Se debe mantener contacto visual, asentir, evitar interrumpir y
+            <strong>no hacer suposiciones</strong>. La entrevista debe concluir agradeciendo y enviando un resumen
+            posterior para evitar malos entendidos.
+          </p>
+        </div>
+
+        <h3>2. Cuestionarios</h3>
+        <p>
+          Permiten recolectar hechos y opiniones de un <strong>gran número de personas geográficamente
+            dispersas</strong>. Son económicos y garantizan anonimato, pero tienen una baja tasa de respuesta y no
+          permiten analizar el lenguaje corporal ni aclarar ambigüedades. Se recomienda dejar espacio en blanco
+          suficiente, usar escalas de medición (1 a 5) y evitar preguntas parciales u ofensivas.
+        </p>
+
+        <h3>3. Muestreo de Documentación Existente</h3>
+        <p>
+          Consiste en estudiar el "sistema actual" a través de su papelería: organigramas (para identificar dueños del
+          sistema), minutas, registros contables, manuales de entrenamiento, formularios vacíos y llenos. Permite
+          conocer la historia y los datos que realmente fluyen en la organización.
+        </p>
+
+        <h3>4. Observación del Ambiente de Trabajo</h3>
+        <p>
+          El analista se convierte en un observador pasivo. Útil para entender tareas difíciles de explicar con palabras
+          y medir aspectos físicos (tránsito, iluminación, ruidos).<br>
+          <em>Desventaja:</em> La gente suele alterar su conducta (trabajar de forma "correcta" en lugar de "habitual")
+          cuando sabe que es observada, un fenómeno psicológico ineludible.
+        </p>
+
+        <h3>5. JRP / JAD (Joint Requirements Planning)</h3>
+        <p>
+          Reuniones de grupo altamente estructuradas con el cliente, usuarios y gerentes, guiadas por un
+          <strong>Facilitador</strong> (neutral, con habilidades de negociación). Un <strong>Secretario</strong>
+          documenta todo (usualmente con herramientas CASE). <br>
+          <em>Ventajas:</em> Reduce drásticamente los tiempos de exploración, fomenta desarrollos creativos y logra
+          consenso inmediato. <br>
+          <em>Desventajas:</em> Es muy difícil cuadrar las agendas de tantos directivos simultáneamente y requiere
+          facilitadores muy entrenados.
+        </p>
+
+        <h3>6. Lluvia de Ideas (Brainstorming)</h3>
+        <p>
+          Su regla de oro es: <em>"Cuantas más ideas, mejor. Se prohíbe cualquier tipo de crítica o análisis hasta
+            agotar la etapa de generación."</em> Ideal para resolver falta de consenso y fomentar la creatividad grupal.
+        </p>
+      </section>
       <section class="chapter-section" id="cap5">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 5 • Clase Teórica 2</div>
@@ -803,17 +1552,27 @@
         </div>
 
         <p>
-          La elicitación es el descubrimiento proactivo de necesidades ocultas. Catálogo exhaustivo de técnicas de la Clase 2:
+          La elicitación es el descubrimiento proactivo de necesidades ocultas. Catálogo exhaustivo de técnicas de la
+          Clase 2:
         </p>
         <ol>
-          <li><strong>Entrevistas:</strong> Estructuradas (cerradas), semiestructuradas (recomendadas en IS) y abiertas. Fases: Preparación previa (guión temático), Conducción (escucha activa 80/20 y técnica de los 5 Por qués), Registro y Validación formal por minuta post-entrevista.</li>
-          <li><strong>Cuestionarios y Encuestas:</strong> Para poblaciones dispersas o validación cuantitativa masiva; diseño con escalas de Likert.</li>
-          <li><strong>Observación del Ambiente de Trabajo:</strong> Observación pasiva (*fly-on-the-wall*) vs. activa; detección y mitigación del <strong>Efecto Hawthorne</strong> (cambio de conducta al saberse observado).</li>
-          <li><strong>Talleres JRP / JAD (Joint Application Development):</strong> Sesiones intensivas de 2 a 4 días con facilitador neutral, sponsor ejecutivo con poder de decisión, escriba y usuarios clave para acordar requerimientos en tiempo real.</li>
-          <li><strong>Lluvia de Ideas (Brainstorming):</strong> Fases separadas de divergencia creativa (cero censura) y convergencia evaluativa; modalidades libre, en círculo y silenciosa (*Brainwriting* con post-its).</li>
-          <li><strong>Muestreo de Documentación Existente:</strong> Análisis de formularios, reportes de excepción y sistemas legados.</li>
+          <li><strong>Entrevistas:</strong> Estructuradas (cerradas), semiestructuradas (recomendadas en IS) y abiertas.
+            Fases: Preparación previa (guión temático), Conducción (escucha activa 80/20 y técnica de los 5 Por qués),
+            Registro y Validación formal por minuta post-entrevista.</li>
+          <li><strong>Cuestionarios y Encuestas:</strong> Para poblaciones dispersas o validación cuantitativa masiva;
+            diseño con escalas de Likert.</li>
+          <li><strong>Observación del Ambiente de Trabajo:</strong> Observación pasiva (*fly-on-the-wall*) vs. activa;
+            detección y mitigación del <strong>Efecto Hawthorne</strong> (cambio de conducta al saberse observado).</li>
+          <li><strong>Talleres JRP / JAD (Joint Application Development):</strong> Sesiones intensivas de 2 a 4 días con
+            facilitador neutral, sponsor ejecutivo con poder de decisión, escriba y usuarios clave para acordar
+            requerimientos en tiempo real.</li>
+          <li><strong>Lluvia de Ideas (Brainstorming):</strong> Fases separadas de divergencia creativa (cero censura) y
+            convergencia evaluativa; modalidades libre, en círculo y silenciosa (*Brainwriting* con post-its).</li>
+          <li><strong>Muestreo de Documentación Existente:</strong> Análisis de formularios, reportes de excepción y
+            sistemas legados.</li>
         </ol>
       </section>
+
 
       <!-- ============================================================== -->
       <!-- CLASE 3: INGENIERÍA DE REQUERIMIENTOS Y ESPECIFICACIÓN ESTÁTICA-->
@@ -821,89 +1580,138 @@
       <section class="chapter-section" id="cap6">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 6 • Clase Teórica 3</div>
-          <h2 class="chapter-title">Fundamentos de la Ingeniería de Requerimientos y Curva de Boehm</h2>
+          <h2 class="chapter-title">Fundamentos del Proceso de Ingeniería de Requerimientos</h2>
         </div>
 
+        <h3>Impacto Económico de los Errores (Curva de Boehm)</h3>
         <p>
-          La <strong>Ingeniería de Requerimientos (IR)</strong> es la disciplina encargada de identificar, analizar, documentar y verificar los servicios y restricciones del sistema.
+          Los errores en la etapa de requerimientos tienen un impacto catastrófico: el software resultante puede no
+          satisfacer a los usuarios, las interpretaciones múltiples causan desacuerdos legales y se gasta tiempo y
+          dinero construyendo un sistema erróneo.
+          Según Boehm, el costo relativo de solucionar un error de cálculo crece exponencialmente según la fase en que
+          se detecta:
+        </p>
+        <ul>
+          <li><strong>Etapa de Requerimientos:</strong> Costo 0,1</li>
+          <li><strong>Etapa de Diseño:</strong> Costo 0,5</li>
+          <li><strong>Etapa de Codificación:</strong> Costo 1</li>
+          <li><strong>Pruebas de Unidad:</strong> Costo 2</li>
+          <li><strong>Pruebas de Aceptación:</strong> Costo 5</li>
+          <li><strong>Etapa de Mantenimiento:</strong> Costo 20</li>
+        </ul>
+
+        <h3>Definición de Ingeniería de Requerimientos (IR)</h3>
+        <p>
+          Es la disciplina para desarrollar una especificación completa, consistente y no ambigua, que servirá como base
+          para acuerdos comunes entre las partes. Transforma los requerimientos declarados (hablados o escritos) en
+          especificaciones precisas del comportamiento del sistema, interfaces, rendimiento y limitaciones.
         </p>
 
-        <h3>Definición Formal IEEE Standard 610.12</h3>
-        <p>
-          Un requerimiento es: (1) una condición o capacidad que un usuario necesita para resolver un problema; (2) una condición o capacidad que el sistema debe satisfacer para cumplir un contrato, norma o especificación; (3) la representación documentada de lo anterior.
-        </p>
-
-        <h3>La Curva de Boehm: Costo Exponencial de Defectos</h3>
-        <p>
-          El costo de subsanar un error en los requerimientos escala exponencialmente: $1\times$ en requerimientos $\rightarrow$ $5\times$ en diseño $\rightarrow$ $10\times$ en código $\rightarrow$ $50\times$ en pruebas $\rightarrow$ $100\times \text{ a } 200\times$ en producción.
-        </p>
-
-        <h3>Fases del Proceso de IR</h3>
+        <h3>El Proceso de Ingeniería de Requerimientos</h3>
+        <p>El macro-proceso general consta de las siguientes fases iterativas:</p>
         <ol>
-          <li><strong>Estudio de Viabilidad:</strong> Técnica, económica, operativa y legal.</li>
-          <li><strong>Obtención y Análisis:</strong> Elicitación activa y negociación de conflictos.</li>
-          <li><strong>Especificación:</strong> Documentación formal en estándares (SRS IEEE 830, DTE, Petri, Casos de Uso, HU).</li>
-          <li><strong>Validación y Verificación:</strong> Confirmación con el cliente y pruebas de consistencia técnica.</li>
-          <li><strong>Gestión de Requerimientos:</strong> Trazabilidad y control de cambios sistemático.</li>
+          <li>
+            <strong>Estudio de Viabilidad:</strong> Fundamental para sistemas nuevos. Se elabora un informe resumido que
+            recomienda la conveniencia o no de realizar el desarrollo. Responde a: ¿Contribuye a los objetivos generales
+            del negocio? ¿Se puede implementar con tecnología actual? ¿Entra en las restricciones de costo y tiempo? ¿Se
+            puede integrar con los sistemas que ya existen?
+          </li>
+          <li>
+            <strong>Obtención y Análisis de Requerimientos:</strong> Descubrimiento interactivo de las necesidades
+            (visto en la Clase 2).
+          </li>
+          <li>
+            <strong>Especificación de Requerimientos:</strong> Documentación formal y estructurada del modelo acordado.
+          </li>
+          <li>
+            <strong>Validación de Requerimientos:</strong> Proceso donde el usuario participa activamente para
+            certificar que el modelo documentado refleja fielmente sus intenciones. Asegura que estamos construyendo el
+            sistema correcto, antes de construirlo correctamente (verificación).
+          </li>
         </ol>
-
-        <h3>Propiedades de Calidad</h3>
-        <p>
-          No ambiguo, completo, consistente, verificable/testeable (criterio objetivo de pasa/no pasa) y trazable con ID único.
-        </p>
       </section>
 
       <section class="chapter-section" id="cap7">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 7 • Clase Teórica 3</div>
-          <h2 class="chapter-title">Requerimientos Funcionales y No Funcionales (RNF)</h2>
+          <h2 class="chapter-title">Clasificación Detallada de Requerimientos</h2>
         </div>
 
+        <p>
+          Los requerimientos no son un bloque monolítico. Tienen diversas naturalezas y niveles de abstracción:
+        </p>
+
+        <h3>Requerimientos Funcionales vs. No Funcionales</h3>
         <ul>
-          <li><strong>Requerimientos Funcionales (RF):</strong> QUÉ debe hacer el software (servicios, cálculos, flujos de datos).</li>
-          <li><strong>Requerimientos No Funcionales (RNF):</strong> CÓMO debe comportarse el software (cualidades globales y restricciones). <em>Impactan de manera directa en toda la arquitectura del sistema</em>.</li>
+          <li><strong>Requerimientos Funcionales:</strong> Describen la interacción entre el sistema y su ambiente.
+            Especifican exactamente <em>QUÉ</em> debe hacer el sistema ante un estímulo, o incluso qué <em>NO</em> debe
+            hacer. Son independientes de la implementación tecnológica.</li>
+          <li><strong>Requerimientos No Funcionales:</strong> Describen una restricción sobre el sistema que limita las
+            opciones de diseño o construcción (el <em>CÓMO</em>). Implican: Estética, Consistencia de Interfaz,
+            Materiales de capacitación, Eficiencia, Disponibilidad, Tiempo de Respuesta, Tiempo de Recuperación,
+            Frecuencia de fallas y Uso de recursos. Se dividen en:
+            <ul>
+              <li><em>Del producto:</em> Usabilidad, eficiencia, rendimiento, espacio, fiabilidad, portabilidad.</li>
+              <li><em>Organizacionales:</em> Políticas de la organización, estándares de implementación, entrega.</li>
+              <li><em>Externos:</em> Interoperabilidad, leyes, privacidad, seguridad, ética.</li>
+            </ul>
+          </li>
         </ul>
 
-        <h3>Taxonomía de RNF (Sommerville, FURPS+ e ISO 25010)</h3>
-        <div class="table-responsive">
-          <table class="table-styled">
-            <thead>
-              <tr><th>Modelo</th><th>Dimensiones Clave</th><th>Ejemplo Concreto</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Sommerville</strong></td>
-                <td>Del Producto, Organizacionales y Externos.</td>
-                <td>Cumplimiento de la Ley de Protección de Datos Personales (Externo).</td>
-              </tr>
-              <tr>
-                <td><strong>FURPS+</strong></td>
-                <td>Functionality, Usability, Reliability, Performance, Supportability + Restricciones (+).</td>
-                <td>Disponibilidad 99.9% (Reliability); respuesta P95 < 500ms (Performance).</td>
-              </tr>
-              <tr>
-                <td><strong>ISO/IEC 25010</strong></td>
-                <td>8 características: Adecuación funcional, Rendimiento, Compatibilidad, Usabilidad, Fiabilidad, Seguridad, Mantenibilidad y Portabilidad.</td>
-                <td>Cifrado TLS 1.3 y AES-256 en reposo (Seguridad); contenedor Docker ligero (Portabilidad).</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h3>Otras Clasificaciones Clave</h3>
+        <ul>
+          <li><strong>Por Nivel de Audiencia:</strong>
+            <ul>
+              <li><em>Requerimientos del Usuario:</em> Declaraciones en lenguaje natural y diagramas simples pensados
+                para que el cliente entienda los servicios y restricciones.</li>
+              <li><em>Requerimientos del Sistema:</em> Establecen con detalle técnico profundo los servicios y
+                restricciones para los desarrolladores.</li>
+            </ul>
+          </li>
+          <li><strong>Requerimientos del Dominio:</strong> Reflejan las características matemáticas, físicas o legales
+            del dominio de aplicación (ej. leyes de la aerodinámica para un simulador de vuelo). Pueden ser funcionales
+            o no funcionales, pero su falta hace inoperable al sistema. Suelen ser difíciles de comunicar porque los
+            expertos del dominio los dan por obvios.</li>
+          <li><strong>Por Prioridad:</strong> 1. Obligatorios (absolutamente satisfechos); 2. Deseables (no
+            indispensables pero valiosos); 3. Opcionales (posibles, pero eliminables si falta tiempo).</li>
+        </ul>
       </section>
 
       <section class="chapter-section" id="cap8">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 8 • Clase Teórica 3</div>
-          <h2 class="chapter-title">Técnicas Estáticas de Especificación y Estándar IEEE 830</h2>
+          <h2 class="chapter-title">Especificación de Requerimientos y Técnicas Estáticas</h2>
         </div>
 
         <p>
-          Las técnicas estáticas modelan reglas y restricciones independientes del tiempo:
+          La especificación se materializa en el documento final (por ejemplo, el estándar <strong>IEEE Std. 830-1998
+            (SRS)</strong>), cuyo objetivo es brindar una colección de buenas prácticas y plantillas. Sus propiedades
+          innegociables son: Correcta, No ambigua, Completa, Verificable, Consistente, Comprensible, Modificable,
+          Rastreable, Independiente del diseño, Anotada, Concisa y Organizada.
+        </p>
+        <p>
+          Para documentar con precisión matemática sin ambigüedades de lenguaje natural, se utilizan <strong>Técnicas de
+            Especificación</strong>. Se dividen en Estáticas y Dinámicas.
+        </p>
+
+        <h3>Técnicas de Especificación Estáticas</h3>
+        <p>
+          Se utilizan cuando el tiempo y los cambios de estado no son un factor predominante en la operación lógica del
+          sistema. Describen relaciones y estructuras que son constantes.
         </p>
         <ul>
-          <li><strong>Tablas de Decisión:</strong> Condiciones, combinaciones ($2^N$ reglas), acciones y marcas de disparo. Reducción lógica de reglas redundantes.</li>
-          <li><strong>Árboles de Decisión:</strong> Representación gráfica ramificada de decisiones secuenciales.</li>
-          <li><strong>Documento SRS según IEEE 830:</strong> Estructura en 3 secciones: 1. Introducción (propósito, alcance, glosario), 2. Descripción General (perspectiva, usuarios, restricciones generales), 3. Requisitos Específicos (interfaces externas, RF minuciosos, rendimiento, atributos de calidad y diseño).</li>
+          <li><strong>Referencia Indirecta (Ecuaciones Implícitas):</strong> Define "QUÉ" se hace, no "CÓMO". Ej:
+            "Sistema que resuelva k ecuaciones con n incógnitas". No declara el método de resolución.</li>
+          <li><strong>Relaciones de Recurrencia:</strong> Descripción mediante una función que define su valor en base a
+            términos anteriores. Ej: Serie de Fibonacci $F(n+1) = F(n) + F(n-1)$.</li>
+          <li><strong>Definición Axiomática:</strong> Define las propiedades básicas mediante un conjunto completo y
+            consistente de operadores y axiomas formales. Ideal para Sistemas Expertos.</li>
+          <li><strong>Expresiones Regulares:</strong> Define un alfabeto y las combinaciones válidas permitidas para una
+            cadena de datos mediante operadores lógicos de alternación, composición e iteración (Ej: $(a|b)+ = \{a, b,
+            ab, ba...\}$).</li>
+          <li><strong>Abstracciones de Datos:</strong> Para sistemas donde la naturaleza de los datos determina la
+            acción. Agrupa la información en Diccionarios separando los TIPOS DE DATOS (clases) y los DATOS (objetos).
+          </li>
         </ul>
       </section>
 
@@ -913,17 +1721,45 @@
       <section class="chapter-section" id="cap9">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 9 • Clase Teórica 4</div>
-          <h2 class="chapter-title">Técnicas Dinámicas I: Diagramas de Transición de Estados (DTE)</h2>
+          <h2 class="chapter-title">Técnicas Dinámicas I: Diagramas de Transición de Estados (DTE) y Tablas de Decisión
+          </h2>
         </div>
 
         <p>
-          Modelan entidades reactivas cuyo comportamiento depende de su estado interno:
+          Las técnicas dinámicas consideran a un sistema en función de los cambios que ocurren a lo largo del tiempo.
+          Asumen que el sistema está en un estado particular hasta que un <em>estímulo</em> lo obliga a cambiar su
+          estado.
+        </p>
+
+        <h3>Tablas de Decisión</h3>
+        <p>
+          Herramienta que presenta de forma concisa las reglas lógicas que deciden acciones en función de condiciones.
+          Describe el sistema agrupando: 1) Posibles <strong>Condiciones</strong> (Verdadero o Falso), 2)
+          <strong>Reglas</strong> de reacción ($2^N$ reglas para N condiciones), y 3) <strong>Acciones</strong> a tomar.
         </p>
         <ul>
-          <li><strong>Componentes:</strong> Estados (rectángulos redondeados), Estado inicial (círculo sólido), Estado final (círculo anillado).</li>
-          <li><strong>Sintaxis formal de Transición:</strong> $\text{Evento}(\text{args}) \; [\text{Condición de Guarda}] \; / \; \text{Acción}$</li>
-          <li><strong>Ejercicio de Cátedra:</strong> Ciclo de vida de una orden: <em>Borrador $\rightarrow$ Pendiente de Pago $\rightarrow$ Pagada / Cancelada $\rightarrow$ Enviada $\rightarrow$ Entregada / Reclamada</em>.</li>
+          <li><strong>Especificaciones Redundantes:</strong> Diferentes reglas (combinaciones) derivan en la misma
+            acción. Se reduce la complejidad combinando reglas y usando una <em>raya (—)</em> (que significa que la
+            condición no importa, "Don't care").</li>
+          <li><strong>Especificaciones Contradictorias:</strong> Mismas condiciones marcadas para diferentes acciones
+            simultáneamente (un error lógico en los requerimientos).</li>
         </ul>
+
+        <h3>Máquinas de Estado Finito (DTE)</h3>
+        <p>
+          Describe al sistema como un conjunto de estados donde reacciona a eventos (externos o internos). Formalmente
+          se define la función de transición: $f(S_i, C_j) = S_k$ (Estando en el estado $S_i$, la ocurrencia de la
+          condición $C_j$ hace que cambie al estado $S_k$).
+        </p>
+        <ol>
+          <li><strong>Identificar los estados</strong> (ej: reloj visualizando hora, visualizando fecha, cronometrando).
+          </li>
+          <li><strong>Explotar estados complejos</strong> (sub-estados).</li>
+          <li><strong>Identificar cambios (flechas)</strong> desde el estado inicial.</li>
+          <li><strong>Analizar condiciones y acciones</strong> para cada transición.</li>
+          <li><strong>Verificar consistencia:</strong> Todos los estados deben ser alcanzables y debe poderse salir de
+            ellos. El sistema debe tener respuesta a <em>todas</em> las condiciones (normales y anormales).</li>
+        </ol>
       </section>
 
       <section class="chapter-section" id="cap10">
@@ -933,18 +1769,30 @@
         </div>
 
         <p>
-          Herramienta matemática formal para sistemas concurrentes y recursos compartidos:
+          Inventadas por Carl Petri (Universidad de Bonn), son fundamentales para especificar <strong>sistemas de tiempo
+            real concurrentes</strong>. Permiten la ejecución paralela y sincronizada de procesos en un orden
+          impredecible (NO son secuenciales).
         </p>
-        <p>
-          $$\text{Tupla Formal: } N = (P, T, F, W, M_0)$$
-        </p>
+
+        <h3>Definición Formal de la Red de Petri</h3>
+        <p>Es un multigrafo bipartito dirigido definido como la cuádrupla $C = (P, T, I, O)$:</p>
         <ul>
-          <li>$P$: Plazas (círculos), $T$: Transiciones (barras), $F$: Arcos dirigidos, $W$: Pesos de arcos, $M_0$: Marcado inicial.</li>
-          <li><strong>Regla de disparo:</strong> Una transición está habilitada si $\forall p \in \bullet t, M(p) \ge W(p, t)$. Al disparar, consume marcas de entrada y genera marcas de salida de forma atómica.</li>
-          <li><strong>Ejercicio Oficial de Cátedra: Estación de 3 Surtidores:</strong>
-            Plaza $P_{\text{cola}}$ (autos en espera), plaza de recursos $P_{\text{surtidores}}$ con <strong>3 marcas iniciales</strong> ($M_0 = 3$). La transición $T_{\text{ocupar}}$ consume 1 marca de la cola y 1 del pool de surtidores, pasando a $P_{\text{cargando}}$ (máximo 3 concurrentes). Al finalizar ($T_{\text{fin}}$), se produce una marca en $P_{\text{salida}}$ y se <em>devuelve</em> una marca al pool $P_{\text{surtidores}}$.
-          </li>
+          <li><strong>P (Lugares/Sitios):</strong> Representan estados o condiciones (círculos).</li>
+          <li><strong>T (Transiciones):</strong> Representan eventos o acciones (barras).</li>
+          <li><strong>I (Input) / O (Output):</strong> Funciones de entrada y salida (arcos dirigidos).</li>
         </ul>
+
+        <h3>Marcación y Ejecución</h3>
+        <ul>
+          <li><strong>Tokens (Fichas):</strong> Se asignan a los lugares y dictaminan el estado actual. La configuración
+            de tokens se denomina Marcación (Ej: $M = (1, 2, 0, 1)$).</li>
+          <li><strong>Regla de Disparo:</strong> Una transición está habilitada SÓLO si <em>cada lugar de entrada</em>
+            tiene al menos tantos tokens como arcos hacia la transición.</li>
+          <li><strong>Disparo:</strong> Remover tokens de entrada y distribuirlos en salidas es un acto instantáneo. El
+            orden de disparo entre múltiples transiciones habilitadas es NO DETERMINÍSTICO.</li>
+        </ul>
+        <p><strong>Patrones Clásicos:</strong> Las redes de Petri son ideales para modelar Exclusión Mutua (acceso a un
+          recurso compartido), Paralelismo, y el patrón Productor-Consumidor.</p>
       </section>
 
       <section class="chapter-section" id="cap11">
@@ -954,33 +1802,76 @@
         </div>
 
         <p>
-          Secuencia de transacciones entre un actor externo y el sistema que genera un valor medible (Ivar Jacobson):
+          Creados por Jacobson (1992) en la POO, se independizaron como una técnica universal de requerimientos. Modelan
+          "funcionalidades" del sistema en términos de la interacción entre usuarios externos (actores) y el sistema.
         </p>
+
+        <h3>Elementos del Modelo</h3>
         <ul>
-          <li><strong>Actores:</strong> Primarios (inician el caso), Secundarios (participan o son sistemas externos), Límite del sistema.</li>
-          <li><strong>Relación &laquo;include&raquo;:</strong> Inclusión <em>obligatoria</em>. Factoriza comportamiento común reutilizable.</li>
-          <li><strong>Relación &laquo;extend&raquo;:</strong> Extensión <em>opcional/condicional</em> en un punto de extensión explícito.</li>
-          <li><strong>Generalización:</strong> Herencia funcional entre actores o casos de uso.</li>
-          <li><strong>Plantilla Textual de Cátedra:</strong> Nombre, ID, Actor, Precondiciones, Flujo Normal paso a paso, Flujos Alternativos, Flujos de Excepción y Postcondiciones (casos analizados: Iniciar Sesión CU-01, Descargar Artículo con verificación de tarjeta CU-04).</li>
+          <li><strong>Actores:</strong> Representan roles jugados por personas, dispositivos físicos (sensores, relojes)
+            o sistemas externos (ej. servidor del banco). Inician una actividad.</li>
+          <li><strong>Relaciones:</strong>
+            <ul>
+              <li><em>Asociación:</em> Relación directa actor-sistema.</li>
+              <li><em>Extensión (&laquo;extend&raquo;):</em> Un CU extiende la funcionalidad de otro CU base de forma
+                condicional/opcional.</li>
+              <li><em>Inclusión (&laquo;uses&raquo; o &laquo;include&raquo;):</em> Un CU invoca obligatoriamente a otro.
+                Reduce la redundancia de pasos comunes entre al menos dos CU (ej: Autenticarse).</li>
+              <li><em>Dependencia (&laquo;depends&raquo;):</em> Un CU no puede realizarse hasta que no finalice otro.
+              </li>
+            </ul>
+          </li>
         </ul>
+
+        <h3>El Escenario (La Narración)</h3>
+        <p>Un Caso de Uso no está completo sin su escenario escrito paso a paso. Componentes del diseño de escenario de
+          la cátedra:</p>
+        <ol>
+          <li><strong>Nombre, Descripción y Actores.</strong></li>
+          <li><strong>Precondiciones:</strong> Qué debe ser cierto antes de empezar. No se evalúan en el curso normal;
+            se asumen verdaderas.</li>
+          <li><strong>Ocasionador:</strong> El gatillo que dispara el CU.</li>
+          <li><strong>Curso Normal:</strong> Columna doble "Acción del Actor" vs "Respuesta del Sistema" paso a paso
+            (sin condicionales complejos; se delega en extensions).</li>
+          <li><strong>Cursos Alternos:</strong> Rutas de excepción (Ej: "La tarjeta de crédito es rechazada, se cancela
+            la operación").</li>
+          <li><strong>Postcondición:</strong> El estado final del sistema.</li>
+        </ol>
       </section>
 
       <section class="chapter-section" id="cap12">
         <div class="chapter-header">
           <div class="chapter-num">Capítulo 12 • Clase Teórica 4</div>
-          <h2 class="chapter-title">Técnicas Dinámicas IV: Historias de Usuario (HU), INVEST y BDD</h2>
+          <h2 class="chapter-title">Técnicas Dinámicas IV: Historias de Usuario</h2>
         </div>
 
         <p>
-          Representación ágil centrada en el usuario:
+          Técnica estandarte de las metodologías de desarrollo ágil. Es una representación de un requisito escrito en
+          una o dos frases utilizando el <strong>lenguaje común del cliente</strong> (y escrita preferentemente en una
+          pequeña nota adhesiva).
         </p>
+
+        <h3>Estructura y Tiempos</h3>
+        <p>
+          <strong>Formato:</strong> <em>"Como [rol] quiero [algo] para poder [beneficio]"</em>.<br>
+          Se estima que implementar una historia debe tomar entre 10 horas y un par de semanas. Si toma más, debe ser
+          dividida (slicing) en historias más pequeñas para no frenar la iteración.
+        </p>
+
+        <h3>Beneficios y Limitaciones</h3>
         <ul>
-          <li><strong>Formato Connextra:</strong> <em>Como [rol], Quiero [acción], Para [beneficio]</em>.</li>
-          <li><strong>Las 3 C (Ron Jeffries):</strong> Card (tarjeta breve), Conversation (diálogo continuo), Confirmation (criterios de aceptación).</li>
-          <li><strong>Criterios INVEST (Bill Wake):</strong> Independent, Negotiable, Valuable, Estimable, Small, Testable.</li>
-          <li><strong>Criterios de Aceptación en BDD / Gherkin:</strong> <em>Dado que [contexto], Cuando [evento], Entonces [resultado observable]</em>.</li>
-          <li><strong>Slicing Vertical:</strong> Partición de épicas por pasos de flujo, operaciones CRUD o reglas de negocio.</li>
+          <li><strong>Beneficios:</strong> Se implementan muy rápido, necesitan escaso mantenimiento documental,
+            promueven relación íntima con el cliente y son ideales para requerimientos volátiles. Permiten dividir
+            grandes proyectos fácilmente.</li>
+          <li><strong>Limitaciones:</strong> Al ser breves, son "promesas de conversación" más que contratos rígidos. Si
+            el desarrollador no se comunica permanentemente con el cliente, quedan abiertas a malas interpretaciones.
+            Escalar esto a proyectos masivos es complejo y exige programadores sumamente competentes y proactivos.</li>
         </ul>
+        <p>
+          <strong>Características Clave:</strong> Deben ser Independientes, Negociables (no son contratos cerrados),
+          Valoradas por el cliente, Estimables, Pequeñas y Verificables (mediante criterios de aceptación
+          automatizados).
+        </p>
       </section>
 
       <!-- ============================================================== -->
@@ -998,18 +1889,31 @@
             <span class="widget-badge">Ejercicio Oficial Clase 4</span>
           </div>
           <div class="widget-results" style="margin-bottom:14px;">
-            <div class="result-box"><span class="result-label">Autos en Cola</span><span class="result-value" id="tCola">0</span></div>
-            <div class="result-box highlight"><span class="result-label">Surtidores Libres</span><span class="result-value" id="tLibres">3</span></div>
-            <div class="result-box highlight"><span class="result-label">Cargando Combustible</span><span class="result-value" id="tCarga" style="color:var(--accent-ochre);">0</span></div>
-            <div class="result-box"><span class="result-label">Atendidos / Salida</span><span class="result-value" id="tOut" style="color:var(--accent-sage);">0</span></div>
+            <div class="result-box"><span class="result-label">Autos en Cola</span><span class="result-value"
+                id="tCola">0</span></div>
+            <div class="result-box highlight"><span class="result-label">Surtidores Libres</span><span
+                class="result-value" id="tLibres">3</span></div>
+            <div class="result-box highlight"><span class="result-label">Cargando Combustible</span><span
+                class="result-value" id="tCarga" style="color:var(--accent-ochre);">0</span></div>
+            <div class="result-box"><span class="result-label">Atendidos / Salida</span><span class="result-value"
+                id="tOut" style="color:var(--accent-sage);">0</span></div>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button class="btn-theme active" style="flex:1; padding:8px;" onclick="simT1()">Llegada Auto (T1)</button>
-            <button class="btn-theme active" style="flex:1; padding:8px; background:var(--accent-ochre); border-color:var(--accent-ochre);" onclick="simT2()">Ocupar Surtidor (T2)</button>
-            <button class="btn-theme active" style="flex:1; padding:8px; background:var(--accent-sage); border-color:var(--accent-sage);" onclick="simT3()">Fin de Carga (T3)</button>
-            <button class="btn-theme" style="padding:8px 12px;" onclick="simReset()">Reiniciar M0</button>
+            <button
+              style="flex:1; padding:8px; background:var(--accent-ink); color:#fff; border:1px solid var(--accent-ink); border-radius:4px; font-weight:600; cursor:pointer; font-family:var(--font-sans);"
+              onclick="simT1()">Llegada Auto (T1)</button>
+            <button
+              style="flex:1; padding:8px; background:var(--accent-ochre); color:#fff; border:1px solid var(--accent-ochre); border-radius:4px; font-weight:600; cursor:pointer; font-family:var(--font-sans);"
+              onclick="simT2()">Ocupar Surtidor (T2)</button>
+            <button
+              style="flex:1; padding:8px; background:var(--accent-sage); color:#fff; border:1px solid var(--accent-sage); border-radius:4px; font-weight:600; cursor:pointer; font-family:var(--font-sans);"
+              onclick="simT3()">Fin de Carga (T3)</button>
+            <button
+              style="padding:8px 12px; background:var(--bg-card); color:var(--text-heading); border:1px solid var(--border-color); border-radius:4px; font-weight:600; cursor:pointer; font-family:var(--font-sans);"
+              onclick="simReset()">Reiniciar M0</button>
           </div>
-          <div style="margin-top:10px; font-size:0.84rem; color:var(--text-muted);" id="tLog">Estado inicial M0 = [Cola: 0, Surtidores: 3, Cargando: 0, Salida: 0].</div>
+          <div style="margin-top:10px; font-size:0.84rem; color:var(--text-muted);" id="tLog">Estado inicial M0 = [Cola:
+            0, Surtidores: 3, Cargando: 0, Salida: 0].</div>
         </div>
       </section>
 
@@ -1023,12 +1927,61 @@
         </div>
 
         <div class="box-exercise">
-          <div class="box-exercise-title">Pregunta de Examen: Distinción Formal entre Inclusión y Extensión en UML</div>
-          <p><strong>Pregunta:</strong> Explique la diferencia semántica entre &laquo;include&raquo; y &laquo;extend&raquo; en diagramas de Casos de Uso. Ilustre con un ejemplo bancario.</p>
+          <div class="box-exercise-title">Pregunta de Examen 1: Leyes de Evolución del Software de Lehman</div>
+          <p>
+            <strong>Enunciado:</strong> ¿Por qué el software evoluciona y no se desgasta? Explique las 3 Leyes de Lehman
+            fundamentales (Cambio Continuo, Complejidad Creciente y Autorregulación), indicando qué consecuencias prácticas
+            tienen para la gestión de un proyecto de software.
+          </p>
+          <div class="box-callout box-concept" style="margin-top:12px;">
+            <p style="margin-bottom:8px;"><strong>Respuesta Modelo de Examen:</strong></p>
+            <p>
+              1. <strong>Naturaleza de la evolución vs. desgaste:</strong> El software es un bien lógico e intangible; no sufre corrosión física ni fricción de materiales (no tiene "Curva de la Bañera" de desgaste de hardware). Su deterioro proviene de los <em>cambios continuos</em> que debe sufrir para adecuarse a nuevas necesidades del entorno.
+            </p>
+            <p>
+              2. <strong>I. Cambio Continuo:</strong> Un sistema de software en uso real debe cambiar continuamente o se vuelve inservible. <em>Consecuencia:</em> El software nunca está "congelado"; el mantenimiento y evolución representan entre el 60% y el 80% del costo total del ciclo de vida.
+            </p>
+            <p>
+              3. <strong>II. Complejidad Creciente:</strong> A medida que el software evoluciona con parches y modificaciones sucesivas, su estructura interna se deteriora a menos que se invierta explícitamente en mantenerla. <em>Consecuencia:</em> Es obligatorio realizar <strong>refactorización continua (<em>refactoring</em>)</strong> y testing de regresión para evitar el colapso del sistema por deuda técnica.
+            </p>
+            <p>
+              4. <strong>III. Autorregulación:</strong> El ritmo de producción, entrega y defectos de un equipo u organización es estadísticamente estable a lo largo del tiempo. <em>Consecuencia:</em> Forzar plazos o agregar desarrolladores al final viola este equilibrio natural y degrada la calidad (base de la velocidad constante en metodologías ágiles).
+            </p>
+          </div>
+        </div>
+
+        <div class="box-exercise">
+          <div class="box-exercise-title">Pregunta de Examen 2: Responsabilidad Profesional y Códigos Éticos (ACM / IEEE)</div>
+          <p>
+            <strong>Enunciado:</strong> Enumere y explique los cuatro pilares fundamentales de la responsabilidad profesional
+            en Ingeniería de Software según la cátedra y los estándares ACM/IEEE. Ejemplifique una falta ética para cada uno.
+          </p>
+          <div class="box-callout box-concept" style="margin-top:12px;">
+            <p style="margin-bottom:8px;"><strong>Respuesta Modelo de Examen:</strong></p>
+            <p>
+              Principio general: El ingeniero no debe utilizar sus capacidades de forma deshonesta ni que deshonre la profesión. Los 4 pilares son:
+            </p>
+            <ul>
+              <li><strong>1. Confidencialidad:</strong> Guardar reserva estricta de la información y secretos de clientes/empleadores, con o sin acuerdo formal (NDA). <em>Ejemplo de falta:</em> Filtrar la base de datos de usuarios o datos financieros de un cliente.</li>
+              <li><strong>2. Competencia:</strong> No falsear el nivel real de conocimiento ni aceptar trabajos fuera de la capacidad técnica sin aclararlo y capacitarse. <em>Ejemplo de falta:</em> Cobrar por desarrollar un sistema criptográfico crítico garantizando seguridad militar sin tener conocimientos de seguridad.</li>
+              <li><strong>3. Propiedad Intelectual:</strong> Respetar patentes, copyrights y contratos de licenciamiento. <em>Ejemplo de falta:</em> Copiar código propietario de un trabajo anterior o usar librerías bajo licencia comercial restrictiva en un producto sin pagar la licencia.</li>
+              <li><strong>4. Uso Inapropiado:</strong> No utilizar las habilidades técnicas para intervenir, dañar o acceder indebidamente a sistemas ajenos. <em>Ejemplo de falta:</em> Aprovechar credenciales administrativas para curiosear archivos privados del cliente o instalar software de minería en sus servidores.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box-exercise">
+          <div class="box-exercise-title">Pregunta de Examen 3: Distinción Formal entre Inclusión y Extensión en UML</div>
+          <p><strong>Pregunta:</strong> Explique la diferencia semántica entre &laquo;include&raquo; y
+            &laquo;extend&raquo; en diagramas de Casos de Uso. Ilustre con un ejemplo bancario.</p>
           <div class="box-callout box-concept" style="margin-top:12px;">
             <p>
-              • <strong>&laquo;include&raquo;:</strong> Obligatoria. El caso base no puede completarse sin invocar al incluido. Se usa para reutilizar lógica común. <em>Ejemplo:</em> "Transferir Fondos" &laquo;include&raquo; "Autenticar Usuario".<br>
-              • <strong>&laquo;extend&raquo;:</strong> Opcional / condicional. El caso base se completa normalmente y sólo si se cumple una guarda en un punto de extensión se ejecuta el extensor. <em>Ejemplo:</em> "Emitir Ticket Impreso" &laquo;extend&raquo; "Extraer Dinero" (solo si el cliente pulsa 'imprimir recibo').
+              • <strong>&laquo;include&raquo;:</strong> Obligatoria. El caso base no puede completarse sin invocar al
+              incluido. Se usa para reutilizar lógica común. <em>Ejemplo:</em> "Transferir Fondos" &laquo;include&raquo;
+              "Autenticar Usuario".<br>
+              • <strong>&laquo;extend&raquo;:</strong> Opcional / condicional. El caso base se completa normalmente y
+              sólo si se cumple una guarda en un punto de extensión se ejecuta el extensor. <em>Ejemplo:</em> "Emitir
+              Ticket Impreso" &laquo;extend&raquo; "Extraer Dinero" (solo si el cliente pulsa 'imprimir recibo').
             </p>
           </div>
         </div>
@@ -1064,7 +2017,7 @@
       if (e.key === 'm' || e.key === 'M') toggleSidebar();
     });
 
-    const themeButtons = document.querySelectorAll('.btn-theme');
+    const themeButtons = document.querySelectorAll('[data-set-theme]');
     themeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const theme = btn.getAttribute('data-set-theme');
@@ -1124,4 +2077,5 @@
     }
   </script>
 </body>
+
 </html>
